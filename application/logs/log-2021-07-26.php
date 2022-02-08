@@ -1,0 +1,110 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-07-26 00:41:27 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 01:05:59 --> Severity: Notice --> Trying to get property 'image' of non-object /data/customers/public_html/ramrasiya.com/application/controllers/Home.php 219
+ERROR - 2021-07-26 01:05:59 --> Severity: Notice --> Trying to get property 'imgfolder' of non-object /data/customers/public_html/ramrasiya.com/application/controllers/Home.php 228
+ERROR - 2021-07-26 01:05:59 --> Severity: Notice --> Trying to get property 'title' of non-object /data/customers/public_html/ramrasiya.com/application/views/web/catalogdetail.php 17
+ERROR - 2021-07-26 01:05:59 --> Severity: Notice --> Trying to get property 'description' of non-object /data/customers/public_html/ramrasiya.com/application/views/web/catalogdetail.php 60
+ERROR - 2021-07-26 02:12:16 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 02:12:18 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 02:12:31 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 02:44:41 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 03:07:00 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 04:47:29 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 05:50:22 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:48 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:48 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:48 --> 404 Page Not Found: Blog/wp-includes
+ERROR - 2021-07-26 07:08:49 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:49 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:49 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:49 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:50 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:50 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:50 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:50 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:50 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:51 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:51 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:51 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:51 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:08:51 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:13:57 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:13:58 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:13:58 --> 404 Page Not Found: Blog/wp-includes
+ERROR - 2021-07-26 07:13:58 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:13:59 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:13:59 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:13:59 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:13:59 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:00 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:00 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:00 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:00 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:01 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:01 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:01 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:01 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:02 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:14:02 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 07:31:39 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:35 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:37 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:40 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:41 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:42 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:44 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:45 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:50 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:51 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:52 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:54 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:55 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:56 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:57 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:20:58 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:21:00 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:21:01 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:21:04 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:21:05 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:21:07 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:21:08 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 08:36:02 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 10:23:04 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 10:33:25 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 10:50:06 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 12:03:06 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 12:03:58 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 12:12:23 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 12:18:48 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 12:18:49 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 12:18:50 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 12:18:52 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 13:37:53 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 14:14:47 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 14:28:05 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 14:45:12 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 14:55:12 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 14:57:59 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 15:01:11 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 15:01:12 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 15:31:24 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 15:35:46 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 15:35:47 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 16:01:22 --> Severity: Notice --> Trying to get property 'image' of non-object /data/customers/public_html/ramrasiya.com/application/controllers/Home.php 219
+ERROR - 2021-07-26 16:01:22 --> Severity: Notice --> Trying to get property 'imgfolder' of non-object /data/customers/public_html/ramrasiya.com/application/controllers/Home.php 228
+ERROR - 2021-07-26 16:01:22 --> Severity: Notice --> Trying to get property 'title' of non-object /data/customers/public_html/ramrasiya.com/application/views/web/catalogdetail.php 17
+ERROR - 2021-07-26 16:01:22 --> Severity: Notice --> Trying to get property 'description' of non-object /data/customers/public_html/ramrasiya.com/application/views/web/catalogdetail.php 60
+ERROR - 2021-07-26 16:48:14 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 19:10:00 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 19:55:22 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 19:55:22 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 19:55:23 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 20:44:05 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 21:17:34 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 21:17:34 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 21:52:58 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 22:04:07 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 23:45:52 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 23:46:14 --> 404 Page Not Found: /index
+ERROR - 2021-07-26 23:56:01 --> 404 Page Not Found: /index

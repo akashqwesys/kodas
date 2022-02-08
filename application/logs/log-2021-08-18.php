@@ -1,0 +1,70 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-08-18 00:34:12 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 00:34:43 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 00:48:34 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:17:20 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:05 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:08 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:09 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:24 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:25 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:26 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:27 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:28 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:29 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:45 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:48 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:51:50 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:52:04 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:52:06 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:52:08 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:52:09 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:52:11 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 01:52:13 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 02:28:26 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 02:41:29 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 02:44:03 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 04:32:49 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 04:39:28 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 04:39:33 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 05:37:44 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 05:51:52 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 06:27:08 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 06:27:09 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 06:27:10 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 06:51:58 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 07:54:23 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 08:33:27 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 08:33:28 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 08:33:29 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 08:33:31 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 09:08:01 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 09:26:42 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 10:34:45 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 11:14:32 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 11:17:39 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 11:58:36 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 12:23:37 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 12:40:48 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 12:40:49 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 13:34:49 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 14:43:24 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 15:02:32 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 15:39:18 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 15:50:21 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 16:07:27 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 16:19:42 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 16:19:49 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 16:26:34 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 16:45:24 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 17:41:42 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 18:56:02 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 20:51:09 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 20:57:01 --> Severity: Notice --> Trying to get property 'image' of non-object /data/customers/public_html/ramrasiya.com/application/controllers/Home.php 219
+ERROR - 2021-08-18 20:57:01 --> Severity: Notice --> Trying to get property 'imgfolder' of non-object /data/customers/public_html/ramrasiya.com/application/controllers/Home.php 228
+ERROR - 2021-08-18 20:57:01 --> Severity: Notice --> Trying to get property 'title' of non-object /data/customers/public_html/ramrasiya.com/application/views/web/catalogdetail.php 17
+ERROR - 2021-08-18 20:57:01 --> Severity: Notice --> Trying to get property 'description' of non-object /data/customers/public_html/ramrasiya.com/application/views/web/catalogdetail.php 60
+ERROR - 2021-08-18 21:38:19 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 22:03:16 --> 404 Page Not Found: /index
+ERROR - 2021-08-18 22:03:17 --> 404 Page Not Found: /index

@@ -1,0 +1,72 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-06-17 00:31:56 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 00:31:58 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 00:36:52 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 01:24:06 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 01:33:35 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 01:42:48 --> Severity: Notice --> Trying to get property 'image' of non-object /data/customers/public_html/ramrasiya.com/application/controllers/Home.php 219
+ERROR - 2021-06-17 01:42:48 --> Severity: Notice --> Trying to get property 'imgfolder' of non-object /data/customers/public_html/ramrasiya.com/application/controllers/Home.php 228
+ERROR - 2021-06-17 01:42:48 --> Severity: Notice --> Trying to get property 'title' of non-object /data/customers/public_html/ramrasiya.com/application/views/web/catalogdetail.php 17
+ERROR - 2021-06-17 01:42:48 --> Severity: Notice --> Trying to get property 'description' of non-object /data/customers/public_html/ramrasiya.com/application/views/web/catalogdetail.php 60
+ERROR - 2021-06-17 01:56:02 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 01:56:14 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 03:46:33 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 06:01:42 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 07:06:05 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 07:06:06 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 07:32:16 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 07:32:18 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 07:32:19 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 07:32:21 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 07:37:50 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 08:45:38 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 08:45:40 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 09:28:10 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 09:50:49 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 10:16:08 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 10:17:38 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 11:21:51 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 11:49:47 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:25 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:25 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:26 --> 404 Page Not Found: Blog/wp-includes
+ERROR - 2021-06-17 12:38:26 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:26 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:26 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:27 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:27 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:27 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:27 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:28 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:28 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:28 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:29 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:29 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:29 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:29 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 12:38:30 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 13:44:05 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:48:19 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:16 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:17 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:18 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:33 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:34 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:35 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:36 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:37 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:40 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:52 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:54 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:51:56 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:52:12 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:52:15 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:52:16 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:52:18 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:52:20 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 15:52:21 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 16:59:18 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 18:27:11 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 19:46:18 --> 404 Page Not Found: /index
+ERROR - 2021-06-17 21:10:25 --> 404 Page Not Found: /index

@@ -1,0 +1,49 @@
+
+.flexslider{
+  margin-bottom: 0 !important;
+}
+
+
+.slider-for{
+  div{
+    img{
+      width: 350px;
+      height: 150px;
+    }
+  }
+}
+
+/*.slider-nav{
+  margin-top: 10px;
+  div{
+    img{
+      width: 80%;
+      height: 50px;
+    }
+  }
+}*/
+
+.slick-slide{
+  outline: 0;
+}
+
+.flex-direction-nav{
+  a:before{
+    font-size: 30px;
+  }
+}
+
+.flex-active-slide
+{
+  border:2px solid #000!important;
+}
+
+/*#slider{
+  ul.flex-direction-nav{
+    li{
+      a{
+        display: none !important;
+      }
+    }
+  }
+}*/

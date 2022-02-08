@@ -1,0 +1,91 @@
+a:5:{s:8:"template";s:8414:"<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>{{ keyword }}</title>
+<link href="https://fonts.googleapis.com/css?family=Poppins%3A400%2C600%7CUbuntu%3A400%2C400i%2C500%2C500i" id="bizworx-fonts-css" media="all" rel="stylesheet" type="text/css"/>
+<style rel="stylesheet" type="text/css">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}aside,footer,header,nav{display:block}a{background-color:transparent}a:active,a:hover{outline:0} @media print{*,:after,:before{background:0 0!important;color:#000!important;-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}a,a:visited{text-decoration:underline}a[href]:after{content:" (" attr(href) ")"}a[href^="#"]:after{content:""}h2{orphans:3;widows:3}h2{page-break-after:avoid}}*,:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:10px;-webkit-tap-highlight-color:transparent}body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.42857143;color:#333;background-color:#fff}a{color:#337ab7;text-decoration:none}a:focus,a:hover{color:#23527c;text-decoration:underline}a:focus{outline:dotted thin;outline:-webkit-focus-ring-color auto 5px;outline-offset:-2px}h2{font-family:inherit;font-weight:500;line-height:1.1;color:inherit}h2{margin-top:20px;margin-bottom:10px}h2{font-size:30px}ul{margin-top:0;margin-bottom:10px}.container{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.row{margin-left:-15px;margin-right:-15px}.col-md-12,.col-md-6,.col-sm-6,.col-xs-12{position:relative;min-height:1px;padding-left:15px;padding-right:15px}.col-xs-12{float:left}.col-xs-12{width:100%}@media (min-width:768px){.col-sm-6{float:left}.col-sm-6{width:50%}}@media (min-width:992px){.col-md-12,.col-md-6{float:left}.col-md-12{width:100%}.col-md-6{width:50%}}.container:after,.container:before,.row:after,.row:before{content:" ";display:table}.container:after,.row:after{clear:both}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;line-height:.68;font-weight:100;margin:.05em .1em 0 0;text-transform:uppercase;font-style:normal}.has-drop-cap:not(:focus):after{content:"";display:table;clear:both;padding-top:14px}@font-face{font-family:Poppins;font-style:normal;font-weight:400;src:local('Poppins Regular'),local('Poppins-Regular'),url(https://fonts.gstatic.com/s/poppins/v9/pxiEyp8kv8JHgFVrJJfedw.ttf) format('truetype')}@font-face{font-family:Poppins;font-style:normal;font-weight:600;src:local('Poppins SemiBold'),local('Poppins-SemiBold'),url(https://fonts.gstatic.com/s/poppins/v9/pxiByp8kv8JHgFVrLEj6Z1xlEA.ttf) format('truetype')}@font-face{font-family:Ubuntu;font-style:italic;font-weight:400;src:local('Ubuntu Italic'),local('Ubuntu-Italic'),url(https://fonts.gstatic.com/s/ubuntu/v14/4iCu6KVjbNBYlgoKej70l0w.ttf) format('truetype')}@font-face{font-family:Ubuntu;font-style:italic;font-weight:500;src:local('Ubuntu Medium Italic'),local('Ubuntu-MediumItalic'),url(https://fonts.gstatic.com/s/ubuntu/v14/4iCp6KVjbNBYlgoKejYHtFyPN4Q.ttf) format('truetype')}@font-face{font-family:Ubuntu;font-style:normal;font-weight:400;src:local('Ubuntu Regular'),local('Ubuntu-Regular'),url(https://fonts.gstatic.com/s/ubuntu/v14/4iCs6KVjbNBYlgoKfw7z.ttf) format('truetype')}@font-face{font-family:Ubuntu;font-style:normal;font-weight:500;src:local('Ubuntu Medium'),local('Ubuntu-Medium'),url(https://fonts.gstatic.com/s/ubuntu/v14/4iCv6KVjbNBYlgoCjC3jsGyI.ttf) format('truetype')}.page-wrap .content-wrapper{padding-top:15px;padding-bottom:15px;background-color:#fff}*,:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}body{font:16px/1.8 Poppins,sans-serif;background:#fff;color:#777}a{text-decoration:none;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-ms-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}a:focus,a:hover{color:#443f3f;text-decoration:none;outline:0;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-ms-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}h2{font:42px/1.1 Ubuntu,sans-serif}h2{color:#000;font-weight:500;margin:10px 0 24px}a{color:#e64e4e}.widget-area .widget{position:relative;margin-bottom:30px;padding-top:50px}.widget-area .widget:before{content:"";position:absolute;left:0;top:0;width:30px;height:1px}.widget-area .widget:first-child{padding-top:0}.widget-area .widget:first-child:before{height:0}.footer-widgets{border-top:1px solid #ebebeb}.widget-area{color:#767676}.site-header{position:fixed;top:0;left:0;width:100%;z-index:1000;background-color:transparent;padding:20px 0;-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-ms-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out}#site-navigation{display:block;float:right;-webkit-transition:all .3s linear;-moz-transition:all .3s linear;-ms-transition:all .3s linear;-o-transition:all .3s linear;transition:all .3s linear}#site-navigation ul{list-style:none;margin:0;padding:0}#site-navigation li{float:left;padding:0 14px}#site-navigation ul li a{position:relative;display:block;font-size:14px;font-family:Ubuntu,sans-serif;color:#fff;font-weight:500;text-decoration:none;outline:0}#site-navigation ul li a:hover{color:#e64e4e}#site-navigation ul li{position:relative}#site-navigation ul{padding:0}#site-navigation ul li::before{font-family:Fontawesome;color:#fff;float:left;margin:5px 5px 0 0;font-size:14px;line-height:1;font-weight:400}#site-navigation ul li a{float:left}.btn-menu{font-size:28px;font-family:FontAwesome;color:#fff;text-align:center;cursor:pointer;display:none;float:right;margin-top:10px}.btn-menu::before{content:"\f0c9"}.header-content{position:relative;top:60%;left:0;right:0;text-align:center;z-index:2;width:100%;padding-top:5px;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);-o-transform:translateY(-50%);transform:translateY(-50%)}.site-footer{background-color:#1c1c1c;line-height:35px;padding:15px 0;border-top:1px solid #ebebeb}#content{word-wrap:break-word}@media screen and (min-width:1025px){.head-wrap .container>.row{display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-ms-flex-align:center;align-items:center}}@media screen and (max-width:1024px){.btn-menu{display:block}.site-header{position:static}}@media screen and (max-width:767px){.head-wrap{text-align:center}.btn-menu{float:none}.header-background{height:75vh!important;overflow:hidden}.header-content{top:50%}}@media screen and (max-width:480px){body{font-size:14px!important}h2{margin:10px 0 12px}.page-wrap{padding:30px 0!important}}</style>
+</head>
+<body class="wp-custom-logo">
+<header class="site-header" id="masthead" role="banner">
+<div class="head-wrap banner-background">
+<div class="container">
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-12">
+<a href="#" title="{{ keyword }}">{{ keyword }}</a>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="btn-menu"></div>
+<nav class="site-navigation" id="site-navigation" role="navigation">
+<div class="menu"><ul>
+<li class="page_item page-item-2"><a href="#">{{ keyword }}</a></li>
+</ul></div>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="bizworx-banner-area">
+<div class="header-background">
+<div class="header-content">
+<h2 class="bg-maintitle maintitle">{{ keyword }}</h2>
+</div>
+</div>
+</div>
+<div class="page-wrap" id="content">
+<div class="content-wrapper container">
+<div class="row">
+{{ text }}
+</div>
+</div>
+</div>
+<div class="footer-widgets widget-area" id="sidebar-footer" role="complementary">
+<div class="container">
+<div class="sidebar-column col-md-12">
+<aside class="widget widget_text" id="text-2"><div class="textwidget">
+{{ links }}
+</div>
+</aside> </div>
+<div class="sidebar-column col-md-12">
+</div>
+</div>
+</div> <footer class="site-footer" id="colophon" role="contentinfo">
+<div class="site-info container">
+2020 {{ keyword }}
+</div>
+</footer>
+</body>
+</html>";s:4:"text";s:5422:"<br> <br>The Sandman was born in in June 16, 1963. One of his entrance themes was the song “Big Shot” by Billy Joel. Continue to next page below to see how much is The Sandman really worth, including net worth, estimated earnings, and salary for 2019 and 2020. Woman wanted to make Dreamer suffer and so lured Dreamer into a match with Sandman wherein whoever lost would have to receive ten strikes from the other with a Singapore cane. Jim Fullington Zodiac Sign is Gemini, Ethnicity White & religion Not Available.. Jim Fullington Net Worth 2018. 5-time ECW World Heavyweight Champion, XPW World Heavyweight Champion, known for his White Russian Legsweep finishing move.Continue to next page below to see how much is The Sandman really worth, including net worth, estimated earnings, and salary for 2019 and 2020.The Sandman was born in Utah, United States on Sunday, June 16, 1963. The Sandman net worth and salary: The Sandman is a Wrestler who has a net worth of $300 Million. Jim Fullington is a American Wrestler, who was born on 19 June, 1963 in Sandy, Utah. He also performed in Memphis in 1991–1992. This page will examine The Sandman’s total career net worth. T he Sandman is a professional wrestler whose real name is James Fullington. 5-time ECW World Heavyweight Champion, XPW World Heavyweight Champion, known for his White Russian Legsweep finishing move. On July 2, 2016, Sandman lost a cage match to Sabu, in a match where Bill Alfonso was the referee. <br> <br>– NZPWI,"Caldwell's TNA Hardcore Justice PPV results 8/8: Ongoing "virtual time" coverage of ECW-themed PPV headlined by RVD vs. Sabu","TNA News: Spoilers – detailed Impact TV taping report for "Whole F'n Show" featuring new angle, MOTY candidate?, three title matches","TNA's 'The Whole F'n Show': Beer Money, Machine Guns put on match of year candidate; Fortune makes statement","Wilkenfeld's TNA Impact report 8/19: Ongoing "virtual time" coverage of Spike TV broadcast","Wed. update: Ratings, main event announced, Fedor's people want big fight,TNA no-show and departure",http://www.cagematch.net/?id=2&nr=69&page=19,"Wrestler to spend another night in Yonkers jail","Wrestler 'Sandman' Makes Bail in Party Brawl","County judge sets $10,000 bail for pro wrestler 'The Sandman,' charged in Yonkers brawl","PWU "Crazy 8" Results From Biggest Crowd In PWU History. The Undertaker was born Mark William Calaway. He was previously married to Lori Fullington, a.k.a. Discover The Sandman Net Worth, Salary, Biography, Height, Dating, Wiki. Edge (Wrestler) Net Worth: Edge is a retired Canadian professional wrestler and actor who has a net worth of $14 million. How much is The Sandman worth now? View Net Worth. The Sandman net worth and salary: The Sandman is a Wrestler who has a net worth of $300 Million. After the match Sandman was told by Woman that Dreamer was with Cairo and that they were both sleeping with his wife, which enraged Sandman. The bulletin stated that Sandman has a two-month-old child and a girlfriend to take care of, so he feels it is time to leave the wrestling business after a 20 plus year career. <br> <br>Jon Sandman is 29 years old and a famous Twitch Star. The Sandman is a wrestler from Utah, United States. Peaches. Born on December 15, 1989, in California.. Continue reading to learn more about Jon Sandman’s Estimated Net Worth,Career, Height, Weight, Family, Age, Biography,Cars, House,Wiki & Nationality. <br> Thomas James Laughlin (born February 13, 1971), best known by his ring name Tommy Dreamer, is an American professional wrestler and promoter.He is the owner and promoter of the House of Hardcore promotion, for whom he also wrestles, and works as a wrestler, producer and member of the creative team for Impact Wrestling.. Dreamer is best known for his tenures with Extreme Championship … This page will examine The Sandman’s total career net worth. Our estimate for The Sandman’s net worth in 2018 is: $200,000.Copyright © 2004- 2020, Content Arcade. We take a look at The Sandman's net worth, estimated salary for 2019-2020 and Wrestlers recent earnings here. He got his start in pro wrestling under the ring name Mr. Sandman with Tri-State Wrestling Alliance. The Sandman was born on June 16, 1963, in Sandy, Utah, United States. The Sandman married Lori Fullington (divorced), and is the parent of 4; including Tyler Fullington. Jim Fullington estimated net worth in 2018 is Under Review.Here we also added Jim Fullington previous years Net Worth, Income, Salary & Property details. What is The Sandman's net worth in 2020? Jim Fullington net worth is. We track celebrity net worth so you don't have to. The bulletin also noted that he would still be accepting bookings over the next few weeks and that his official retirement date would be announced soon.On October 25, 2014, Fullington and Tommy Dreamer defeated Damien Darling and Danny Demanto.  He began a feud with,After the closure of ECW The Sandman wrestled for,In late 2002 and early 2003, The Sandman had a tenure in,The Sandman made his surprise debut on February 12, 2003 where he was defeated by,In 2005, Sandman participated in the ECW reunion show,Subsequently, the Sandman has made several short appearances, mostly coming out through the crowd and caning someone whenever some injustice was done. He got his start in pro wrestling under the ring name Mr. Sandman with Tri-State Wrestling Alliance. <br>";s:7:"keyword";s:30:"the sandman wrestler net worth";s:5:"links";s:3246:"<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=steal-like-an-artist-audiobook'>Steal Like An Artist Audiobook</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=anime-boy'>Anime Boy</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=how-are-earthquakes-and-tsunamis-related'>How Are Earthquakes And Tsunamis Related</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=catherine-tresa-real-age'>Catherine Tresa Real Age</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=Kristi-Yamaguchi-family'>Kristi Yamaguchi Family</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=oregon-high-school-football-rankings-2019'>Oregon High School Football Rankings 2019</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=florida-gators-2024-football-schedule'>Florida Gators 2024 Football Schedule</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=francium-sulfide'>Francium Sulfide</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=leicester-aston-villa-result'>Leicester Aston Villa Result</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=chennai-vs-punjab-2012'>Chennai Vs Punjab 2012</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=university-of-miami-athletic-facilities'>University Of Miami Athletic Facilities</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=Nicola-Rizzoli'>Nicola Rizzoli</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=Proper-form'>Proper Form</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=Oh-Eesa'>Oh Eesa</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=pat-summitt-net-worth'>Pat Summitt Net Worth</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=aesthetic-boy-art'>Aesthetic Boy Art</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=2010-Indian-premier-league'>2010 Indian Premier League</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=agriculture-malayalam-meaning'>Agriculture Malayalam Meaning</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=japan-tsunami-nuclear-disaster-2011'>Japan Tsunami Nuclear Disaster 2011</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=washington-wizards-insider'>Washington Wizards Insider</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=is-cyanide-illegal'>Is Cyanide Illegal</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=Welcome-to-My-Truth'>Welcome To My Truth</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=img-models-reviews'>Img Models Reviews</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=leicester-aston-villa-result'>Leicester Aston Villa Result</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=phil-kessel-height'>Phil Kessel Height</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=Oh-Eesa'>Oh Eesa</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=aesthetic-education'>Aesthetic Education</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=paper-loving-king-jabbi-remix'>Paper Loving King Jabbi Remix</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=usc-2009'>Usc 2009</a>,
+<a href='https://tulsiarts.com/forum/gu088.php?1e49d4=good-comments-for-friends-pictures'>Good Comments For Friends Pictures</a>,
+";s:7:"expired";i:-1;}

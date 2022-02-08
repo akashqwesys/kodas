@@ -1,0 +1,37 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-09-24 06:53:55 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 12:38:06 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 12:38:06 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 12:38:07 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:09 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:11 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:11 --> 404 Page Not Found: ../modules/admin/controllers//index
+ERROR - 2020-09-24 18:12:12 --> 404 Page Not Found: ../modules/admin/controllers//index
+ERROR - 2020-09-24 18:12:13 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:13 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:15 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:15 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:16 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:17 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:17 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:19 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:19 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:20 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:21 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:22 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:22 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:22 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:23 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:23 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:24 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:25 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:25 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:25 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:26 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:26 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:27 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:28 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:28 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:12:29 --> 404 Page Not Found: /index
+ERROR - 2020-09-24 18:21:38 --> 404 Page Not Found: /index

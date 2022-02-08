@@ -1,0 +1,62 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-08-22 01:45:55 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 01:45:57 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 01:55:59 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 08:26:31 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): Connection refused /data/customers/public_html/ramrasiya.com/system/database/drivers/mysqli/mysqli_driver.php 203
+ERROR - 2021-08-22 08:26:31 --> Unable to connect to the database
+ERROR - 2021-08-22 08:26:31 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at /data/customers/public_html/ramrasiya.com/system/core/Exceptions.php:271) /data/customers/public_html/ramrasiya.com/system/core/Common.php 570
+ERROR - 2021-08-22 08:41:24 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 09:23:53 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 09:35:50 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 09:49:40 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 09:54:14 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 10:17:23 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 11:02:18 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 11:14:49 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 11:19:43 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 11:19:45 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 11:19:46 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 11:19:49 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:23:15 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:33:58 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:33:59 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:01 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:17 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:19 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:20 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:22 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:23 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:24 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:41 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:44 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:34:46 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:35:04 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:35:06 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:35:09 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:35:11 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:35:13 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:35:15 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 12:35:53 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 13:57:47 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 14:13:25 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 14:30:51 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 14:30:51 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 14:30:52 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 14:30:52 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 15:23:55 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 15:28:40 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 16:44:06 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 16:56:41 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 17:15:33 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 17:17:46 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 17:40:25 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 17:40:35 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 17:40:36 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 19:35:14 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 19:36:48 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 20:39:21 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 20:39:27 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 21:53:27 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 21:54:45 --> 404 Page Not Found: /index
+ERROR - 2021-08-22 23:55:02 --> 404 Page Not Found: /index
