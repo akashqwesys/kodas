@@ -142,7 +142,7 @@ class Api_model extends CI_Model {
 			curl_close($ch);
 			$msgdisplay = json_decode($data);
 
-			// print_r($msgdisplay);die;
+			print_r($msgdisplay);die;
 			if ($msgdisplay->Data[0]->MessageErrorDescription == 'Success') {
 				//echo "cURL Error #:" . $err;
 				$return['Data'] = "1";
