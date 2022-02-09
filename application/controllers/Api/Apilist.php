@@ -633,8 +633,7 @@ class Apilist extends REST_Controller {
 		     * Get One SendOtp
 	*/
 
-	public function SendOtp_post() {
-		echo 'hi';die;
+	public function SendOtp_post() {		
 		$product = $this->Api_model->GetSendOtpFun();
 		// sendsms($mobileno,$six_digit_random_number);
 

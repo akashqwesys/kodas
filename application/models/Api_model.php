@@ -121,6 +121,8 @@ class Api_model extends CI_Model {
 		$signature = !empty($_REQUEST['signature']) ? $_REQUEST['signature'] : '';
 		if ($MobileNo != '' && $OtpCode != '') {
 
+
+		echo 'hi';die;	
 			// $res=sendsms($MobileNo,$OtpCode,$signature);
 
 			// $msg = "Welcome%20to%20Ramrasiya%20Mobile%20Application.%20Your%20verification%20code%20is%20$OtpCode.";
