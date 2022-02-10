@@ -9,7 +9,7 @@
     $senderId = "BIGAME";
 
 //Your message to send, Add URL encoding here.
-    $message = "OTP is $otp";
+    $message = urlencode("OTP is $otp");
 
 //Define route 
     $route = 4;
