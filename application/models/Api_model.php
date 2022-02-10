@@ -129,9 +129,8 @@ class Api_model extends CI_Model {
 			// $msg = urlencode($msg);
 			// $message = urlencode($message);
 
-			$data=sendsms($MobileNo,$OtpCode,$signature);
-
-			print_r($data);die;
+			$msgdisplay=sendsms($MobileNo,$OtpCode,$signature);
+			
 			// $url = "http://sms.premware.in:6005/api/v2/SendSMS?ApiKey=FbKnpOIgZfU541fff6mxudtf5tiCMEz/L5dEUKNJ6YI=&ClientId=26e94c2d-96f0-417e-8ddf-fa563e95e5c7&SenderId=RASIYA&Message=$msg&MobileNumbers=$MobileNo&Is_Flash=False";
 			// $ch = curl_init();
 			// $timeout = 20;
@@ -143,10 +142,10 @@ class Api_model extends CI_Model {
 			// $data = curl_exec($ch);
 			// // print_r($data);die;
 			// curl_close($ch);
-			$msgdisplay = json_decode($data);
+			// $msgdisplay = json_decode($data);
 
 			// print_r($msgdisplay);die;
-			if ($msgdisplay->Data[0]->MessageErrorDescription == 'Success') {
+			if (!empty($msgdisplay)) {
 				//echo "cURL Error #:" . $err;
 				$return['Data'] = "1";
 				$return['Message'] = 'Data Get Successfully!';
