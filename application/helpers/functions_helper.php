@@ -49,5 +49,6 @@
         echo 'error:' . curl_error($ch);
     }
     curl_close($ch);
+    return $output;
 }
 ?>
