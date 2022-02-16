@@ -3542,6 +3542,51 @@ class Api_model extends CI_Model {
 		}
 		return $return;
 	}
+
+	public function getProductByCategory($id="",$sort='',$filter=[],$lang="") {
+
+
+		if($sort=='price_low_to_high'){
+			$this->db->order_by('products_translations.price', 'ASC');		
+		}
+		if($sort=='price_high_to_low'){
+			$this->db->order_by('products_translations.price', 'DESC');
+		}
+		if($sort=='latest'){
+			$this->db->order_by('products.id', 'DESC');
+		}
+		if($sort=='oldest'){
+			$this->db->order_by('products.id', 'ASC');
+		}
+		if($sort=='best_offer'){
+			$this->db->order_by('products.id', 'ASC');
+		}		
+		if(!empty($filter)){
+			$this->db->join('product_attribute1', 'product_attribute1.refProduct_id = productcat.productid');
+			$this->db->where_in('product_attribute1.refattributes_id',$filter);					
+		}
+
+		$this->db->join('products', 'products.id = productcat.productid', 'left');
+		// $this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
+		$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+		$this->db->where('products_translations.abbr', $lang);
+		$this->db->where('productcat.catid', $id);		
+		$this->db->limit(10);
+		$query = $this->db->select('products.id as product_id, products.image as product_image, products.time as product_time_created, products.time_update as product_time_updated, products.visibility as product_visibility, products.shop_categorie as product_category, products.quantity as product_quantity_available, products.procurement as product_procurement, products.url as product_url, products.virtual_products, products.brand_id as product_brand_id, products.position as product_position , products_translations.title, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description')->get('productcat');
+		return $query->result_array();
+	}
+
+	public function getAttributeGroup() {
+		$this->db->where('status',1);		
+		$query = $this->db->get('attributes_group');
+		return $query->result_array();
+	}
+	public function getAttributes() {
+		$this->db->where('status',1);		
+		$query = $this->db->get('attributes');
+		return $query->result_array();
+	}
+
 	public function getProduct($lang, $id) {
 		$this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
 		$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
