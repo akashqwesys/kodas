@@ -68,3 +68,6 @@ ORDER BY `products`.`id` ASC
  LIMIT 10
 ERROR - 2022-02-16 17:52:09 --> Severity: error --> Exception: Call to a member function result_array() on bool C:\xampp8\htdocs\kodas\application\models\Api_model.php 3576
 ERROR - 2022-02-16 18:06:27 --> Severity: error --> Exception: array_push(): Argument #1 ($array) must be of type array, null given C:\xampp8\htdocs\kodas\application\controllers\Api\Apilist.php 474
+ERROR - 2022-02-16 18:25:20 --> Severity: Warning --> Undefined array key "catid" C:\xampp8\htdocs\kodas\application\controllers\Api\Apilist.php 461
+ERROR - 2022-02-16 18:25:20 --> Severity: Warning --> Undefined array key "sort" C:\xampp8\htdocs\kodas\application\controllers\Api\Apilist.php 462
+ERROR - 2022-02-16 18:25:20 --> Severity: Warning --> Undefined array key "filter" C:\xampp8\htdocs\kodas\application\controllers\Api\Apilist.php 463

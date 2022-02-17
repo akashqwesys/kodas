@@ -626,25 +626,31 @@ class Api_model extends CI_Model {
 			$image_link[$a]['ImageName'] = $without_extension;
 			$image_link[$a]['LikeStatus'] = $likestatus;
 			$a++;
+		
+
+		// $imgnameextension = str_replace(base_url('attachments/shop_images/' . $multiimg . '/'), "", $value);
+		// $without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
+		// $this->db->where('likepreproductimg.userid', $_REQUEST['UserId']);
+		// $this->db->where('likepreproductimg.imgname', $without_extension);
+		// $querylikedi = $this->db->select('likestatus')->get('likepreproductimg')->row();
+		// if (isset($querylikedi->likestatus)) {$likestatus = $querylikedi->likestatus;} else { $likestatus = '';}
+		// $image_link[$a]['Image'] = $value;
+		// $image_link[$a]['ImageName'] = $without_extension;
+		// $image_link[$a]['LikeStatus'] = $likestatus;
 		}
 
-		$imgnameextension = str_replace(base_url('attachments/shop_images/' . $multiimg . '/'), "", $value);
-		$without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
-		$this->db->where('likepreproductimg.userid', $_REQUEST['UserId']);
-		$this->db->where('likepreproductimg.imgname', $without_extension);
-		$querylikedi = $this->db->select('likestatus')->get('likepreproductimg')->row();
-		if (isset($querylikedi->likestatus)) {$likestatus = $querylikedi->likestatus;} else { $likestatus = '';}
-		$image_link[$a]['Image'] = $value;
-		$image_link[$a]['ImageName'] = $without_extension;
-		$image_link[$a]['LikeStatus'] = $likestatus;
-		$this->db->where('product_attribute.productid', $_REQUEST['ItemId']);
-		$queryatt = $this->db->select('product_attribute.*')->get('product_attribute');
+		$this->db->join('attributes_group', 'attributes_group.attributesgroup_id  = product_attribute1.refAttributesgroup_id', 'left');
+		$this->db->join('attributes', 'attributes.attributes_id  = product_attribute1.refattributes_id', 'left');
+		$this->db->where('product_attribute1.refProduct_id', $_REQUEST['ItemId']);
+
+		$queryatt = $this->db->select('product_attribute1.*,attributes_group.title as ag_title,attributes.title as at_title')->get('product_attribute1');
 		$resultatt = $queryatt->result_array();
-		$Attribute = array();
-		foreach ($resultatt as $key => $value) {
-			$Attribute[$key]['Text'] = $this->attributename($value['keyid']);
-			$Attribute[$key]['Value'] = $this->attributename($value['valueid']);
-		}
+		// print_r($resultatt);die;
+		// $Attribute = array();
+		// foreach ($resultatt as $key => $value) {
+		// 	$Attribute[$key]['Text'] = $this->attributename($value['keyid']);
+		// 	$Attribute[$key]['Value'] = $this->attributename($value['valueid']);
+		// }
 
 		foreach ($result as $key => $value) {
 
@@ -678,7 +684,7 @@ class Api_model extends CI_Model {
 			$data[$i]['PdfUrl'] = !empty($pdfurl) ? $pdfurl[0] : '';
 			$data[$i]['VideoUrl'] = !empty($value['VideoId']) ? $value['VideoId'] : '';
 			$data[$i]['Images'] = $image_link;
-			$data[$i]['Attribute'] = $Attribute;
+			$data[$i]['Attribute'] = $resultatt;
 			$i++;
 		}
 		if (!empty($data) && $data != '') {
