@@ -87,6 +87,9 @@ class User_model extends CI_Model {
 
 	public function setProduct($post, $id = 0) {
 		
+		$post['premiumuser'] = 0;
+		$post['reguleruser'] = 0;
+
 		if (isset($post['user_group'])) {
 			if($post['user_group']=='premiumuser'){
 				$post['premiumuser'] = 1;
@@ -94,9 +97,6 @@ class User_model extends CI_Model {
 			if($post['user_group']=='reguleruser'){
 				$post['reguleruser'] = 1;
 			}
-		}else{
-			$post['premiumuser'] = 0;
-			$post['reguleruser'] = 0;
 		}		
 		if (!isset($post['credit'])) {
 			$post['credit'] = 0;
@@ -166,6 +166,10 @@ class User_model extends CI_Model {
 				                             * We want our plaform public ulrs to be in default
 				                             * language that we use
 			*/
+
+		
+			
+
 			if (!$this->db->insert('user_app', array(
 				'name' => $post['name'],
 				'mobilenumber' => $post['mobilenumber'],

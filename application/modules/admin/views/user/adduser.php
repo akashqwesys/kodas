@@ -155,7 +155,7 @@ if ($this->session->flashdata('result_publish')) {
                     <td><?=$value['address'];?></td>
                     <td><?=$value['gstnumber'];?></td>
                     <td><a href="javascript:void(0);" data-toggle="modal" data-target="#edit_useraddress<?=$value['id'];?>" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
-                            <a href="<?=base_url('admin/shopcategories/?delete=' . $value['id'])?>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a></td>
+                        <a href="<?=base_url('admin/removeaddress/?delete=' . $value['id'])?>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a></td>
                   </tr>
                   <div class="modal fade" id="edit_useraddress<?=$value['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
