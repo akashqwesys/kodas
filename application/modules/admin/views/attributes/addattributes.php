@@ -44,7 +44,7 @@ if ($this->session->flashdata('add_attributes')) {
               <td><select class="form-control" name="refAttributes_group_id">
                   <option value="0">Select Attributes group</option>
                   <?php foreach($attributes_group_result as $row){ ?>
-                  <option value="attributesgroup_id"><?= $row['title'] ?></option>
+                  <option value="<?= $row['attributesgroup_id'] ?>"><?= $row['title'] ?></option>
                   <?php } ?>
                 </select></td>
             </tr>        

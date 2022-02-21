@@ -142,7 +142,7 @@ foreach ($shop_categorie['info'] as $nameAbbr) {
   </div>
 
   
-  <div class="form-group for-shop" style="display: inline-block;">
+  <!-- <div class="form-group for-shop" style="display: inline-block;">
     <label>Attribute</label>
     <div class="col-sm-12 col-md-12 col-lg-12 ">
       <table border="1">
@@ -174,7 +174,7 @@ $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM shop_a
 ?>
       </table>
     </div>
-  </div>
+  </div> -->
 
 
   <div class="form-group for-shop" style="display: inline-block;">
@@ -233,10 +233,27 @@ foreach ($result as $key => $value) {
       $result =$query->result_array();    
       foreach ($result as $key => $value) {
     ?>
-      <option <?=$_POST['refPackagingtype_id'] == $value['packagingtype_id'] ? 'selected' : ''?> value="<?=$value['packagingtype_id']?>"><?php echo $value['title'].'-'.$value['pcs']?>
+      <option <?php if(isset($_POST['refPackagingtype_id']))
+      {
+        if($_POST['refPackagingtype_id'] == $value['packagingtype_id'])
+        {echo 'selected';}
+      }?> value="<?=$value['packagingtype_id']?>"><?php echo $value['title'].'-'.$value['pcs']?>
       </option>
       <?php }?>
     </select>
+  </div>
+
+  <?php
+$productoffertype = [];
+if (isset($_POST['productoffertype'])) {
+	$productoffertype = explode(",", $_POST['productoffertype']);
+}
+?>
+  <div class="form-group for-shop">
+  <label>Offer type : </label>
+      <div class="checkbox-inline"><label for="latest"><input <?php if (in_array("latest", $productoffertype)) {echo 'checked';}?> type="checkbox" name="productoffertype[]" value="latest" />Latest</label></div>
+      <div class="checkbox-inline"><label for="trending"><input <?php if (in_array("trending", $productoffertype)) {echo 'checked';}?> type="checkbox" name="productoffertype[]" value="trending" />Trending</label></div>
+      <div class="checkbox-inline"><label for="recommended"><input <?php if (in_array("recommended", $productoffertype)) {echo 'checked';}?> type="checkbox" name="productoffertype[]" value="recommended"/>Recommended</label></div>
   </div>
 
 
@@ -331,6 +348,9 @@ if (isset($_POST['productviewtype'])) {
       <div class="checkbox-inline"><label for="reguleruser"><input <?php if (in_array("reguleruser", $productviewtype)) {echo 'checked';}?> id="reguleruser" type="checkbox" name="productviewtype[]" value="reguleruser" />Reguler User</label></div>
       <div class="checkbox-inline"><label for="guestuser"><input <?php if (in_array("guestuser", $productviewtype)) {echo 'checked';}?> id="guestuser" type="checkbox" name="productviewtype[]" value="guestuser"/>Guest User</label></div>
   </div>
+
+
+ 
 
   <div class="form-group for-shop">
     <?php /*?><label>Position</label><?php */?>

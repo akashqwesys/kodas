@@ -205,6 +205,7 @@ class Products_model extends CI_Model {
 				'virtual_products' => $post['virtual_products'],
 				'brand_id' => $post['brand_id'],
 				'productviewtype' => implode(',', $post['productviewtype']),
+				'productoffertype' => implode(',', $post['productoffertype']),
 				'time_update' => time(),
 			))) {
 				log_message('error', print_r($this->db->error(), true));
@@ -243,6 +244,7 @@ class Products_model extends CI_Model {
 				'folder' => $post['folder'],
 				'brand_id' => $post['brand_id'],
 				'productviewtype' => implode(',', $post['productviewtype']),
+				'productoffertype' => implode(',', $post['productoffertype']),
 				'time' => time(),
 			))) {
 				log_message('error', print_r($this->db->error(), true));
