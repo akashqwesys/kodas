@@ -276,13 +276,51 @@ class Api_model extends CI_Model {
 		$sort = '';
 		$gettype = $this->getcustomeridbypricetype($_REQUEST['UserId']);
 		$getusertypepro = $this->getcustomtypeshowproduct($_REQUEST['UserId']);
+		// print_r($gettype);die;
+
+		// if(!empty($filter)){
+		// 	$this->db->join('product_attribute1', 'product_attribute1.refProduct_id = productcat.productid');
+		// 	$this->db->where_in('product_attribute1.refattributes_id',$filter);					
+		// }
+
 		if (isset($_REQUEST['sort']) && !empty($_REQUEST['sort'])) {
 			$sort = $_REQUEST['sort'];
+
 			// $gettype = $this->getcustomeridbypricetype($_REQUEST['UserId']);
 			if (!empty($gettype)) {
-				$this->db->order_by('products.' . strtolower($gettype), $_REQUEST['sort']);
+
+				if($sort=='price_low_to_high'){
+					$this->db->order_by('products_translations.price', 'ASC');		
+				}
+				if($sort=='price_high_to_low'){
+					$this->db->order_by('products_translations.price', 'DESC');
+				}
+				if($sort=='latest'){
+					$this->db->order_by('products.id', 'DESC');
+				}
+				if($sort=='oldest'){
+					$this->db->order_by('products.id', 'ASC');
+				}
+				if($sort=='best_offer'){
+					$this->db->order_by('products.id', 'ASC');
+				}					
+				// $this->db->order_by('products.' . strtolower($gettype), $_REQUEST['sort']);
 			} else {
-				$this->db->order_by('products_translations.price', $_REQUEST['sort']);
+				if($sort=='price_low_to_high'){
+					$this->db->order_by('products_translations.price', 'ASC');		
+				}
+				if($sort=='price_high_to_low'){
+					$this->db->order_by('products_translations.price', 'DESC');
+				}
+				if($sort=='latest'){
+					$this->db->order_by('products.id', 'DESC');
+				}
+				if($sort=='oldest'){
+					$this->db->order_by('products.id', 'ASC');
+				}
+				if($sort=='best_offer'){
+					$this->db->order_by('products.id', 'ASC');
+				}	
 			}
 
 		} else {
