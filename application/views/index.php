@@ -5,8 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title><?= !empty($page_name)
-            ? 'Ramrasiya - ' . ucwords($page_name)
-            : Ramrasiya ?></title>
+            ? 'Kodas - ' . ucwords($page_name)
+            : Kodas ?></title>
         <meta name="author" content="premware service india LLP" />
         <meta name="description" content="">
         <meta name="Keywords" content="">
