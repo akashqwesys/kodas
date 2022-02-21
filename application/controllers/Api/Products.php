@@ -26,13 +26,45 @@ class Products extends REST_Controller
 
     public function all_get($lang)
     {	
-		
+		$response['product']=array();
         $products = $this->Api_model->getProducts($lang);
+
+        $response['sort']=array();
+		$response['sort'][0]['title']='Price Low to High';
+		$response['sort'][0]['value']='price_low_to_high';
+
+		$response['sort'][1]['title']='Price High to Low';
+		$response['sort'][1]['value']='price_high_to_low';
+
+		$response['sort'][2]['title']='Latest';
+		$response['sort'][2]['value']='latest';
+
+		$response['sort'][3]['title']='Oldest';
+		$response['sort'][3]['value']='oldest';
+
+		$response['sort'][3]['title']='Best Offer';
+		$response['sort'][3]['value']='best_offer';
+
+		$response['filter']=array();
+		$ag_res=$this->Api_model->getAttributeGroup();
+		$at_res=$this->Api_model->getAttributes();
+		if(!empty($ag_res)){
+			foreach($ag_res as $ag_row){
+				$ag_row['list']	=array();			
+				foreach($at_res as $atr_row){
+					if($ag_row['attributesgroup_id']==$atr_row['refAttributes_group_id']){
+						array_push($ag_row['list'],$atr_row);
+					}							
+				}
+				array_push($response['filter'],$ag_row);	
+			}
+		}
 
         // Check if the products data store contains products (in case the database result returns NULL)
         if ($products) {
+            $response['product']=$products;
             // Set the response and exit
-            $this->response($products, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+            $this->response($response, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
         } else {
             // Set the response and exit
             $this->response([

@@ -813,7 +813,7 @@ class Apilist extends REST_Controller {
 	*/
 
 	public function GetMyCart_get() {
-
+		
 		$product = $this->Api_model->GetMyCart();
 
 		// Check if the products data store contains products (in case the database result returns NULL)

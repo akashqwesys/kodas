@@ -316,8 +316,8 @@ class Api_model extends CI_Model {
 			if (isset($_REQUEST['Attribute']) && $_REQUEST['Attribute'] != '') {
 				$attributearray = explode(",", $_REQUEST['Attribute']);
 				$this->db->distinct('products.id');
-				$this->db->join('product_attribute', 'product_attribute.productid = productcat.productid', 'left');
-				$this->db->where_in('product_attribute.valueid', $attributearray);
+				$this->db->join('product_attribute1', 'product_attribute1.refProduct_id = productcat.productid', 'left');
+				$this->db->where_in('product_attribute1.refattributes_id', $attributearray);
 			}
 			$this->db->join('products', 'products.id = productcat.productid', 'left');
 			$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
@@ -582,9 +582,10 @@ class Api_model extends CI_Model {
 		$this->db->join('vendors', 'vendors.id = products.vendor_id', 'left');
 		$this->db->join('user_app', 'user_app.id = ' . $_REQUEST['UserId'], 'left');
 		$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+		$this->db->join('packagingtype', 'packagingtype.packagingtype_id = products.refPackagingtype_id', 'left');
 		$this->db->where('products.id', $id);
 		$this->db->limit(1);
-		$query = $this->db->select('user_app.pviewcount,products.id as Id,products.videoid as VideoId, products_translations.title, products.image as product_image, products.folder as imgfolder, products.product_type as Type, products.product_pcs as Pcs, products.min_qty as MinQty, products.quantity as product_quantity_available, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description')->get('products');
+		$query = $this->db->select('user_app.pviewcount,products.id as Id,products.videoid as VideoId, products_translations.title, products.image as product_image, products.folder as imgfolder, products.product_type as Type, products.product_pcs as Pcs, products.min_qty as MinQty, products.quantity as product_quantity_available, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id')->get('products');
 		$result = $query->result_array();
 
 		$data = array();
@@ -677,6 +678,9 @@ class Api_model extends CI_Model {
 			$data[$i]['Type'] = $value['Type'];
 			$data[$i]['Mrp'] = $Mrp;
 			$data[$i]['PcsMrp'] = $PcsMrp;
+			$data[$i]['packagingtype_id'] = $value['packagingtype_id'];			
+			$data[$i]['required_packing_pcs'] = $value['required_packing_pcs'];
+			$data[$i]['packing_title'] = $value['packing_title'];			
 			$data[$i]['Pcs'] = $value['Pcs'];
 			$data[$i]['MinQty'] = $value['MinQty'];
 			$data[$i]['IsCart'] = $isincart;
@@ -776,9 +780,10 @@ class Api_model extends CI_Model {
 		$query_cartgst = $this->db->where("thekey = 'addgst'")->get('value_store')->row_array();
 
 		$this->db->join('products', 'products.id = cartdetails.itemid', 'left');
+		$this->db->join('packagingtype', 'packagingtype.packagingtype_id = products.refPackagingtype_id', 'left');
 		$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
 		$this->db->where('cartdetails.userid', $_REQUEST['UserId']);
-		$query = $this->db->select('products.id as ItemId, cartdetails.id as CartId, cartdetails.qty as Qty, cartdetails.comment as Comment, cartdetails.audiofile as AudioFile, cartdetails.hindicomment as HindiComment, products.image as product_image, products.folder as imgfolder, products.product_pcs as Pcs, products.min_qty as MinQty, products_translations.description, products.product_type as Type, products_translations.title, products_translations.price, products_translations.old_price')->get('cartdetails');
+		$query = $this->db->select('products.id as ItemId, cartdetails.id as CartId, cartdetails.qty as Qty, cartdetails.comment as Comment, cartdetails.audiofile as AudioFile, cartdetails.hindicomment as HindiComment, products.image as product_image, products.folder as imgfolder, products.product_pcs as Pcs, products.min_qty as MinQty, products_translations.description, products.product_type as Type, products_translations.title, products_translations.price,products_translations.old_price,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id')->get('cartdetails');
 		$result = $query->result_array();
 		$data = array();
 		$count = array();
@@ -812,9 +817,13 @@ class Api_model extends CI_Model {
 			$data[$i]['ItemId'] = $value['ItemId'];
 			$data[$i]['CartId'] = $value['CartId'];
 			$data[$i]['Qty'] = $value['Qty'];
+			// $data[$i]['price'] = $value['price'];
 			$data[$i]['ItemName'] = $value['title'];
 			$data[$i]['Type'] = $value['Type'];
 			$data[$i]['Mrp'] = $Mrp;
+			$data[$i]['packagingtype_id'] = $value['packagingtype_id'];		
+			$data[$i]['required_packing_pcs'] = $value['required_packing_pcs'];
+			$data[$i]['packing_title'] = $value['packing_title'];	
 			$data[$i]['PcsMrp'] = $PcsMrp;
 			$data[$i]['Pcs'] = $value['Pcs'];
 			$data[$i]['MinQty'] = $value['MinQty'];
@@ -839,7 +848,29 @@ class Api_model extends CI_Model {
 		$item[0]['TotalwithGST'] = !empty($cartgst) ? $carttotal + round($carttotal * $cartgst / 100) : 0;
 		$item[0]['Pcstotal'] = !empty($pcstotal) ? $pcstotal : 0;
 		// $item[0]['CartTotal'] = $count;
-		$item[0]['CartItem'] = $data;
+		$item[0]['CartItem'] = array();
+
+		$packing_typet = $this->db->where("status = '1'")->get('packagingtype')->result_array();
+		// print_r($packing_typet);die;
+		if(!empty($packing_typet)){
+			foreach($packing_typet as $p_row){
+				$box=array();
+				$total=0;
+				foreach($data as $c_row){
+					if($p_row['packagingtype_id']==$c_row['packagingtype_id']){
+						$total=$total+($c_row['PcsMrp']*$c_row['Qty']);
+						array_push($box,$c_row);
+					}
+				}
+				if(!empty($box)){
+					$box['Package_total']=$total;				
+					array_push($item[0]['CartItem'],$box);
+				}
+			}
+		}
+
+
+
 		if (!empty($item) && $item != '') {
 			$return['Data'] = $item;
 			$return['Message'] = 'Data Get Successfully!';
@@ -1491,6 +1522,8 @@ class Api_model extends CI_Model {
 	}
 
 	public function CheckOutfun() {
+		
+		// print_r($_REQUEST);die;
 		$query_cartgst = $this->db->where("thekey = 'addgst'")->get('value_store')->row_array();
 		$cartgst = $query_cartgst['value'];
 		$q = $this->db->query('SELECT MAX(order_id) as order_id FROM orders');
@@ -1502,7 +1535,11 @@ class Api_model extends CI_Model {
 		$this->db->where('cartdetails.userid', $_REQUEST['UserId']);
 		$query = $this->db->select('*')->get('cartdetails');
 
+		
+		// print_r($query);die;
+
 		if ($query->num_rows() > 0) {
+					
 			$result = $query->result_array();
 			$post['date'] = time();
 			$products_to_order = [];
@@ -1519,6 +1556,7 @@ class Api_model extends CI_Model {
 					];
 				}
 			}
+				
 
 			$this->db->select('*');
 			$this->db->from('user_app');
@@ -1526,6 +1564,9 @@ class Api_model extends CI_Model {
 			$this->db->limit(1);
 			$query = $this->db->get();
 			$userrow = $query->row_array();
+
+
+			
 			$post['name'] = $userrow['name'];
 			$post['mobilenumber'] = $userrow['mobilenumber'];
 			$post['emailid'] = $userrow['emailid'];
@@ -1574,6 +1615,7 @@ class Api_model extends CI_Model {
 			}
 
 			$lastId = $this->db->insert_id();
+			
 			$Addressship = $this->GetUserAddressfun($_REQUEST['ShipId'], null);
 			$Addressbill = $this->GetUserAddressfun(null, $_REQUEST['BillId']);
 			if (!$this->db->insert('orders_clients', array(
@@ -1588,6 +1630,8 @@ class Api_model extends CI_Model {
 			))) {
 				log_message('error', print_r($this->db->error(), true));
 			}
+
+			// print_r($lastId);die;
 			// $this->db->last_query();
 			$fcmtoken = $this->getadminfcmtoken();
 			$title = 'New Order Placed Order ID #' . $lastId;
@@ -1799,10 +1843,12 @@ class Api_model extends CI_Model {
 	public function sendorderdetailsfun() {
 
 		if (isset($_REQUEST['Type']) && $_REQUEST['Type'] == 'order' && isset($_REQUEST['Orderid']) && $_REQUEST['Orderid'] != '') {
+			
 			$this->db->select('orders.*, orders_clients.first_name,orders_clients.shiptoid,orders_clients.billtoid,'
 				. ' orders_clients.last_name, orders_clients.email, orders_clients.phone, '
 				. 'orders_clients.address, orders_clients.city, orders_clients.post_code,'
 				. ' orders_clients.notes');
+
 			$this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'inner');
 			$this->db->where('orders.id', $_REQUEST['Orderid']);
 			$this->db->order_by("orders.id", "desc");
@@ -1843,6 +1889,11 @@ class Api_model extends CI_Model {
 
 					$productsingalimg = '';
 					$productinfo = $value['product_info'];
+					
+					$this->db->where('id',$productinfo['id']);							
+					$result = $this->db->get('products');			
+					$row = $result->row_array();
+					
 					$productsingalimg = $this->productmultiimg($productinfo['folder'], 1);
 					// $productprice = $value['product_quantity'] * $productinfo['price'];
 					$productprice = ($value['product_quantity'] * $productinfo['product_pcs']) * $productinfo['price'];
@@ -1860,12 +1911,43 @@ class Api_model extends CI_Model {
 					$Items_List[$j]['Image'] = !empty($productinfo['image']) ? base_url('attachments/shop_images/' . $productinfo['image']) : $productsingalimg;
 					$Items_List[$j]['Comment'] = $value['product_comment'];
 					$Items_List[$j]['AudioFile'] = !empty($value['product_audiofile']) ? base_url('attachments/audiofile/' . $value['product_audiofile']) : '';
+					$Items_List[$j]['refPackagingtype_id']=$row['refPackagingtype_id'];
+					// array_push($Items_List[$j],$Items_List[$row['refPackagingtype_id']]);
 					$j++;
 				}
+
+
+				// print_r($Items_List);die;
+				$item_box_array = [];
+
+				$packing_typet = $this->db->where("status = '1'")->get('packagingtype')->result_array();
+				// print_r($packing_typet);die;
+				if(!empty($packing_typet)){
+					$i=0;
+					foreach($packing_typet as $p_row){
+						$item_box_array[$i] = [];						
+						$box=array();
+						$total=0;
+						foreach($Items_List as $c_row){
+							// print_r($c_row);die;
+							if($p_row['packagingtype_id']==$c_row['refPackagingtype_id']){
+								$total=$total+($c_row['Pcs']*$c_row['TotalQty']*$c_row['Mrp']);
+								array_push($box,$c_row);
+							}
+						}
+						if(!empty($box)){
+							$box['Package_total']=$total;				
+							array_push($item_box_array[$i],$box);
+						}
+						$i=$i+1;						
+					}
+				}
+
+
 				$withdiscount = $this->IND_money_format(($finalprice - $discountamount) + $gstamount);
 				$withoutdiscount = $this->IND_money_format($finalprice + $gstamount);
 				$Mrp = $this->IND_money_format($finalprice);
-				$data[$i]['ItemsList'] = $Items_List;
+				$data[$i]['ItemsList'] = $item_box_array;
 				$data[$i]['Total'] = "$Mrp";
 				$data[$i]['WithDiscount'] = "$withdiscount";
 				$data[$i]['WithoutDiscount'] = "$withoutdiscount";
