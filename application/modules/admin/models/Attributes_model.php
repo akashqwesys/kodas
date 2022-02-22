@@ -2,8 +2,8 @@
 class Attributes_model extends CI_Model
 {
     var $table = 'attributes';
-    var $column_order = array(null,'attributes.title', 'attributes.sort_order','attributes.status','attributes_group.title as ag_title'); //set column field database for datatable orderable
-    var $column_search = array('attributes.title', 'attributes.sort_order','attributes.status','attributes_group.title as ag_title'); //set column field database for datatable searchable 
+    var $column_order = array(null,'attributes.title', 'attributes.sort_order','attributes_group.title','attributes.status',); //set column field database for datatable orderable
+    var $column_search = array('attributes.title', 'attributes.sort_order','attributes_group.title','attributes.status',); //set column field database for datatable searchable 
     var $order = array('attributes.attributes_id' => 'desc'); // default order 
 
     public function __construct()

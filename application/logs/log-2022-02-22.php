@@ -56,3 +56,17 @@ WHERE `status` = 1
 AND `refAttributes_group_id` = '3'
 ORDER BY `sort` ASC
 ERROR - 2022-02-22 16:42:39 --> Severity: error --> Exception: Call to a member function result_array() on bool C:\xampp8\htdocs\kodas\application\modules\admin\views\ecommerce\publish.php 280
+ERROR - 2022-02-22 16:47:55 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as `ag_title` ASC
+ LIMIT 10' at line 4 - Invalid query: SELECT `attributes`.*, `attributes_group`.`title` as `ag_title`
+FROM `attributes`
+LEFT JOIN `attributes_group` ON `attributes_group`.`attributesgroup_id` = `attributes`.`refAttributes_group_id`
+ORDER BY `attributes_group`.`title` as `ag_title` ASC
+ LIMIT 10
+ERROR - 2022-02-22 16:47:55 --> Severity: error --> Exception: Call to a member function result() on bool C:\xampp8\htdocs\kodas\application\modules\admin\models\Attributes_model.php 56
+ERROR - 2022-02-22 16:47:59 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as `ag_title` DESC
+ LIMIT 10' at line 4 - Invalid query: SELECT `attributes`.*, `attributes_group`.`title` as `ag_title`
+FROM `attributes`
+LEFT JOIN `attributes_group` ON `attributes_group`.`attributesgroup_id` = `attributes`.`refAttributes_group_id`
+ORDER BY `attributes_group`.`title` as `ag_title` DESC
+ LIMIT 10
+ERROR - 2022-02-22 16:47:59 --> Severity: error --> Exception: Call to a member function result() on bool C:\xampp8\htdocs\kodas\application\modules\admin\models\Attributes_model.php 56
