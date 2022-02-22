@@ -39,7 +39,7 @@ class ShopCategories extends ADMIN_Controller
         }
         if (isset($_POST['submit'])) {
             $this->Categories_model->setShopCategorie($_POST);
-            $this->session->set_flashdata('result_add', 'Shop categorie is added!');
+            $this->session->set_flashdata('result_add', 'Categorie is added!');
             redirect('admin/shopcategories');
         }
         if (isset($_POST['editSubId'])) {

@@ -133,7 +133,7 @@ echo $links_pagination;
 } else {
 	?>
         <div class="clearfix"></div><hr>
-        <div class="alert alert-info">No shop categories found!</div>
+        <div class="alert alert-info">No Categories found!</div>
     <?php }?>
 
     <!-- add edit home categorie -->

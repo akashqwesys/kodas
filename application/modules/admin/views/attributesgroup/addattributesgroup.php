@@ -1,4 +1,4 @@
-<h1><img src="<?= base_url('assets/imgs/admin-user.png') ?>" class="header-img" style="margin-top:-3px;"> Add Attributesgroup</h1>
+<h1><img src="<?= base_url('assets/imgs/admin-user.png') ?>" class="header-img" style="margin-top:-3px;"> Add Attribute Group</h1>
 <hr>
 <?php
 $timeNow = time();
@@ -26,7 +26,7 @@ if ($this->session->flashdata('add_attributesgroup')) {
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-user"></i> Attributesgroup</h3>
+        <h3 class="panel-title"><i class="fa fa-user"></i> Attribute Group</h3>
       </div>
       <form method="POST" action="" enctype="multipart/form-data">
         <table class="table">
@@ -50,9 +50,9 @@ if ($this->session->flashdata('add_attributesgroup')) {
             <tr>
               <td><strong></strong></td>
               <td class="text-center">
-                <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-                <button type="submit" name="submit" class="btn btn-lg btn-default btn-addattributesgroup">Save</button>
+                <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">                
                 <a href="<?= base_url('admin/listattributesgroup') ?>" class="btn btn-lg btn-default">Cancel</a>
+                <button type="submit" name="submit" class="btn btn-success btn-addattributesgroup">Save</button>
               </td>
             </tr>
           </tbody>

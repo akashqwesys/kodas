@@ -26,7 +26,7 @@ if ($this->session->flashdata('edit_attributesgroup')) {
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-user"></i> Attributesgroup Details</h3>
+        <h3 class="panel-title"><i class="fa fa-user"></i> Attribute Group Details</h3>
       </div>
       <form method="POST" action="" enctype="multipart/form-data">
           <input type="hidden" name="attributesgroup_id" value="<?= $attributesgroup_result['attributesgroup_id']; ?>">
@@ -51,9 +51,9 @@ if ($this->session->flashdata('edit_attributesgroup')) {
             <tr>
               <td><strong></strong></td>
               <td class="text-center">
-                <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-                <button type="submit" name="submit" class="btn btn-lg btn-default btn-addattributesgroup">Save</button>
-                <a href="<?= base_url('admin/listattributesgroup') ?>" class="btn btn-lg btn-default">Cancel</a>
+                <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">                
+                <a href="<?= base_url('admin/listattributesgroup') ?>" class="btn btn-lg btn-default">Cancel</a>                
+                <button type="submit" name="submit" class="btn btn-success btn-addattributesgroup">Save</button>
               </td>
             </tr>
           </tbody>

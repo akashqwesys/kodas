@@ -22,9 +22,9 @@ if ($this->session->flashdata('edit_attributesgroup')) {
 <?php
 }
 ?>
-  <h1><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"> All Attributesgroup</h1>
+  <h1><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"> Attribute Groups</h1>
   <hr>
-  <a href="<?= base_url('admin/addattributesgroup'); ?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Attributesgroup</a>
+  <a href="<?= base_url('admin/addattributesgroup'); ?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Attribute Group</a>
   <div class="row">
     <div class="col-xs-12">
       <div class="table-responsive">

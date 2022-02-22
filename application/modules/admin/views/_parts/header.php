@@ -186,7 +186,7 @@ $sitelogo = $data1['sitelogo'];
                                     ) ?>" <?= urldecode(uri_string()) ==
 'admin/listattributesgroup'
     ? 'class="active"'
-    : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Attributes Group</a></li>
+    : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Attribute Groups</a></li>
 <?php } ?>
 
 <?php if (

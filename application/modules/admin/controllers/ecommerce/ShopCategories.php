@@ -31,9 +31,9 @@ class ShopCategories extends ADMIN_Controller {
 		$data['links_pagination'] = pagination('admin/shopcategories', $rowscount, $this->num_rows, 3);
 		if (isset($_GET['delete'])) {
 			if (!in_array('deletecat', $adminid)) {redirect('admin');}
-			$this->saveHistory('Delete a shop categorie');
+			$this->saveHistory('Delete a categorie');
 			$this->Categories_model->deleteShopCategorie($_GET['delete']);
-			$this->session->set_flashdata('result_delete', 'Shop Categorie is deleted!');
+			$this->session->set_flashdata('result_delete', 'Categorie is deleted!');
 			redirect('admin/shopcategories');
 		}
 		if (isset($_POST['submit'])) {
@@ -45,7 +45,7 @@ class ShopCategories extends ADMIN_Controller {
 			$_POST['image'] = $this->uploadImage();
 			$_POST['webimage'] = $this->uploadImage('website');
 			$this->Categories_model->setShopCategorie($_POST, $id);
-			$this->session->set_flashdata('result_add', 'Shop categorie is added!');
+			$this->session->set_flashdata('result_add', 'Categorie is added!');
 			redirect('admin/shopcategories');
 		}
 		if (isset($_POST['editSubId'])) {
@@ -55,14 +55,14 @@ class ShopCategories extends ADMIN_Controller {
 				$this->session->set_flashdata('result_add', 'Subcategory changed!');
 				$this->saveHistory('Change subcategory for category id - ' . $_POST['editSubId']);
 			} else {
-				$this->session->set_flashdata('result_add', 'Problem with Shop category change!');
+				$this->session->set_flashdata('result_add', 'Problem with category change!');
 			}
 			redirect('admin/shopcategories');
 		}
 		$this->load->view('_parts/header', $head);
 		$this->load->view('ecommerce/shopcategories', $data);
 		$this->load->view('_parts/footer');
-		$this->saveHistory('Go to shop categories');
+		$this->saveHistory('Go to categories');
 	}
 
 	/*
@@ -72,7 +72,7 @@ class ShopCategories extends ADMIN_Controller {
 	public function editShopCategorie() {
 		$this->login_check();
 		$result = $this->Categories_model->editShopCategorie($_POST);
-		$this->saveHistory('Edit shop categorie to ' . $_POST['name']);
+		$this->saveHistory('Edit categorie to ' . $_POST['name']);
 	}
 
 	/*
@@ -82,7 +82,7 @@ class ShopCategories extends ADMIN_Controller {
 	public function changePosition() {
 		$this->login_check();
 		$result = $this->Categories_model->editShopCategoriePosition($_POST);
-		$this->saveHistory('Edit shop categorie position ' . $_POST['name']);
+		$this->saveHistory('Edit categorie position ' . $_POST['name']);
 	}
 
 	private function uploadImage($banner = null) {
