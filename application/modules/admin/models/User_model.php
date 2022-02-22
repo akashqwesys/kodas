@@ -438,6 +438,8 @@ class User_model extends CI_Model {
         $table_where_field = $params['wherefield'];
         $status = $params['status'];
         $table_id = $params['table_id'];
+
+		print_r($params);die;
         $query_res = $this->db->query("UPDATE $table SET $table_update_field = '$status' WHERE $table_where_field=$table_id");
         if ($query_res) {
             return true;
