@@ -279,6 +279,22 @@ $colorscount = $this->db->count_all_results('user_app');
   <span class="sr-only"></span>
                                     </a></li>
  <?php } ?>
+
+
+ <?php if (
+        in_array('addagent', $adminid) ||
+        in_array('editagent', $adminid) ||
+        in_array('deleteagent', $adminid) ||
+        in_array('listagent', $adminid)
+    ) { ?>
+                                <li><a href="<?= base_url(
+                                        'admin/listagent'
+                                    ) ?>" <?= urldecode(uri_string()) ==
+'admin/listagent'
+    ? 'class="active"'
+    : '' ?>><i class="fa fa-user-secret" aria-hidden="true"></i> Agent</a></li>
+<?php } ?>
+
  <li><a href="<?= base_url('admin/chatlist') ?>" <?= urldecode(uri_string()) ==
 'admin/chatlist'
     ? 'class="active"'
@@ -293,6 +309,9 @@ $colorscount = $this->db->count_all_results('wpn_chatmessenger');
                                     </a></li>
 
 
+
+
+                                    
                                     <li><a href="<?= base_url('admin/chatlistagent') ?>" <?= urldecode(uri_string()) ==
 'admin/chatlistagent'
     ? 'class="active"'
@@ -428,19 +447,7 @@ $colorscount = $this->db->count_all_results('wpn_chatmessenger1');
     : '' ?>><i class="fa fa-user" aria-hidden="true"></i> Mobile Admin User</a></li>
                                 <?php } ?>
 
-                                <?php if (
-        in_array('addagent', $adminid) ||
-        in_array('editagent', $adminid) ||
-        in_array('deleteagent', $adminid) ||
-        in_array('listagent', $adminid)
-    ) { ?>
-                                <li><a href="<?= base_url(
-                                        'admin/listagent'
-                                    ) ?>" <?= urldecode(uri_string()) ==
-'admin/listagent'
-    ? 'class="active"'
-    : '' ?>><i class="fa fa-user-secret" aria-hidden="true"></i> Agent</a></li>
-<?php } ?>
+                             
                                 </ul>
                             </div>
                             <div class="col-sm-9 col-md-9 col-lg-10 col-sm-offset-3 col-md-offset-3 col-lg-offset-2">
