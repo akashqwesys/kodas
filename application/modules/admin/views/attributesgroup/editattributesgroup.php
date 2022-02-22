@@ -1,4 +1,4 @@
-<h1><img src="<?= base_url('assets/imgs/admin-user.png') ?>" class="header-img" style="margin-top:-3px;"> Edit Attributesgroup</h1>
+<h1><img src="<?= base_url('assets/imgs/admin-user.png') ?>" class="header-img" style="margin-top:-3px;"> Edit Attribute group</h1>
 <hr>
 <?php
 $timeNow = time();
