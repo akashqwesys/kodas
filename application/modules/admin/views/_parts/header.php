@@ -159,29 +159,7 @@ $sitelogo = $data1['sitelogo'];
     ? 'class="active"'
     : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Shop Categories</a></li>
                                     <?php } ?>
-                                    <?php if (
-                                        in_array('addprelaunch', $adminid) ||
-                                        in_array('editprelaunch', $adminid) ||
-                                        in_array('deleteprelaunch', $adminid)
-                                    ) { ?>
-                                    <li><a href="<?= base_url(
-                                        'admin/preproducts'
-                                    ) ?>" <?= urldecode(uri_string()) ==
-'admin/preproducts'
-    ? 'class="active"'
-    : '' ?>><i class="fa fa-files-o" aria-hidden="true"></i> Pre launch</a></li>
-                                    <?php } ?>
-                                    <?php if (
-                                        in_array('addattribute', $adminid) ||
-                                        in_array('deleteattribute', $adminid)
-                                    ) { ?>
-                                    <li><a href="<?= base_url(
-                                        'admin/shopattribute'
-                                    ) ?>" <?= urldecode(uri_string()) ==
-'admin/shopattribute'
-    ? 'class="active"'
-    : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Attribute</a></li>
-                                    <?php } ?>
+                                  
 
                                     <?php if (
         in_array('addattributes', $adminid) ||
