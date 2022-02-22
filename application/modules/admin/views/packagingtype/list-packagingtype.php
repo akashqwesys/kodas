@@ -22,7 +22,7 @@ if ($this->session->flashdata('edit_packagingtype')) {
 <?php
 }
 ?>
-  <h1><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"> All Packaging type</h1>
+  <h1><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"> Packaging type</h1>
   <hr>
   <a href="<?= base_url('admin/addpackagingtype'); ?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Packaging type</a>
   <div class="row">

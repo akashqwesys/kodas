@@ -51,8 +51,9 @@ if ($this->session->flashdata('add_packagingtype')) {
               <td><strong></strong></td>
               <td class="text-center">
                 <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-                <button type="submit" name="submit" class="btn btn-lg btn-default btn-addpackagingtype">Save</button>
+               
                 <a href="<?= base_url('admin/listpackagingtype') ?>" class="btn btn-lg btn-default">Cancel</a>
+                <button type="submit" name="submit" class="btn btn-success btn-addpackagingtype">Save</button>
               </td>
             </tr>
           </tbody>
