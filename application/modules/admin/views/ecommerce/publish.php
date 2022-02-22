@@ -1,3 +1,28 @@
+<style>
+
+.close-icon {
+  position: absolute;
+  right: -8rem;
+  margin-top: -10rem;
+  color: red;
+  font-size: 18px;
+ }
+
+.inner {
+  position: relative;
+  background: #ccc;
+  height: 40px;
+  width: 100%;
+  margin: 5px;
+}
+.close-icon:hover{
+  cursor: pointer;
+}
+.outer {
+  height: 90px;
+  width: 100px;
+}
+</style>
 <script src="<?=base_url('assets/ckeditor/ckeditor.js')?>"></script>
 
 <h1><img src="<?=base_url('assets/imgs/shop-cart-add-icon.png')?>" class="header-img" style="margin-top:-3px;"> Add product</h1>
@@ -117,12 +142,61 @@ if (isset($_POST['image']) && $_POST['image'] != null) {
     <label for="userfile">Cover Image</label>
     <input type="file" id="userfile" name="userfile">
   </div>
+
+
+<?php
+  $this->db->where('refProduct_id', $id);                    
+  $query = $this->db->get('product_image');
+  $otherImgs =$query->result_array();
+?>
+
   <div class="form-group bordered-group">
-    <div class="others-images-container">
-      <?=$otherImgs?>
-    </div>
+    <div class="others-images-container row">
+      <?php
+        if(!empty($otherImgs)){
+          foreach($otherImgs as $img_row){
+            ?>
+          <div class="outer col-md-2" id=<?php echo 'img_'.$img_row['product_image_id']; ?>>
+            <ion-card class="inner" *ngFor="let i of images">
+              <img src="<?php echo base_url('attachments/uploads/thumb'); ?>/<?php echo $img_row['img_name']; ?>"/>
+              <span class="close-icon delete-image" data-id="<?php echo $img_row['product_image_id']; ?>">X</span>
+            </ion-card>
+          </div>
+            <?php
+          }
+        }
+      ?>
+  </div>
+
+<script>
+
+$(document).on('click', '.delete-image', function (e) {
+    // e.preventDefault();
+
+    var imgId = $(this).data('id');
+    alert(imgId);
+    var this_ = $(this);
+    this_.attr('disabled', 'disabled');
+  $.ajax({
+        type: 'POST',
+        url: '<?php echo site_url('admin/removeimg'); ?>',
+        data: {'imgId': imgId},
+        success: function (res) {
+            this_.removeAttr('disabled');
+            var data = $.parseJSON(res);
+            if (data.suceess == 'success') {
+                $("#img_" + imgId).remove();
+            }
+        }
+  });
+});
+</script>
+
+  <br><br>  
     <?php /*?><a href="javascript:void(0);" data-toggle="modal" data-target="#modalMoreImages" class="btn btn-default">Upload more images</a><?php */?>
-    <a href="javascript:void(0);" data-toggle="modal" data-target="#modalMorePdf" class="btn btn-default">Upload PDF File</a> </div>
+    <input type="file" name="products_others_image[]" id="products_others_image" accept="iamge/*" multiple>
+    <!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#modalMorePdf" class="btn btn-default">Upload PDF File</a>  -->
+    </div>
   <div class="form-group for-shop" style="display:none;">
     <label>Shop Categories</label>
     <select class="selectpicker form-control show-tick show-menu-arrow" name="shop_categorie">

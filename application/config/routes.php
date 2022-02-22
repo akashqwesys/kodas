@@ -224,6 +224,8 @@ $route['admin/addattributes'] = 'admin/attributes/attributes/add_attributes';
 $route['admin/editattributes/(:num)'] = 'admin/attributes/attributes/edit_attributes/$1';
 $route['admin/active-inactive-attributes'] = 'admin/attributes/attributes/approve_status';
 
+$route['admin/removeimg'] = 'admin/ecommerce/Publish/removeimg';
+
 
 $route['admin/listattributesgroup'] = 'admin/attributesgroup/attributesgroup';
 $route['admin/get-attributesgroup-list'] = 'admin/attributesgroup/attributesgroup/attributesgroup_list';

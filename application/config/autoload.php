@@ -108,7 +108,8 @@ $autoload['helper'] = array(
     'rrmdir',
     'rreadDir',
     'savefile',
-    'functions'
+    'functions',
+    'functions1'
 );
 
 /*

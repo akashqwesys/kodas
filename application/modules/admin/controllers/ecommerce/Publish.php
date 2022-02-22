@@ -82,6 +82,20 @@ class Publish extends ADMIN_Controller {
 		$this->saveHistory('Go to publish product');
 	}
 
+
+	
+	public function removeimg() {        
+        if (isset($_REQUEST['imgId'])) {
+            $res = $this->Products_model->remove_img($_REQUEST['imgId']);
+            if ($res) {
+                $data = array(
+                    'suceess' => 'success'
+                );
+            }
+            echo json_encode($data);
+        }
+    }
+
 	private function uploadImage() {
 		if (empty($_FILES['userfile']['name']) && empty($_POST['old_image'])) {
 			if (isset($_POST['folder']) && $_POST['folder'] != null) {

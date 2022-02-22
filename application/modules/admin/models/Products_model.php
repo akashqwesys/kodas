@@ -4,6 +4,7 @@ class Products_model extends CI_Model {
 
 	public function __construct() {
 		parent::__construct();
+		include APPPATH . 'third_party/vendor/image-resize/imageresize.php';
 	}
 
 	public function deleteProduct($id) {
@@ -154,7 +155,6 @@ class Products_model extends CI_Model {
 				log_message('error', print_r($this->db->error(), true));
 			}
 
-
 			$this->db->where('refProduct_id', $id);
 			$this->db->delete('product_attribute1');
 			foreach ($post['refattributes_id'] as $key => $value) {
@@ -176,16 +176,25 @@ class Products_model extends CI_Model {
 					));
 				}
 			}
-
-			foreach ($post['shop_attribute'] as $key => $value) {
-				if (!empty($value[0])) {
-					$this->db->insert('product_attribute', array(
-						'productid' => $id,
-						'keyid' => $key,
-						'valueid' => $value[0],
-					));
-				}
+			
+			$products_others_image = multiImageUpload('products_others_image');
+			foreach ($products_others_image as $poi) {
+				$params = array();
+				$params['refProduct_id'] = $id;
+				$params['img_name'] = $poi[2]['file_name'];
+				// $params['status'] = 1;
+				$this->db->insert('product_image',$params);
 			}
+
+			// foreach ($post['shop_attribute'] as $key => $value) {
+			// 	if (!empty($value[0])) {
+			// 		$this->db->insert('product_attribute', array(
+			// 			'productid' => $id,
+			// 			'keyid' => $key,
+			// 			'valueid' => $value[0],
+			// 		));
+			// 	}
+			// }
 			isset($_POST['old_image']) ? $oldimg = $_POST['old_image'] : $oldimg = '';
 			if (!$this->db->where('id', $id)->update('products', array(
 				'image' => $post['image'] != null ? $_POST['image'] : $oldimg,
@@ -212,6 +221,12 @@ class Products_model extends CI_Model {
 			}
 			// echo $this->db->last_query();exit;
 		} else {
+
+
+
+
+			
+
 			/*
 				             * Lets get what is default tranlsation number
 				             * in titles and convert it to url
@@ -251,18 +266,29 @@ class Products_model extends CI_Model {
 			}
 
 			$id = $this->db->insert_id();
-			$this->sendproductnotification('New product added ' . $post['title'][0], $post['image'], $id);
-			foreach ($post['shop_attribute'] as $key => $value) {
-				if (!empty($value[0])) {
-					$this->db->insert('product_attribute', array(
-						'productid' => $id,
-						'keyid' => $key,
-						'valueid' => $value[0],
-					));
-				}
+
+
+			$products_others_image = multiImageUpload('products_others_image');
+			foreach ($products_others_image as $poi) {
+				$params = array();
+				$params['refProduct_id'] = $id;
+				$params['img_name'] = $poi[2]['file_name'];
+				// $params['status'] = 1;
+				$this->db->insert('product_image',$params);
 			}
 
 
+			// $this->sendproductnotification('New product added ' . $post['title'][0], $post['image'], $id);
+			// foreach ($post['shop_attribute'] as $key => $value) {
+			// 	if (!empty($value[0])) {
+			// 		$this->db->insert('product_attribute', array(
+			// 			'productid' => $id,
+			// 			'keyid' => $key,
+			// 			'valueid' => $value[0],
+			// 		));
+			// 	}
+			// }
+				
 			$this->db->where('refProduct_id', $id);
 			$this->db->delete('product_attribute1');
 			foreach ($post['refattributes_id'] as $key => $value) {
@@ -300,6 +326,15 @@ class Products_model extends CI_Model {
 			$this->db->trans_commit();
 		}
 	}
+
+
+	public function remove_img($id) {
+		$this->db->where('product_image_id', $id);
+		$this->db->delete('product_image');
+		return true;
+	}
+
+	
 
 	private function setProductTranslation($post, $id, $is_update) {
 		$i = 0;
