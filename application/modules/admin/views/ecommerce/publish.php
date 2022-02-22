@@ -171,10 +171,9 @@ if (isset($_POST['image']) && $_POST['image'] != null) {
 <script>
 
 $(document).on('click', '.delete-image', function (e) {
-    // e.preventDefault();
-
+     e.preventDefault();
     var imgId = $(this).data('id');
-    alert(imgId);
+    // alert(imgId);
     var this_ = $(this);
     this_.attr('disabled', 'disabled');
   $.ajax({
