@@ -37,7 +37,7 @@ class Attributesgroup extends ADMIN_Controller
         $this->load->view('_parts/header', $head);
         $this->load->view('attributesgroup/list-attributesgroup', $data);
         $this->load->view('_parts/footer');
-        $this->saveHistory('Go to Add Attributesgroup');
+        $this->saveHistory('Go to Add Attribute groups');
     }
 
     public function attributesgroup_list() {       
@@ -110,11 +110,11 @@ class Attributesgroup extends ADMIN_Controller
             $res=$this->Attributesgroup_model->addAttributesgroup($_POST);
             if ($res) {
                 $this->session->set_flashdata('add_attributesgroup', 'Create Attributesgroup Successfully!');
-                $this->saveHistory('Success create Attributesgroup');  
+                $this->saveHistory('Success create Attribute group');  
                 redirect('admin/listattributesgroup');              
             }else{
                 $this->session->set_flashdata('add_attributesgroup', 'somthing happen wrong!');
-                $this->saveHistory('Failed create Attributesgroup');    
+                $this->saveHistory('Failed create Attribute group');    
             }
         } 
                    
@@ -127,7 +127,7 @@ class Attributesgroup extends ADMIN_Controller
         $this->load->view('_parts/header', $head);
         $this->load->view('attributesgroup/addattributesgroup', $data);
         $this->load->view('_parts/footer');
-        $this->saveHistory('Go to Add Attributesgroup');
+        $this->saveHistory('Go to Add Attribute group');
     }
     public function edit_attributesgroup($id)
     {
@@ -142,12 +142,12 @@ class Attributesgroup extends ADMIN_Controller
         if (isset($_POST['submit'])) {            
             $res=$this->Attributesgroup_model->editAttributesgroup($_POST);
             if ($res) {
-                $this->session->set_flashdata('edit_attributesgroup', 'Update Attributesgroup Successfully!');
-                $this->saveHistory('Success update Attributesgroup');  
+                $this->session->set_flashdata('edit_attributesgroup', 'Update Attribute group Successfully!');
+                $this->saveHistory('Success update Attribute group');  
                 redirect('admin/listattributesgroup');              
             }else{
                 $this->session->set_flashdata('edit_attributesgroup', 'somthing happen wrong!');
-                $this->saveHistory('Failed update Attributesgroup');    
+                $this->saveHistory('Failed update Attribute group');    
             }
         }             
         $data = array();        
@@ -159,7 +159,7 @@ class Attributesgroup extends ADMIN_Controller
         $this->load->view('_parts/header', $head);
         $this->load->view('attributesgroup/editattributesgroup', $data);
         $this->load->view('_parts/footer');
-        $this->saveHistory('Go to Edit Attributesgroup');
+        $this->saveHistory('Go to Edit Attribute group');
     }
 
     public function approve_status() {        
