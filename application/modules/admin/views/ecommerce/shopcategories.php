@@ -19,7 +19,7 @@ if ($this->session->flashdata('result_delete')) {
         <?php
 }
 ?>
-    <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add categorie</a>
+    <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Categorie</a>
     <div class="clearfix"></div>
     <?php
 if (!empty($shop_categories)) {
@@ -159,12 +159,12 @@ foreach ($languages as $language) {?>
                             <div class="form-group">
                                 <label>App Image</label>
                                 <input type="file" oninvalid="this.setCustomValidity('Please Select App Image')"
- oninput="setCustomValidity('')" name="userfile" class="form-control" required>
+ oninput="setCustomValidity('')" name="userfile" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Website Image</label>
                                 <input type="file" oninvalid="this.setCustomValidity('Please Select Website Image')"
- oninput="setCustomValidity('')" name="websiteimg" class="form-control" required>
+ oninput="setCustomValidity('')" name="websiteimg" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Position</label>
