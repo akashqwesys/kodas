@@ -157,7 +157,7 @@ $sitelogo = $data1['sitelogo'];
                                     ) ?>" <?= urldecode(uri_string()) ==
 'admin/shopcategories'
     ? 'class="active"'
-    : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Shop Categories</a></li>
+    : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Categories</a></li>
                                     <?php } ?>
                                   
 
@@ -298,7 +298,7 @@ $colorscount = $this->db->count_all_results('user_app');
  <li><a href="<?= base_url('admin/chatlist') ?>" <?= urldecode(uri_string()) ==
 'admin/chatlist'
     ? 'class="active"'
-    : '' ?>><i class="fa fa-comment" aria-hidden="true"></i> Chat
+    : '' ?>><i class="fa fa-comment" aria-hidden="true"></i> Chat With Customer
 <?php
 $this->db->where('wpn_chatmessenger.read_status ', '0');
 $this->db->where('wpn_chatmessenger.usertype !=', 'admin');

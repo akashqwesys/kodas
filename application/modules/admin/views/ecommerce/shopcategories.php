@@ -1,5 +1,5 @@
 <div id="languages">
-    <h1><img src="<?=base_url('assets/imgs/categories.jpg')?>" class="header-img" style="margin-top:-2px;"> Shop Categories</h1>
+    <h1><img src="<?=base_url('assets/imgs/categories.jpg')?>" class="header-img" style="margin-top:-2px;"> Categories</h1>
     <hr>
     <?php if (validation_errors()) {?>
         <div class="alert alert-danger"><?=validation_errors()?></div>
