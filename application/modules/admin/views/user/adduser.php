@@ -149,13 +149,13 @@ if ($this->session->flashdata('result_publish')) {
                 </thead>
                 <tbody>
                   <?php foreach ($_POST['Addresslist'] as $key => $value) {?>
-                  <tr>
+                  <tr id="address_<?php echo $value['id']; ?>">
                     <td class="relative"><?=$value['addresstype'];?></td>
                     <td><?=$value['companyname'];?></td>
                     <td><?=$value['address'];?></td>
                     <td><?=$value['gstnumber'];?></td>
                     <td><a href="javascript:void(0);" data-toggle="modal" data-target="#edit_useraddress<?=$value['id'];?>" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a href="<?=base_url('admin/removeaddress/?delete=' . $value['id'])?>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a></td>
+                        <button class="btn btn-danger btn-xs delete-address" data-id="<?php echo $value['id']; ?>"><span class="glyphicon glyphicon-remove"></span></button></td>
                   </tr>
                   <div class="modal fade" id="edit_useraddress<?=$value['id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -208,7 +208,28 @@ if ($this->session->flashdata('result_publish')) {
     <?php }?>
   </div>
 
+  <script>
 
+$(document).on('click', '.delete-address', function (e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    // alert(id);
+    var this_ = $(this);
+    this_.attr('disabled', 'disabled');
+  $.ajax({
+        type: 'POST',
+        url: '<?php echo site_url('admin/removeaddress'); ?>',
+        data: {'id': id},
+        success: function (res) {
+            this_.removeAttr('disabled');
+            var data = $.parseJSON(res);
+            if (data.suceess == 'success') {
+                $("#address_" + id).remove();
+            }
+        }
+  });
+});
+</script>
 
 <div class="modal fade" id="add_useraddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

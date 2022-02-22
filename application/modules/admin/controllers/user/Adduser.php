@@ -106,6 +106,18 @@ class Adduser extends ADMIN_Controller {
 		$this->saveHistory('Go to Add User');
 	}
 
+
+	public function removeaddress() {        
+        if (isset($_REQUEST['id'])) {
+			$this->db->where('id', $_REQUEST['id']);
+			$this->db->delete('useraddress');            
+			$data = array(
+				'suceess' => 'success'
+			);            
+            echo json_encode($data);
+        }
+    }
+
 	private function uploadImage() {
 		$config['upload_path'] = './attachments/shop_images/';
 		$config['allowed_types'] = $this->allowed_img_types;

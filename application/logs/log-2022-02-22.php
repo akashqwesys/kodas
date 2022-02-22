@@ -15,3 +15,4 @@ ERROR - 2022-02-22 07:54:27 --> 404 Page Not Found: ../modules/admin/controllers
 ERROR - 2022-02-22 07:54:27 --> 404 Page Not Found: ../modules/admin/controllers//index
 ERROR - 2022-02-22 07:54:27 --> 404 Page Not Found: ../modules/admin/controllers//index
 ERROR - 2022-02-22 07:55:25 --> 404 Page Not Found: ../modules/admin/controllers//index
+ERROR - 2022-02-22 08:35:04 --> 404 Page Not Found: ../modules/admin/controllers//index
