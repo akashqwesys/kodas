@@ -16,3 +16,32 @@ ERROR - 2022-02-22 07:54:27 --> 404 Page Not Found: ../modules/admin/controllers
 ERROR - 2022-02-22 07:54:27 --> 404 Page Not Found: ../modules/admin/controllers//index
 ERROR - 2022-02-22 07:55:25 --> 404 Page Not Found: ../modules/admin/controllers//index
 ERROR - 2022-02-22 08:35:04 --> 404 Page Not Found: ../modules/admin/controllers//index
+ERROR - 2022-02-22 11:01:36 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:01:36 --> Severity: Warning --> Undefined array key "file_name" C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 184
+ERROR - 2022-02-22 11:01:36 --> Query error: Column 'img_name' cannot be null - Invalid query: INSERT INTO `product_image` (`refProduct_id`, `img_name`) VALUES ('1', NULL)
+ERROR - 2022-02-22 11:02:04 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:02:04 --> Severity: Warning --> Undefined array key "file_name" C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 184
+ERROR - 2022-02-22 11:02:04 --> Query error: Column 'img_name' cannot be null - Invalid query: INSERT INTO `product_image` (`refProduct_id`, `img_name`) VALUES ('1', NULL)
+ERROR - 2022-02-22 11:05:01 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:06:28 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:06:28 --> Severity: Warning --> Undefined array key "file_name" C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 184
+ERROR - 2022-02-22 11:06:28 --> Query error: Column 'img_name' cannot be null - Invalid query: INSERT INTO `product_image` (`refProduct_id`, `img_name`) VALUES ('1', NULL)
+ERROR - 2022-02-22 11:07:01 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:07:01 --> Severity: Warning --> Undefined array key "file_name" C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 185
+ERROR - 2022-02-22 11:07:01 --> Query error: Column 'img_name' cannot be null - Invalid query: INSERT INTO `product_image` (`refProduct_id`, `img_name`) VALUES ('1', NULL)
+ERROR - 2022-02-22 11:07:36 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:07:36 --> Severity: Warning --> Undefined array key 0 C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 180
+ERROR - 2022-02-22 11:07:36 --> Severity: Warning --> Trying to access array offset on value of type null C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 180
+ERROR - 2022-02-22 11:08:25 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:08:25 --> Severity: Warning --> Undefined array key 0 C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 180
+ERROR - 2022-02-22 11:08:25 --> Severity: Warning --> Trying to access array offset on value of type null C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 180
+ERROR - 2022-02-22 11:12:58 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:13:47 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:14:43 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:17:20 --> Severity: Warning --> Undefined array key "productoffertype" C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 265
+ERROR - 2022-02-22 11:17:20 --> Severity: error --> Exception: implode(): Argument #1 ($pieces) must be of type array, string given C:\xampp8\htdocs\kodas\application\modules\admin\models\Products_model.php 265
+ERROR - 2022-02-22 11:39:05 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:41:07 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:43:57 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:46:09 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 11:48:29 --> Image Upload Error: <p>You did not select a file to upload.</p>

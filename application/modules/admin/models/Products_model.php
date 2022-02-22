@@ -176,15 +176,18 @@ class Products_model extends CI_Model {
 					));
 				}
 			}
-			
-			$products_others_image = multiImageUpload('products_others_image');
-			foreach ($products_others_image as $poi) {
-				$params = array();
-				$params['refProduct_id'] = $id;
-				$params['img_name'] = $poi[2]['file_name'];
-				// $params['status'] = 1;
-				$this->db->insert('product_image',$params);
-			}
+			// if(isset($_FILES['products_others_image'])){
+				if (($_FILES['products_others_image']['name'][0]) != '') {				
+					$products_others_image = multiImageUpload('products_others_image');
+					foreach ($products_others_image as $poi) {
+						$params = array();
+						$params['refProduct_id'] = $id;
+						$params['img_name'] = $poi[2]['file_name'];
+						// $params['status'] = 1;
+						$this->db->insert('product_image',$params);
+					}
+				}
+			// }
 
 			// foreach ($post['shop_attribute'] as $key => $value) {
 			// 	if (!empty($value[0])) {
@@ -266,16 +269,18 @@ class Products_model extends CI_Model {
 			}
 
 			$id = $this->db->insert_id();
-
-
-			$products_others_image = multiImageUpload('products_others_image');
-			foreach ($products_others_image as $poi) {
-				$params = array();
-				$params['refProduct_id'] = $id;
-				$params['img_name'] = $poi[2]['file_name'];
-				// $params['status'] = 1;
-				$this->db->insert('product_image',$params);
+			
+			if (($_FILES['products_others_image']['name'][0]) != '') {				
+				$products_others_image = multiImageUpload('products_others_image');
+				foreach ($products_others_image as $poi) {
+					$params = array();
+					$params['refProduct_id'] = $id;
+					$params['img_name'] = $poi[2]['file_name'];
+					// $params['status'] = 1;
+					$this->db->insert('product_image',$params);
+				}
 			}
+			
 
 
 			// $this->sendproductnotification('New product added ' . $post['title'][0], $post['image'], $id);

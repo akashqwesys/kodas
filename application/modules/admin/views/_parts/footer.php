@@ -137,5 +137,127 @@
 <?php $this->load->view('packagingtype/packagingtype_js'); ?>
 <?php $this->load->view('shareproduct/shareproduct_js'); ?>
 
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-messaging.js";
+    import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyAPzNIRChBF70ycP9RMi0SYDquRWG1LTOw",
+        authDomain: "janvi-lgd.firebaseapp.com",
+        projectId: "janvi-lgd",
+        storageBucket: "janvi-lgd.appspot.com",
+        messagingSenderId: "152003953916",
+        appId: "1:152003953916:web:1b15b4d05e7e12c1070379",
+        measurementId: "G-L74PSGLSF4"
+    };
+
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+    const messaging = getMessaging(firebaseApp);
+    const analytics = getAnalytics(firebaseApp);
+    const serviceWorkerRegistration = await navigator.serviceWorker.register(
+        '/firebase-messaging-sw.js', {
+            type: 'module'
+        });
+        // .then(reg => {
+        //     console.log(`Service Worker Registration (Scope: ${reg.scope})`);
+        // });
+
+    if (window.location.href.search('dashboard') !== -1) {
+
+        if (!('Notification' in window && navigator.serviceWorker)) {
+            $.toast({
+                heading: 'Error',
+                text: 'Desktop Notification is not supported in this browser',
+                icon: 'error',
+                position: 'top-right'
+            });
+        } else {
+            (async () => {
+                function initFirebaseMessagingRegistration() {
+                    getToken(messaging, {
+                        vapidKey: "BMHATKTzrOf7LF1PXuBfN3nb8LYeeErQwLBSDqfFEbxoiI__wcAYNk3I3xHh0cDhGa7wB32kohEJiYjbOP4O2Po",
+                        serviceWorkerRegistration: serviceWorkerRegistration
+                    })
+                    .then(function(token) {
+                        // $.ajaxSetup({
+                        //     headers: {
+                        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        //     }
+                        // });
+
+                        $.ajax({
+                            url: '/admin/save-device-token',
+                            type: 'POST',
+                            data: {
+                                token: token
+                            },
+                            dataType: 'JSON',
+                            success: function (response) {
+                                // console.log('Token saved successfully.');
+                            },
+                            error: function (err) {
+                                console.log('User Chat Token Error '+ err);
+                            },
+                        });
+
+                    }).catch(function (err) {
+                        console.log('User Chat Token Error '+ err);
+                    });
+                }
+
+                let granted = false;
+                if (Notification.permission === "granted") {
+                    granted = true;
+                } else if (Notification.permission !== "denied") {
+                    let noti_permission = await Notification.requestPermission();
+                    granted = noti_permission === 'granted' ? true : false;
+                }
+                if (granted) {
+                    initFirebaseMessagingRegistration();
+                } else {
+                    $.toast({
+                        heading: 'Information',
+                        text: 'Please give access to show notifications',
+                        icon: 'info',
+                        position: 'top-right'
+                    });
+                }
+
+            })();
+        }
+
+    }
+
+    onMessage(messaging, function (payload) {
+        // console.log('Message received. ', payload);
+        $('.push-noti-text').text(payload.notification.body);
+        $('.push-noti-time').text(JSON.parse(payload.data['gcm.notification.data']).time);
+        $('.notification-dropdown').slideDown();
+        const noteTitle = payload.notification.title;
+        const noteOptions = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+        };
+        new Notification(noteTitle, noteOptions);
+    });
+
+    $(document).on('click', '.push-noti-read', function () {
+        $('.push-noti-text, .push-noti-time').text('');
+        $('.notification-dropdown').slideUp();
+    });
+
+
+</script>
+
+
 </body>
 </html>
