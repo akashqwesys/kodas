@@ -210,6 +210,21 @@ class Viewchat extends ADMIN_Controller {
 		$data['userid'] = !empty($this->input->post("receiver_id")) ? $this->input->post("receiver_id") : '';
 		$data['timeanddate'] = time();
 		$result_check = $this->db->insert('wpn_chatmessenger1', $data);
+
+
+		$this->db->select('*');
+		$this->db->where('fcmtoken !=', '');
+		$this->db->where('agent_id =',$this->input->post("receiver_id"));		
+		$result = $this->db->get('agent');
+		$this->db->last_query();
+		$row = $result->result_array();
+		$fcmtoken = array();
+		foreach ($row as $rows) {			
+			$fcmtoken[] = $rows['fcmtoken'];
+		}
+		notifications("New message", $this->input->post("commentmsg"), $fcmtoken);
+
+
 		$msg = '';
 		if ($result_check == 1) {
 			$msg = 'Message sent successfully!';

@@ -220,7 +220,6 @@ foreach ($shop_categorie['info'] as $nameAbbr) {
     <div class="col-sm-12 col-md-12 col-lg-12 ">
       <table border="1">
         <?php
-
 $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM shop_attribute_translations WHERE for_id = sub_for AND abbr = translations_first.abbr) as sub_is, shop_attribute.position FROM shop_attribute_translations as translations_first INNER JOIN shop_attribute ON shop_attribute.id = translations_first.for_id WHERE shop_attribute.sub_for = 0 ORDER BY position ASC');
 $result = $query->result_array();
 foreach ($result as $key => $value) {

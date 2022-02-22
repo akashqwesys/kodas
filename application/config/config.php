@@ -1073,7 +1073,7 @@ $config['proxy_ips'] = '';
 $config['template'] = 'redlabel';
 
 function notifications($title, $message, $fcmtoken, $img = '', $name = '', $id = '', $type = '') {
-	define('API_ACCESS_KEY', 'AAAAhTTk_4A:APA91bG3Wv80T8H43L_V5xclXEZw_rX4T6HAlAsHCj6fYqVBHTIy_-5ZLSEvV9qt2Tu4D9tn5jtgiwNNtKOwIA1fDJsQbaBuN5_0MhAIRs_2FQj5RjwFTJpa93o8SR-pEqPgDsjjaRVZ');
+	define('API_ACCESS_KEY', 'AAAAPGdbHBM:APA91bHu02pHkazG4mApCdmpV-Gayb54C_Dq7TtdEUkDmMujyKKwzvLrYUDhI43aZfr2j4hIFtj6HHGczPzRkQk-csaOmmMjkxISIC3sGO4Bw05Fck2kqsch5NW8Ee-XhBLOFs0eWm7s');
 	$fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 	$notification = [
 		'title' => $title,

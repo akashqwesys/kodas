@@ -283,16 +283,16 @@ class Products_model extends CI_Model {
 			
 
 
-			// $this->sendproductnotification('New product added ' . $post['title'][0], $post['image'], $id);
-			// foreach ($post['shop_attribute'] as $key => $value) {
-			// 	if (!empty($value[0])) {
-			// 		$this->db->insert('product_attribute', array(
-			// 			'productid' => $id,
-			// 			'keyid' => $key,
-			// 			'valueid' => $value[0],
-			// 		));
-			// 	}
-			// }
+			$this->sendproductnotification('New product added ' . $post['title'][0], $post['image'], $id);
+			foreach ($post['shop_attribute'] as $key => $value) {
+				if (!empty($value[0])) {
+					$this->db->insert('product_attribute', array(
+						'productid' => $id,
+						'keyid' => $key,
+						'valueid' => $value[0],
+					));
+				}
+			}
 				
 			$this->db->where('refProduct_id', $id);
 			$this->db->delete('product_attribute1');
@@ -424,5 +424,4 @@ class Products_model extends CI_Model {
 		}
 		notifications($title, '', $fcmtoken, $imgurl, $title, $pid, 'product');
 	}
-
 }
