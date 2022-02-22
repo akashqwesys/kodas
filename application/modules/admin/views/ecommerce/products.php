@@ -18,7 +18,7 @@ if ($this->session->flashdata('result_publish')) {
 ?>
     <h1><img src="<?=base_url('assets/imgs/products-img.png')?>" class="header-img" style="margin-top:-2px;"> Products</h1>
     <hr>
-    <a href="<?=base_url('admin/publish');?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Products</a>
+    <a href="<?=base_url('admin/publish');?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Product</a>
     <div class="row">
         <div class="col-xs-12">
             <div class="well hidden-xs">
@@ -99,7 +99,7 @@ foreach ($products as $row) {
                                     <td>
                                         <a href="<?=base_url('admin/likedislikeproimg/' . $row->id);?>">
                                         <img src="<?=$image?>" alt="No Image" class="img-thumbnail" style="height:100px;">
-                                        <button class="btn btn-primary">Like Dislike</button>
+                                        <!-- <button class="btn btn-primary">Like Dislike</button> -->
                                     </a>
                                     </td>
                                     <td>
