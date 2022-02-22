@@ -261,8 +261,9 @@ $result =$query->result_array();
 // $result = $query->result_array();
 // echo '<pre>';print_r($result);die;
 
-$this->db->where('refProduct_id', $id);                    
+$this->db->where('refProduct_id', $id);                  
 $query = $this->db->get('product_attribute1');
+$this->db->order_by('sort_order','asc');   
 $result_product =$query->result_array();
 
 foreach ($result as $key => $value) {

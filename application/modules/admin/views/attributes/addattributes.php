@@ -60,8 +60,9 @@ if ($this->session->flashdata('add_attributes')) {
               <td><strong></strong></td>
               <td class="text-center">
                 <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-                <button type="submit" name="submit" class="btn btn-lg btn-default btn-addattributes">Save</button>
+                
                 <a href="<?= base_url('admin/listattributes') ?>" class="btn btn-lg btn-default">Cancel</a>
+                <button type="submit" name="submit" class="btn btn-success btn-addattributes">Save</button>
               </td>
             </tr>
           </tbody>

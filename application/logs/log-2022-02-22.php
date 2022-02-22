@@ -45,3 +45,14 @@ ERROR - 2022-02-22 11:41:07 --> Image Upload Error: <p>You did not select a file
 ERROR - 2022-02-22 11:43:57 --> Image Upload Error: <p>You did not select a file to upload.</p>
 ERROR - 2022-02-22 11:46:09 --> Image Upload Error: <p>You did not select a file to upload.</p>
 ERROR - 2022-02-22 11:48:29 --> Image Upload Error: <p>You did not select a file to upload.</p>
+ERROR - 2022-02-22 16:42:18 --> Query error: Unknown column 'sort' in 'order clause' - Invalid query: SELECT *
+FROM `product_attribute1`
+WHERE `refProduct_id` = '25'
+ORDER BY `sort` ASC
+ERROR - 2022-02-22 16:42:18 --> Severity: error --> Exception: Call to a member function result_array() on bool C:\xampp8\htdocs\kodas\application\modules\admin\views\ecommerce\publish.php 267
+ERROR - 2022-02-22 16:42:39 --> Query error: Unknown column 'sort' in 'order clause' - Invalid query: SELECT *
+FROM `attributes`
+WHERE `status` = 1
+AND `refAttributes_group_id` = '3'
+ORDER BY `sort` ASC
+ERROR - 2022-02-22 16:42:39 --> Severity: error --> Exception: Call to a member function result_array() on bool C:\xampp8\htdocs\kodas\application\modules\admin\views\ecommerce\publish.php 280
