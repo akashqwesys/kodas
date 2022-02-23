@@ -70,3 +70,21 @@ LEFT JOIN `attributes_group` ON `attributes_group`.`attributesgroup_id` = `attri
 ORDER BY `attributes_group`.`title` as `ag_title` DESC
  LIMIT 10
 ERROR - 2022-02-22 16:47:59 --> Severity: error --> Exception: Call to a member function result() on bool C:\xampp8\htdocs\kodas\application\modules\admin\models\Attributes_model.php 56
+ERROR - 2022-02-22 17:14:49 --> 404 Page Not Found: /index
+ERROR - 2022-02-22 17:14:55 --> 404 Page Not Found: /index
+ERROR - 2022-02-22 17:16:31 --> Severity: Warning --> Undefined array key "id" C:\xampp8\htdocs\kodas\application\modules\admin\views\user\adduser.php 275
+ERROR - 2022-02-22 17:18:16 --> Severity: Warning --> Undefined array key "id" C:\xampp8\htdocs\kodas\application\modules\admin\views\user\adduser.php 275
+ERROR - 2022-02-22 17:18:41 --> Severity: Warning --> Undefined array key "id" C:\xampp8\htdocs\kodas\application\modules\admin\views\user\adduser.php 275
+ERROR - 2022-02-22 17:19:06 --> Severity: Warning --> Undefined array key "id" C:\xampp8\htdocs\kodas\application\modules\admin\views\user\adduser.php 276
+ERROR - 2022-02-22 17:26:45 --> Severity: Warning --> Undefined variable $agent_details C:\xampp8\htdocs\kodas\application\modules\admin\views\agent\list-alocate-user.php 28
+ERROR - 2022-02-22 17:26:45 --> Severity: Warning --> Trying to access array offset on value of type null C:\xampp8\htdocs\kodas\application\modules\admin\views\agent\list-alocate-user.php 28
+ERROR - 2022-02-22 17:27:11 --> Severity: Warning --> Undefined variable $agent_details C:\xampp8\htdocs\kodas\application\modules\admin\views\agent\list-alocate-user.php 29
+ERROR - 2022-02-22 17:27:11 --> Severity: Warning --> Trying to access array offset on value of type null C:\xampp8\htdocs\kodas\application\modules\admin\views\agent\list-alocate-user.php 29
+ERROR - 2022-02-22 17:27:13 --> Severity: Warning --> Undefined variable $agent_details C:\xampp8\htdocs\kodas\application\modules\admin\views\agent\list-alocate-user.php 29
+ERROR - 2022-02-22 17:27:13 --> Severity: Warning --> Trying to access array offset on value of type null C:\xampp8\htdocs\kodas\application\modules\admin\views\agent\list-alocate-user.php 29
+ERROR - 2022-02-22 17:27:21 --> Severity: error --> Exception: Unclosed '{' on line 14 C:\xampp8\htdocs\kodas\application\modules\admin\views\agent\list-alocate-user.php 61
+ERROR - 2022-02-22 17:42:07 --> Severity: 8192 --> Required parameter $type follows optional parameter $search_title C:\xampp8\htdocs\kodas\application\modules\admin\models\Slider_model.php 42
+ERROR - 2022-02-22 17:42:15 --> Severity: 8192 --> Required parameter $type follows optional parameter $search_title C:\xampp8\htdocs\kodas\application\modules\admin\models\Slider_model.php 42
+ERROR - 2022-02-22 17:42:22 --> Severity: 8192 --> Required parameter $type follows optional parameter $search_title C:\xampp8\htdocs\kodas\application\modules\admin\models\Slider_model.php 42
+ERROR - 2022-02-22 17:43:22 --> Severity: 8192 --> Required parameter $type follows optional parameter $search_title C:\xampp8\htdocs\kodas\application\modules\admin\models\Slider_model.php 42
+ERROR - 2022-02-22 18:08:28 --> Severity: 8192 --> Required parameter $type follows optional parameter $search_title C:\xampp8\htdocs\kodas\application\modules\admin\models\Slider_model.php 42

@@ -39,7 +39,7 @@ class Slider_model extends CI_Model {
 		return $this->db->count_all_results('user_app');
 	}
 
-	public function getSlider($limit, $page, $search_title = null, $orderby = null, $category = null, $vendor = null, $type) {
+	public function getSlider($limit, $page, $search_title = null, $orderby = null, $category = null, $vendor = null, $type='') {
 		if ($orderby !== null) {
 			$ord = explode('=', $orderby);
 			if (isset($ord[0]) && isset($ord[1])) {

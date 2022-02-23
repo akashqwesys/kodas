@@ -21,7 +21,13 @@
   <?php
   }
   ?>
-  <h1><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"> User allocation</h1>
+  <?php
+   $this->db->where('agent_id', $id);
+   $query = $this->db->get('agent');
+   $agent_details=$query->row_array();
+  ?>
+  <h1><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"> Customer allocation for <?php echo $agent_details['name']; ?><a href="<?php echo site_url('admin/listagent'); ?>" class="btn btn-primary" style="float:right">Back To Agents</a></h1>
+  
   <hr>
   <div class="row">
     <div class="col-xs-12">

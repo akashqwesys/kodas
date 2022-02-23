@@ -27,7 +27,10 @@ class Addterm extends ADMIN_Controller {
 				exit;
 				$id = 0;
 			}
-			$this->Term_model->setTerm($_POST, $id);
+			$res=$this->Term_model->setTerm($_POST, $id);
+			if(!empty($res)){
+				redirect('admin/listterm');
+			}
 			if ($id == 0) {
 				$this->session->set_flashdata('result_publish', 'Create Term Successfully!');
 				$this->saveHistory('Success create Term');

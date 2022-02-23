@@ -36,8 +36,8 @@ if ($this->session->flashdata('add_agent')) {
               <td><input type="text" required id="name" name="name" placeholder="Full Name" value="<?= @$_POST['name'] ?>" class="form-control"></td>
             </tr>
             <tr>
-              <td><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Mobile number"><i class="fa fa-phone fa-fw"></i></label></td>
-              <td><input type="text" required id="phone" name="phone" placeholder="Mobilenumber" value="<?= @$_POST['phone'] ?>" class="form-control"></td>
+              <td><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Mobile Number"><i class="fa fa-phone fa-fw"></i></label></td>
+              <td><input type="text" required id="phone" name="phone" placeholder="Mobile Number" value="<?= @$_POST['phone'] ?>" class="form-control"></td>
             </tr>
             <tr>
               <td><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Email"><i class="fa fa-envelope-o fa-fw"></i></label></td>
@@ -45,7 +45,7 @@ if ($this->session->flashdata('add_agent')) {
             </tr>
             <tr>
               <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Address"><i class="fa fa-map-marker fa-fw"></i></label></td>
-              <td><textarea name="address" rows="5" placeholder="address" class="form-control"><?= @$_POST['address'] ?></textarea></td>
+              <td><textarea name="address" rows="5" placeholder="Address" class="form-control"><?= @$_POST['address'] ?></textarea></td>
             </tr>
             <tr>
               <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Status"><i class="fa fa-calendar fa-fw"></i></label></td>
@@ -59,8 +59,9 @@ if ($this->session->flashdata('add_agent')) {
               <td><strong></strong></td>
               <td class="text-center">
                 <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-                <button type="submit" name="submit" class="btn btn-lg btn-default btn-addagent">Save</button>
+               
                 <a href="<?= base_url('admin/listagent') ?>" class="btn btn-lg btn-default">Cancel</a>
+                <button type="submit" name="submit" class="btn btn-success btn-addagent">Save</button>
               </td>
             </tr>
           </tbody>

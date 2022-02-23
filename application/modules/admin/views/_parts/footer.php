@@ -133,6 +133,8 @@
 <?php $this->load->view('agent/agent_js'); ?>
 <?php $this->load->view('user/user_js'); ?>
 <?php $this->load->view('attributes/attributes_js'); ?>
+<?php $this->load->view('categories/categories_js'); ?>
+<?php $this->load->view('ecommerce/productss_js'); ?>
 <?php $this->load->view('attributesgroup/attributesgroup_js'); ?>
 <?php $this->load->view('packagingtype/packagingtype_js'); ?>
 <?php $this->load->view('shareproduct/shareproduct_js'); ?>

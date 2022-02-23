@@ -27,7 +27,10 @@ class Addprivacy extends ADMIN_Controller {
 				exit;
 				$id = 0;
 			}
-			$this->Privacy_model->setPrivacy($_POST, $id);
+			$res=$this->Privacy_model->setPrivacy($_POST, $id);
+			if(!empty($res)){
+				redirect('admin/listprivacy');
+			}
 			if ($id == 0) {
 				$this->session->set_flashdata('result_publish', 'Create Privacy Successfully!');
 				$this->saveHistory('Success create Privacy');

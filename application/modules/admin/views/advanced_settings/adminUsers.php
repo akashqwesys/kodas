@@ -1,5 +1,5 @@
 <div id="users">
-    <h1><img src="<?=base_url('assets/imgs/admin-user.png')?>" class="header-img" style="margin-top:-3px;"> Admin Users</h1>
+    <h1><img src="<?=base_url('assets/imgs/admin-user.png')?>" class="header-img" style="margin-top:-3px;"> Admin Users  <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_users" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add new user</a></h1>
     <hr>
     <?php if (validation_errors()) {?>
         <hr>
@@ -22,7 +22,7 @@ if ($this->session->flashdata('result_delete')) {
         <?php
 }
 ?>
-    <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_users" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add new user</a>
+   
     <div class="clearfix"></div>
     <?php
 if ($users->result()) {
@@ -197,6 +197,23 @@ if (isset($_POST['userrole'])) {
                             </div>
                         </div>
 
+
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <label for="notify">Categories : </label>
+                            </div>
+                            <div class="col-sm-9 col-md-9 col-lg-9">
+                                <label class="checkbox-inline">
+                                  <input type="checkbox" class="autoselectcheck" name="userrole[]" <?php if (in_array("addcategories", $userroll)) {echo 'checked';}?> value="addcategories">Add categories
+                                </label>
+                                <label class="checkbox-inline">
+                                  <input type="checkbox" class="autoselectcheck" name="userrole[]" <?php if (in_array("editcategories", $userroll)) {echo 'checked';}?> value="editcategories">Edit categories
+                                </label>
+                                <label class="checkbox-inline">
+                                  <input type="checkbox" class="autoselectcheck" name="userrole[]" <?php if (in_array("deletecategories", $userroll)) {echo 'checked';}?> value="deletecategories">Delete categories
+                                </label>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <div class="col-sm-3 col-md-3 col-lg-3">

@@ -66,6 +66,8 @@ class Privacy_model extends CI_Model {
 				'description' => $post['description'],
 			))) {
 				log_message('error', print_r($this->db->error(), true));
+			}else{
+				return true;
 			}
 
 		} else {
@@ -78,6 +80,9 @@ class Privacy_model extends CI_Model {
 				log_message('error', print_r($this->db->error(), true));
 			}
 			$id = $this->db->insert_id();
+			if(!empty($id)){
+				return true;
+			}
 		}
 	}
 

@@ -2,7 +2,7 @@
 <?php if ($this->session->flashdata('result_delete')) {?> <hr> <div class="alert alert-success"> <?=$this->session->flashdata('result_delete')?> </div> <hr> <?php }
 if ($this->session->flashdata('result_publish')) {?> <hr> <div class="alert alert-success"> <?=$this->session->flashdata('result_publish')?> </div> <hr> <?php }?>
 
-  <h1><img src="<?=base_url('assets/imgs/list-user.png')?>" class="header-img" style="margin-top:-2px;"> All Subscribers</h1>
+  <h1><img src="<?=base_url('assets/imgs/list-user.png')?>" class="header-img" style="margin-top:-2px;"> Subscribers</h1>
   <hr>
   <div class="row">
     <div class="col-xs-12">

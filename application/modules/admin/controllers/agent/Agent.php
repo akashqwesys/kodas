@@ -79,8 +79,8 @@ class Agent extends ADMIN_Controller
             $history_url=base_url('admin/agent-history/'). $datarow->agent_id;
             $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>             
             <button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->agent_id . '" data-status="' . $status . '" data-table="agent" data-wherefield="agent_id" data-updatefield="status" data-module="agent">'.$str.'</button>
-            <a href="'.$history_url.'" class="btn btn-xs btn-info">History <i class="fa fa-history" aria-hidden="true"></i></a>
-            <a href="'.$alocate_url.'" class="btn btn-xs btn-primary">Allocate <i class="fa fa-check" aria-hidden="true"></i></a>';
+            <a href="'.$history_url.'" class="btn btn-xs btn-info">Device History <i class="fa fa-history" aria-hidden="true"></i></a>
+            <a href="'.$alocate_url.'" class="btn btn-xs btn-primary">Customers <i class="fa fa-check" aria-hidden="true"></i></a>';
             $no++;
             $row = array();
             $row[] = $no;

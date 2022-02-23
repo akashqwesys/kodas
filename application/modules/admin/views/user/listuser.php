@@ -19,9 +19,9 @@ if ($this->session->flashdata('result_publish')) {
   <?php
 }
 ?>
-  <h1><img src="<?=base_url('assets/imgs/list-user.png')?>" class="header-img" style="margin-top:-2px;"> All User</h1>
+  <h1><img src="<?=base_url('assets/imgs/list-user.png')?>" class="header-img" style="margin-top:-2px;"> Customers <a href="<?=base_url('admin/adduser');?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add Customer</a></h1>
   <hr>
-  <a href="<?=base_url('admin/adduser');?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add User</a>
+  
   <form class="form-horizontal" action="<?=base_url('admin/addbulkuser');?>" role="form" method="post" enctype="multipart/form-data">
     <div class="col-md-2">
       <div class="form-group">
@@ -40,7 +40,7 @@ if ($this->session->flashdata('result_publish')) {
     <div class="col-md-3">
       <div class="form-group">
         <div class="col-sm-4">
-          <a href="<?php echo base_url() ?>ramrasiya.csv" download="Ramrasiya.csv"  style="padding: 2px;" class="btn btn-primary btn-md">Download Sample CSV File</a>
+          <a href="<?php echo base_url() ?>Kodas-customers.csv" download="Kodas-customers.csv"  style="padding: 2px;" class="btn btn-primary btn-md">Download Sample CSV File</a>
         </div>
       </div>
     </div>

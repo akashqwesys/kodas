@@ -38,7 +38,7 @@ if ($this->session->flashdata('edit_agent')) {
             </tr>
             <tr>
               <td><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Mobile number"><i class="fa fa-phone fa-fw"></i></label></td>
-              <td><input type="text" required id="phone" name="phone" placeholder="Mobilenumber" value="<?= $agent_result['phone']; ?>" class="form-control"></td>
+              <td><input type="text" required id="phone" name="phone" placeholder="Mobile Number" value="<?= $agent_result['phone']; ?>" class="form-control"></td>
             </tr>
             <tr>
               <td><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Email"><i class="fa fa-envelope-o fa-fw"></i></label></td>
@@ -60,8 +60,9 @@ if ($this->session->flashdata('edit_agent')) {
               <td><strong></strong></td>
               <td class="text-center">
                 <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-                <button type="submit" name="submit" class="btn btn-lg btn-default btn-addagent">Save</button>
+               
                 <a href="<?= base_url('admin/listagent') ?>" class="btn btn-lg btn-default">Cancel</a>
+                <button type="submit" name="submit" class="btn btn-success btn-addagent">Save</button>
               </td>
             </tr>
           </tbody>

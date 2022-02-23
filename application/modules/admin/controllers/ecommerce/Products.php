@@ -14,7 +14,7 @@ class Products extends ADMIN_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model(array('Products_model', 'Languages_model', 'Categories_model'));
+		$this->load->model(array('Products_model', 'Languages_model', 'Categories_model','Productsdt_model'));
 	}
 
 	public function index($page = 0) {
@@ -23,7 +23,7 @@ class Products extends ADMIN_Controller {
 		if (!in_array('addproduct', $adminid) || !in_array('editproduct', $adminid) || !in_array('deleteproduct', $adminid)) {redirect('admin');}
 		$data = array();
 		$head = array();
-		$head['title'] = 'Administration - View products';
+		$head['title'] = 'List-Products';
 		$head['description'] = '!';
 		$head['keywords'] = '';
 		if (isset($_GET['delete'])) {
@@ -68,6 +68,60 @@ class Products extends ADMIN_Controller {
 		$this->load->view('ecommerce/products', $data);
 		$this->load->view('_parts/footer');
 	}
+
+
+	public function product_list() {       
+        $this->login_check();
+        $adminid = $this->session->userdata('logged_roledata');
+        if (!in_array('addproduct', $adminid)) {
+            redirect('admin');
+        }
+        if (!in_array('editproduct', $adminid)) {
+            redirect('admin');
+        } 
+        $list = $this->Productsdt_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+
+        // echo '<pre>';print_r($list);die;
+
+        foreach ($list as $datarow) {    
+           
+
+			$u_path = 'attachments/shop_images/';
+			if ($datarow->image != null && file_exists($u_path . $datarow->image)) {
+				$image = base_url($u_path . $datarow->image);
+			} else {
+				$image = base_url('attachments/no-image.png');
+			}
+
+			$img=' <a href="'.base_url('admin/likedislikeproimg/' . $datarow->id).'">
+			<img src="'.$image.'" alt="No Image" class="img-thumbnail" style="height:100px;"></a>';
+
+            $edit_url=base_url('admin/publish/'). $datarow->id; 
+			$delete_url=base_url('admin/products?delete='). $datarow->id;           
+            $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>             
+			<a href="'.$delete_url.'" class="btn btn-xs btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>';
+            $no++;
+            $row = array();
+            $row[] = $no;
+			$row[] = $img;
+            $row[] = $datarow->title;        
+            $row[] = $datarow->price; 
+            $row[]=$datarow->product_pcs;   
+            $row[]=$datarow->view_count;  
+            $row[]=$this->db->count_all_results('userviewproduct');    
+			$row[]=$actionBtn;             
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Productsdt_model->count_all(),
+            "recordsFiltered" => $this->Productsdt_model->count_filtered(),
+            "data" => $data,
+        );
+        echo json_encode($output);
+    }
 
 	public function getProductInfo($id, $noLoginCheck = false) {
 		/*

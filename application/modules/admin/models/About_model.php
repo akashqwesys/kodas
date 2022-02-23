@@ -73,10 +73,11 @@ class About_model extends CI_Model {
 				'description' => $post['description'],
 			))) {
 				log_message('error', print_r($this->db->error(), true));
+			}else{
+				return true;
 			}
 
 		} else {
-
 			if (!$this->db->insert('aboutpage', array(
 				'title' => $post['title'],
 				'description' => $post['description'],
@@ -85,6 +86,9 @@ class About_model extends CI_Model {
 				log_message('error', print_r($this->db->error(), true));
 			}
 			$id = $this->db->insert_id();
+			if(!empty($id)){
+				return true;
+			}
 		}
 
 		// $this->setProductTranslation($post, $id, $is_update);

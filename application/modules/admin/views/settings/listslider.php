@@ -62,9 +62,9 @@ if ($this->session->flashdata('result_publish')) {
   <div class="col-xs-6">
     <h1>
   <?php /*?><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"><?php */?>
-  App Slider</h1>
+  App Slider <a href="javascript:void(0);" data-toggle="modal" data-target="#add_app_slider" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add Slide</a></h1>
 <hr>
-<a href="javascript:void(0);" data-toggle="modal" data-target="#add_app_slider" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Slide</a>
+
     <div class="clearfix"></div>
     <?php
 if ($appslidelist) {
@@ -160,9 +160,9 @@ foreach ($appslidelist as $row) {
   <div class="col-xs-6">
     <h1>
   <?php /*?><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"><?php */?>
-  Web Slider</h1>
+  Web Slider <a href="javascript:void(0);" data-toggle="modal" data-target="#add_web_slider" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add Slide</a></h1>
 <hr>
-<a href="javascript:void(0);" data-toggle="modal" data-target="#add_web_slider" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Slide</a>
+
     <div class="clearfix"></div>
     <?php
 if ($websiteslidelist) {

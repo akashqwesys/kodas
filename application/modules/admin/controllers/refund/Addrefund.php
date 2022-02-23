@@ -32,7 +32,10 @@ class Addrefund extends ADMIN_Controller {
 				exit;
 				$id = 0;
 			}
-			$this->Refund_model->setRefund($_POST, $id);
+			$res=$this->Refund_model->setRefund($_POST, $id);
+			if(!empty($res)){
+				redirect('admin/listrefund');	
+			}
 			if ($id == 0) {
 				$this->session->set_flashdata('result_publish', 'Create Refund Successfully!');
 				$this->saveHistory('Success create Refund');

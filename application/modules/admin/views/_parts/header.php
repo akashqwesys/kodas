@@ -270,7 +270,7 @@ $ordercount = $this->db->count_all_results('orders');
                                     ) ?>" <?= urldecode(uri_string()) ==
 'admin/listuser'
     ? 'class="active"'
-    : '' ?>><i class="fa fa-user" aria-hidden="true"></i> Customer
+    : '' ?>><i class="fa fa-user" aria-hidden="true"></i> Customers
 <?php
 $this->db->where('user_app.isverified ', '0');
 $colorscount = $this->db->count_all_results('user_app');
@@ -292,7 +292,7 @@ $colorscount = $this->db->count_all_results('user_app');
                                     ) ?>" <?= urldecode(uri_string()) ==
 'admin/listagent'
     ? 'class="active"'
-    : '' ?>><i class="fa fa-user-secret" aria-hidden="true"></i> Agent</a></li>
+    : '' ?>><i class="fa fa-user-secret" aria-hidden="true"></i> Agents</a></li>
 <?php } ?>
 
  <li><a href="<?= base_url('admin/chatlist') ?>" <?= urldecode(uri_string()) ==
@@ -332,7 +332,7 @@ $colorscount = $this->db->count_all_results('wpn_chatmessenger1');
                                         ) ?>" <?= urldecode(uri_string()) ==
 'admin/newsletter'
     ? 'class="active"'
-    : '' ?>><i class="fa fa-bullhorn" aria-hidden="true"></i> Newsletter </a> </li>
+    : '' ?>><i class="fa fa-bullhorn" aria-hidden="true"></i> SUBSCRIBERS </a> </li>
                                     <?php if (
                                         in_array('addcoupan', $adminid) ||
                                         in_array('editcoupan', $adminid) ||

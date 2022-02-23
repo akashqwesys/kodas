@@ -4,9 +4,9 @@
 <?php } if ($this->session->flashdata('result_publish')) { ?> <hr>
 <div class="alert alert-success"> <?=$this->session->flashdata('result_publish')?> </div> <hr>
 <?php } ?>
-<h1><!-- <img src="<?=base_url('assets/imgs/list-user.png')?>" class="header-img" style="margin-top:-2px;"> --> Privacy Policy Page</h1>
+<h1><!-- <img src="<?=base_url('assets/imgs/list-user.png')?>" class="header-img" style="margin-top:-2px;"> --> Privacy Policy Page <a href="<?=base_url('admin/addprivacy');?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add Privacy Policy</a></h1>
 <hr>
-<a href="<?=base_url('admin/addprivacy');?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Privacy Policy</a>
+
 <div class="row">
   <div class="col-xs-12">
   <?php if ($privacylist) {

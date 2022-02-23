@@ -32,7 +32,10 @@ class Addabout extends ADMIN_Controller {
 				exit;
 				$id = 0;
 			}
-			$this->About_model->setAbout($_POST, $id);
+			$res=$this->About_model->setAbout($_POST, $id);
+			if($res){
+				redirect('admin/listabout');
+			}
 			if ($id == 0) {
 				$this->session->set_flashdata('result_publish', 'Create About Successfully!');
 				$this->saveHistory('Success create About');

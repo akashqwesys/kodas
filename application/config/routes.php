@@ -224,6 +224,15 @@ $route['admin/addattributes'] = 'admin/attributes/attributes/add_attributes';
 $route['admin/editattributes/(:num)'] = 'admin/attributes/attributes/edit_attributes/$1';
 $route['admin/active-inactive-attributes'] = 'admin/attributes/attributes/approve_status';
 
+
+$route['admin/listcategories'] = 'admin/categories/categories';
+$route['admin/get-categories-list'] = 'admin/categories/categories/categories_list';
+$route['admin/addcategories'] = 'admin/categories/categories/add_categories';
+$route['admin/editcategories/(:num)'] = 'admin/categories/categories/edit_categories/$1';
+$route['admin/active-inactive-categories'] = 'admin/categories/categories/approve_status';
+
+
+
 $route['admin/removeimg'] = 'admin/ecommerce/Publish/removeimg';
 $route['admin/removeaddress'] = 'admin/user/Adduser/removeaddress';
 
@@ -250,6 +259,8 @@ $route['admin/removeSecondaryImage'] =
 	'admin/ecommerce/publish/removeSecondaryImage';
 $route['admin/products'] = 'admin/ecommerce/products';
 $route['admin/products/(:num)'] = 'admin/ecommerce/products/index/$1';
+
+$route['admin/get-product-list'] = 'admin/ecommerce/products/product_list';
 
 $route['admin/prepublish'] = 'admin/ecommerce/prepublish';
 $route['admin/prepublish/(:num)'] = 'admin/ecommerce/prepublish/index/$1';

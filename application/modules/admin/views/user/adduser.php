@@ -1,6 +1,6 @@
 <script src="<?=base_url('assets/ckeditor/ckeditor.js')?>"></script>
 
-<h1><img src="<?=base_url('assets/imgs/admin-user.png')?>" class="header-img" style="margin-top:-3px;"> Add User</h1>
+<h1><img src="<?=base_url('assets/imgs/admin-user.png')?>" class="header-img" style="margin-top:-3px;"> Add Customer</h1>
 <hr>
 <?php
 $timeNow = time();
@@ -61,7 +61,7 @@ if ($this->session->flashdata('result_publish')) {
 
            <tr>
             <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user-md fa-fw"></i></label></td>
-            <td><input type="text"  id="JobTitle" placeholder="Jobtitle Name" name="jobtitle" value="<?=@$_POST['jobtitle']?>" class="form-control"></td>
+            <td><input type="text"  id="JobTitle" placeholder="Designation" name="jobtitle" value="<?=@$_POST['jobtitle']?>" class="form-control"></td>
           </tr>
 
           <tr>
@@ -112,8 +112,9 @@ if ($this->session->flashdata('result_publish')) {
             <td><strong></strong></td>
             <td class="text-center">
               <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-              <button type="submit" name="submit" class="btn btn-lg btn-default btn-adduser">Save</button>
+              
   <a href="<?=base_url('admin/listuser')?>" class="btn btn-lg btn-default">Cancel</a>
+  <button type="submit" name="submit" class="btn btn-success btn-adduser">Save</button>
             </td>
           </tr>
         </tbody>

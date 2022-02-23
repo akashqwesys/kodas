@@ -57,10 +57,11 @@ if ($this->session->flashdata('result_publish')) { ?>
               <td><strong></strong></td>
               <td class="text-center">
                 <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-                <button type="submit" name="submit" class="btn btn-lg btn-default btn-addrefund">Save</button>
+                
                 <a href="<?= base_url(
                             'admin/listrefund'
                           ) ?>" class="btn btn-lg btn-default">Cancel</a>
+                          <button type="submit" name="submit" class="btn btn-success btn-addrefund">Save</button>
               </td>
             </tr>
           </tbody>

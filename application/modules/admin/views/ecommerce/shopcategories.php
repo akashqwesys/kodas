@@ -1,25 +1,36 @@
 <div id="languages">
-    <h1><img src="<?=base_url('assets/imgs/categories.jpg')?>" class="header-img" style="margin-top:-2px;"> Categories</h1>
+    <h1><img src="<?=base_url('assets/imgs/categories.jpg')?>" class="header-img" style="margin-top:-2px;"> Categories <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add Categorie</a></h1>
     <hr>
     <?php if (validation_errors()) {?>
         <div class="alert alert-danger"><?=validation_errors()?></div>
         <hr>
         <?php
 }
+?>
+
+<?php
 if ($this->session->flashdata('result_add')) {
-	?>
-        <div class="alert alert-success"><?=$this->session->flashdata('result_add')?></div>
-        <hr>
-        <?php
-}
-if ($this->session->flashdata('result_delete')) {
-	?>
-        <div class="alert alert-success"><?=$this->session->flashdata('result_delete')?></div>
-        <hr>
-        <?php
+?>
+ 
+  <div class="alert alert-success">
+    <?= $this->session->flashdata('result_add') ?>
+  </div>
+ 
+<?php
 }
 ?>
-    <a href="javascript:void(0);" data-toggle="modal" data-target="#add_edit_articles" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Categorie</a>
+<?php
+if ($this->session->flashdata('result_delete')) {
+?>
+ 
+  <div class="alert alert-success">
+    <?= $this->session->flashdata('result_delete') ?>
+  </div>
+  
+<?php
+}
+?>
+    
     <div class="clearfix"></div>
     <?php
 if (!empty($shop_categories)) {
@@ -231,3 +242,6 @@ foreach ($shop_categories as $key_cat => $shop_categorie) {
     </button>
     <button type="button" class="btn btn-default closePositionCategorie"><i class="fa fa-times" aria-hidden="true"></i></button>
 </div>
+
+<?php $this->session->set_flashdata('result_add', ''); ?>
+<?php $this->session->set_flashdata('result_delete', ''); ?>

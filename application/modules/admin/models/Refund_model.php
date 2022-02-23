@@ -67,6 +67,9 @@ class Refund_model extends CI_Model {
 			))) {
 				log_message('error', print_r($this->db->error(), true));
 			}
+			else{
+				return true;
+			}
 
 		} else {
 
@@ -78,6 +81,9 @@ class Refund_model extends CI_Model {
 				log_message('error', print_r($this->db->error(), true));
 			}
 			$id = $this->db->insert_id();
+			if(!empty($id)){
+				return true;
+			}
 		}
 	}
 

@@ -57,9 +57,9 @@ if ($this->session->flashdata('result_publish')) {
             <tr>
               <td><strong></strong></td>
               <td class="text-center">
-                <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">
-                <button type="submit" name="submit" class="btn btn-lg btn-default btn-addabout">Save</button>
+                <input type="hidden" name="pviewcount" placeholder="" value="500" class="form-control">               
                 <a href="<?= base_url('admin/listabout') ?>" class="btn btn-lg btn-default">Cancel</a>
+                <button type="submit" name="submit" class="btn btn-success btn-addabout">Save</button>
               </td>
             </tr>
           </tbody>

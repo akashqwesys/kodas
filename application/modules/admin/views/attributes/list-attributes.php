@@ -22,9 +22,9 @@ if ($this->session->flashdata('edit_attributes')) {
 <?php
 }
 ?>
-  <h1><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"> Attributes</h1>
+  <h1><img src="<?= base_url('assets/imgs/list-user.png') ?>" class="header-img" style="margin-top:-2px;"> Attributes <a href="<?= base_url('admin/addattributes'); ?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add Attributes</a></h1>
   <hr>
-  <a href="<?= base_url('admin/addattributes'); ?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;"><b>+</b> Add Attributes</a>
+  
   <div class="row">
     <div class="col-xs-12">
       <div class="table-responsive">
