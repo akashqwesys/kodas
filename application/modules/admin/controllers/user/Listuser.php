@@ -14,7 +14,7 @@ class Listuser extends ADMIN_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model(array('User_model', 'Languages_model', 'Categories_model'));
+		$this->load->model(array('User_model', 'Languages_model', 'Categories_model','Userlist_model'));
 	}
 
 	public function index($page = 0) {
@@ -23,7 +23,7 @@ class Listuser extends ADMIN_Controller {
 		if (!in_array('addcustomer', $adminid) || !in_array('editcustomer', $adminid) || !in_array('delcustomer', $adminid)) {redirect('admin');}
 		$data = array();
 		$head = array();
-		$head['title'] = 'Administration - View products';
+		$head['title'] = 'List-Users';
 		$head['description'] = '!';
 		$head['keywords'] = '';
 
@@ -73,6 +73,67 @@ class Listuser extends ADMIN_Controller {
 		$this->load->view('_parts/footer');
 	}
 
+
+
+	public function user_list() {       
+        $this->login_check();
+        $adminid = $this->session->userdata('logged_roledata');
+        if (!in_array('addcustomer', $adminid)) {
+            redirect('admin');
+        }
+        if (!in_array('editcustomer', $adminid)) {
+            redirect('admin');
+        } 
+        $list = $this->Userlist_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $datarow) {    
+            
+
+            $active_inactive_badge='';
+            if($datarow->isverified=='true'){
+                $active_inactive_badge='<span class="badge badge-success badge-status-'.$datarow->id.'">Active</span>';
+            }
+            if($datarow->isverified=='false'){
+                $active_inactive_badge='<span class="badge badge-danger badge-status-'.$datarow->id.'">inActive</span>';
+            }            
+            if($datarow->isverified=='true'){
+                $str='Inactive';
+                $class="btn-danger";
+                $status='false';
+            }
+            if($datarow->isverified=='false'){
+                $str='Active';
+                $class="btn-success";
+                $status='true';
+            }
+            $edit_url=base_url('admin/adduser/'). $datarow->id;
+            $delete_url=base_url('admin/listuser?delete='). $datarow->id;
+            $history_url=base_url('admin/customer-history/'). $datarow->id;
+            $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a> 
+			<a href="'.$delete_url.'" class="btn btn-xs btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>             
+            <button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->id . '" data-status="' . $status . '" data-table="user_app" data-wherefield="id" data-updatefield="isverified" data-module="user_app">'.$str.'</button>
+            <a href="'.$history_url.'" class="btn btn-xs btn-info">Device History <i class="fa fa-history" aria-hidden="true"></i></a>';
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $datarow->name;        
+            $row[] = $datarow->mobilenumber;
+            $row[] = $datarow->emailid;     
+            $row[]=$datarow->compnay;
+            $row[]=$active_inactive_badge;  
+            $row[]=$actionBtn;               
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Userlist_model->count_all(),
+            "recordsFiltered" => $this->Userlist_model->count_filtered(),
+            "data" => $data,
+        );
+        echo json_encode($output);
+    }
+
 	public function getProductInfo($id, $noLoginCheck = false) {
 		/*
 			         * if method is called from public(template) page
@@ -97,5 +158,18 @@ class Listuser extends ADMIN_Controller {
 		}
 		$this->saveHistory('Change user id ' . $_POST['id'] . ' to status ' . $_POST['to_status']);
 	}
+
+	
+    public function approve_status() {        
+        if (isset($_REQUEST['table_id'])) {
+            $res = $this->Userlist_model->approve_status($_REQUEST);
+            if ($res) {
+                $data = array(
+                    'suceess' => true
+                );
+            }
+            echo json_encode($data);
+        }
+    }
 
 }

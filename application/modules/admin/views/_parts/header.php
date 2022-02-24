@@ -153,9 +153,9 @@ $sitelogo = $data1['sitelogo'];
          in_array('deletecat', $adminid)
      ) { ?>
                                     <li><a href="<?= base_url(
-                                        'admin/shopcategories'
+                                        'admin/listcategories'
                                     ) ?>" <?= urldecode(uri_string()) ==
-'admin/shopcategories'
+'admin/listcategories'
     ? 'class="active"'
     : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Categories</a></li>
                                     <?php } ?>

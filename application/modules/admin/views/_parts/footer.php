@@ -132,6 +132,7 @@
 
 <?php $this->load->view('agent/agent_js'); ?>
 <?php $this->load->view('user/user_js'); ?>
+<?php $this->load->view('user/userlist_js'); ?>
 <?php $this->load->view('attributes/attributes_js'); ?>
 <?php $this->load->view('categories/categories_js'); ?>
 <?php $this->load->view('ecommerce/productss_js'); ?>

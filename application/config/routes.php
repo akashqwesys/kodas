@@ -187,7 +187,8 @@ $route['^(\w{2})/(.*)$'] = '$2';
  * Admin Controllers Routes
  */
 
-
+$route['admin/get-user-list'] = 'admin/user/listuser/user_list';
+$route['admin/active-inactive-user'] = 'admin/user/listuser/approve_status';
 //agent managements
 $route['admin/listagent'] = 'admin/agent/agent';
 $route['admin/get-agent-list'] = 'admin/agent/agent/agent_list';

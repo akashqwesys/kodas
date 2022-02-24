@@ -487,3 +487,122 @@ ERROR - 2022-02-24 17:59:02 --> 404 Page Not Found: /index
 ERROR - 2022-02-24 17:59:02 --> Severity: Warning --> getimagesize(http://localhost/kodas/attachments/shop_images/1645508843/1645705741-5.jpg): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
  C:\xampp8\htdocs\kodas\application\libraries\Compress.php 52
 ERROR - 2022-02-24 17:59:02 --> Severity: Warning --> Trying to access array offset on value of type bool C:\xampp8\htdocs\kodas\application\libraries\Compress.php 54
+ERROR - 2022-02-24 18:35:13 --> 404 Page Not Found: ../modules/admin/controllers/categories//index
+ERROR - 2022-02-24 18:55:29 --> Severity: Warning --> Undefined property: CI::$Agent_model C:\xampp8\htdocs\kodas\application\third_party\MX\Controller.php 59
+ERROR - 2022-02-24 18:55:29 --> Severity: error --> Exception: Call to a member function get_datatables() on null C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 87
+ERROR - 2022-02-24 19:01:27 --> Severity: Warning --> Undefined property: CI::$Userlist_model C:\xampp8\htdocs\kodas\application\third_party\MX\Controller.php 59
+ERROR - 2022-02-24 19:01:27 --> Severity: error --> Exception: Call to a member function get_datatables() on null C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 87
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 94
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 97
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 98
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 100
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 105
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 94
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 97
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 98
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 100
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 105
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 94
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 97
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 98
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 100
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 105
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 94
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 97
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 98
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 100
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 105
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 94
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 97
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 98
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 100
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 105
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:02:11 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 95
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 98
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 98
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 95
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 95
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 110
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 111
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 112
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$agent_id C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$phone C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 121
+ERROR - 2022-02-24 19:03:19 --> Severity: Warning --> Undefined property: stdClass::$email C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 123
+ERROR - 2022-02-24 19:05:25 --> Severity: Warning --> Undefined array key "id" C:\xampp8\htdocs\kodas\application\modules\admin\views\user\adduser.php 308
+ERROR - 2022-02-24 19:07:03 --> 404 Page Not Found: ../modules/admin/controllers/user/Listuser/approve_status
+ERROR - 2022-02-24 19:07:17 --> 404 Page Not Found: ../modules/admin/controllers/user/Listuser/approve_status
+ERROR - 2022-02-24 19:08:26 --> Severity: Warning --> Undefined property: CI::$Agent_model C:\xampp8\htdocs\kodas\application\third_party\MX\Controller.php 59
+ERROR - 2022-02-24 19:08:26 --> Severity: error --> Exception: Call to a member function approve_status() on null C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 165
+ERROR - 2022-02-24 19:09:12 --> Severity: Warning --> Undefined variable $class C:\xampp8\htdocs\kodas\application\modules\admin\views\user\listuser.php 201
+ERROR - 2022-02-24 19:09:12 --> Severity: Warning --> Undefined variable $status C:\xampp8\htdocs\kodas\application\modules\admin\views\user\listuser.php 201
+ERROR - 2022-02-24 19:09:12 --> Severity: Warning --> Undefined variable $str C:\xampp8\htdocs\kodas\application\modules\admin\views\user\listuser.php 201
+ERROR - 2022-02-24 19:09:12 --> Severity: Warning --> Undefined variable $class C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:09:12 --> Severity: Warning --> Undefined variable $status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:09:12 --> Severity: Warning --> Undefined variable $str C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:10:21 --> Severity: Warning --> Undefined variable $class C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:10:21 --> Severity: Warning --> Undefined variable $status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:10:21 --> Severity: Warning --> Undefined variable $str C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:10:53 --> Severity: Warning --> Undefined variable $class C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:10:53 --> Severity: Warning --> Undefined variable $status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:10:53 --> Severity: Warning --> Undefined variable $str C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:11:09 --> Severity: Warning --> Undefined variable $class C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:11:09 --> Severity: Warning --> Undefined variable $status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:11:09 --> Severity: Warning --> Undefined variable $str C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:11:44 --> Severity: Warning --> Undefined variable $class C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:11:44 --> Severity: Warning --> Undefined variable $status C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:11:44 --> Severity: Warning --> Undefined variable $str C:\xampp8\htdocs\kodas\application\modules\admin\controllers\user\Listuser.php 115
+ERROR - 2022-02-24 19:12:44 --> Severity: Warning --> Undefined array key "id" C:\xampp8\htdocs\kodas\application\modules\admin\views\user\adduser.php 308
