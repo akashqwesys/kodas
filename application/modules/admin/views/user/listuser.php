@@ -182,7 +182,7 @@ foreach ($userlist as $row) {
     if($row->isverified=='false'){
         $active_inactive_badge='<span class="badge badge-danger badge-status-'.$row->id.'">inActive</span>';
     }  
-    if($row->isverified==0){
+    if($row->isverified===0){
       $active_inactive_badge='<span class="badge badge-warning badge-status-'.$row->id.'">Pending</span>';
     }            
     if($row->isverified=='true'){
