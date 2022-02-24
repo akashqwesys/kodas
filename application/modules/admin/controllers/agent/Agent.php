@@ -349,4 +349,64 @@ class Agent extends ADMIN_Controller
         echo json_encode($output);
     }
 
+
+
+    //Bulk User
+	public function addbulkagent() {
+		if (isset($_POST['submit'])) {
+			$userexits = array();
+			$fp = fopen($_FILES['csvfile']['tmp_name'], 'r') or die("can't open file");
+			$skip = 0;
+			while (($line = fgetcsv($fp)) !== FALSE) {
+				// print_r($line);die;
+				if ($skip == 0) {
+					$skip++;
+				} else {
+					// $getpremium = str_replace('"', '', strtolower("$line[7]"));
+					// $getcoupan = str_replace('"', '', strtolower("$line[8]"));
+					// $getcredit = str_replace('"', '', strtolower("$line[9]"));
+					// if ($getpremium == 'yes') {
+					// 	$premium = 1;
+					// } else {
+					// 	$premium = 0;
+					// }
+					// if ($getcoupan == 'yes') {
+					// 	$coupan = 1;
+					// } else {
+					// 	$coupan = 0;
+					// }
+					// if ($getcredit == 'yes') {
+					// 	$credit = 1;
+					// } else {
+					// 	$credit = 0;
+					// }
+					$data = array(
+						'name' => str_replace('"', '', $line[0]),
+						'ac_type' => str_replace('"', '', $line[1]),
+						'city' => str_replace('"', '', $line[2]),
+                        'phone' => str_replace('"', '', $line[3]),												
+						'phone_1' => str_replace('"', '', $line[4]),
+						'phone_2' => str_replace('"', '', $line[5]),
+						'email' => str_replace('"', '', $line[6])								
+					);
+
+					$querymobile = $this->db->get_where('agent', array('phone' => $data['phone']));
+					if ($querymobile->num_rows() > 0) {
+						$this->session->set_flashdata('result_publish', 'Some Agent Mobile Already exits In System!');
+						array_push($userexits, $data['phone']);
+					} else {
+						$this->db->insert('agent', $data);
+					}
+				}
+			}
+			fclose($fp) or die("can't close file");
+			$List = implode(', ', $userexits);
+			if ($List) {
+				$this->session->set_flashdata('result_error', "Some Users Mobile Number Already exits In System! $List");
+			}
+			$this->session->set_flashdata('result_publish', 'Customers Imported Successfully');
+			redirect('admin/listagent');
+		}
+	}
+
 }

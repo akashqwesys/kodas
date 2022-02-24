@@ -265,9 +265,6 @@ foreach ($userlist as $row) {
           }
         }
 
-
-
-
         $(document).ready(function() {
           $(document).on('click', '.active_inactive_customer', function() {
                 var self = $(this);
@@ -325,3 +322,4 @@ foreach ($userlist as $row) {
             });
         });
         </script>
+        <?php $this->session->set_flashdata('result_publish', ''); ?>

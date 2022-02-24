@@ -435,7 +435,7 @@ Save
         </div>
     </div>
     <div class="panel panel-success col-h">
-        <div class="panel-heading">Cart Limit</div>
+        <div class="panel-heading">Theli based number limitation</div>
         <div class="panel-body">
             <?php if ($this->session->flashdata('resultCartlimitset')) { ?>
             <div class="alert alert-info"><?= $this->session->flashdata(

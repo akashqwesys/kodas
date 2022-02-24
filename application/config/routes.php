@@ -328,6 +328,8 @@ $route['admin/listuserStatusChange'] =
 	'admin/user/listuser/listuserStatusChange';
 
 $route['admin/addbulkuser'] = 'admin/user/adduser/addbulkuser';
+$route['admin/addbulkagent'] = 'admin/agent/agent/addbulkagent';
+
 
 $route['admin/newsletter'] = 'admin/newsletter/newsletter';
 $route['admin/newsletter/(:num)'] = 'admin/newsletter/newsletter/index/$1';

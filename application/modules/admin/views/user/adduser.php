@@ -1,5 +1,10 @@
 <script src="<?=base_url('assets/ckeditor/ckeditor.js')?>"></script>
+<style>
+.hide_tr{
+  display:none;
+}
 
+</style>
 <h1><img src="<?=base_url('assets/imgs/admin-user.png')?>" class="header-img" style="margin-top:-3px;"> Add Customer</h1>
 <hr>
 <?php
@@ -49,6 +54,23 @@ if ($this->session->flashdata('result_publish')) {
             <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Date Added"><i class="fa fa-map-marker fa-fw"></i></label></td>
             <td><textarea name="address" rows="5" placeholder="Address" class="form-control"><?=@$_POST['address']?></textarea></td>
           </tr>
+
+<?php	
+	$this->db->where('status',1);
+	$query = $this->db->get('agent');
+	$agents = $query->result_array();
+?>
+
+          <tr>
+            <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Date Added"><i class="fa fa-calendar fa-fw"></i></label></td>
+            <td><select class="form-control" name="alocation_agent_id">
+              <option value="">Select Agent</option>
+              <?php foreach($agents as $agent_row){ ?>
+              <option value="<?php echo $agent_row['agent_id']; ?>" <?=isset($_POST['alocation_agent_id']) && $_POST['alocation_agent_id'] == $agent_row['agent_id'] ? 'selected' : ''?>><?php echo $agent_row['name']; ?></option>   
+              <?php } ?>           
+            </select></td>
+          </tr>
+
           <tr>
             <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></label></td>
             <td><input type="text"  id="ContactID" placeholder="Account reference ID" name="contactid" value="<?=@$_POST['contactid']?>" class="form-control"></td>
@@ -76,19 +98,20 @@ if ($this->session->flashdata('result_publish')) {
             <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Date Added"><i class="fa fa-money fa-fw"></i></label></td>
             <td><select class="form-control" name="userprice">
               <option value="">Select Price</option>
-              <option value="Price1" <?=isset($_POST['userprice']) && $_POST['userprice'] == 'Price1' ? 'selected' : ''?>>Price 1</option>
-              <option value="Price2" <?=isset($_POST['userprice']) && $_POST['userprice'] == 'Price2' ? 'selected' : ''?>>Price 2</option>
-              <option value="Price3" <?=isset($_POST['userprice']) && $_POST['userprice'] == 'Price3' ? 'selected' : ''?>>Price 3</option>
-              <option value="Price4" <?=isset($_POST['userprice']) && $_POST['userprice'] == 'Price4' ? 'selected' : ''?>>Price 4</option>
+              <option value="Price1" <?=isset($_POST['userprice']) && $_POST['userprice'] == 'Price1' ? 'selected' : ''?>>Guest Price</option>
+              <option value="Price2" <?=isset($_POST['userprice']) && $_POST['userprice'] == 'Price2' ? 'selected' : ''?>>Retailer Price</option>
+              <option value="Price3" <?=isset($_POST['userprice']) && $_POST['userprice'] == 'Price3' ? 'selected' : ''?>>Wholesaller Price</option>
+              <!-- <option value="Price4" <?=isset($_POST['userprice']) && $_POST['userprice'] == 'Price4' ? 'selected' : ''?>>Price 4</option> -->
             </select></td>
           </tr>
           <tr>
           <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Date Added"><i class="fa fa-users fa-fw"></i></label></td>
             <td>          
-            <select class="form-control" name="user_group">
+            <select class="form-control" name="user_group" id="user_group">
               <option value="">Select user group</option>
-              <option value="premiumuser" <?=isset($_POST['user_group']) && $_POST['user_group'] == 'premiumuser' ? 'selected' : ''?>>Premium user</option>
-              <option value="reguleruser" <?=isset($_POST['user_group']) && $_POST['user_group'] == 'reguleruser' ? 'selected' : ''?>>Reguler user</option>             
+              <option value="guest" <?=isset($_POST['user_group']) && $_POST['user_group'] == 'guest' ? 'selected' : ''?>>Guest</option>
+              <option value="retailer" <?=isset($_POST['user_group']) && $_POST['user_group'] == 'retailer' ? 'selected' : ''?>>Retailer</option>  
+              <option value="wholesaller" <?=isset($_POST['user_group']) && $_POST['user_group'] == 'wholesaller' ? 'selected' : ''?>>Wholesaller</option>             
             </select>
             <!-- <b>Premium User</b><input id="premiumusercheck" type="checkbox" value="1"  <?//=isset($_POST['premiumuser']) && $_POST['premiumuser'] == '1' ? 'checked="checked"' : ''?> style="margin-left: 5px;" name="premiumuser" /> -->
           </td>
@@ -97,14 +120,23 @@ if ($this->session->flashdata('result_publish')) {
             <td style="width: 1%;"></td>
             <td><b>Register Guest User</b><input id="guestusercheck" type="checkbox" value="1"  <?//=isset($_POST['guestuser']) && $_POST['guestuser'] == '1' ? 'checked="checked"' : ''?> style="margin-left: 5px;" name="guestuser" /></td>
           </tr> -->
-
-           <tr>
+          
+          <?php if(isset($_POST['coupan']) && $_POST['coupan'] == '1' && isset($_POST['id'])){ ?>
+           <tr id="tr_coupen">
+             <?php }else{ ?>
+              <tr id="tr_coupen" class="hide_tr">
+              <?php } ?>
             <td style="width: 1%;"></td>
-            <td><b>Coupan Code</b><input type="checkbox" value="1"  <?=isset($_POST['coupan']) && $_POST['coupan'] == '1' ? 'checked="checked"' : ''?> style="margin-left: 5px;" name="coupan" /></td>
+            <td><b>Coupan Code</b><input type="checkbox" id="coupen"  value="1"  <?=isset($_POST['coupan']) && $_POST['coupan'] == '1' ? 'checked="checked"' : ''?> style="margin-left: 5px;" name="coupan" /></td>
           </tr>
-           <tr>
+
+          <?php if(isset($_POST['credit']) && $_POST['credit'] == '1' && isset($_POST['id'])){ ?>
+           <tr id="tr_credit">
+             <?php }else{ ?>
+              <tr id="tr_credit" class="hide_tr">
+              <?php } ?>          
             <td style="width: 1%;"></td>
-            <td><b>Credit</b><input type="checkbox" value="1"  <?=isset($_POST['credit']) && $_POST['credit'] == '1' ? 'checked="checked"' : ''?> style="margin-left: 5px;" name="credit" /></td>
+            <td><b>Credit</b><input type="checkbox" id="credit" value="1"  <?=isset($_POST['credit']) && $_POST['credit'] == '1' ? 'checked="checked"' : ''?> style="margin-left: 5px;" name="credit" /></td>
           </tr>
 
 
@@ -567,6 +599,31 @@ $( document ).ready(function() {
   $('#guestusercheck').click(function() {
     $('#premiumusercheck').prop('checked', false);
   });
+
+  $("#user_group").change(function(){
+    var res=$(this).val(); 
+    
+    if(res==="guest"){
+      $("#coupen").prop("checked", false);
+      $("#credit").prop("checked", false);
+      $("#tr_coupen").addClass("hide_tr");
+      $("#tr_credit").addClass("hide_tr");            
+    }
+
+    if(res==="retailer"){
+      $("#coupen").prop("checked", true);
+      $("#credit").prop("checked", false);
+      $("#tr_coupen").removeClass("hide_tr");
+      $("#tr_credit").addClass("hide_tr"); 
+           
+    }
+    if(res==="wholesaller"){
+      $("#coupen").prop("checked", false);
+      $("#credit").prop("checked", true);
+      $("#tr_coupen").addClass("hide_tr");
+      $("#tr_credit").removeClass("hide_tr");   
+    }
+  });
 });
 
 
@@ -632,3 +689,6 @@ $( document ).ready(function() {
     });
 })(jQuery);
 </script>
+
+
+<?php $this->session->set_flashdata('result_publish', ''); ?>

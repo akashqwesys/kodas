@@ -87,15 +87,21 @@ class User_model extends CI_Model {
 
 	public function setProduct($post, $id = 0) {
 		
-		$post['premiumuser'] = 0;
-		$post['reguleruser'] = 0;
+		$post['guest'] = 0;
+		$post['retailer'] = 0;
+		$post['wholesaller'] = 0;
+		
+		// echo $post['alocation_agent_id'];die;
 
 		if (isset($post['user_group'])) {
-			if($post['user_group']=='premiumuser'){
-				$post['premiumuser'] = 1;
+			if($post['user_group']=='guest'){
+				$post['guest'] = 1;
 			}
-			if($post['user_group']=='reguleruser'){
-				$post['reguleruser'] = 1;
+			if($post['user_group']=='retailer'){
+				$post['retailer'] = 1;
+			}
+			if($post['user_group']=='wholesaller'){
+				$post['wholesaller'] = 1;
 			}
 		}		
 		if (!isset($post['credit'])) {
@@ -128,8 +134,10 @@ class User_model extends CI_Model {
 				'pviewcount' => $post['pviewcount'],
 				'isverified' => $post['isverified'],
 				'userprice' => $post['userprice'],
-				'premiumuser' => $post['premiumuser'],
-				'reguleruser' => $post['reguleruser'],				
+				'alocation_agent_id' => $post['alocation_agent_id'],
+				'guest' => $post['guest'],
+				'retailer' => $post['retailer'],
+				'wholesaller' => $post['wholesaller'],					
 				'businessname' => $post['businessname'],
 				'jobtitle' => $post['jobtitle'],
 				'credit' => $post['credit'],
@@ -179,8 +187,12 @@ class User_model extends CI_Model {
 				'pviewcount' => $post['pviewcount'],
 				'isverified' => 'true',
 				'userprice' => $post['userprice'],
-				'premiumuser' => $post['premiumuser'],
-				'reguleruser' => $post['reguleruser'],
+				'alocation_agent_id' => $post['alocation_agent_id'],
+				// 'premiumuser' => $post['premiumuser'],
+				// 'reguleruser' => $post['reguleruser'],
+				'guest' => $post['guest'],
+				'retailer' => $post['retailer'],
+				'wholesaller' => $post['wholesaller'],	
 				'businessname' => $post['businessname'],
 				'jobtitle' => $post['jobtitle'],
 				'credit' => $post['credit'],
@@ -439,7 +451,7 @@ class User_model extends CI_Model {
         $status = $params['status'];
         $table_id = $params['table_id'];
 
-		print_r($params);die;
+		// print_r($params);die;
         $query_res = $this->db->query("UPDATE $table SET $table_update_field = '$status' WHERE $table_where_field=$table_id");
         if ($query_res) {
             return true;

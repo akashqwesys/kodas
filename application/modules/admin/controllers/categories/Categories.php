@@ -60,7 +60,7 @@ class Categories extends ADMIN_Controller
             $edit_url=base_url('admin/editcategories/'). $datarow->id; 
             $delete_url=base_url('admin/deletecategories/'). $datarow->id;           
             $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
-            <a href="'.$delete_url.'" class="btn btn-xs btn-warning">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>';
+            <a href="'.$delete_url.'" class="btn btn-xs btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>';
             $no++;
             $row = array();
             $row[] = $no;
@@ -126,7 +126,11 @@ class Categories extends ADMIN_Controller
         if (!in_array('editcategories', $adminid)) {
             redirect('admin');
         }           
-        if (isset($_POST['submit'])) {            
+        if (isset($_POST['submit'])) { 
+            
+            $_POST['image'] = $this->uploadImage();
+			$_POST['webimage'] = $this->uploadImage('website');
+            
             $res=$this->Categoriesdt_model->editCategories($_POST);
             if ($res) {
                 $this->session->set_flashdata('edit_categories', 'Update Categories Successfully!');
@@ -138,7 +142,7 @@ class Categories extends ADMIN_Controller
             }
         }             
         $data = array();       
-        $data['categories_result']=$this->Categoriesdt_model->get_categories_details($id);
+        $data['result']=$this->Categoriesdt_model->get_categories_details($id);
 
         $head = array();
         $head['title'] = 'Administration - Edit Categories';

@@ -212,7 +212,7 @@ class Products_model extends CI_Model {
 				'price1' => $post['price1'],
 				'price2' => $post['price2'],
 				'price3' => $post['price3'],
-				'price4' => $post['price4'],
+				// 'price4' => $post['price4'],
 				'position' => $post['position'],
 				'virtual_products' => $post['virtual_products'],
 				'brand_id' => $post['brand_id'],
@@ -351,9 +351,9 @@ class Products_model extends CI_Model {
 				$emergency_insert = true;
 			}
 			$post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
-			$post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
-			$post['price'][$i] = str_replace(',', '.', $post['price'][$i]);
-			$post['price'][$i] = preg_replace("/[^0-9,.]/", "", $post['price'][$i]);
+			// $post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
+			// $post['price'][$i] = str_replace(',', '.', $post['price'][$i]);
+			// $post['price'][$i] = preg_replace("/[^0-9,.]/", "", $post['price'][$i]);
 			$post['old_price'][$i] = str_replace(' ', '', $post['old_price'][$i]);
 			$post['old_price'][$i] = str_replace(',', '.', $post['old_price'][$i]);
 			$post['old_price'][$i] = preg_replace("/[^0-9,.]/", "", $post['old_price'][$i]);
@@ -361,7 +361,7 @@ class Products_model extends CI_Model {
 				'title' => $post['title'][$i],
 				'basic_description' => $post['basic_description'][$i],
 				'description' => $post['description'][$i],
-				'price' => $post['price'][$i],
+				// 'price' => $post['price'][$i],
 				'old_price' => $post['old_price'][$i],
 				'abbr' => $abbr,
 				'for_id' => $id,

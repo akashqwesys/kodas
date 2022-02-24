@@ -211,40 +211,41 @@ class Adduser extends ADMIN_Controller {
 			$fp = fopen($_FILES['csvfile']['tmp_name'], 'r') or die("can't open file");
 			$skip = 0;
 			while (($line = fgetcsv($fp)) !== FALSE) {
+				// print_r($line);die;
 				if ($skip == 0) {
 					$skip++;
 				} else {
-					$getpremium = str_replace('"', '', strtolower("$line[7]"));
-					$getcoupan = str_replace('"', '', strtolower("$line[8]"));
-					$getcredit = str_replace('"', '', strtolower("$line[9]"));
-					if ($getpremium == 'yes') {
-						$premium = 1;
-					} else {
-						$premium = 0;
-					}
-					if ($getcoupan == 'yes') {
-						$coupan = 1;
-					} else {
-						$coupan = 0;
-					}
-					if ($getcredit == 'yes') {
-						$credit = 1;
-					} else {
-						$credit = 0;
-					}
+					// $getpremium = str_replace('"', '', strtolower("$line[7]"));
+					// $getcoupan = str_replace('"', '', strtolower("$line[8]"));
+					// $getcredit = str_replace('"', '', strtolower("$line[9]"));
+					// if ($getpremium == 'yes') {
+					// 	$premium = 1;
+					// } else {
+					// 	$premium = 0;
+					// }
+					// if ($getcoupan == 'yes') {
+					// 	$coupan = 1;
+					// } else {
+					// 	$coupan = 0;
+					// }
+					// if ($getcredit == 'yes') {
+					// 	$credit = 1;
+					// } else {
+					// 	$credit = 0;
+					// }
 					$data = array(
 						'name' => str_replace('"', '', $line[0]),
-						'mobilenumber' => str_replace('"', '', $line[1]),
-						'emailid' => str_replace('"', '', $line[2]),
-						'address' => str_replace('"', '', $line[3]),
-						'gstin' => str_replace('"', '', $line[4]),
-						'businessname' => str_replace('"', '', $line[5]),
-						'jobtitle' => str_replace('"', '', $line[6]),
-						'isverified' => "true",
-						'premiumuser' => $premium,
-						'credit' => $credit,
-						'coupan' => $coupan,
-						'pviewcount' => 500,
+						'ac_type' => str_replace('"', '', $line[1]),
+						'city' => str_replace('"', '', $line[2]),
+						'broker' => str_replace('"', '', $line[3]),
+						'whatsapp' => str_replace('"', '', $line[4]),
+						'mobilenumber' => str_replace('"', '', $line[5]),
+						'phone_2' => str_replace('"', '', $line[6]),
+						'emailid' => str_replace('"', '', $line[7]),
+						'sms_no' => str_replace('"', '', $line[8]),											
+						'gstin' => str_replace('"', '', $line[9]),
+						'guest' => 1,	
+						'isverified' => 'true'			
 					);
 
 					$querymobile = $this->db->get_where('user_app', array('mobilenumber' => $data['mobilenumber']));

@@ -105,12 +105,24 @@ class Categoriesdt_model extends CI_Model
     }
     public function editCategories($post)
     {
+        $data=array();
+        if($post['image']!=''){
+            $data['catimg'] = $post['image'];           
+        }
+        if($post['webimage']!=''){
+            $data['websiteimg'] = $post['webimage'];           
+        }     
+        $data['position']=$post['position'];        
+        $data['dateandtime']=time();
         $this->db->where('id', $post['id']);
-        $res = $this->db->update('shop_categories', array(
-            'title' => $post['title'],
-            'sort_order' => $post['sort_order'],                 
-            'status' => $post['status']
+        $res = $this->db->update('shop_categories',$data);
+
+
+        $this->db->where('for_id', $post['id']);
+        $res = $this->db->update('shop_categories_translations', array(
+            'name' => $post['name']
         ));
+
         if ($res) {
             return true;
         } else {
@@ -133,7 +145,11 @@ class Categoriesdt_model extends CI_Model
 
     public function get_categories_details($id)
     {
-        $this->db->where('id', $id);
+       
+
+        $this->db->select('shop_categories.*,shop_categories_translations.name');               
+        $this->db->join('shop_categories_translations', 'shop_categories_translations.for_id = shop_categories.id', 'left');
+        $this->db->where('shop_categories.id', $id);
         $query = $this->db->get('shop_categories');
         return $query->row_array();
     }

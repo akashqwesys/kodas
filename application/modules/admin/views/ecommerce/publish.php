@@ -74,45 +74,48 @@ foreach ($languages as $language) {
       <div class="form-group">
         <label for="basic_description<?=$i?>">Slider Description </label>
         <textarea name="basic_description[]" id="basic_description<?=$i?>" rows="50" class="form-control"><?=$trans_load != null && isset($trans_load[$language->abbr]['basic_description']) ? $trans_load[$language->abbr]['basic_description'] : ''?>
-</textarea>
+      </textarea>
         <script>
                         CKEDITOR.replace('basic_description<?=$i?>');
                         CKEDITOR.config.entities = false;
                     </script>
       </div>
     </div>
+
+
+    <div class="row">
+    	<!-- <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
+        <label>Price (Unassign)</label>
+        <input type="text" name="price[]" required placeholder="without currency at the end" value="<?=$trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : ''?>" class="form-control">
+      </div> -->
+    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
+      <label>Guest </label>
+      <input type="text" name="price1" required placeholder="without currency at the end" value="<?=@$_POST['price1']?>" class="form-control">
+    </div>
+    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
+      <label>Retailer </label>
+      <input type="text" name="price2" required placeholder="without currency at the end" value="<?=@$_POST['price2']?>" class="form-control">
+    </div>
+    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
+      <label>Wholesaller </label>
+      <input type="text" name="price3" required placeholder="without currency at the end" value="<?=@$_POST['price3']?>" class="form-control">
+    </div>
+    <!-- <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
+      <label>Price 4 </label>
+      <input type="text" name="price4" required placeholder="without currency at the end" value="<?=@$_POST['price4']?>" class="form-control">
+    </div> -->
+    </div>
+
     <div class="form-group">
       <label for="description<?=$i?>">Description </label>
       <textarea name="description[]" id="description<?=$i?>" required rows="50" class="form-control"><?=$trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : ''?>
-</textarea>
+      </textarea>
       <script>
                     CKEDITOR.replace('description<?=$i?>');
                     CKEDITOR.config.entities = false;
                 </script>
     </div>
-    <div class="row">
-    	<div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Price (Unassign)</label>
-      <input type="text" name="price[]" required placeholder="without currency at the end" value="<?=$trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : ''?>" class="form-control">
-    </div>
-    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Price 1 </label>
-      <input type="text" name="price1" required placeholder="without currency at the end" value="<?=@$_POST['price1']?>" class="form-control">
-    </div>
-    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Price 2 </label>
-      <input type="text" name="price2" required placeholder="without currency at the end" value="<?=@$_POST['price2']?>" class="form-control">
-    </div>
-    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Price 3 </label>
-      <input type="text" name="price3" required placeholder="without currency at the end" value="<?=@$_POST['price3']?>" class="form-control">
-    </div>
-    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Price 4 </label>
-      <input type="text" name="price4" required placeholder="without currency at the end" value="<?=@$_POST['price4']?>" class="form-control">
-    </div>
-    </div>
-
+    
     <div class="form-group for-shop">
       <?php /*?><label>Old Price </label><?php */?>
       <input type="hidden" name="old_price[]" placeholder="without currency at the end" value="<?=$trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : ''?>" class="form-control">
@@ -141,6 +144,14 @@ if (isset($_POST['image']) && $_POST['image'] != null) {
 ?>
     <label for="userfile">Cover Image</label>
     <input type="file" id="userfile" name="userfile">
+  </div>
+
+  <div class="form-group bordered-group">
+    <div class="others-images-container">
+      <?=$otherImgs?>
+    </div>
+    <?php /*?><a href="javascript:void(0);" data-toggle="modal" data-target="#modalMoreImages" class="btn btn-default">Upload more images</a><?php */?>
+    <a href="javascript:void(0);" data-toggle="modal" data-target="#modalMorePdf" class="btn btn-default">Upload PDF File</a> 
   </div>
 
 
@@ -417,9 +428,9 @@ if (isset($_POST['productviewtype'])) {
   </div> -->
 
   <div class="form-group for-shop">
-      <div class="checkbox-inline"><label for="premiumuser"><input <?php if (in_array("premiumuser", $productviewtype)) {echo 'checked';}?> id="premiumuser" type="checkbox" name="productviewtype[]" value="premiumuser" />Premium User</label></div>
-      <div class="checkbox-inline"><label for="reguleruser"><input <?php if (in_array("reguleruser", $productviewtype)) {echo 'checked';}?> id="reguleruser" type="checkbox" name="productviewtype[]" value="reguleruser" />Reguler User</label></div>
-      <div class="checkbox-inline"><label for="guestuser"><input <?php if (in_array("guestuser", $productviewtype)) {echo 'checked';}?> id="guestuser" type="checkbox" name="productviewtype[]" value="guestuser"/>Guest User</label></div>
+      <div class="checkbox-inline"><label for="guest"><input <?php if (in_array("guest", $productviewtype)) {echo 'checked';}?> id="guest" type="checkbox" name="productviewtype[]" value="guest" />Guest</label></div>
+      <div class="checkbox-inline"><label for="retailer"><input <?php if (in_array("retailer", $productviewtype)) {echo 'checked';}?> id="retailer" type="checkbox" name="productviewtype[]" value="retailer" />Retailer</label></div>
+      <div class="checkbox-inline"><label for="wholesaller"><input <?php if (in_array("wholesaller", $productviewtype)) {echo 'checked';}?> id="wholesaller" type="checkbox" name="productviewtype[]" value="wholesaller"/>Wholesaller</label></div>
   </div>
 
 
