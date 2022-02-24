@@ -190,7 +190,7 @@ foreach ($userlist as $row) {
         $class="btn-danger";
         $status='false';
     }
-    if($row->isverified=='false' || $row->isverified==0){
+    if($row->isverified=='false' || $row->isverified===0){
         $str='Active';
         $class="btn-success";
         $status='true';
