@@ -1,5 +1,6 @@
 {
     "require": {
-        "phpoffice/phpspreadsheet": "^1.21"
+        "phpoffice/phpspreadsheet": "^1.21",
+        "idrsolutions/idrsolutions-php-client": "^5.1"
     }
 }

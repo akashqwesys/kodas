@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fba1ee1c7f0cb47cf13cc3ff6cbfc62f",
+    "content-hash": "5dc1e7ec49af949415d497741384fd34",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -56,6 +56,62 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.14.0"
             },
             "time": "2021-12-25T01:21:49+00:00"
+        },
+        {
+            "name": "idrsolutions/idrsolutions-php-client",
+            "version": "v5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/idrsolutions/idrsolutions-php-client.git",
+                "reference": "7eff9fcc5e7f5e320b8f53005ef35fbf1688fe50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/idrsolutions/idrsolutions-php-client/zipball/7eff9fcc5e7f5e320b8f53005ef35fbf1688fe50",
+                "reference": "7eff9fcc5e7f5e320b8f53005ef35fbf1688fe50",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "IDRsolutions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "IDRsolutions (https://www.idrsolutions.com)"
+                }
+            ],
+            "description": "IDRSolutions PHP Client is the PHP API for IDRsolutions' BuildVu or JPedal Microservice Example",
+            "keywords": [
+                "HTML5",
+                "Microservice",
+                "api",
+                "application",
+                "buildvu",
+                "client",
+                "converter",
+                "example",
+                "idrsolutions",
+                "images",
+                "jpedal",
+                "pdf",
+                "php",
+                "server",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/idrsolutions/idrsolutions-php-client/issues",
+                "source": "https://github.com/idrsolutions/idrsolutions-php-client/tree/v5.1.0"
+            },
+            "time": "2021-09-09T09:28:35+00:00"
         },
         {
             "name": "maennchen/zipstream-php",

@@ -237,12 +237,17 @@ $route['admin/active-inactive-categories'] = 'admin/categories/categories/approv
 $route['admin/removeimg'] = 'admin/ecommerce/Publish/removeimg';
 $route['admin/removeaddress'] = 'admin/user/Adduser/removeaddress';
 
-
 $route['admin/listattributesgroup'] = 'admin/attributesgroup/attributesgroup';
 $route['admin/get-attributesgroup-list'] = 'admin/attributesgroup/attributesgroup/attributesgroup_list';
 $route['admin/addattributesgroup'] = 'admin/attributesgroup/attributesgroup/add_attributesgroup';
 $route['admin/editattributesgroup/(:num)'] = 'admin/attributesgroup/attributesgroup/edit_attributesgroup/$1';
 $route['admin/active-inactive-attributesgroup'] = 'admin/attributesgroup/attributesgroup/approve_status';
+
+$route['admin/listcoupan'] = 'admin/coupan/coupan';
+$route['admin/get-coupan-list'] = 'admin/coupan/coupan/coupan_list';
+$route['admin/addcoupan'] = 'admin/coupan/coupan/add_coupan';
+$route['admin/editcoupan/(:num)'] = 'admin/coupan/coupan/edit_coupan/$1';
+$route['admin/active-inactive-coupan'] = 'admin/coupan/coupan/approve_status';
 
 $route['admin/listpackagingtype'] = 'admin/packagingtype/packagingtype';
 $route['admin/get-packagingtype-list'] = 'admin/packagingtype/packagingtype/packagingtype_list';
@@ -334,7 +339,7 @@ $route['admin/addbulkagent'] = 'admin/agent/agent/addbulkagent';
 
 $route['admin/newsletter'] = 'admin/newsletter/newsletter';
 $route['admin/newsletter/(:num)'] = 'admin/newsletter/newsletter/index/$1';
-
+$route['admin/get-newsletter-list'] = 'admin/newsletter/newsletter/newsletter_list';
 
 
 $route['admin/viewchatagent/(:num)'] = 'admin/agent/viewchat/index/$1';
@@ -376,10 +381,10 @@ $route['admin/listrefund'] = 'admin/refund/listrefund';
 $route['admin/listrefund/(:num)'] = 'admin/refund/listrefund/index/$1';
 
 // Coupan
-$route['admin/addcoupan'] = 'admin/coupan/addcoupan';
-$route['admin/addcoupan/(:num)'] = 'admin/coupan/addcoupan/index/$1';
-$route['admin/addcoupan/add'] = 'admin/coupan/addcoupan/add';
-$route['admin/addcoupan/add/(:num)'] = 'admin/coupan/addcoupan/add/$1';
+// $route['admin/addcoupan'] = 'admin/coupan/addcoupan';
+// $route['admin/addcoupan/(:num)'] = 'admin/coupan/addcoupan/index/$1';
+// $route['admin/addcoupan/add'] = 'admin/coupan/addcoupan/add';
+// $route['admin/addcoupan/add/(:num)'] = 'admin/coupan/addcoupan/add/$1';
 
 // SETTINGS GROUP
 $route['admin/settings'] = 'admin/settings/settings';

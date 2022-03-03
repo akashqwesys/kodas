@@ -22,6 +22,20 @@ if ($this->session->flashdata('edit_categories')) {
 <?php
 }
 ?>
+<?php
+if ($this->session->flashdata('result_delete')) {
+?>
+  <hr>
+  <div class="alert alert-success">
+    <?= $this->session->flashdata('result_delete') ?>
+  </div>
+  <hr>
+<?php
+}
+?>
+
+
+
   <h1>Categories <a href="<?= base_url('admin/addcategories'); ?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add Category</a></h1>
   <hr>  
   <div class="row">
@@ -43,3 +57,4 @@ if ($this->session->flashdata('edit_categories')) {
 </div>
 <?php $this->session->set_flashdata('add_categories', ''); ?>
 <?php $this->session->set_flashdata('edit_categories', ''); ?>
+<?php $this->session->set_flashdata('result_delete', ''); ?>

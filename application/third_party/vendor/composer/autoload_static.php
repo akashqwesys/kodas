@@ -32,6 +32,10 @@ class ComposerStaticInit923999aa44bfd7038bf90ca34cf9f40b
             'MyCLabs\\Enum\\' => 13,
             'Matrix\\' => 7,
         ),
+        'I' => 
+        array (
+            'IDRsolutions\\' => 13,
+        ),
         'C' => 
         array (
             'Complex\\' => 8,
@@ -53,8 +57,8 @@ class ComposerStaticInit923999aa44bfd7038bf90ca34cf9f40b
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -71,6 +75,10 @@ class ComposerStaticInit923999aa44bfd7038bf90ca34cf9f40b
         'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
+        ),
+        'IDRsolutions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/idrsolutions/idrsolutions-php-client/src',
         ),
         'Complex\\' => 
         array (

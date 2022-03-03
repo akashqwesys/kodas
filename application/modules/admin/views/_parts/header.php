@@ -404,9 +404,9 @@ $colorscount = $this->db->count_all_results('wpn_chatmessenger1');
                                         in_array('delcoupan', $adminid)
                                     ) { ?>
                                      <li><a href="<?= base_url(
-                                         'admin/addcoupan'
+                                         'admin/listcoupan'
                                      ) ?>" <?= urldecode(uri_string()) ==
-'admin/addcoupan'
+'admin/listcoupan'
     ? 'class="active"'
     : '' ?>><i class="fa fa-gift" aria-hidden="true"></i> Coupon </a></li>
                                      <?php } ?>

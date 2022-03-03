@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => 'f8a793b80e46684a3794003649f1364e8b2f7eb0',
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => 'f8a793b80e46684a3794003649f1364e8b2f7eb0',
             'dev_requirement' => false,
         ),
         'ezyang/htmlpurifier' => array(
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../ezyang/htmlpurifier',
             'aliases' => array(),
             'reference' => '12ab42bd6e742c70c0a52f7b82477fcd44e64b75',
+            'dev_requirement' => false,
+        ),
+        'idrsolutions/idrsolutions-php-client' => array(
+            'pretty_version' => 'v5.1.0',
+            'version' => '5.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../idrsolutions/idrsolutions-php-client',
+            'aliases' => array(),
+            'reference' => '7eff9fcc5e7f5e320b8f53005ef35fbf1688fe50',
             'dev_requirement' => false,
         ),
         'maennchen/zipstream-php' => array(

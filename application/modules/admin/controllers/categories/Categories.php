@@ -27,7 +27,17 @@ class Categories extends ADMIN_Controller
         }
         if (!in_array('editcategories', $adminid)) {
             redirect('admin');
-        }                    
+        }
+        
+        
+        if (isset($_GET['delete'])) {
+			if (!in_array('deletecategories', $adminid)) {redirect('admin');}
+			$this->Categoriesdt_model->deleteCategories($_GET['delete']);
+			$this->session->set_flashdata('result_delete', 'Category is deleted!');
+			$this->saveHistory('Delete category id - ' . $_GET['delete']);
+			redirect('admin/listcategories');
+		}
+
         $data = array();
         $head = array();
         $head['title'] = 'List-Categories';
@@ -58,7 +68,7 @@ class Categories extends ADMIN_Controller
         foreach ($list as $datarow) {    
                        
             $edit_url=base_url('admin/editcategories/'). $datarow->id; 
-            $delete_url=base_url('admin/deletecategories/'). $datarow->id;           
+            $delete_url=base_url('admin/listcategories?delete='). $datarow->id;           
             $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>
             <a href="'.$delete_url.'" class="btn btn-xs btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>';
             $no++;

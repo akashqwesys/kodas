@@ -4,7 +4,7 @@ class Categoriesdt_model extends CI_Model
     var $table = 'shop_categories';
     var $column_order = array(null,'shop_categories_translations.name','shop_categories.position'); //set column field database for datatable orderable
     var $column_search = array('shop_categories_translations.name','shop_categories.position'); //set column field database for datatable searchable 
-    var $order = array('id' => 'desc'); // default order 
+    var $order = array('shop_categories.id' => 'desc'); // default order 
 
     public function __construct()
     {
@@ -157,5 +157,17 @@ class Categoriesdt_model extends CI_Model
     {        
         $query = $this->db->get('categories');
         return $query->result_array();
+    }
+
+    public function deleteCategories($id)
+    {            
+        $this->db->where('id', $id);
+		if (!$this->db->delete('shop_categories')) {
+			log_message('error', print_r($this->db->error(), true));
+		}
+        $this->db->where('for_id', $id);
+		if (!$this->db->delete('shop_categories_translations')) {
+			log_message('error', print_r($this->db->error(), true));
+		}
     }
 }

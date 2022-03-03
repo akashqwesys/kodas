@@ -7,7 +7,6 @@
 if (!defined('BASEPATH')) {
 	exit('No direct script access allowed');
 }
-
 class Publish extends ADMIN_Controller {
 
 	public function __construct() {
@@ -19,7 +18,7 @@ class Publish extends ADMIN_Controller {
 			'Categories_model',
 			'Attribute_model',
 		));
-		$this->load->library('Compress');
+		$this->load->library('Compress');	
 	}
 
 	public function index($id = 0) {
@@ -74,7 +73,7 @@ class Publish extends ADMIN_Controller {
 
 		// echo $this->loadOthersImages();die;
 
-		$data['otherImgs'] = $this->loadOthersImages();
+		$data['loadpdfimages'] = $this->loadOthersImages();
 		
 		$this->load->view('_parts/header', $head);
 		$this->load->view('ecommerce/publish', $data);
@@ -147,6 +146,7 @@ class Publish extends ADMIN_Controller {
 	*/
 
 	public function do_upload_others_images() {
+		
 		if ($this->input->is_ajax_request()) {
 			$upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
 			if (!file_exists($upath)) {
@@ -179,9 +179,9 @@ class Publish extends ADMIN_Controller {
 			$upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
 			if (!file_exists($upath)) {
 				mkdir($upath, 0777);
-			}
+			}			
 
-			$output_dir = $upath;
+			$output_dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
 			ini_set("display_errors", 1);
 			if (isset($_FILES["pdffile"])) {
 				$RandomNum = time();
@@ -192,13 +192,7 @@ class Publish extends ADMIN_Controller {
 
 				$ImageExt = substr($ImageName, strrpos($ImageName, '.'));
 				$ImageExt = str_replace('.', '', $ImageExt);
-
-				if ($ImageExt != "pdf") {
-					$message = "Invalid file format only <b>\"PDF\"</b> allowed.";
-				} else {
-					$ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
-					$NewImageName = $ImageName . '-' . $RandomNum . '.' . $ImageExt;
-					move_uploaded_file($_FILES["pdffile"]["tmp_name"], $output_dir . $NewImageName);
+			
 					$location = __DIR__;
 					$name = $output_dir . $NewImageName;
 					$num = $this->count_pages($name);
@@ -206,6 +200,8 @@ class Publish extends ADMIN_Controller {
 					$nameto = $output_dir . $RandomNum . ".jpg";
 					$location . " " . $convert = $location . " " . $name . " " . $nameto;
 					exec("convert " . $convert);
+
+					// echo $_POST['folder'];die;
 
 					for ($i = 0; $i < $num; $i++) {
 						$nameto = $RandomNum . '-' . $i . ".jpg";
@@ -222,8 +218,8 @@ class Publish extends ADMIN_Controller {
 						$compress->destination = $destination;
 						$compress->compress_image();
 					}
-					//$pdffiledelete = $_SERVER['DOCUMENT_ROOT'].'/attachments/shop_images/'.$_POST['folder'].'/'.$NewImageName;
-					//unlink($pdffiledelete);
+					// $pdffiledelete = $_SERVER['DOCUMENT_ROOT'].'/attachments/shop_images/'.$_POST['folder'].'/'.$NewImageName;
+					// unlink($pdffiledelete);
 				}
 			}
 		}

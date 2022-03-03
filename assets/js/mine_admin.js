@@ -419,7 +419,6 @@ $('.saveEditAttribute').click(function() {
     });
 });
 
-
 $('.editAttributeSub').click(function() {
     var position = $(this).position();
     var subForId = $(this).data('sub-for-id');

@@ -148,7 +148,7 @@ if (isset($_POST['image']) && $_POST['image'] != null) {
 
   <div class="form-group bordered-group">
     <div class="others-images-container">
-      <?=$otherImgs?>
+      <?=$loadpdfimages?> 
     </div>
     <?php /*?><a href="javascript:void(0);" data-toggle="modal" data-target="#modalMoreImages" class="btn btn-default">Upload more images</a><?php */?>
     <a href="javascript:void(0);" data-toggle="modal" data-target="#modalMorePdf" class="btn btn-default">Upload PDF File</a> 

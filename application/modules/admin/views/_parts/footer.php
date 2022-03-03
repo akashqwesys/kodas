@@ -139,6 +139,7 @@
 <?php $this->load->view('attributesgroup/attributesgroup_js'); ?>
 <?php $this->load->view('packagingtype/packagingtype_js'); ?>
 <?php $this->load->view('shareproduct/shareproduct_js'); ?>
-
+<?php $this->load->view('newsletter/subscriber_js'); ?>
+<?php $this->load->view('coupan/coupan_js'); ?>
 </body>
 </html>
