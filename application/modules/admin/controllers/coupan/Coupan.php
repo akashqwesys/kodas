@@ -70,6 +70,11 @@ class Coupan extends ADMIN_Controller
                 $class="btn-success";
                 $status=1;
             }
+            if($datarow->discounttype=="Percentage"){
+                $str_p='%';
+            }else{
+                $str_p='';
+            }
             $edit_url=base_url('admin/editcoupan/'). $datarow->id;           
             $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>             
             <button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->id . '" data-status="' . $status . '" data-table="coupan" data-wherefield="id" data-updatefield="isactive" data-module="coupan">'.$str.'</button>';
@@ -80,7 +85,7 @@ class Coupan extends ADMIN_Controller
             $row[] = $datarow->code; 
             $row[]=$datarow->codelimit; 
             $row[]=date('d-m-Y', $datarow->enddate); 
-            $row[]=$datarow->discount;
+            $row[]=$datarow->discount.$str_p;
             $row[]=$datarow->discounttype;               
             $row[]=$active_inactive_badge;                          
             $row[]=$actionBtn;               
@@ -110,7 +115,7 @@ class Coupan extends ADMIN_Controller
             $res=$this->Coupan_model->addCoupan($_POST);
             if ($res) {
                 $this->session->set_flashdata('add_coupan', 'Create Coupan Successfully!');
-                $this->saveHistory('Success create Attribute group');  
+                $this->saveHistory('Success create Coupan');  
                 redirect('admin/listcoupan');              
             }else{
                 $this->session->set_flashdata('add_coupan', 'somthing happen wrong!');
@@ -142,12 +147,12 @@ class Coupan extends ADMIN_Controller
         if (isset($_POST['submit'])) {            
             $res=$this->Coupan_model->editCoupan($_POST);
             if ($res) {
-                $this->session->set_flashdata('edit_coupan', 'Update Attribute group Successfully!');
-                $this->saveHistory('Success update Attribute group');  
+                $this->session->set_flashdata('edit_coupan', 'Update Coupon Successfully!');
+                $this->saveHistory('Success update Coupon');  
                 redirect('admin/listcoupan');              
             }else{
                 $this->session->set_flashdata('edit_coupan', 'somthing happen wrong!');
-                $this->saveHistory('Failed update Attribute group');    
+                $this->saveHistory('Failed update Coupon');    
             }
         }             
         $data = array();        
@@ -159,7 +164,7 @@ class Coupan extends ADMIN_Controller
         $this->load->view('_parts/header', $head);
         $this->load->view('coupan/editcoupan', $data);
         $this->load->view('_parts/footer');
-        $this->saveHistory('Go to Edit Attribute group');
+        $this->saveHistory('Go to Edit Coupan');
     }
 
     public function approve_status() {        

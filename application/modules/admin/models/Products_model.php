@@ -167,12 +167,25 @@ class Products_model extends CI_Model {
 				}
 			}
 
+			$this->db->where('productid', $id);
+			$this->db->delete('productcat');
 			foreach ($post['shop_categorie'] as $key => $value) {
 				if (!empty($value[0])) {
 					$this->db->insert('productcat', array(
 						'productid' => $id,
 						'catid' => $value,
 						'timeanddate' => time(),
+					));
+				}
+			}
+
+			$this->db->where('refProductId', $id);
+			$this->db->delete('connproduct');	
+			foreach ($post['connectedProduct'] as $key => $value) {
+				if (!empty($value[0])) {
+					$this->db->insert('connproduct', array(
+						'refProductId' => $id,
+						'connProductId' => $value						
 					));
 				}
 			}
@@ -200,10 +213,11 @@ class Products_model extends CI_Model {
 			// }
 			isset($_POST['old_image']) ? $oldimg = $_POST['old_image'] : $oldimg = '';
 			if (!$this->db->where('id', $id)->update('products', array(
+				'designNo' => $post['designNo'],
 				'image' => $post['image'] != null ? $_POST['image'] : $oldimg,
 				// 'shop_categorie' => $post['shop_categorie'],
 				'quantity' => $post['quantity'],
-				'product_type' => $post['product_type'],
+				// 'product_type' => $post['product_type'],
 				'product_pcs' => $post['product_pcs'],
 				'refPackagingtype_id' => $post['refPackagingtype_id'],
 				'min_qty' => $post['min_qty'],
@@ -212,13 +226,16 @@ class Products_model extends CI_Model {
 				'price1' => $post['price1'],
 				'price2' => $post['price2'],
 				'price3' => $post['price3'],
+				'theli_price1' => $post['theli_price1'],
+				'theli_price2' => $post['theli_price2'],
+				'theli_price3' => $post['theli_price3'],
 				// 'price4' => $post['price4'],
 				'position' => $post['position'],
 				'virtual_products' => $post['virtual_products'],
 				'brand_id' => $post['brand_id'],
 				'productviewtype' => implode(',', $post['productviewtype']),
 				'productoffertype' => implode(',', $post['productoffertype']),
-				'time_update' => time(),
+				'time_update' => time()
 			))) {
 				log_message('error', print_r($this->db->error(), true));
 			}
@@ -244,10 +261,12 @@ class Products_model extends CI_Model {
 				$i++;
 			}
 			if (!$this->db->insert('products', array(
+				
+				'designNo' => $post['designNo'],
 				'image' => $post['image'],
 				// 'shop_categorie' => $post['shop_categorie'],
 				'quantity' => $post['quantity'],
-				'product_type' => $post['product_type'],
+				// 'product_type' => $post['product_type'],
 				'product_pcs' => $post['product_pcs'],
 				'refPackagingtype_id' => $post['refPackagingtype_id'],
 				'min_qty' => $post['min_qty'],
@@ -256,14 +275,17 @@ class Products_model extends CI_Model {
 				'price1' => $post['price1'],
 				'price2' => $post['price2'],
 				'price3' => $post['price3'],
-				'price4' => $post['price4'],
+				'theli_price1' => $post['theli_price1'],
+				'theli_price2' => $post['theli_price2'],
+				'theli_price3' => $post['theli_price3'],
+				// 'price4' => $post['price4'],
 				'position' => $post['position'],
 				'virtual_products' => $post['virtual_products'],
 				'folder' => $post['folder'],
 				'brand_id' => $post['brand_id'],
 				'productviewtype' => implode(',', $post['productviewtype']),
 				'productoffertype' => implode(',', $post['productoffertype']),
-				'time' => time(),
+				'time' => time()
 			))) {
 				log_message('error', print_r($this->db->error(), true));
 			}
@@ -284,15 +306,15 @@ class Products_model extends CI_Model {
 
 
 			$this->sendproductnotification('New product added ' . $post['title'][0], $post['image'], $id);
-			foreach ($post['shop_attribute'] as $key => $value) {
-				if (!empty($value[0])) {
-					$this->db->insert('product_attribute', array(
-						'productid' => $id,
-						'keyid' => $key,
-						'valueid' => $value[0],
-					));
-				}
-			}
+			// foreach ($post['shop_attribute'] as $key => $value) {
+			// 	if (!empty($value[0])) {
+			// 		$this->db->insert('product_attribute', array(
+			// 			'productid' => $id,
+			// 			'keyid' => $key,
+			// 			'valueid' => $value[0],
+			// 		));
+			// 	}
+			// }
 				
 			$this->db->where('refProduct_id', $id);
 			$this->db->delete('product_attribute1');
@@ -307,12 +329,25 @@ class Products_model extends CI_Model {
 			}
 
 
+			$this->db->where('productid', $id);
+			$this->db->delete('productcat');
 			foreach ($post['shop_categorie'] as $key => $value) {
 				if (!empty($value[0])) {
 					$this->db->insert('productcat', array(
 						'productid' => $id,
 						'catid' => $value,
 						'timeanddate' => time(),
+					));
+				}
+			}
+
+			$this->db->where('refProductId', $id);
+			$this->db->delete('connproduct');
+			foreach ($post['connectedProduct'] as $key => $value) {
+				if (!empty($value[0])) {
+					$this->db->insert('connproduct', array(
+						'refProductId' => $id,
+						'connProductId' => $value						
 					));
 				}
 			}
@@ -339,7 +374,12 @@ class Products_model extends CI_Model {
 		return true;
 	}
 
-	
+	public function getConnProducts() {		
+		$this->db->select('products.id as p_id,products_translations.*');	
+		$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');	
+		$result = $this->db->get('products');		
+		return $result->result_array();
+	}
 
 	private function setProductTranslation($post, $id, $is_update) {
 		$i = 0;
@@ -359,6 +399,7 @@ class Products_model extends CI_Model {
 			$post['old_price'][$i] = preg_replace("/[^0-9,.]/", "", $post['old_price'][$i]);
 			$arr = array(
 				'title' => $post['title'][$i],
+				'theli_title' => $post['theli_title'][$i],
 				'basic_description' => $post['basic_description'][$i],
 				'description' => $post['description'][$i],
 				// 'price' => $post['price'][$i],
@@ -387,6 +428,7 @@ class Products_model extends CI_Model {
 		$arr = array();
 		foreach ($query->result() as $row) {
 			$arr[$row->abbr]['title'] = $row->title;
+			$arr[$row->abbr]['theli_title'] = $row->theli_title;
 			$arr[$row->abbr]['basic_description'] = $row->basic_description;
 			$arr[$row->abbr]['description'] = $row->description;
 			$arr[$row->abbr]['price'] = $row->price;
@@ -405,6 +447,17 @@ class Products_model extends CI_Model {
 		}
 		return $arr;
 	}
+	public function getMultiConnProduct($id) {
+		$this->db->where('refProductId', $id);
+		$query = $this->db->get('connproduct');
+		$arr = array();
+		$i = 0;
+		foreach ($query->result() as $row) {
+			$arr[$i] = $row->connProductId;
+			$i++;
+		}
+		return $arr;
+	}
 	public function sendproductnotification($title, $image, $pid) {
 		$this->db->select('*');
 		$this->db->where('fcmtoken !=', '');
@@ -412,8 +465,8 @@ class Products_model extends CI_Model {
 		$this->db->last_query();
 		$row = $result->result_array();
 		$fcmtoken = array();
-		foreach ($row as $rows) {
-			$imgurl = base_url('attachments/shop_images/' . $image);
+		$imgurl = base_url('attachments/shop_images/' . $image);
+		foreach ($row as $rows) {			
 			$notidata['title'] = $title;
 			$notidata['productid'] = $pid;
 			$notidata['userid'] = $rows['id'];

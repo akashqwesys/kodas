@@ -30,6 +30,9 @@ $sitelogo = $data1['sitelogo'];
 
         <link href="<?= base_url('assets/central') ?>/datatable/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
         <link href="<?= base_url('assets/central') ?>/datatable/dataTables.responsive.css" rel="stylesheet" type="text/css"> 
+        <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"> 
+        
+
         <link rel="stylesheet" href="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css">
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/flat/blue.css"> -->
         

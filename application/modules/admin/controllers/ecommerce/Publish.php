@@ -35,6 +35,7 @@ class Publish extends ADMIN_Controller {
 		if ($id > 0 && $_POST == null) {
 			$_POST = $this->Products_model->getOneProduct($id);
 			$_POST['multicat'] = $this->Products_model->getMulticat($id);
+			$_POST['multiConnProduct'] = $this->Products_model->getMultiConnProduct($id);
 			$trans_load = $this->Products_model->getTranslations($id);
 		}
 
@@ -71,6 +72,7 @@ class Publish extends ADMIN_Controller {
 		$data['trans_load'] = $trans_load;
 		$data['languages'] = $this->Languages_model->getLanguages();
 		$data['shop_categories'] = $this->Categories_model->getShopCategories();
+		$data['conn_products'] = $this->Products_model->getConnProducts();
 		$data['shop_attribute'] = $this->Attribute_model->getShopAttribute();
 		$data['shop_mainattribute'] = $this->Attribute_model->getShopmainAttribute();
 		$data['brands'] = $this->Brands_model->getBrands();

@@ -66,49 +66,88 @@ foreach ($languages as $language) {
   <div class="locale-container locale-container-<?=$language->abbr?>" <?=$language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : ''?>>
     <input type="hidden" name="translations[]" value="<?=$language->abbr?>">
     <div class="form-group">
-      <label>Title </label>
-      <input type="text" name="title[]" value="<?=$trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : ''?>" class="form-control" required>
+      <label>Design No </label>
+      <input type="text" name="designNo" value="<?=@$_POST['designNo']?>" class="form-control" required>
     </div>
-    <?php /*?><div class="form-group"> <a href="javascript:void(0);" class="btn btn-default showSliderDescrption" data-descr="<?= $i ?>">Show Slider Description <span class="glyphicon glyphicon-circle-arrow-down"></span></a> </div><?php */?>
+    <div class="row">
+      <div class="col-md-6" style="background-color: #eee;border:1px solid gray;">
+        <h3>Box</h3>
+        <div class="form-group">
+          <label>Title </label>
+          <input type="text" name="title[]" value="<?=$trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : ''?>" class="form-control">
+        </div> 
+        <?php /*?><div class="form-group"> <a href="javascript:void(0);" class="btn btn-default showSliderDescrption" data-descr="<?= $i ?>">Show Slider Description <span class="glyphicon glyphicon-circle-arrow-down"></span></a> </div><?php */?>
     <div class="theSliderDescrption" id="theSliderDescrption-<?=$i?>" <?=isset($_POST['in_slider']) && $_POST['in_slider'] == 1 ? 'style="display:block;"' : ''?>>
       <div class="form-group">
         <label for="basic_description<?=$i?>">Slider Description </label>
         <textarea name="basic_description[]" id="basic_description<?=$i?>" rows="50" class="form-control"><?=$trans_load != null && isset($trans_load[$language->abbr]['basic_description']) ? $trans_load[$language->abbr]['basic_description'] : ''?>
-      </textarea>
+</textarea>
         <script>
                         CKEDITOR.replace('basic_description<?=$i?>');
                         CKEDITOR.config.entities = false;
                     </script>
       </div>
     </div>
+        <div class="row">
+          <div class="form-group for-shop col-sm-4 col-md-4 col-lg-4">
+            <label>Guest Price</label>
+            <input type="text" name="price1" placeholder="without currency at the end" value="<?=@$_POST['price1']?>" class="form-control">
+          </div>
+          <div class="form-group for-shop col-sm-4 col-md-4 col-lg-4">
+            <label>Retailer Price</label>
+            <input type="text" name="price2" placeholder="without currency at the end" value="<?=@$_POST['price2']?>" class="form-control">
+          </div>
+          <div class="form-group for-shop col-sm-4 col-md-4 col-lg-4">
+            <label>Wholesaller Price</label>
+            <input type="text" name="price3" placeholder="without currency at the end" value="<?=@$_POST['price3']?>" class="form-control">
+          </div>
+        </div>
+        <div class="form-group for-shop">
+          <label>Packing type</label>
+          <select class="selectpicker" name="refPackagingtype_id">
+          <option value="">Select Type</option>
+          <?php
+            $query = $this->db->get('packagingtype');
+            $result =$query->result_array();    
+            foreach ($result as $key => $value) {
+          ?>
+            <option <?php if(isset($_POST['refPackagingtype_id']))
+            {
+              if($_POST['refPackagingtype_id'] == $value['packagingtype_id'])
+              {echo 'selected';}
+            }?> value="<?=$value['packagingtype_id']?>"><?php echo $value['title'].'-'.$value['pcs']?>
+            </option>
+            <?php }?>
+          </select>
+        </div>
+      </div>
 
-
-    <div class="row">
-    	<!-- <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-        <label>Price (Unassign)</label>
-        <input type="text" name="price[]" required placeholder="without currency at the end" value="<?=$trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : ''?>" class="form-control">
-      </div> -->
-    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Guest </label>
-      <input type="text" name="price1" required placeholder="without currency at the end" value="<?=@$_POST['price1']?>" class="form-control">
+      <div class="col-md-6" style="background-color: #eee;border:1px solid gray;">  
+        <h3>Theli</h3>
+        <div class="form-group">
+          <label>Title </label>
+          <input type="text" name="theli_title[]" value="<?=$trans_load != null && isset($trans_load[$language->abbr]['theli_title']) ? $trans_load[$language->abbr]['theli_title'] : ''?>" class="form-control">
+        </div>  
+        <div class="row">
+          <div class="form-group for-shop col-sm-4 col-md-4 col-lg-4">
+            <label>Guest Price</label>
+            <input type="text" name="theli_price1" placeholder="without currency at the end" value="<?=@$_POST['theli_price1']?>" class="form-control">
+          </div>
+          <div class="form-group for-shop col-sm-4 col-md-4 col-lg-4">
+            <label>Retailer Price</label>
+            <input type="text" name="theli_price2" placeholder="without currency at the end" value="<?=@$_POST['theli_price2']?>" class="form-control">
+          </div>
+          <div class="form-group for-shop col-sm-4 col-md-4 col-lg-4">
+            <label>Wholesaller Price</label>
+            <input type="text" name="theli_price3" placeholder="without currency at the end" value="<?=@$_POST['theli_price3']?>" class="form-control">
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Retailer </label>
-      <input type="text" name="price2" required placeholder="without currency at the end" value="<?=@$_POST['price2']?>" class="form-control">
-    </div>
-    <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Wholesaller </label>
-      <input type="text" name="price3" required placeholder="without currency at the end" value="<?=@$_POST['price3']?>" class="form-control">
-    </div>
-    <!-- <div class="form-group for-shop col-sm-2 col-md-2 col-lg-2">
-      <label>Price 4 </label>
-      <input type="text" name="price4" required placeholder="without currency at the end" value="<?=@$_POST['price4']?>" class="form-control">
-    </div> -->
-    </div>
-
+<br>
     <div class="form-group">
       <label for="description<?=$i?>">Description </label>
-      <textarea name="description[]" id="description<?=$i?>" required rows="50" class="form-control"><?=$trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : ''?>
+      <textarea name="description[]" id="description<?=$i?>" rows="50" class="form-control"><?=$trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : ''?>
       </textarea>
       <script>
                     CKEDITOR.replace('description<?=$i?>');
@@ -162,7 +201,7 @@ if (isset($_POST['image']) && $_POST['image'] != null) {
 ?>
 
   <div class="form-group bordered-group">
-    <div class="others-images-container row">
+    <div class="row">
       <?php
         if(!empty($otherImgs)){
           foreach($otherImgs as $img_row){
@@ -308,24 +347,7 @@ foreach ($result as $key => $value) {
     </div>
   </div>
 
-  <div class="form-group for-shop">
-    <label>Packing type</label>
-    <select class="selectpicker" name="refPackagingtype_id">
-    <option value="">Select Type</option>
-    <?php
-      $query = $this->db->get('packagingtype');
-      $result =$query->result_array();    
-      foreach ($result as $key => $value) {
-    ?>
-      <option <?php if(isset($_POST['refPackagingtype_id']))
-      {
-        if($_POST['refPackagingtype_id'] == $value['packagingtype_id'])
-        {echo 'selected';}
-      }?> value="<?=$value['packagingtype_id']?>"><?php echo $value['title'].'-'.$value['pcs']?>
-      </option>
-      <?php }?>
-    </select>
-  </div>
+ 
 
   <?php
 $productoffertype = [];
@@ -395,14 +417,40 @@ foreach ($shop_categorie['info'] as $nameAbbr) {
       <?php }?>
     </select>
   </div>
+
+
+
+
   <div class="form-group for-shop">
+    <label>Connected Products</label>
+    <select class="selectpicker form-control show-tick show-menu-arrow" name="connectedProduct[]" multiple>
+      <?php foreach ($conn_products as $conn_product) {
+	$selectcat = '';
+	if (isset($_POST['multiConnProduct'])) {
+		$selectcat = '';
+		if (in_array($conn_product['p_id'], $_POST['multiConnProduct'])) {
+			$selectcat = 'selected="selected"';
+		}
+	}
+
+	?>
+      <option <?=$selectcat;?> value="<?=$conn_product['p_id']?>">
+      <?php
+      echo $conn_product['title'];
+	?>
+      </option>
+      <?php }?>
+    </select>
+  </div>
+
+  <!-- <div class="form-group for-shop">
     <label>Product Type</label>
     <select class="selectpicker form-control show-tick show-menu-arrow" name="product_type" required>
       <option value="">Select Product Type</option>
       <option value="parcel" <?=isset($_POST['product_type']) && $_POST['product_type'] == 'parcel' ? 'selected' : ''?>>Parcel</option>
       <option value="loose" <?=isset($_POST['product_type']) && $_POST['product_type'] == 'loose' ? 'selected' : ''?>>Loose</option>
     </select>
-  </div>
+  </div> -->
   <div class="form-group for-shop">
     <label>Pcs</label>
     <input type="text" required placeholder="number" name="product_pcs" value="<?=@$_POST['product_pcs']?>" class="form-control" id="quantity">
