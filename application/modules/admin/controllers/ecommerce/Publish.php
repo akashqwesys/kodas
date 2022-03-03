@@ -7,6 +7,8 @@
 if (!defined('BASEPATH')) {
 	exit('No direct script access allowed');
 }
+require APPPATH . 'third_party/vendor/autoload.php';
+use IDRsolutions\IDRCloudClient;
 class Publish extends ADMIN_Controller {
 
 	public function __construct() {
@@ -18,7 +20,9 @@ class Publish extends ADMIN_Controller {
 			'Categories_model',
 			'Attribute_model',
 		));
-		$this->load->library('Compress');	
+		$this->load->library('Compress');
+		// $this->load->library('IDRCloudClient');
+		// $this->load->library('Imagick_lib');		
 	}
 
 	public function index($id = 0) {
@@ -192,7 +196,13 @@ class Publish extends ADMIN_Controller {
 
 				$ImageExt = substr($ImageName, strrpos($ImageName, '.'));
 				$ImageExt = str_replace('.', '', $ImageExt);
-			
+
+				if ($ImageExt != "pdf") {					
+					$message = "Invalid file format only <b>\"PDF\"</b> allowed.";
+				} else {					
+					$ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+					$NewImageName = $ImageName . '-' . $RandomNum . '.' . $ImageExt;
+					move_uploaded_file($_FILES["pdffile"]["tmp_name"], $output_dir . $NewImageName);					
 					$location = __DIR__;
 					$name = $output_dir . $NewImageName;
 					$num = $this->count_pages($name);
