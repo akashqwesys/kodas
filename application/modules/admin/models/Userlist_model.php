@@ -3,9 +3,9 @@ class Userlist_model extends CI_Model
 {
 
     var $table = 'user_app';
-    var $column_order = array(null, 'name', 'mobilenumber', 'emailid', 'compnay','isverified'); //set column field database for datatable orderable
-    var $column_search = array('name', 'mobilenumber', 'emailid', 'compnay','isverified'); //set column field database for datatable searchable 
-    var $order = array('id' => 'asc'); // default order 
+    var $column_order = array(null, 'user_app.name', 'user_app.mobilenumber', 'user_app.emailid', 'user_app.compnay','user_app.isverified','agent.name as a_name'); //set column field database for datatable orderable
+    var $column_search = array('user_app.name', 'user_app.mobilenumber', 'user_app.emailid', 'user_app.compnay','user_app.isverified','agent.name as a_name'); //set column field database for datatable searchable 
+    var $order = array('user_app.id' => 'asc'); // default order 
 
     public function __construct()
     {
@@ -48,7 +48,9 @@ class Userlist_model extends CI_Model
 
     function get_datatables()
     {
+        $this->db->select('user_app.*,agent.name as a_name');        
         $this->_get_datatables_query();
+        $this->db->join('agent', 'agent.agent_id = user_app.alocation_agent_id', 'left');
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
@@ -57,14 +59,18 @@ class Userlist_model extends CI_Model
 
     function count_filtered()
     {
+        $this->db->select('user_app.*,agent.name as a_name');        
         $this->_get_datatables_query();
+        $this->db->join('agent', 'agent.agent_id = user_app.alocation_agent_id', 'left');
         $query = $this->db->get();
         return $query->num_rows();
     }
 
     public function count_all()
     {
+        $this->db->select('user_app.*,agent.name as a_name');    
         $this->db->from($this->table);
+        $this->db->join('agent', 'agent.agent_id = user_app.alocation_agent_id', 'left');
         return $this->db->count_all_results();
     }
 

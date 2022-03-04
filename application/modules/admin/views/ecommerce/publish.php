@@ -10,7 +10,7 @@
 
 .inner {
   position: relative;
-  background: #ccc;
+  /* background: #ccc; */
   height: 40px;
   width: 100%;
   margin: 5px;
@@ -70,7 +70,7 @@ foreach ($languages as $language) {
       <input type="text" name="designNo" value="<?=@$_POST['designNo']?>" class="form-control" required>
     </div>
     <div class="row">
-      <div class="col-md-6" style="background-color: #eee;border:1px solid gray;">
+      <div class="col-md-6">
         <h3>Box</h3>
         <div class="form-group">
           <label>Title </label>
@@ -122,7 +122,7 @@ foreach ($languages as $language) {
         </div>
       </div>
 
-      <div class="col-md-6" style="background-color: #eee;border:1px solid gray;">  
+      <div class="col-md-6">  
         <h3>Theli</h3>
         <div class="form-group">
           <label>Title </label>
@@ -394,7 +394,7 @@ if (isset($_POST['productoffertype'])) {
 </div><?php */?>
 <div class="form-group for-shop">
     <label>Categories</label>
-    <select class="selectpicker form-control show-tick show-menu-arrow" id="multipleSelectcat" name="shop_categorie[]" multiple>
+    <select class="selectpicker form-control show-tick show-menu-arrow" data-live-search="true" id="multipleSelectcat" name="shop_categorie[]" multiple>
       <?php foreach ($shop_categories as $key_cat => $shop_categorie) {
 	$selectcat = '';
 	if (isset($_POST['multicat'])) {
@@ -418,12 +418,9 @@ foreach ($shop_categorie['info'] as $nameAbbr) {
     </select>
   </div>
 
-
-
-
   <div class="form-group for-shop">
     <label>Connected Products</label>
-    <select class="selectpicker form-control show-tick show-menu-arrow" name="connectedProduct[]" multiple>
+    <select class="selectpicker form-control show-tick show-menu-arrow" data-live-search="true" name="connectedProduct[]" multiple>
       <?php foreach ($conn_products as $conn_product) {
 	$selectcat = '';
 	if (isset($_POST['multiConnProduct'])) {

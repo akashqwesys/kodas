@@ -42,8 +42,8 @@ if ($this->session->flashdata('edit_attributes')) {
             </tr> 
             <tr>
               <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Attributes group"><i class="fa fa-calendar fa-fw"></i></label></td>
-              <td><select class="form-control" name="refAttributes_group_id">
-                  <option value="">Select Attributes group</option>
+              <td><select class="selectpicker form-control" data-live-search="true" name="refAttributes_group_id">  
+                  <!-- <option value="">Select Attributes group</option> -->
                   <?php 
                   if(!empty($attributes_group_result)){
                   foreach($attributes_group_result as $row){ ?>

@@ -121,6 +121,7 @@ class Listuser extends ADMIN_Controller {
             $row[] = $datarow->mobilenumber;
             $row[] = $datarow->emailid;     
             $row[]=$datarow->compnay;
+			$row[]=$datarow->a_name;
             $row[]=$active_inactive_badge;  
             $row[]=$actionBtn;               
             $data[] = $row;

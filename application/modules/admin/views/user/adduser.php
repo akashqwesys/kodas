@@ -63,8 +63,7 @@ if ($this->session->flashdata('result_publish')) {
 
           <tr>
             <td style="width: 1%;"><label data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Date Added"><i class="fa fa-calendar fa-fw"></i></label></td>
-            <td><select class="form-control" name="alocation_agent_id">
-              <option value="">Select Agent</option>
+            <td><select class="selectpicker form-control" data-live-search="true" name="alocation_agent_id">              
               <?php foreach($agents as $agent_row){ ?>
               <option value="<?php echo $agent_row['agent_id']; ?>" <?=isset($_POST['alocation_agent_id']) && $_POST['alocation_agent_id'] == $agent_row['agent_id'] ? 'selected' : ''?>><?php echo $agent_row['name']; ?></option>   
               <?php } ?>           

@@ -48,6 +48,7 @@ if ($this->session->flashdata('result_publish')) {
               <th>Mobile</th>              
               <th>Email</th>
               <th>Business Name</th>
+              <th>Agent Name</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
