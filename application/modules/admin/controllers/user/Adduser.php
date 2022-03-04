@@ -233,11 +233,17 @@ class Adduser extends ADMIN_Controller {
 					// } else {
 					// 	$credit = 0;
 					// }
+					$row=$this->User_model->getAgentId(str_replace('"', '', $line[3]));																
+					$agent_id=0;
+					if (!empty($row)) {
+						$agent_id=$row['agent_id'];
+					}
+					
 					$data = array(
 						'name' => str_replace('"', '', $line[0]),
 						'ac_type' => str_replace('"', '', $line[1]),
 						'city' => str_replace('"', '', $line[2]),
-						'broker' => str_replace('"', '', $line[3]),
+						'alocation_agent_id' => $agent_id,
 						'whatsapp' => str_replace('"', '', $line[4]),
 						'mobilenumber' => str_replace('"', '', $line[5]),
 						'phone_2' => str_replace('"', '', $line[6]),
@@ -248,7 +254,7 @@ class Adduser extends ADMIN_Controller {
 						'isverified' => 'true'			
 					);
 
-					$querymobile = $this->db->get_where('user_app', array('mobilenumber' => $data['mobilenumber']));
+					$querymobile = $this->db->get_where('user_app', array('whatsapp' => $data['whatsapp']));
 					if ($querymobile->num_rows() > 0) {
 						$this->session->set_flashdata('result_publish', 'Some Users Mobile Already exits In System!');
 						array_push($userexits, $data['mobilenumber']);

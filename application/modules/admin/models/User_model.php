@@ -77,8 +77,9 @@ class User_model extends CI_Model {
 		} else {
 			return false;
 		}
-	}
+	}	
 
+	
 	public function productStatusChange($id, $to_status) {
 		$this->db->where('id', $id);
 		$result = $this->db->update('user_app', array('visibility' => $to_status));
@@ -417,6 +418,19 @@ class User_model extends CI_Model {
 		}
 		return $arr;
 	}
+
+	// public function getAgentId($name) {
+	// 	$this->db->where('name', $name);
+	// 	$query = $this->db->get('agent');
+	// 	return $query->row_array();		
+	// }
+
+	public function getAgentId($name)
+    {
+        // $this->db->where('name=', $name);
+        $query = $this->db->get('agent');
+        return $query->row_array();
+    }
 
 	public function chatcomment($userid) {
 
