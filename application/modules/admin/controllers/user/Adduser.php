@@ -233,16 +233,17 @@ class Adduser extends ADMIN_Controller {
 					// } else {
 					// 	$credit = 0;
 					// }
+					// print_r($line);die;
 					$row=$this->User_model->getAgentId(str_replace('"', '', $line[3]));																
 					$agent_id=0;
 					if (!empty($row)) {
 						$agent_id=$row['agent_id'];
 					}
-					
+									
 					$data = array(
-						'name' => str_replace('"', '', $line[0]),
-						'ac_type' => str_replace('"', '', $line[1]),
-						'city' => str_replace('"', '', $line[2]),
+						'name' => str_replace('"', '', "$line[0]"),
+						'ac_type' => str_replace('"', '', "$line[1]"),
+						'city' => str_replace('"', '', "$line[2]"),
 						'alocation_agent_id' => $agent_id,
 						'whatsapp' => str_replace('"', '', $line[4]),
 						'mobilenumber' => str_replace('"', '', $line[5]),

@@ -380,6 +380,7 @@ class Agent extends ADMIN_Controller
 					// } else {
 					// 	$credit = 0;
 					// }
+                    // print_r($line);die;
 					$data = array(
 						'name' => str_replace('"', '', $line[0]),
 						'ac_type' => str_replace('"', '', $line[1]),
