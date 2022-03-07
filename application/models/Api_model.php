@@ -279,7 +279,6 @@ class Api_model extends CI_Model {
 			$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();			
 		}	
 
-
 		if(!empty($product_type)){
 			$this->db->like('productoffertype',$product_type);
 		}
@@ -617,7 +616,6 @@ class Api_model extends CI_Model {
 	}
 
 	public function getProductsbyid($id) {
-
 		if (isset($_REQUEST['UserId']) && $_REQUEST['UserId'] != '0' && $_REQUEST['UserId'] != null && $_REQUEST['UserId'] != '') {
 			$this->db->insert('userviewproduct', array(
 				'productid' => $_REQUEST['ItemId'],
@@ -754,8 +752,7 @@ class Api_model extends CI_Model {
 					if($pricebyuser->wholesaller==1){
 						$PcsMrp_reg = $value['theli_wholesaller_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['theli_wholesaller_price']);
-						$PcsMrp = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Pcs']);
-						
+						$PcsMrp = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Pcs']);						
 					}	
 				
 				// box_retailer_price		
