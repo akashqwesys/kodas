@@ -274,7 +274,7 @@ class Api_model extends CI_Model {
 	public function getProducts($lang,$product_type='') {
 		// print_r($_REQUEST);
 		$sort = '';
-		
+		$user=array();
 		if(isset($_REQUEST['UserId'])){
 			$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();			
 		}	
@@ -410,19 +410,20 @@ class Api_model extends CI_Model {
 			$data[$i]['Pcs'] = $value['Pcs'];
 			$data[$i]['VideoUrl'] = !empty($value['videoid']) ? $value['videoid'] : '';
 			$data[$i]['Image'] = $image_link;
-
-			if($user->guest==1){
-				$data[$i]['mainprice']=	$this->IND_money_format($value['box_guest_price']);
-				$data[$i]['mainprice2']=$this->IND_money_format($value['theli_guest_price']);
-			}
-			if($user->retailer==1){
-				$data[$i]['mainprice']=	$this->IND_money_format($value['box_retailer_price']);
-				$data[$i]['mainprice2']=$this->IND_money_format($value['theli_retailer_price']);
-			}
-			if($user->wholesaller==1){
-				$data[$i]['mainprice']=	$this->IND_money_format($value['box_wholesaller_price']);
-				$data[$i]['mainprice2']=$this->IND_money_format($value['theli_wholesaller_price']);
-			}
+			if(!empty($user)){
+				if($user->guest==1){
+					$data[$i]['mainprice']=	$this->IND_money_format($value['box_guest_price']);
+					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_guest_price']);
+				}
+				if($user->retailer==1){
+					$data[$i]['mainprice']=	$this->IND_money_format($value['box_retailer_price']);
+					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_retailer_price']);
+				}
+				if($user->wholesaller==1){
+					$data[$i]['mainprice']=	$this->IND_money_format($value['box_wholesaller_price']);
+					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_wholesaller_price']);
+				}
+			}	
 
 			$i++;
 		}
@@ -737,8 +738,7 @@ class Api_model extends CI_Model {
 						$PcsMrp = $this->IND_money_format($value['box_wholesaller_price'] * $value['Pcs']);
 					
 					}	
-				
-				
+								
 					if($pricebyuser->guest==1){
 						$PcsMrp_reg = $value['theli_guest_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['theli_guest_price']);
