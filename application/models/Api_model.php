@@ -352,10 +352,10 @@ class Api_model extends CI_Model {
 			$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
 			$this->db->where('productcat.catid', $_REQUEST['Catid']);
 			$this->db->where('products.visibility', 1);
-			$query = $this->db->select('products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,products.id as Id, products.image as product_image, products.folder as imgfolder, products.videoid, products.product_pcs as Pcs, products_translations.title,products_translations.theli_title, products_translations.price, products_translations.old_price, ' . $myshortprice)->get('productcat');
+			$query = $this->db->select('products_translations.description,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,products.id as Id, products.image as product_image, products.folder as imgfolder, products.videoid, products.product_pcs as Pcs, products_translations.title,products_translations.theli_title, products_translations.price, products_translations.old_price, ' . $myshortprice)->get('productcat');
 		} else {
 			$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
-			$query = $this->db->select('products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,products.id as Id, products.image as product_image, products.folder as imgfolder, products.videoid, products.product_pcs as Pcs, products_translations.title,products_translations.theli_title, products_translations.price, products_translations.old_price, ' . $myshortprice)->get('products');
+			$query = $this->db->select('products_translations.description,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,products.id as Id, products.image as product_image, products.folder as imgfolder, products.videoid, products.product_pcs as Pcs, products_translations.title,products_translations.theli_title, products_translations.price, products_translations.old_price, ' . $myshortprice)->get('products');
 		}
 		$result = $query->result_array();
 		$data = array();
@@ -396,6 +396,8 @@ class Api_model extends CI_Model {
 			$data[$i]['Id'] = $value['Id'];
 			$data[$i]['ItemName'] = $value['title'];
 			$data[$i]['Theli_ItemName'] = $value['theli_title'];
+			$data[$i]['description'] = $value['description'];
+			
 			// $data[$i]['Mrp'] = $Mrp;
 			// $data[$i]['PcsMrp'] = $PcsMrp;
 			$data[$i]['box_guest_price'] = $this->IND_money_format($value['box_guest_price']);
@@ -619,14 +621,16 @@ class Api_model extends CI_Model {
 		$this->db->join('packagingtype', 'packagingtype.packagingtype_id = products.refPackagingtype_id', 'left');
 		$this->db->where('products.id', $id);
 		$this->db->limit(1);
-		$query = $this->db->select('user_app.pviewcount,products.id as Id,products.videoid as VideoId, products_translations.title, products.image as product_image, products.folder as imgfolder, products.product_type as Type, products.product_pcs as Pcs, products.min_qty as MinQty, products.quantity as product_quantity_available, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id')->get('products');
+		$query = $this->db->select('user_app.pviewcount,products.id as Id,products.videoid as VideoId, products_translations.title, products.image as product_image, products.folder as imgfolder, products.product_type as Type, products.product_pcs as Pcs, products.min_qty as MinQty, products.quantity as product_quantity_available, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,')->get('products');
 		$result = $query->result_array();
 
 		$data = array();
 		$image_link = array();
 		$i = 0;
-		$singalimg = $result[0]['product_image'];
+		$multiimgarray=array();
+		
 		if (isset($singalimg) && $singalimg != '') {
+			$singalimg = $result[0]['product_image'];
 			$imgnameextension = str_replace(base_url('attachments/shop_images/'), "", $singalimg);
 			$without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
 			$this->db->where('likeproductimg.userid', $_REQUEST['UserId']);
@@ -640,14 +644,15 @@ class Api_model extends CI_Model {
 			$image_link[0]['ImageName'] = $without_extension;
 			$image_link[0]['LikeStatus'] = $likestatus;
 			$a = 1;
+
+			$multiimg = $result[0]['imgfolder'];
+			$multiimgarray = $this->productmultiimg($multiimg);
+			$pdfurl = $this->productmultiimg($multiimg, 0, 'pdfurl');
+
 		} else {
 			$a = 0;
 		}
-
-		$multiimg = $result[0]['imgfolder'];
-		$multiimgarray = $this->productmultiimg($multiimg);
-		$pdfurl = $this->productmultiimg($multiimg, 0, 'pdfurl');
-
+		
 		foreach ($multiimgarray as $key => $value) {
 			$imgnameextension = str_replace(base_url('attachments/shop_images/' . $multiimg . '/'), "", $value);
 			$without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
@@ -661,17 +666,6 @@ class Api_model extends CI_Model {
 			$image_link[$a]['ImageName'] = $without_extension;
 			$image_link[$a]['LikeStatus'] = $likestatus;
 			$a++;
-		
-
-		// $imgnameextension = str_replace(base_url('attachments/shop_images/' . $multiimg . '/'), "", $value);
-		// $without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
-		// $this->db->where('likepreproductimg.userid', $_REQUEST['UserId']);
-		// $this->db->where('likepreproductimg.imgname', $without_extension);
-		// $querylikedi = $this->db->select('likestatus')->get('likepreproductimg')->row();
-		// if (isset($querylikedi->likestatus)) {$likestatus = $querylikedi->likestatus;} else { $likestatus = '';}
-		// $image_link[$a]['Image'] = $value;
-		// $image_link[$a]['ImageName'] = $without_extension;
-		// $image_link[$a]['LikeStatus'] = $likestatus;
 		}
 
 		$this->db->join('attributes_group', 'attributes_group.attributesgroup_id  = product_attribute1.refAttributesgroup_id', 'left');
@@ -697,13 +691,62 @@ class Api_model extends CI_Model {
 			$query = $this->db->get();
 			$isincart = "";
 			if ($query->num_rows() > 0) {$isincart = "1";}
-			$pricebyuser = $this->getcustomerpricebytype($_REQUEST['UserId'], $_REQUEST['ItemId']);
+			// $pricebyuser = $this->getcustomerpricebytype($_REQUEST['UserId'], $_REQUEST['ItemId']);
+			// if (!empty($pricebyuser)) {
+			// 	$Mrp = $this->IND_money_format($pricebyuser);
+			// 	$PcsMrp = $this->IND_money_format($pricebyuser * $value['Pcs']);
+			// } else {
+			// 	$Mrp = $this->IND_money_format($value['price']);
+			// 	$PcsMrp = $this->IND_money_format($value['price'] * $value['Pcs']);
+			// }
+			$pricebyuser = '';
+			if (!empty($_REQUEST['UserId']) && isset($_REQUEST['UserId'])) {
+				$pricebyuser = $this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();				
+			}
 			if (!empty($pricebyuser)) {
-				$Mrp = $this->IND_money_format($pricebyuser);
-				$PcsMrp = $this->IND_money_format($pricebyuser * $value['Pcs']);
-			} else {
-				$Mrp = $this->IND_money_format($value['price']);
-				$PcsMrp = $this->IND_money_format($value['price'] * $value['Pcs']);
+				
+					$box_guest_price_reg=$value['box_guest_price'] * $value['Pcs'];
+					
+						$PcsMrp_reg = $value['box_guest_price'] * $value['Pcs'];
+						$Mrp = $this->IND_money_format($value['box_guest_price']);
+						$PcsMrp = $this->IND_money_format($value['box_guest_price'] * $value['Pcs']);
+						
+					
+					if($pricebyuser->retailer==1){
+						$PcsMrp_reg = $value['box_retailer_price'] * $value['Pcs'];
+						$Mrp = $this->IND_money_format($value['box_retailer_price']);
+						$PcsMrp = $this->IND_money_format($value['box_retailer_price'] * $value['Pcs']);
+						
+					}
+					if($pricebyuser->wholesaller==1){
+						$PcsMrp_reg = $value['box_wholesaller_price'] * $value['Pcs'];
+						$Mrp = $this->IND_money_format($value['box_wholesaller_price']);
+						$PcsMrp = $this->IND_money_format($value['box_wholesaller_price'] * $value['Pcs']);
+					
+					}	
+				
+				
+					if($pricebyuser->guest==1){
+						$PcsMrp_reg = $value['theli_guest_price'] * $value['Pcs'];
+						$Mrp = $this->IND_money_format($value['theli_guest_price']);
+						$PcsMrp = $this->IND_money_format($value['theli_guest_price'] * $value['Pcs']);
+					
+					}
+					if($pricebyuser->retailer==1){
+						$PcsMrp_reg = $value['theli_retailer_price'] * $value['Pcs'];
+						$Mrp = $this->IND_money_format($value['theli_retailer_price']);
+						$PcsMrp = $this->IND_money_format($value['theli_retailer_price'] * $value['Pcs']);
+						
+					}
+					if($pricebyuser->wholesaller==1){
+						$PcsMrp_reg = $value['theli_wholesaller_price'] * $value['Pcs'];
+						$Mrp = $this->IND_money_format($value['theli_wholesaller_price']);
+						$PcsMrp = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Pcs']);
+						
+					}	
+				
+				// box_retailer_price		
+				// theli_wholesaller_price					
 			}
 
 			$data[$i]['Id'] = $value['Id'];
