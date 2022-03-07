@@ -631,9 +631,11 @@ class Api_model extends CI_Model {
 		$this->db->join('user_app', 'user_app.id = ' . $_REQUEST['UserId'], 'left');
 		$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
 		$this->db->join('packagingtype', 'packagingtype.packagingtype_id = products.refPackagingtype_id', 'left');
+		// $this->db->join('productcat', 'productcat.productid = products.id', 'left');	
+		// $this->db->join('shop_categories_translations', 'shop_categories_translations.for_id = productcat.catid', 'left');		
 		$this->db->where('products.id', $id);
 		$this->db->limit(1);
-		$query = $this->db->select('user_app.pviewcount,products.id as Id,products.videoid as VideoId, products_translations.title, products.image as product_image, products.folder as imgfolder, products.product_type as Type, products.product_pcs as Pcs, products.min_qty as MinQty, products.quantity as product_quantity_available, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,')->get('products');
+		$query = $this->db->select('price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,user_app.pviewcount,products.id as Id,products.videoid as VideoId, products_translations.title, products.image as product_image, products.folder as imgfolder, products.product_type as Type, products.product_pcs as Pcs, products.min_qty as MinQty, products.quantity as product_quantity_available, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price')->get('products');
 		$result = $query->result_array();
 
 		$data = array();
@@ -701,6 +703,20 @@ class Api_model extends CI_Model {
 			$this->db->where('cartdetails.itemid', $_REQUEST['ItemId']);
 			$this->db->limit(1);
 			$query = $this->db->get();
+
+
+			// $this->db->join('productcat', 'productcat.productid = '.$id, 'left');	
+			$this->db->join('shop_categories_translations', 'shop_categories_translations.for_id = productcat.catid', 'left');
+			$this->db->where('productcat.productid', $id);			
+			$query = $this->db->select('shop_categories_translations.name')->get('productcat');
+			$categories = $query->result_array();	
+			$cat_array=array();
+			if(!empty($categories)){
+				foreach($categories as $c_row){
+					array_push($cat_array,$c_row['name']);
+				}
+			}		
+
 			$isincart = "";
 			if ($query->num_rows() > 0) {$isincart = "1";}
 			// $pricebyuser = $this->getcustomerpricebytype($_REQUEST['UserId'], $_REQUEST['ItemId']);
@@ -711,11 +727,45 @@ class Api_model extends CI_Model {
 			// 	$Mrp = $this->IND_money_format($value['price']);
 			// 	$PcsMrp = $this->IND_money_format($value['price'] * $value['Pcs']);
 			// }
-			$pricebyuser = '';
+
+
+			$user = array();
 			if (!empty($_REQUEST['UserId']) && isset($_REQUEST['UserId'])) {
-				$pricebyuser = $this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();				
+				$user = $this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();				
 			}
-			if (!empty($pricebyuser)) {
+
+			$data[$i]['box_guest_price'] = $this->IND_money_format($value['box_guest_price']);
+			$data[$i]['box_retailer_price'] = $this->IND_money_format($value['box_retailer_price']);
+			$data[$i]['box_wholesaller_price'] = $this->IND_money_format($value['box_wholesaller_price']);
+
+			$data[$i]['theli_guest_price'] = $this->IND_money_format($value['theli_guest_price']);
+			$data[$i]['theli_retailer_price'] = $this->IND_money_format($value['theli_retailer_price']);
+			$data[$i]['theli_wholesaller_price'] = $this->IND_money_format($value['theli_wholesaller_price']);
+			// $data[$i]['FilterMrp'] = $value['ShortPrice'];
+			$data[$i]['Pcs'] = $value['Pcs'];
+			$data[$i]['VideoUrl'] = !empty($value['videoid']) ? $value['videoid'] : '';
+			$data[$i]['Image'] = $image_link;
+			if(!empty($user)){
+				if($user->guest==1){
+					$data[$i]['mainprice']=	$this->IND_money_format($value['box_guest_price']);
+					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_guest_price']);
+				}
+				if($user->retailer==1){
+					$data[$i]['mainprice']=	$this->IND_money_format($value['box_retailer_price']);
+					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_retailer_price']);
+				}
+				if($user->wholesaller==1){
+					$data[$i]['mainprice']=	$this->IND_money_format($value['box_wholesaller_price']);
+					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_wholesaller_price']);
+				}
+			}	
+
+
+
+
+
+			
+			if (!empty($user)) {
 				
 					$box_guest_price_reg=$value['box_guest_price'] * $value['Pcs'];
 					
@@ -724,32 +774,32 @@ class Api_model extends CI_Model {
 						$PcsMrp = $this->IND_money_format($value['box_guest_price'] * $value['Pcs']);
 						
 					
-					if($pricebyuser->retailer==1){
+					if($user->retailer==1){
 						$PcsMrp_reg = $value['box_retailer_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['box_retailer_price']);
 						$PcsMrp = $this->IND_money_format($value['box_retailer_price'] * $value['Pcs']);
 						
 					}
-					if($pricebyuser->wholesaller==1){
+					if($user->wholesaller==1){
 						$PcsMrp_reg = $value['box_wholesaller_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['box_wholesaller_price']);
 						$PcsMrp = $this->IND_money_format($value['box_wholesaller_price'] * $value['Pcs']);
 					
 					}	
 								
-					if($pricebyuser->guest==1){
+					if($user->guest==1){
 						$PcsMrp_reg = $value['theli_guest_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['theli_guest_price']);
 						$PcsMrp = $this->IND_money_format($value['theli_guest_price'] * $value['Pcs']);
 					
 					}
-					if($pricebyuser->retailer==1){
+					if($user->retailer==1){
 						$PcsMrp_reg = $value['theli_retailer_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['theli_retailer_price']);
 						$PcsMrp = $this->IND_money_format($value['theli_retailer_price'] * $value['Pcs']);
 						
 					}
-					if($pricebyuser->wholesaller==1){
+					if($user->wholesaller==1){
 						$PcsMrp_reg = $value['theli_wholesaller_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['theli_wholesaller_price']);
 						$PcsMrp = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Pcs']);						
@@ -760,6 +810,7 @@ class Api_model extends CI_Model {
 			}
 
 			$data[$i]['Id'] = $value['Id'];
+			$data[$i]['category'] = $cat_array;
 			$data[$i]['ItemName'] = $value['title'];
 			$data[$i]['Description'] = $value['description'];
 			$data[$i]['Type'] = $value['Type'];
