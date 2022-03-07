@@ -787,10 +787,34 @@ class Apilist extends REST_Controller {
 		}
 	}
 
+
+	public function Home_get($lang) {
+
+		$response=array();
+		$response['slider'] = $this->Api_model->HomeSliderFun();
+		$response['catlist'] = $this->Api_model->Catlistfun();
+
+		$response['trending_product'] = $this->Api_model->getProducts($lang,'trending');
+		$response['latest_product'] = $this->Api_model->getProducts($lang,'latest');
+		$response['recommended_product'] = $this->Api_model->getProducts($lang,'recommended');
+		// Check if the products data store contains products (in case the database result returns NULL)
+		if (!empty($response)) {
+			// Set the response and exit
+			$this->response($response, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		} else {
+			// Set the response and exit
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No product were found',
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}
+	}
+
+
+
 	/*
 		     * Get One Catlist
 	*/
-
 	public function Catlist_get() {
 
 		$product = $this->Api_model->Catlistfun();

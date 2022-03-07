@@ -430,6 +430,7 @@ $route['admin/loadOthersImages'] =
 | Sample REST API Routes
 | -------------------------------------------------------------------------
  */
+$route['api/Home'] = 'Api/Apilist/Home/$1';
 $route['api/GetProductListByType'] = 'Api/Products/all/$1';
 $route['api/product/(\w{2})/(:num)/get'] = 'Api/Products/one/$1/$2';
 $route['api/product/set'] = 'Api/Products/set';
