@@ -641,6 +641,7 @@ class Api_model extends CI_Model {
 		$data = array();
 		$image_link = array();
 		$i = 0;
+		$singalimg = $result[0]['product_image'];
 		$multiimgarray=array();
 		
 		if (isset($singalimg) && $singalimg != '') {
@@ -662,7 +663,6 @@ class Api_model extends CI_Model {
 			$multiimg = $result[0]['imgfolder'];
 			$multiimgarray = $this->productmultiimg($multiimg);
 			$pdfurl = $this->productmultiimg($multiimg, 0, 'pdfurl');
-
 		} else {
 			$a = 0;
 		}
@@ -759,10 +759,6 @@ class Api_model extends CI_Model {
 					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_wholesaller_price']);
 				}
 			}	
-
-
-
-
 
 			
 			if (!empty($user)) {
