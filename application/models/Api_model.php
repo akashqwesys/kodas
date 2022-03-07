@@ -835,18 +835,21 @@ class Api_model extends CI_Model {
 			if (!empty($pricebyuser)) {
 				if($value['ProductType']=='box'){
 					if($pricebyuser->guest==1){
+						$PcsMrp_reg = $value['box_guest_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['box_guest_price']);
 						$PcsMrp = $this->IND_money_format($value['box_guest_price'] * $value['Pcs']);
 						$carttotal = $carttotal + ($value['box_guest_price'] * $value['Pcs']) * $value['Qty'];
 						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
 					}
 					if($pricebyuser->retailer==1){
+						$PcsMrp_reg = $value['box_retailer_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['box_retailer_price']);
 						$PcsMrp = $this->IND_money_format($value['box_retailer_price'] * $value['Pcs']);
 						$carttotal = $carttotal + ($value['box_retailer_price'] * $value['Pcs']) * $value['Qty'];
 						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
 					}
 					if($pricebyuser->wholesaller==1){
+						$PcsMrp_reg = $value['box_wholesaller_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['box_wholesaller_price']);
 						$PcsMrp = $this->IND_money_format($value['box_wholesaller_price'] * $value['Pcs']);
 						$carttotal = $carttotal + ($value['box_wholesaller_price'] * $value['Pcs']) * $value['Qty'];
@@ -855,18 +858,21 @@ class Api_model extends CI_Model {
 				}
 				if($value['ProductType']=='theli'){
 					if($pricebyuser->guest==1){
+						$PcsMrp_reg = $value['theli_guest_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['theli_guest_price']);
 						$PcsMrp = $this->IND_money_format($value['theli_guest_price'] * $value['Pcs']);
 						$carttotal = $carttotal + ($value['theli_guest_price'] * $value['Pcs']) * $value['Qty'];
 						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
 					}
 					if($pricebyuser->retailer==1){
+						$PcsMrp_reg = $value['theli_retailer_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['theli_retailer_price']);
 						$PcsMrp = $this->IND_money_format($value['theli_retailer_price'] * $value['Pcs']);
 						$carttotal = $carttotal + ($value['theli_retailer_price'] * $value['Pcs']) * $value['Qty'];
 						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
 					}
 					if($pricebyuser->wholesaller==1){
+						$PcsMrp_reg = $value['theli_wholesaller_price'] * $value['Pcs'];
 						$Mrp = $this->IND_money_format($value['theli_wholesaller_price']);
 						$PcsMrp = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Pcs']);
 						$carttotal = $carttotal + ($value['theli_wholesaller_price'] * $value['Pcs']) * $value['Qty'];
@@ -889,10 +895,12 @@ class Api_model extends CI_Model {
 			$data[$i]['ItemName'] = $value['title'];
 			// $data[$i]['Type'] = $value['Type'];
 			$data[$i]['Mrp'] = $Mrp;
+			$data[$i]['ProductType'] = $value['ProductType'];
 			$data[$i]['packagingtype_id'] = $value['packagingtype_id'];		
 			$data[$i]['required_packing_pcs'] = $value['required_packing_pcs'];
 			$data[$i]['packing_title'] = $value['packing_title'];	
 			$data[$i]['PcsMrp'] = $PcsMrp;
+			$data[$i]['PcsMrp_reg'] = $PcsMrp_reg;
 			$data[$i]['Pcs'] = $value['Pcs'];
 			$data[$i]['MinQty'] = $value['MinQty'];
 			$data[$i]['Description'] = $value['description'];
@@ -924,20 +932,34 @@ class Api_model extends CI_Model {
 			foreach($packing_typet as $p_row){
 				$box=array();
 				$total=0;
-				foreach($data as $c_row){
-					if($p_row['packagingtype_id']==$c_row['packagingtype_id']){
-						$total=$total+($c_row['PcsMrp']*$c_row['Qty']);
-						array_push($box,$c_row);
-					}
+				foreach($data as $c_row){					
+					if($c_row['ProductType']=='box'){
+						if($p_row['packagingtype_id']==$c_row['packagingtype_id']){						
+							$total=$total+($c_row['PcsMrp_reg']*$c_row['Qty']);
+							array_push($box,$c_row);
+						}
+					}					
 				}
 				if(!empty($box)){
+					$box['Package_type']='box';
 					$box['Package_total']=$total;				
 					array_push($item[0]['CartItem'],$box);
 				}
-			}
+			}			
 		}
-
-
+		$box=array();
+		$total=0;
+		foreach($data as $c_row){					
+			if($c_row['ProductType']=='theli'){										
+				$total=$total+($c_row['PcsMrp_reg']*$c_row['Qty']);
+				array_push($box,$c_row);					
+			}					
+		}
+		if(!empty($box)){
+			$box['Package_type']='theli';
+			$box['Package_total']=$total;				
+			array_push($item[0]['CartItem'],$box);
+		}
 
 		if (!empty($item) && $item != '') {
 			$return['Data'] = $item;
