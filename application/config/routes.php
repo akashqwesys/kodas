@@ -243,6 +243,9 @@ $route['admin/addattributesgroup'] = 'admin/attributesgroup/attributesgroup/add_
 $route['admin/editattributesgroup/(:num)'] = 'admin/attributesgroup/attributesgroup/edit_attributesgroup/$1';
 $route['admin/active-inactive-attributesgroup'] = 'admin/attributesgroup/attributesgroup/approve_status';
 
+
+$route['admin/get-orders-list'] = 'admin/ecommerce/Orders/order_list';
+
 $route['admin/listcoupan'] = 'admin/coupan/coupan';
 $route['admin/get-coupan-list'] = 'admin/coupan/coupan/coupan_list';
 $route['admin/addcoupan'] = 'admin/coupan/coupan/add_coupan';

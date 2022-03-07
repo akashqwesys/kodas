@@ -141,5 +141,6 @@
 <?php $this->load->view('shareproduct/shareproduct_js'); ?>
 <?php $this->load->view('newsletter/subscriber_js'); ?>
 <?php $this->load->view('coupan/coupan_js'); ?>
+<?php $this->load->view('ecommerce/orderlist_js'); ?>
 </body>
 </html>

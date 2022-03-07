@@ -24,7 +24,7 @@ class Orders extends ADMIN_Controller {
 		if (!in_array('vieworder', $adminid)) {redirect('admin');}
 		$data = array();
 		$head = array();
-		$head['title'] = 'Administration - Orders';
+		$head['title'] = 'Orders-List';
 		$head['description'] = '!';
 		$head['keywords'] = '';
 
@@ -95,6 +95,57 @@ class Orders extends ADMIN_Controller {
 			$this->saveHistory('Go to orders page');
 		}
 	}
+
+
+
+	public function order_list() {       
+        $this->login_check();             
+        $list = $this->Attributesgroup_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+
+        // echo '<pre>';print_r($list);die;
+
+        foreach ($list as $datarow) {    
+            
+            $active_inactive_badge='';
+            if($datarow->status==1){
+                $active_inactive_badge='<span class="badge badge-success badge-status-'.$datarow->attributesgroup_id.'">Active</span>';
+            }
+            if($datarow->status==0){
+                $active_inactive_badge='<span class="badge badge-danger badge-status-'.$datarow->attributesgroup_id.'">inActive</span>';
+            }            
+            if($datarow->status==1){
+                $str='Inactive';
+                $class="btn-danger";
+                $status=0;
+            }
+            if($datarow->status==0){
+                $str='Active';
+                $class="btn-success";
+                $status=1;
+            }
+            $edit_url=base_url('admin/editattributesgroup/'). $datarow->attributesgroup_id;           
+            $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>             
+            <button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->attributesgroup_id . '" data-status="' . $status . '" data-table="attributes_group" data-wherefield="attributesgroup_id" data-updatefield="status" data-module="attributesgroup">'.$str.'</button>';
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $datarow->title;        
+            $row[] = $datarow->sort_order; 
+            // $row[]=$datarow->ag_title;   
+            $row[]=$active_inactive_badge;  
+            $row[]=$actionBtn;               
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Attributesgroup_model->count_all(),
+            "recordsFiltered" => $this->Attributesgroup_model->count_filtered(),
+            "data" => $data,
+        );
+        echo json_encode($output);
+    }
 
 	public function changeOrdersOrderStatus() {
 		$this->login_check();

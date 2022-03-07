@@ -423,8 +423,6 @@ class Api_model extends CI_Model {
 				$data[$i]['mainprice']=	$this->IND_money_format($value['box_wholesaller_price']);
 				$data[$i]['mainprice2']=$this->IND_money_format($value['theli_wholesaller_price']);
 			}
-			
-
 
 			$i++;
 		}
