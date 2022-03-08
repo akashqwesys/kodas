@@ -635,7 +635,7 @@ class Api_model extends CI_Model {
 		// $this->db->join('shop_categories_translations', 'shop_categories_translations.for_id = productcat.catid', 'left');		
 		$this->db->where('products.id', $id);
 		$this->db->limit(1);
-		$query = $this->db->select('price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,user_app.pviewcount,products.id as Id,products.videoid as VideoId, products_translations.title, products.image as product_image, products.folder as imgfolder, products.product_type as Type, products.product_pcs as Pcs, products.min_qty as MinQty, products.quantity as product_quantity_available, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price')->get('products');
+		$query = $this->db->select('price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,user_app.pviewcount,products.id as Id,products.videoid as VideoId, products_translations.title,products_translations.theli_title, products.image as product_image, products.folder as imgfolder, products.product_type as Type, products.product_pcs as Pcs, products.min_qty as MinQty, products.quantity as product_quantity_available, products_translations.description, products_translations.price, products_translations.old_price, products_translations.basic_description,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price')->get('products');
 		$result = $query->result_array();
 
 		$data = array();
@@ -751,69 +751,38 @@ class Api_model extends CI_Model {
 				if($user->guest==1){
 					$data[$i]['mainprice']=	$this->IND_money_format($value['box_guest_price']);
 					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_guest_price']);
+										
+					$data[$i]['PcsMrp'] = $this->IND_money_format($value['box_guest_price'] * $value['Pcs']);
+					$data[$i]['PcsMrp_theli'] = $this->IND_money_format($value['theli_guest_price'] * $value['Pcs']);
 				}
 				if($user->retailer==1){
 					$data[$i]['mainprice']=	$this->IND_money_format($value['box_retailer_price']);
 					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_retailer_price']);
+
+					$data[$i]['PcsMrp'] = $this->IND_money_format($value['box_retailer_price'] * $value['Pcs']);
+					$data[$i]['PcsMrp_theli'] = $this->IND_money_format($value['theli_retailer_price'] * $value['Pcs']);
 				}
 				if($user->wholesaller==1){
 					$data[$i]['mainprice']=	$this->IND_money_format($value['box_wholesaller_price']);
 					$data[$i]['mainprice2']=$this->IND_money_format($value['theli_wholesaller_price']);
+
+					$data[$i]['PcsMrp'] = $this->IND_money_format($value['box_wholesaller_price'] * $value['Pcs']);
+					$data[$i]['PcsMrp_theli'] = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Pcs']);
 				}
 			}	
-
-			
-			if (!empty($user)) {
-				
-					$box_guest_price_reg=$value['box_guest_price'] * $value['Pcs'];
-					
-						$PcsMrp_reg = $value['box_guest_price'] * $value['Pcs'];
-						$Mrp = $this->IND_money_format($value['box_guest_price']);
-						$PcsMrp = $this->IND_money_format($value['box_guest_price'] * $value['Pcs']);
-						
-					
-					if($user->retailer==1){
-						$PcsMrp_reg = $value['box_retailer_price'] * $value['Pcs'];
-						$Mrp = $this->IND_money_format($value['box_retailer_price']);
-						$PcsMrp = $this->IND_money_format($value['box_retailer_price'] * $value['Pcs']);
-						
-					}
-					if($user->wholesaller==1){
-						$PcsMrp_reg = $value['box_wholesaller_price'] * $value['Pcs'];
-						$Mrp = $this->IND_money_format($value['box_wholesaller_price']);
-						$PcsMrp = $this->IND_money_format($value['box_wholesaller_price'] * $value['Pcs']);
-					
-					}	
-								
-					if($user->guest==1){
-						$PcsMrp_reg = $value['theli_guest_price'] * $value['Pcs'];
-						$Mrp = $this->IND_money_format($value['theli_guest_price']);
-						$PcsMrp = $this->IND_money_format($value['theli_guest_price'] * $value['Pcs']);
-					
-					}
-					if($user->retailer==1){
-						$PcsMrp_reg = $value['theli_retailer_price'] * $value['Pcs'];
-						$Mrp = $this->IND_money_format($value['theli_retailer_price']);
-						$PcsMrp = $this->IND_money_format($value['theli_retailer_price'] * $value['Pcs']);
-						
-					}
-					if($user->wholesaller==1){
-						$PcsMrp_reg = $value['theli_wholesaller_price'] * $value['Pcs'];
-						$Mrp = $this->IND_money_format($value['theli_wholesaller_price']);
-						$PcsMrp = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Pcs']);						
-					}	
-				
-				// box_retailer_price		
-				// theli_wholesaller_price					
-			}
 
 			$data[$i]['Id'] = $value['Id'];
 			$data[$i]['category'] = $cat_array;
 			$data[$i]['ItemName'] = $value['title'];
+			$data[$i]['Theli_ItemName'] = $value['theli_title'];			
 			$data[$i]['Description'] = $value['description'];
 			$data[$i]['Type'] = $value['Type'];
-			$data[$i]['Mrp'] = $Mrp;
-			$data[$i]['PcsMrp'] = $PcsMrp;
+			$data[$i]['Mrp'] = $data[$i]['mainprice'];
+			$data[$i]['PcsMrp'] = $data[$i]['PcsMrp'];
+
+			$data[$i]['Mrp_theli'] = $data[$i]['mainprice2'];
+			$data[$i]['PcsMrp_theli'] = $data[$i]['PcsMrp_theli'];
+
 			$data[$i]['packagingtype_id'] = $value['packagingtype_id'];			
 			$data[$i]['required_packing_pcs'] = $value['required_packing_pcs'];
 			$data[$i]['packing_title'] = $value['packing_title'];			
