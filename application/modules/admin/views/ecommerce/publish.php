@@ -123,7 +123,7 @@ foreach ($languages as $language) {
       </div>
 
       <div class="col-md-6">  
-        <h3>Theli</h3>
+        <h3>Thely</h3>
         <div class="form-group">
           <label>Title </label>
           <input type="text" name="theli_title[]" value="<?=$trans_load != null && isset($trans_load[$language->abbr]['theli_title']) ? $trans_load[$language->abbr]['theli_title'] : ''?>" class="form-control">

@@ -243,17 +243,6 @@ class Products_model extends CI_Model {
 			// echo $this->db->last_query();exit;
 		} else {
 
-
-
-
-			
-
-			/*
-				             * Lets get what is default tranlsation number
-				             * in titles and convert it to url
-				             * We want our plaform public ulrs to be in default
-				             * language that we use
-			*/
 			$i = 0;
 			foreach ($_POST['translations'] as $translation) {
 				if ($translation == MY_DEFAULT_LANGUAGE_ABBR) {
@@ -400,6 +389,10 @@ class Products_model extends CI_Model {
 			$post['old_price'][$i] = str_replace(' ', '', $post['old_price'][$i]);
 			$post['old_price'][$i] = str_replace(',', '.', $post['old_price'][$i]);
 			$post['old_price'][$i] = preg_replace("/[^0-9,.]/", "", $post['old_price'][$i]);
+
+
+			echo $post['description'][$i];die;
+
 			$arr = array(
 				'title' => $post['title'][$i],
 				'theli_title' => $post['theli_title'][$i],
