@@ -902,7 +902,7 @@ class Api_model extends CI_Model {
 			if (!empty($_REQUEST['UserId']) && isset($_REQUEST['UserId'])) {
 				$pricebyuser = $this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();				
 			}
-			print_
+		
 			if (!empty($pricebyuser)) {
 				if($value['ProductType']=='box'){
 					if($pricebyuser->guest==1){
