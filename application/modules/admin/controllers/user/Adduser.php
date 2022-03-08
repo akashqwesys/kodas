@@ -236,7 +236,7 @@ class Adduser extends ADMIN_Controller {
 					// print_r($line);
 					$row=$this->User_model->getAgentId(str_replace('"', '', $line[3]));																			
 					$agent_id=0;
-					if (!empty($row)) {
+					if (!empty($row)) {						
 						$agent_id=$row['agent_id'];
 					}
 									
@@ -264,7 +264,7 @@ class Adduser extends ADMIN_Controller {
 					}
 				}
 			}
-			// die;
+			// die;	
 			fclose($fp) or die("can't close file");
 			$List = implode(', ', $userexits);
 			if ($List) {

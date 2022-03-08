@@ -817,7 +817,6 @@ class Api_model extends CI_Model {
 		} else {
 			return '';
 		}
-
 	}
 
 	public function AddToCart() {		

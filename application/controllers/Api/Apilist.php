@@ -810,8 +810,6 @@ class Apilist extends REST_Controller {
 		}
 	}
 
-
-
 	/*
 		     * Get One Catlist
 	*/
