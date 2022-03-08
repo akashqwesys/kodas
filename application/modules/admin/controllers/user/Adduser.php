@@ -212,55 +212,57 @@ class Adduser extends ADMIN_Controller {
 			$skip = 0;
 			while (($line = fgetcsv($fp)) !== FALSE) {
 				// echo '<pre>';print_r($line[3]);
-				if ($skip == 0) {
-					$skip++;
-				} else {
-					// $getpremium = str_replace('"', '', strtolower("$line[7]"));
-					// $getcoupan = str_replace('"', '', strtolower("$line[8]"));
-					// $getcredit = str_replace('"', '', strtolower("$line[9]"));
-					// if ($getpremium == 'yes') {
-					// 	$premium = 1;
-					// } else {
-					// 	$premium = 0;
-					// }
-					// if ($getcoupan == 'yes') {
-					// 	$coupan = 1;
-					// } else {
-					// 	$coupan = 0;
-					// }
-					// if ($getcredit == 'yes') {
-					// 	$credit = 1;
-					// } else {
-					// 	$credit = 0;
-					// }
-					// print_r($line);
-					$row=$this->User_model->getAgentId(str_replace('"', '', strtolower($line[3])));																			
-					$agent_id=0;
-					if (!empty($row)) {						
-						$agent_id=$row['agent_id'];
-					}
-									
-					$data = array(
-						'name' => str_replace('"', '', "$line[0]"),
-						'ac_type' => str_replace('"', '', "$line[1]"),
-						'city' => str_replace('"', '', "$line[2]"),
-						'alocation_agent_id' => $agent_id,
-						'whatsapp' => str_replace('"', '', $line[4]),
-						'mobilenumber' => str_replace('"', '', $line[5]),
-						'phone_2' => str_replace('"', '', $line[6]),
-						'emailid' => str_replace('"', '', $line[7]),
-						'sms_no' => str_replace('"', '', $line[8]),											
-						'gstin' => str_replace('"', '', $line[9]),
-						'guest' => 1,	
-						'isverified' => 'true'			
-					);
-
-					$querymobile = $this->db->get_where('user_app', array('whatsapp' => $data['whatsapp']));
-					if ($querymobile->num_rows() > 0) {
-						$this->session->set_flashdata('result_publish', 'Some Users Mobile Already exits In System!');
-						array_push($userexits, $data['mobilenumber']);
+				if(!empty($line[0])){
+					if ($skip == 0) {
+						$skip++;
 					} else {
-						$this->db->insert('user_app', $data);
+						// $getpremium = str_replace('"', '', strtolower("$line[7]"));
+						// $getcoupan = str_replace('"', '', strtolower("$line[8]"));
+						// $getcredit = str_replace('"', '', strtolower("$line[9]"));
+						// if ($getpremium == 'yes') {
+						// 	$premium = 1;
+						// } else {
+						// 	$premium = 0;
+						// }
+						// if ($getcoupan == 'yes') {
+						// 	$coupan = 1;
+						// } else {
+						// 	$coupan = 0;
+						// }
+						// if ($getcredit == 'yes') {
+						// 	$credit = 1;
+						// } else {
+						// 	$credit = 0;
+						// }
+						// print_r($line);
+						$row=$this->User_model->getAgentId(str_replace('"', '', strtolower($line[3])));																			
+						$agent_id=0;
+						if (!empty($row)) {						
+							$agent_id=$row['agent_id'];
+						}
+										
+						$data = array(
+							'name' => str_replace('"', '', "$line[0]"),
+							'ac_type' => str_replace('"', '', "$line[1]"),
+							'city' => str_replace('"', '', "$line[2]"),
+							'alocation_agent_id' => $agent_id,
+							'whatsapp' => str_replace('"', '', $line[4]),
+							'mobilenumber' => str_replace('"', '', $line[5]),
+							'phone_2' => str_replace('"', '', $line[6]),
+							'emailid' => str_replace('"', '', $line[7]),
+							'sms_no' => str_replace('"', '', $line[8]),											
+							'gstin' => str_replace('"', '', $line[9]),
+							'guest' => 1,	
+							'isverified' => 'true'			
+						);
+
+						$querymobile = $this->db->get_where('user_app', array('whatsapp' => $data['whatsapp']));
+						if ($querymobile->num_rows() > 0) {
+							$this->session->set_flashdata('result_publish', 'Some Users Mobile Already exits In System!');
+							array_push($userexits, $data['mobilenumber']);
+						} else {
+							$this->db->insert('user_app', $data);
+						}
 					}
 				}
 			}
