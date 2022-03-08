@@ -178,15 +178,16 @@ class Products_model extends CI_Model {
 					));
 				}
 			}
-
-			$this->db->where('refProductId', $id);
-			$this->db->delete('connproduct');	
-			foreach ($post['connectedProduct'] as $key => $value) {
-				if (!empty($value[0])) {
-					$this->db->insert('connproduct', array(
-						'refProductId' => $id,
-						'connProductId' => $value						
-					));
+			if(isset($post['connectedProduct'])){
+				$this->db->where('refProductId', $id);
+				$this->db->delete('connproduct');	
+				foreach ($post['connectedProduct'] as $key => $value) {
+					if (!empty($value[0])) {
+						$this->db->insert('connproduct', array(
+							'refProductId' => $id,
+							'connProductId' => $value						
+						));
+					}
 				}
 			}
 			// if(isset($_FILES['products_others_image'])){
@@ -341,14 +342,16 @@ class Products_model extends CI_Model {
 				}
 			}
 
-			$this->db->where('refProductId', $id);
-			$this->db->delete('connproduct');
-			foreach ($post['connectedProduct'] as $key => $value) {
-				if (!empty($value[0])) {
-					$this->db->insert('connproduct', array(
-						'refProductId' => $id,
-						'connProductId' => $value						
-					));
+			if(isset($post['connectedProduct'])){
+				$this->db->where('refProductId', $id);
+				$this->db->delete('connproduct');
+				foreach ($post['connectedProduct'] as $key => $value) {
+					if (!empty($value[0])) {
+						$this->db->insert('connproduct', array(
+							'refProductId' => $id,
+							'connProductId' => $value						
+						));
+					}
 				}
 			}
 			$this->db->where('id', $id);

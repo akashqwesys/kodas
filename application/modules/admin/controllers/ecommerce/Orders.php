@@ -89,7 +89,7 @@ class Orders extends ADMIN_Controller {
 		$data['cashondelivery_visibility'] = $this->Home_admin_model->getValueStore('cashondelivery_visibility');
 		$data['bank_account'] = $this->Orders_model->getBankAccountSettings();
 		$this->load->view('_parts/header', $head);
-		$this->load->view('ecommerce/orders', $data);
+		$this->load->view('ecommerce/list-orders', $data);
 		$this->load->view('_parts/footer');
 		if ($page == 0) {
 			$this->saveHistory('Go to orders page');
@@ -98,13 +98,12 @@ class Orders extends ADMIN_Controller {
 
 
 
-	public function order_list() {       
+	public function order_list() {
+		// echo 'hi';die;       
         $this->login_check();             
         $list = $this->Attributesgroup_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
-
-        // echo '<pre>';print_r($list);die;
 
         foreach ($list as $datarow) {    
             
