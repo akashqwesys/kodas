@@ -234,7 +234,7 @@ class Adduser extends ADMIN_Controller {
 					// 	$credit = 0;
 					// }
 					// print_r($line);
-					$row=$this->User_model->getAgentId(str_replace('"', '', $line[3]));																			
+					$row=$this->User_model->getAgentId(str_replace('"', '', strtolower($line[3])));																			
 					$agent_id=0;
 					if (!empty($row)) {						
 						$agent_id=$row['agent_id'];
