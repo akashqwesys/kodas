@@ -427,7 +427,7 @@ class User_model extends CI_Model {
 
 	public function getAgentId($name)
     {
-        // $this->db->where('name=', $name);
+        $this->db->where('name', $name);
         $query = $this->db->get('agent');
         return $query->row_array();
     }

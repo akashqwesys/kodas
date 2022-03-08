@@ -211,7 +211,7 @@ class Adduser extends ADMIN_Controller {
 			$fp = fopen($_FILES['csvfile']['tmp_name'], 'r') or die("can't open file");
 			$skip = 0;
 			while (($line = fgetcsv($fp)) !== FALSE) {
-				// print_r($line);die;
+				// echo '<pre>';print_r($line[3]);
 				if ($skip == 0) {
 					$skip++;
 				} else {
@@ -233,8 +233,8 @@ class Adduser extends ADMIN_Controller {
 					// } else {
 					// 	$credit = 0;
 					// }
-					// print_r($line);die;
-					$row=$this->User_model->getAgentId(str_replace('"', '', $line[3]));																
+					// print_r($line);
+					$row=$this->User_model->getAgentId(str_replace('"', '', $line[3]));																			
 					$agent_id=0;
 					if (!empty($row)) {
 						$agent_id=$row['agent_id'];
@@ -264,6 +264,7 @@ class Adduser extends ADMIN_Controller {
 					}
 				}
 			}
+			// die;
 			fclose($fp) or die("can't close file");
 			$List = implode(', ', $userexits);
 			if ($List) {
