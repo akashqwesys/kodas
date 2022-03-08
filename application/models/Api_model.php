@@ -774,7 +774,7 @@ class Api_model extends CI_Model {
 			$data[$i]['Id'] = $value['Id'];
 			$data[$i]['category'] = $cat_array;
 			$data[$i]['ItemName'] = $value['title'];
-			$data[$i]['Theli_ItemName'] = $value['theli_title'];			
+			$data[$i]['ItemName_theli'] = $value['theli_title'];			
 			$data[$i]['Description'] = $value['description'];
 			$data[$i]['Type'] = $value['Type'];
 			$data[$i]['Mrp'] = $data[$i]['mainprice'];
