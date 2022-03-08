@@ -682,6 +682,8 @@ class Api_model extends CI_Model {
 			$a++;
 		}
 
+		$this->db->select('likestatus')->get('likeproductimg')->row();
+
 		$this->db->join('attributes_group', 'attributes_group.attributesgroup_id  = product_attribute1.refAttributesgroup_id', 'left');
 		$this->db->join('attributes', 'attributes.attributes_id  = product_attribute1.refattributes_id', 'left');
 		$this->db->where('product_attribute1.refProduct_id', $_REQUEST['ItemId']);
