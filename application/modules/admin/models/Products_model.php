@@ -261,7 +261,7 @@ class Products_model extends CI_Model {
 				'product_pcs' => $post['product_pcs'],
 				'refPackagingtype_id' => $post['refPackagingtype_id'],
 				'min_qty' => $post['min_qty'],
-				'stock' => $post['stock'],
+				
 				'videoid' => $post['videoid'],
 				//'in_slider' => $post['in_slider'],
 				'price1' => $post['price1'],
@@ -322,7 +322,14 @@ class Products_model extends CI_Model {
 					}
 				}
 			}
-
+					
+			if (!empty($post['stock'])) {
+				$this->db->insert('stock', array(
+					'refProduct_id' => $id,
+					'qty' => $post['stock'],
+					'timeanddate' => time(),
+				));
+			}			
 
 			$this->db->where('productid', $id);
 			$this->db->delete('productcat');

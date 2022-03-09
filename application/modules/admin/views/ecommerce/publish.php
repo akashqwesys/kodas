@@ -463,9 +463,20 @@ foreach ($shop_categorie['info'] as $nameAbbr) {
     <label>Min Qty</label>
     <input type="text" required placeholder="number" name="min_qty" value="<?=@$_POST['min_qty']?>" class="form-control" id="quantity">
   </div>
+
+<?php
+  $this->db->where('refProduct_id', $_POST['id']);  
+  $stock_array = $this->db->get('stock')->result_array();  
+  $totalStock=0;
+  foreach($stock_array as $stock_row){
+    $totalStock=$totalStock+$stock_row['qty'];
+  }
+
+  
+?>
   <div class="form-group for-shop">
     <label>Opening stock</label>
-    <input type="text" required placeholder="Stock" name="stock" <?php if(isset($_POST['stock'])){echo 'readonly';} ?> value="<?=@$_POST['stock']?>" class="form-control" id="stock">
+    <input type="text" required placeholder="Stock" name="stock" <?php if(isset($_POST['id'])){echo 'readonly';} ?> value="<?=$totalStock?>" class="form-control" id="stock">
   </div>
 <?php
 $productviewtype = [];

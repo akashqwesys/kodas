@@ -1006,16 +1006,41 @@ class Api_model extends CI_Model {
 				$box=array();
 				$box['cartdata']=array();
 				$total=0;
-				foreach($data as $c_row){					
+				$package_qty = 0;
+				foreach($data as $c_row){
+
 					if($c_row['ProductType']=='box'){
 						if($p_row['packagingtype_id']==$c_row['packagingtype_id']){						
 							$total=$total+($c_row['PcsMrp_reg']*$c_row['Qty']);
 							array_push($box['cartdata'],$c_row);
+							$package_qty += $c_row['Qty'] * $c_row['Pcs'];							
 						}
 					}					
 				}
-				if(!empty($box['cartdata'])){	
-					$box['Require_Qty']=$p_row['pcs'];				
+				if(!empty($box['cartdata'])){
+
+						// 84
+						//84*1.5=126
+						//200
+					// echo $package_qty;die;
+					$x=1;
+					for($i=1;$i<10;$i+=0.5) {
+						if(($x % 2 == 0) && ($p_row['pcs'] * $i > $package_qty)) {																				
+							$box['Require_Qty']=0;
+							break;
+						}
+
+						if(($x % 2 == 1) && ($p_row['pcs'] * $i > $package_qty)) {							
+							$box['Require_Qty']=($p_row['pcs'] * $i - $package_qty);
+							break;
+						}
+
+						if(($p_row['pcs'] * $i) == $package_qty) {
+							$box['Require_Qty']=0;
+							break;
+						}
+						$x++;
+					}														
 					$box['Package_type']='box';
 					$box['Package_total']=$total;				
 					array_push($item[0]['CartItem'],$box);
@@ -1024,15 +1049,22 @@ class Api_model extends CI_Model {
 		}
 		$box=array();
 		$box['cartdata']=array();
+		$package_qty=0;
 		$total=0;
 		foreach($data as $c_row){					
 			if($c_row['ProductType']=='theli'){										
 				$total=$total+($c_row['PcsMrp_reg']*$c_row['Qty']);
+				$package_qty += $c_row['Qty']* $c_row['Pcs'];
 				array_push($box['cartdata'],$c_row);					
 			}					
 		}
 		if(!empty($box['cartdata'])){
-			$box['Require_Qty']=$cart_thely_limit['value'];
+			if($package_qty >= $cart_thely_limit['value']){
+				$box['Require_Qty']=0;
+			}else{
+				$box['Require_Qty']=$cart_thely_limit['value']-	$package_qty;	
+			}
+			// $box['Require_Qty']=$cart_thely_limit['value'];
 			$box['Package_type']='theli';
 			$box['Package_total']=$total;				
 			array_push($item[0]['CartItem'],$box);
