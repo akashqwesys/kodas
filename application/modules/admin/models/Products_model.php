@@ -158,12 +158,14 @@ class Products_model extends CI_Model {
 			$this->db->where('refProduct_id', $id);
 			$this->db->delete('product_attribute1');
 			foreach ($post['refattributes_id'] as $key => $value) {
-				if (isset($value[0]) && $value[0] != '') {
-					$this->db->insert('product_attribute1', array(
-						'refProduct_id' => $id,
-						'refAttributesgroup_id' => $key,
-						'refattributes_id' => $value[0]
-					));
+				foreach($value as $row){
+					if ($row != '' && !empty($row)) {
+						$this->db->insert('product_attribute1', array(
+							'refProduct_id' => $id,
+							'refAttributesgroup_id' => $key,
+							'refattributes_id' => $row
+						));
+					}
 				}
 			}
 
@@ -221,7 +223,7 @@ class Products_model extends CI_Model {
 				// 'product_type' => $post['product_type'],
 				'product_pcs' => $post['product_pcs'],
 				'refPackagingtype_id' => $post['refPackagingtype_id'],
-				'min_qty' => $post['min_qty'],
+				'min_qty' => $post['min_qty'],				
 				'videoid' => $post['videoid'],
 				//'in_slider' => $post['in_slider'],
 				'price1' => $post['price1'],
@@ -250,8 +252,7 @@ class Products_model extends CI_Model {
 				}
 				$i++;
 			}
-			if (!$this->db->insert('products', array(
-				
+			if (!$this->db->insert('products', array(				
 				'designNo' => $post['designNo'],
 				'image' => $post['image'],
 				// 'shop_categorie' => $post['shop_categorie'],
@@ -260,6 +261,7 @@ class Products_model extends CI_Model {
 				'product_pcs' => $post['product_pcs'],
 				'refPackagingtype_id' => $post['refPackagingtype_id'],
 				'min_qty' => $post['min_qty'],
+				'stock' => $post['stock'],
 				'videoid' => $post['videoid'],
 				//'in_slider' => $post['in_slider'],
 				'price1' => $post['price1'],
@@ -306,15 +308,18 @@ class Products_model extends CI_Model {
 			// 	}
 			// }
 				
+			// echo '<pre>';print_r($post['refattributes_id']);die;
 			$this->db->where('refProduct_id', $id);
 			$this->db->delete('product_attribute1');
 			foreach ($post['refattributes_id'] as $key => $value) {
-				if (isset($value[0]) && $value[0] != '') {
-					$this->db->insert('product_attribute1', array(
-						'refProduct_id' => $id,
-						'refAttributesgroup_id' => $key,
-						'refattributes_id' => $value[0]
-					));
+				foreach($value as $row){
+					if ($row != '' && !empty($row)) {
+						$this->db->insert('product_attribute1', array(
+							'refProduct_id' => $id,
+							'refAttributesgroup_id' => $key,
+							'refattributes_id' => $row
+						));
+					}
 				}
 			}
 
@@ -390,8 +395,7 @@ class Products_model extends CI_Model {
 			$post['old_price'][$i] = str_replace(',', '.', $post['old_price'][$i]);
 			$post['old_price'][$i] = preg_replace("/[^0-9,.]/", "", $post['old_price'][$i]);
 
-
-			echo $post['description'][$i];die;
+			// echo $post['description'][$i];die;
 
 			$arr = array(
 				'title' => $post['title'][$i],

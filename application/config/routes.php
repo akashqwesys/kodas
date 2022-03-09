@@ -258,6 +258,7 @@ $route['admin/addpackagingtype'] = 'admin/packagingtype/packagingtype/add_packag
 $route['admin/editpackagingtype/(:num)'] = 'admin/packagingtype/packagingtype/edit_packagingtype/$1';
 $route['admin/active-inactive-packagingtype'] = 'admin/packagingtype/packagingtype/approve_status';
 
+$route['admin/active-inactive-products'] = 'admin/ecommerce/products/approve_status';
 
 // HOME / LOGIN
 $route['admin'] = 'admin/home/login';

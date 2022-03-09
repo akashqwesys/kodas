@@ -98,19 +98,44 @@ class Products extends ADMIN_Controller {
 			$img=' <a href="'.base_url('admin/likedislikeproimg/' . $datarow->id).'">
 			<img src="'.$image.'" alt="No Image" class="img-thumbnail" style="height:100px;"></a>';
 
+
+			$active_inactive_badge='';
+            if($datarow->visibility==1){
+                $active_inactive_badge='<span class="badge badge-success badge-status-'.$datarow->id.'">Active</span>';
+            }
+            if($datarow->visibility==0){
+                $active_inactive_badge='<span class="badge badge-danger badge-status-'.$datarow->id.'">inActive</span>';
+            }            
+            if($datarow->visibility==1){
+                $str='Inactive';
+                $class="btn-danger";
+                $status=0;
+            }
+            if($datarow->visibility==0){
+                $str='Active';
+                $class="btn-success";
+                $status=1;
+            }
+
+			// $actionBtn = '<button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->attributes_id . '" data-status="' . $status . '" data-table="attributes" data-wherefield="attributes_id" data-updatefield="status" data-module="attributes">'.$str.'</button>';
+
             $edit_url=base_url('admin/publish/'). $datarow->id; 
 			$delete_url=base_url('admin/products?delete='). $datarow->id;           
             $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>             
-			<a href="'.$delete_url.'" class="btn btn-xs btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>';
+			<a href="'.$delete_url.'" class="btn btn-xs btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
+			<button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->id . '" data-status="' . $status . '" data-table="products" data-wherefield="id" data-updatefield="visibility" data-module="products">'.$str.'</button>
+			';
             $no++;
             $row = array();
             $row[] = $no;
 			$row[] = $img;
             $row[] = $datarow->title;        
-            $row[] = $datarow->price; 
+            $row[] = $datarow->price3;
+			$row[] = $datarow->theli_price3; 
             $row[]=$datarow->product_pcs;   
             $row[]=$datarow->view_count;  
-            $row[]=$this->db->count_all_results('userviewproduct');    
+            $row[]=$this->db->count_all_results('userviewproduct');   
+			$row[]=$active_inactive_badge; 
 			$row[]=$actionBtn;             
             $data[] = $row;
         }
@@ -147,5 +172,16 @@ class Products extends ADMIN_Controller {
 		}
 		$this->saveHistory('Change product id ' . $_POST['id'] . ' to status ' . $_POST['to_status']);
 	}
+	public function approve_status() {        
+        if (isset($_REQUEST['table_id'])) {
+            $res = $this->Productsdt_model->approve_status($_REQUEST);
+            if ($res) {
+                $data = array(
+                    'suceess' => true
+                );
+            }
+            echo json_encode($data);
+        }
+    }
 
 }

@@ -996,22 +996,26 @@ class Api_model extends CI_Model {
 		$item[0]['Pcstotal'] = !empty($pcstotal) ? $pcstotal : 0;
 		// $item[0]['CartTotal'] = $count;
 		$item[0]['CartItem'] = array();
+		// $item[0]['CartItem']['cartdata'] = array();
 
 		$packing_typet = $this->db->where("status = '1'")->get('packagingtype')->result_array();
+		$cart_thely_limit = $this->db->where("thekey = 'cartlimitset'")->get('value_store')->row_array();
 		// print_r($packing_typet);die;
 		if(!empty($packing_typet)){
 			foreach($packing_typet as $p_row){
 				$box=array();
+				$box['cartdata']=array();
 				$total=0;
 				foreach($data as $c_row){					
 					if($c_row['ProductType']=='box'){
 						if($p_row['packagingtype_id']==$c_row['packagingtype_id']){						
 							$total=$total+($c_row['PcsMrp_reg']*$c_row['Qty']);
-							array_push($box,$c_row);
+							array_push($box['cartdata'],$c_row);
 						}
 					}					
 				}
-				if(!empty($box)){
+				if(!empty($box['cartdata'])){	
+					$box['Require_Qty']=$p_row['pcs'];				
 					$box['Package_type']='box';
 					$box['Package_total']=$total;				
 					array_push($item[0]['CartItem'],$box);
@@ -1019,19 +1023,21 @@ class Api_model extends CI_Model {
 			}			
 		}
 		$box=array();
+		$box['cartdata']=array();
 		$total=0;
 		foreach($data as $c_row){					
 			if($c_row['ProductType']=='theli'){										
 				$total=$total+($c_row['PcsMrp_reg']*$c_row['Qty']);
-				array_push($box,$c_row);					
+				array_push($box['cartdata'],$c_row);					
 			}					
 		}
-		if(!empty($box)){
+		if(!empty($box['cartdata'])){
+			$box['Require_Qty']=$cart_thely_limit['value'];
 			$box['Package_type']='theli';
 			$box['Package_total']=$total;				
 			array_push($item[0]['CartItem'],$box);
-		}
-
+		}		
+		// print_r($item[0]['CartItem']);die;
 		if (!empty($item) && $item != '') {
 			$return['Data'] = $item;
 			$return['Message'] = 'Data Get Successfully!';

@@ -47,7 +47,7 @@ class Productsdt_model extends CI_Model
 
     function get_datatables()
     {
-        $this->db->select('products.id,products.image,products.product_pcs,products.view_count,products_translations.title,products_translations.price');        
+        $this->db->select('products.id,products.visibility,products.image,products.product_pcs,products.view_count,products_translations.title,products.price3,products.theli_price3');        
         $this->_get_datatables_query();
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left'); 
         if ($_POST['length'] != -1)
@@ -58,7 +58,7 @@ class Productsdt_model extends CI_Model
 
     function count_filtered()
     {
-        $this->db->select('products.id,products.image,products.product_pcs,products.view_count,products_translations.title,products_translations.price');        
+        $this->db->select('products.id,products.visibility,products.image,products.product_pcs,products.view_count,products_translations.title,products.price3,products.theli_price3');        
         $this->_get_datatables_query();
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left'); 
         $query = $this->db->get();
@@ -67,9 +67,21 @@ class Productsdt_model extends CI_Model
 
     public function count_all()
     {
-        $this->db->select('products.id,products.image,products.product_pcs,products.view_count,products_translations.title,products_translations.price');       
+        $this->db->select('products.id,products.visibility,products.image,products.product_pcs,products.view_count,products_translations.title,products.price3,products.theli_price3');       
         $this->db->from($this->table);
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left'); 
         return $this->db->count_all_results();
+    }
+    public function approve_status($params)
+    {
+        $table = $params['table'];
+        $table_update_field = $params['updatefield'];
+        $table_where_field = $params['wherefield'];
+        $status = $params['status'];
+        $table_id = $params['table_id'];
+        $query_res = $this->db->query("UPDATE  $table SET $table_update_field = '$status' WHERE $table_where_field=$table_id");
+        if ($query_res) {
+            return true;
+        }
     }
 }

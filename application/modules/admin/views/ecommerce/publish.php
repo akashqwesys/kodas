@@ -320,8 +320,10 @@ foreach ($result as $key => $value) {
 	?>
         <tr>
           <th><?=$value['title'];?></th>
-          <td><select class="selectpicker form-control show-tick show-menu-arrow" name="refattributes_id[<?=$value['attributesgroup_id']?>][]">
-              <option value="">Select Attributes</option>
+          <td>
+          <div class="form-group for-shop">  
+          <select class="selectpicker form-control show-tick show-menu-arrow" multiple name="refattributes_id[<?=$value['attributesgroup_id']?>][]">
+              <!-- <option value="">Select Attributes</option> -->
               <?php
                     $this->db->where('status', 1);
                     $this->db->where('refAttributes_group_id', $value['attributesgroup_id']);
@@ -339,7 +341,8 @@ foreach ($result as $key => $value) {
               <?= $values['title']; ?>
               </option>
               <?php }?>
-            </select></td>
+            </select>
+                  </div></td>
         </tr>
         <?php }
 ?>
@@ -394,7 +397,7 @@ if (isset($_POST['productoffertype'])) {
 </div><?php */?>
 <div class="form-group for-shop">
     <label>Categories</label>
-    <select class="selectpicker form-control show-tick show-menu-arrow" data-live-search="true" id="multipleSelectcat" name="shop_categorie[]" multiple>
+    <select class="selectpicker form-control" data-live-search="true" id="multipleSelectcat" name="shop_categorie[]" multiple>
       <?php foreach ($shop_categories as $key_cat => $shop_categorie) {
 	$selectcat = '';
 	if (isset($_POST['multicat'])) {
@@ -460,6 +463,10 @@ foreach ($shop_categorie['info'] as $nameAbbr) {
     <label>Min Qty</label>
     <input type="text" required placeholder="number" name="min_qty" value="<?=@$_POST['min_qty']?>" class="form-control" id="quantity">
   </div>
+  <div class="form-group for-shop">
+    <label>Opening stock</label>
+    <input type="text" required placeholder="Stock" name="stock" <?php if(isset($_POST['stock'])){echo 'readonly';} ?> value="<?=@$_POST['stock']?>" class="form-control" id="stock">
+  </div>
 <?php
 $productviewtype = [];
 if (isset($_POST['productviewtype'])) {
@@ -478,8 +485,6 @@ if (isset($_POST['productviewtype'])) {
       <div class="checkbox-inline"><label for="wholesaller"><input <?php if (in_array("wholesaller", $productviewtype)) {echo 'checked';}?> id="wholesaller" type="checkbox" name="productviewtype[]" value="wholesaller"/>Wholesaller</label></div>
   </div>
 
-
- 
 
   <div class="form-group for-shop">
     <?php /*?><label>Position</label><?php */?>
