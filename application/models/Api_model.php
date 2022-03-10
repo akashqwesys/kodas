@@ -1068,7 +1068,10 @@ class Api_model extends CI_Model {
 			$box['Package_type']='theli';
 			$box['Package_total']=$total;				
 			array_push($item[0]['CartItem'],$box);
-		}		
+		}
+		
+		
+		$item[0]['address']=$this->GetUserAddressfun();
 		// print_r($item[0]['CartItem']);die;
 		if (!empty($item) && $item != '') {
 			$return['Data'] = $item;
@@ -1733,21 +1736,20 @@ class Api_model extends CI_Model {
 		$post['order_id'] = $rr['order_id'] + 1;
 		$this->db->where('cartdetails.userid', $_REQUEST['UserId']);
 		$query = $this->db->select('*')->get('cartdetails');
-
 		
 		// print_r($query);die;
 
 		if ($query->num_rows() > 0) {
 					
-			$result = $query->result_array();
+			$result = $query->result_array();			
 			$post['date'] = time();
 			$products_to_order = [];
 			if (!empty($result)) {
 				foreach ($result as $key => $value) {
 					$totalqty[] = $value['qty'];
-					$finalprice[] = $this->getOneProductForSerialize($value['qty'], $value['itemid'], $_REQUEST['UserId'], 2);
+					$finalprice[] = $this->getOneProductForSerialize($value['qty'], $value['itemid'], $_REQUEST['UserId'], 2,$value['ProductType']);
 					$products_to_order[] = [
-						'product_info' => $this->getOneProductForSerialize($value['qty'], $value['itemid'], $_REQUEST['UserId'], 1),
+						'product_info' => $this->getOneProductForSerialize($value['qty'], $value['itemid'], $_REQUEST['UserId'], 1,$value['ProductType']),
 						'product_quantity' => $value['qty'],
 						'product_comment' => $value['comment'],
 						'product_hindicomment' => $value['hindicomment'],
@@ -1755,7 +1757,8 @@ class Api_model extends CI_Model {
 					];
 				}
 			}
-				
+			
+			// echo '<pre>';print_r($products_to_order);die;
 
 			$this->db->select('*');
 			$this->db->from('user_app');
@@ -1763,8 +1766,6 @@ class Api_model extends CI_Model {
 			$this->db->limit(1);
 			$query = $this->db->get();
 			$userrow = $query->row_array();
-
-
 			
 			$post['name'] = $userrow['name'];
 			$post['mobilenumber'] = $userrow['mobilenumber'];
@@ -2611,26 +2612,32 @@ class Api_model extends CI_Model {
 		}
 		return $return;
 	}
-	private function getOneProductForSerialize($cartq, $id, $userid, $posi) {
+	private function getOneProductForSerialize($cartq, $id, $userid, $posi,$productType='') {
 
 		if ($posi == 1) {
-			$row = $this->db->get_where('user_app', array('id' => $userid))->row()->userprice;
-			if ($row == 'Price1') {
+			$row = $this->db->get_where('user_app', array('id' => $userid))->row();
+			if (($row->guest == 1) && ($productType=='box')) {
 				$price = 'products.price1 as price';
-			} elseif ($row == 'Price2') {
+			} elseif (($row->retailer == 1) && ($productType=='box')) {
 				$price = 'products.price2 as price';
-			} elseif ($row == 'Price3') {
+			} elseif (($row->wholesaller == 1) && ($productType=='box')) {
 				$price = 'products.price3 as price';
-			} elseif ($row == 'Price4') {
-				$price = 'products.price4 as price';
-			} else {
-				$price = 'products_translations.price as price';
 			}
-			$this->db->select('products.id, products.folder, products.image, products.quantity, products.product_type, products.product_pcs, products.min_qty, products_translations.title,' . $price . ' , products_translations.old_price, products_translations.for_id');
-			$this->db->where('products.id', $id);
-			$this->db->join('products_translations', 'products_translations.for_id = products.id', 'inner');
-			$query = $this->db->get('products');
-			// echo $str = $this->db->last_query();
+			elseif (($row->guest == 1) && ($productType=='theli')) {
+				$price = 'products.theli_price1 as price';
+			}
+			elseif (($row->retailer == 1) && ($productType=='theli')) {
+				$price = 'products.theli_price2 as price';
+			}
+			elseif (($row->wholesaller == 1) && ($productType=='theli')) {
+				$price = 'products.theli_price3 as price';
+			}
+			 else {
+				$price = 'products.price1 as price';
+			}
+			$this->db->select('products.id,' . $price);
+			$this->db->where('products.id', $id);			
+			$query = $this->db->get('products');			
 			if ($query->num_rows() > 0) {
 				return $query->row_array();
 			} else {
