@@ -3,8 +3,8 @@ class Userlist_model extends CI_Model
 {
 
     var $table = 'user_app';
-    var $column_order = array(null, 'user_app.name', 'user_app.mobilenumber', 'user_app.emailid', 'user_app.compnay','user_app.isverified','agent.name as a_name'); //set column field database for datatable orderable
-    var $column_search = array('user_app.name', 'user_app.mobilenumber', 'user_app.emailid', 'user_app.compnay','user_app.isverified','agent.name as a_name'); //set column field database for datatable searchable 
+    var $column_order = array(null, 'user_app.name', 'user_app.mobilenumber', 'user_app.emailid', 'user_app.compnay','user_app.isverified','agent.name'); //set column field database for datatable orderable
+    var $column_search = array('user_app.name', 'user_app.mobilenumber', 'user_app.emailid', 'user_app.compnay','user_app.isverified','agent.name'); //set column field database for datatable searchable 
     var $order = array('user_app.id' => 'asc'); // default order 
 
     public function __construct()

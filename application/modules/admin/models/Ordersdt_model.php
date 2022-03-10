@@ -2,9 +2,9 @@
 class Ordersdt_model extends CI_Model
 {
     var $table = 'orders';
-    var $column_order = array(null,'title', 'sort_order','status'); //set column field database for datatable orderable
-    var $column_search = array('title', 'sort_order','status'); //set column field database for datatable searchable 
-    var $order = array('attributesgroup_id' => 'desc'); // default order 
+    var $column_order = array(null,'orders.date','orders_clients.firstname','user_app.businessname','orders_clients.phone','orders.processed'); //set column field database for datatable orderable
+    var $column_search = array('orders.date','orders_clients.firstname','user_app.businessname','orders_clients.phone','orders.processed'); //set column field database for datatable searchable 
+    var $order = array('orders.id' => 'desc'); // default order 
 
     public function __construct()
     {
@@ -46,10 +46,11 @@ class Ordersdt_model extends CI_Model
     }
 
     function get_datatables()
-    {
-        // $this->db->select('attributesgroup.*,attributesgroup_group.title as ag_title');        
+    {     
+        $this->db->select('orders.*,orders_clients.first_name,orders_clients.phone,user_app.businessname');        
         $this->_get_datatables_query();
-        // $this->db->join('attributesgroup_group', 'attributesgroup_group.attributesgroup_group_id = attributesgroup.refAttributesgroup_group_id', 'left'); 
+        $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
+        $this->db->join('user_app', 'user_app.id = orders.user_id', 'left');  
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
@@ -58,50 +59,23 @@ class Ordersdt_model extends CI_Model
 
     function count_filtered()
     {
-        // $this->db->select('attributesgroup.*,attributesgroup_group.title as ag_title');        
+        $this->db->select('orders.*,orders_clients.first_name,orders_clients.phone,user_app.businessname');        
         $this->_get_datatables_query();
-        // $this->db->join('attributesgroup_group', 'attributesgroup_group.attributesgroup_group_id = attributesgroup.refAttributesgroup_group_id', 'left'); 
+        $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
+        $this->db->join('user_app', 'user_app.id = orders.user_id', 'left');  
         $query = $this->db->get();
         return $query->num_rows();
     }
 
     public function count_all()
     {
-        // $this->db->select('attributesgroup.*,attributesgroup_group.title as ag_title');        
+        $this->db->select('orders.*,orders_clients.first_name,orders_clients.phone,user_app.businessname');        
         $this->db->from($this->table);
-        // $this->db->join('attributesgroup_group', 'attributesgroup_group.attributesgroup_group_id = attributesgroup.refAttributesgroup_group_id', 'left'); 
+        $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
+        $this->db->join('user_app', 'user_app.id = orders.user_id', 'left');          
         return $this->db->count_all_results();
     }
 
-    public function addAttributesgroup($post)
-    {
-        $this->db->insert('attributes_group', array(
-            'title' => $post['title'],
-            'sort_order' => $post['sort_order'],                   
-            'status' => $post['status']
-        ));
-        $id = $this->db->insert_id();
-        if ($id) {
-            return true;
-        } else {
-            log_message('error', print_r($this->db->error(), true));
-        }
-    }
-    public function editAttributesgroup($post)
-    {
-        $this->db->where('attributesgroup_id', $post['attributesgroup_id']);
-        $res = $this->db->update('attributes_group', array(
-            'title' => $post['title'],
-            'sort_order' => $post['sort_order'],
-                 
-            'status' => $post['status']
-        ));
-        if ($res) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function approve_status($params)
     {
@@ -114,17 +88,5 @@ class Ordersdt_model extends CI_Model
         if ($query_res) {
             return true;
         }
-    }
-
-    public function get_attributesgroup_details($id)
-    {
-        $this->db->where('attributesgroup_id', $id);
-        $query = $this->db->get('attributes_group');
-        return $query->row_array();
-    }
-    public function get_attributesgroup_group()
-    {        
-        $query = $this->db->get('attributesgroup_group');
-        return $query->result_array();
     }
 }

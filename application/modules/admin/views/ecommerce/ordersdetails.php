@@ -131,6 +131,7 @@ if (!isset($_GET['settings'])) {
         <?php
 
 		$products = unserialize(html_entity_decode($orders_details->products));
+    // echo '<pre>';print_r($products);die;
 		$fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
 		$finalprice = 0;
 		foreach ($products as $key => $value) {

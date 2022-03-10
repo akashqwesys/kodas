@@ -15,7 +15,7 @@ class Orders extends ADMIN_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('SendMail');
-		$this->load->model(array('Orders_model', 'Home_admin_model'));
+		$this->load->model(array('Orders_model', 'Home_admin_model','Ordersdt_model'));
 	}
 
 	public function index($page = 0) {
@@ -101,46 +101,50 @@ class Orders extends ADMIN_Controller {
 	public function order_list() {
 		// echo 'hi';die;       
         $this->login_check();             
-        $list = $this->Attributesgroup_model->get_datatables();
+        $list = $this->Ordersdt_model->get_datatables();
         $data = array();
         $no = $_POST['start'];
 
         foreach ($list as $datarow) {    
             
-            $active_inactive_badge='';
-            if($datarow->status==1){
-                $active_inactive_badge='<span class="badge badge-success badge-status-'.$datarow->attributesgroup_id.'">Active</span>';
-            }
-            if($datarow->status==0){
-                $active_inactive_badge='<span class="badge badge-danger badge-status-'.$datarow->attributesgroup_id.'">inActive</span>';
-            }            
-            if($datarow->status==1){
-                $str='Inactive';
-                $class="btn-danger";
-                $status=0;
-            }
-            if($datarow->status==0){
-                $str='Active';
-                $class="btn-success";
-                $status=1;
-            }
-            $edit_url=base_url('admin/editattributesgroup/'). $datarow->attributesgroup_id;           
-            $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>             
-            <button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->attributesgroup_id . '" data-status="' . $status . '" data-table="attributes_group" data-wherefield="attributesgroup_id" data-updatefield="status" data-module="attributesgroup">'.$str.'</button>';
+			
+            // $active_inactive_badge='';
+            // if($datarow->status==1){
+            //     $active_inactive_badge='<span class="badge badge-success badge-status-'.$datarow->id.'">Active</span>';
+            // }
+            // if($datarow->status==0){
+            //     $active_inactive_badge='<span class="badge badge-danger badge-status-'.$datarow->id.'">inActive</span>';
+            // }            
+            // if($datarow->status==1){
+            //     $str='Inactive';
+            //     $class="btn-danger";
+            //     $status=0;
+            // }
+            // if($datarow->status==0){
+            //     $str='Active';
+            //     $class="btn-success";
+            //     $status=1;
+            // }
+            $view_url=base_url('admin/ordersdetails/'). $datarow->id;           
+            $actionBtn = '<a href="'.$view_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>';
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $datarow->title;        
-            $row[] = $datarow->sort_order; 
+            $row[] = $datarow->id;        
+            $row[] = date('d-m-Y', $datarow->date); 
             // $row[]=$datarow->ag_title;   
-            $row[]=$active_inactive_badge;  
+            // $row[]=$active_inactive_badge;
+			$row[] = $datarow->first_name;  
+			$row[] = $datarow->businessname;  
+			$row[] = $datarow->phone;
+			$row[] = $datarow->processed;  
             $row[]=$actionBtn;               
             $data[] = $row;
         }
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Attributesgroup_model->count_all(),
-            "recordsFiltered" => $this->Attributesgroup_model->count_filtered(),
+            "recordsTotal" => $this->Ordersdt_model->count_all(),
+            "recordsFiltered" => $this->Ordersdt_model->count_filtered(),
             "data" => $data,
         );
         echo json_encode($output);

@@ -4,6 +4,7 @@
       <table id="table" class="table dt-responsive nowrap">
         <thead>
           <tr>
+          <th>No</th>
             <th>Order ID</th>
             <th>Date</th>
             <th>Name</th>
