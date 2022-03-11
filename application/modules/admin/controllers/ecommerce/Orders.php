@@ -206,6 +206,7 @@ class Orders extends ADMIN_Controller {
 		$head['description'] = '!';
 		$head['keywords'] = '';
 
+		$data['users'] = $this->Products_model->getUsers();
 		$data['conn_products'] = $this->Products_model->getConnProducts();
 		$this->load->view('_parts/header', $head);
 		$this->load->view('ecommerce/add-order', $data);

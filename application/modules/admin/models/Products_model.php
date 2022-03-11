@@ -384,6 +384,11 @@ class Products_model extends CI_Model {
 		$result = $this->db->get('products');		
 		return $result->result_array();
 	}
+	public function getUsers() {		
+		$this->db->select('id,name');			
+		$result = $this->db->get('user_app');		
+		return $result->result_array();
+	}
 
 	private function setProductTranslation($post, $id, $is_update) {
 		$i = 0;
