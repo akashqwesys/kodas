@@ -38,6 +38,7 @@ if ($this->session->flashdata('result_delete')) {
             <th>Box Wholsell Price</th>
             <th>Thely Wholsell Price</th>
             <th>Pcs</th>
+            <th>Available Stock</th>
             <th>Guest Count</th>
             <th>User Count</th>
             <th>Status</th>

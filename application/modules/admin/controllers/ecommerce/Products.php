@@ -87,6 +87,18 @@ class Products extends ADMIN_Controller {
 
         foreach ($list as $datarow) {    
            
+			$this->db->select_sum('qty');
+			$this->db->where('itemid',$datarow->id);
+			$result = $this->db->get('order_products')->row();  
+			$totalStockOrder=$result->qty;
+
+			$this->db->select_sum('qty');
+			$this->db->where('refProduct_id', $datarow->id);
+			$result = $this->db->get('stock')->row();  
+			$totalStock=$result->qty;
+
+			$finalstock=$totalStock-$totalStockOrder;
+
 
 			$u_path = 'attachments/shop_images/';
 			if ($datarow->image != null && file_exists($u_path . $datarow->image)) {
@@ -132,7 +144,8 @@ class Products extends ADMIN_Controller {
             $row[] = $datarow->title;        
             $row[] = $datarow->price3;
 			$row[] = $datarow->theli_price3; 
-            $row[]=$datarow->product_pcs;   
+            $row[]=$datarow->product_pcs; 
+			$row[]=$finalstock;  
             $row[]=$datarow->view_count;  
             $row[]=$this->db->count_all_results('userviewproduct');   
 			$row[]=$active_inactive_badge; 

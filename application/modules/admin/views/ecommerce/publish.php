@@ -465,14 +465,16 @@ foreach ($shop_categorie['info'] as $nameAbbr) {
   </div>
 
 <?php
-  $this->db->where('refProduct_id', $_POST['id']);  
-  $stock_array = $this->db->get('stock')->result_array();  
-  $totalStock=0;
-  foreach($stock_array as $stock_row){
-    $totalStock=$totalStock+$stock_row['qty'];
-  }
 
-  
+// $this->db->where('itemid', $_POST['id']);  
+// $order_product_stock = $this->db->get('order_products')->result_array();
+  $this->db->select('qty');
+  $this->db->where('refProduct_id', $_POST['id']);
+  $result = $this->db->get('stock')->row_array();    
+  $totalStock=0;
+  if(!empty($result)){
+    $totalStock=$result['qty'];
+  }
 ?>
   <div class="form-group for-shop">
     <label>Opening stock</label>

@@ -1,3 +1,5 @@
+<h1>Orders<a href="<?= base_url('admin/add-order'); ?>" class="btn btn-primary btn-xs pull-right" style="margin-bottom:10px;float:right"><b>+</b> Add Order</a></h1>
+<hr>
 <div class="row">
   <div class="col-xs-12">
     <div class="table-responsive">

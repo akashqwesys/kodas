@@ -15,7 +15,7 @@ class Orders extends ADMIN_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('SendMail');
-		$this->load->model(array('Orders_model', 'Home_admin_model','Ordersdt_model'));
+		$this->load->model(array('Orders_model', 'Home_admin_model','Ordersdt_model','Products_model'));
 	}
 
 	public function index($page = 0) {
@@ -199,5 +199,17 @@ class Orders extends ADMIN_Controller {
 			return true;
 		}
 	}
+	public function addOrder() {
+		$data = array();
+		$head = array();
+		$head['title'] = 'Add-Order';
+		$head['description'] = '!';
+		$head['keywords'] = '';
 
+		$data['conn_products'] = $this->Products_model->getConnProducts();
+		$this->load->view('_parts/header', $head);
+		$this->load->view('ecommerce/add-order', $data);
+		$this->load->view('_parts/footer');			
+	}
+	
 }

@@ -427,6 +427,10 @@ $route['admin/uploadOthersImages'] =
 $route['admin/loadOthersImages'] =
 	'admin/ecommerce/prepublish/loadOthersImages';
 
+
+	$route['admin/add-order'] =
+	'admin/ecommerce/orders/addOrder';
+
 // $route['admin/uploadOthersPdf1'] = "admin/ecommerce/prepublish/do_upload_others_pdf";
 
 /*
