@@ -1765,7 +1765,7 @@ class Api_model extends CI_Model {
 				}			
 			}
 			
-			$this->db->insert_batch('oredr_products', $products_to_order); 
+			$this->db->insert_batch('order_products', $products_to_order); 
 			// echo '<pre>';print_r($products_to_order);die;
 			$this->db->select('*');
 			$this->db->from('user_app');
