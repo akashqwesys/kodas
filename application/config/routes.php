@@ -430,6 +430,8 @@ $route['admin/loadOthersImages'] =
 
 	$route['admin/add-order'] =
 	'admin/ecommerce/orders/addOrder';
+	$route['admin/load-address'] =
+	'admin/ecommerce/orders/load_address';
 
 // $route['admin/uploadOthersPdf1'] = "admin/ecommerce/prepublish/do_upload_others_pdf";
 

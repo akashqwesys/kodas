@@ -142,5 +142,63 @@
 <?php $this->load->view('newsletter/subscriber_js'); ?>
 <?php $this->load->view('coupan/coupan_js'); ?>
 <?php $this->load->view('ecommerce/orderlist_js'); ?>
+
+<script>
+ $(document).ready(function () {
+
+    $('#addBlock').on('click', function () { 
+        
+          
+
+
+        var cloneData=$(".block1" ).clone();
+        cloneData.find('.col-md-4').remove();
+        $(".current_1").removeClass('current');
+        cloneData.find('.lbl_append').after('<div class="col-sm-10 col-md-4 current current_1"></div>');                               
+        $( ".block" ).last().after(cloneData);        
+        // $('.current').appendTo(productSelect);   
+        // $('.current').find('.product_select').selectpicker('refresh');  
+        // cloneData.appendTo('#product_field');
+        // $('.product_select').selectpicker('refresh');  
+        
+        
+        $( ".block" ).removeClass("block1");
+        $( ".block" ).first().addClass('block1');
+        $( ".block_img_div" ).css("display","block"); 
+        $( ".block1 .block_img_div" ).css("display","none");
+        
+        $('.current').append($(".mainpicker" ).clone().css("display","block"));
+        // $('.current').append('<select class="product_select form-control show-tick show-menu-arrow" data-live-search="true" name="ItemId[]" required><?php foreach ($conn_products as $conn_product) { ?><option value="<?=$conn_product['p_id']?>"><?php echo $conn_product['title']; ?></option><?php } ?></select>');   
+        $('.current').find('.mainpicker').selectpicker();
+        $( ".current_1 .mainpicker" ).removeClass("mainpicker");
+    });
+    
+    $(document).on('click', ".block_img", function () {           
+        $(this).closest('.block').remove();
+    });
+
+    $('#UserId').on('change', function () {
+        var userid = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('admin/load-address') ?>",
+            data: {'userid': userid},
+            success: function (res) {
+                var data = jQuery.parseJSON(res);                
+                $("#ShipId").empty();
+                $("#BillId").empty();                         
+                $.each(data.shipping, function (index, value) {                            
+                    $("#ShipId").append(new Option(value.companyname+'-'+value.address, value.id));
+                });
+                $.each(data.billing, function (index, value) {
+                    $("#BillId").append(new Option(value.companyname+'-'+value.address, value.id));
+                });
+            }
+        });
+        });
+    });
+</script>
+
+
 </body>
 </html>

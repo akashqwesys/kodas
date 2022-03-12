@@ -41,6 +41,15 @@ class Ordersdetails_model extends CI_Model {
 		*/
 	}
 
+	
+	public function products($order_id) {
+		$this->db->join('products_translations', 'products_translations.for_id = order_products.itemid', 'left');
+		$this->db->join('products', 'products.id = order_products.itemid', 'left');
+		$this->db->where('refOrder_id', $order_id);		
+		$query = $this->db->select('order_products.*,products_translations.title,products_translations.theli_title,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,products.id as p_id, products.image as product_image, products.folder as imgfolder, products.videoid, products.product_pcs as Pcs,')->get('order_products');
+		return $result = $query->result_array();
+	}
+
 	public function ordercomment($order_id) {
 		$this->db->where('order_id', $order_id);
 		$this->db->where('type', 'Normal Order');

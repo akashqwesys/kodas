@@ -39,6 +39,7 @@ class Ordersdetails extends ADMIN_Controller
         }
         $rowscount = $this->Ordersdetails_model->ordersCount();
         $data['orders_details'] = $this->Ordersdetails_model->orders($order_id, $this->num_rows, $page, $order_by);
+        $data['products'] = $this->Ordersdetails_model->products($order_id);
         $data['ordercomment'] = $this->Ordersdetails_model->ordercomment($order_id);
         $data['links_pagination'] = pagination('admin/orders', $rowscount, $this->num_rows, 3);
         if (isset($_POST['sendcomment']) && isset($_POST['ordercommentmsg'])) {

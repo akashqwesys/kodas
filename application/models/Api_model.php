@@ -845,6 +845,7 @@ class Api_model extends CI_Model {
 			$data['comment'] = !empty($_POST['Comment']) ? $_POST['Comment'] : $row['comment'];
 			$data['hindicomment'] = !empty($_POST['HindiComment']) ? $_POST['HindiComment'] : $row['hindicomment'];
 			$data['audiofile'] = $audiofile;
+			$data['user_type'] = $_POST['user_type'];
 			$this->db->where('userid', $_POST['UserId']);
 			$this->db->where('itemid', $_POST['ItemId']);
 			$this->db->update('cartdetails', $data);
@@ -865,6 +866,7 @@ class Api_model extends CI_Model {
 				'comment' => $_POST['Comment'],
 				'hindicomment' => $_POST['HindiComment'],
 				'audiofile' => $audiofile,
+				'user_type' => $_POST['user_type']
 			);
 			$this->db->insert('cartdetails', $data);
 			$string = 1;
@@ -889,7 +891,11 @@ class Api_model extends CI_Model {
 		$this->db->join('packagingtype', 'packagingtype.packagingtype_id = products.refPackagingtype_id', 'left');
 		$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
 		$this->db->where('cartdetails.userid', $_REQUEST['UserId']);
-		$this->db->where('cartdetails.user_type', 'user');
+		if(isset($_REQUEST['user_type'])){
+			$this->db->where('cartdetails.user_type', 'admin');	
+		}else{
+			$this->db->where('cartdetails.user_type', 'user');
+		}
 		$query = $this->db->select('products.id as ItemId, cartdetails.id as CartId, cartdetails.qty as Qty, cartdetails.comment as Comment, cartdetails.audiofile as AudioFile, cartdetails.hindicomment as HindiComment,cartdetails.ProductType,products.image as product_image, products.folder as imgfolder, products.product_pcs as Pcs, products.min_qty as MinQty, products_translations.description, products_translations.title,products_translations.theli_title,products.price1 as box_guest_price,products.price2 as box_retailer_price,products.price3 as box_wholesaller_price,products.theli_price1 as theli_guest_price,products.theli_price2 as theli_retailer_price,products.theli_price3 as theli_wholesaller_price,packagingtype.title as packing_title,packagingtype.pcs as required_packing_pcs,packagingtype.packagingtype_id')->get('cartdetails');
 		$result = $query->result_array();
 		$data = array();
@@ -907,48 +913,48 @@ class Api_model extends CI_Model {
 			if (!empty($pricebyuser)) {
 				if($value['ProductType']=='box'){
 					if($pricebyuser->guest==1){
-						$PcsMrp_reg = $value['box_guest_price'] * $value['Pcs'];
+						$PcsMrp_reg = $value['box_guest_price'] * $value['Qty'];
 						$Mrp = $this->IND_money_format($value['box_guest_price']);
-						$PcsMrp = $this->IND_money_format($value['box_guest_price'] * $value['Pcs']);
-						$carttotal = $carttotal + ($value['box_guest_price'] * $value['Pcs']) * $value['Qty'];
-						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
+						$PcsMrp = $this->IND_money_format($value['box_guest_price'] * $value['Qty']);
+						$carttotal = $carttotal + ($value['box_guest_price']) * $value['Qty'];
+						$pcstotal = $pcstotal + $value['Qty'];
 					}
 					if($pricebyuser->retailer==1){
-						$PcsMrp_reg = $value['box_retailer_price'] * $value['Pcs'];
+						$PcsMrp_reg = $value['box_retailer_price'] * $value['Qty'];
 						$Mrp = $this->IND_money_format($value['box_retailer_price']);
-						$PcsMrp = $this->IND_money_format($value['box_retailer_price'] * $value['Pcs']);
-						$carttotal = $carttotal + ($value['box_retailer_price'] * $value['Pcs']) * $value['Qty'];
-						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
+						$PcsMrp = $this->IND_money_format($value['box_retailer_price'] * $value['Qty']);
+						$carttotal = $carttotal + ($value['box_retailer_price']) * $value['Qty'];
+						$pcstotal = $pcstotal + $value['Qty'];
 					}
 					if($pricebyuser->wholesaller==1){
-						$PcsMrp_reg = $value['box_wholesaller_price'] * $value['Pcs'];
+						$PcsMrp_reg = $value['box_wholesaller_price'] * $value['Qty'];
 						$Mrp = $this->IND_money_format($value['box_wholesaller_price']);
-						$PcsMrp = $this->IND_money_format($value['box_wholesaller_price'] * $value['Pcs']);
-						$carttotal = $carttotal + ($value['box_wholesaller_price'] * $value['Pcs']) * $value['Qty'];
-						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
+						$PcsMrp = $this->IND_money_format($value['box_wholesaller_price'] * $value['Qty']);
+						$carttotal = $carttotal + ($value['box_wholesaller_price']) * $value['Qty'];
+						$pcstotal = $pcstotal + $value['Qty'];
 					}	
 				}
 				if($value['ProductType']=='theli'){
 					if($pricebyuser->guest==1){
-						$PcsMrp_reg = $value['theli_guest_price'] * $value['Pcs'];
+						$PcsMrp_reg = $value['theli_guest_price'] * $value['Qty'];
 						$Mrp = $this->IND_money_format($value['theli_guest_price']);
-						$PcsMrp = $this->IND_money_format($value['theli_guest_price'] * $value['Pcs']);
-						$carttotal = $carttotal + ($value['theli_guest_price'] * $value['Pcs']) * $value['Qty'];
-						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
+						$PcsMrp = $this->IND_money_format($value['theli_guest_price'] * $value['Qty']);
+						$carttotal = $carttotal + ($value['theli_guest_price']) * $value['Qty'];
+						$pcstotal = $pcstotal + $value['Qty'];
 					}
 					if($pricebyuser->retailer==1){
-						$PcsMrp_reg = $value['theli_retailer_price'] * $value['Pcs'];
+						$PcsMrp_reg = $value['theli_retailer_price'] * $value['Qty'];
 						$Mrp = $this->IND_money_format($value['theli_retailer_price']);
-						$PcsMrp = $this->IND_money_format($value['theli_retailer_price'] * $value['Pcs']);
-						$carttotal = $carttotal + ($value['theli_retailer_price'] * $value['Pcs']) * $value['Qty'];
-						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
+						$PcsMrp = $this->IND_money_format($value['theli_retailer_price'] * $value['Qty']);
+						$carttotal = $carttotal + ($value['theli_retailer_price']) * $value['Qty'];
+						$pcstotal = $pcstotal + $value['Qty'];
 					}
 					if($pricebyuser->wholesaller==1){
-						$PcsMrp_reg = $value['theli_wholesaller_price'] * $value['Pcs'];
+						$PcsMrp_reg = $value['theli_wholesaller_price'] * $value['Qty'];
 						$Mrp = $this->IND_money_format($value['theli_wholesaller_price']);
-						$PcsMrp = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Pcs']);
-						$carttotal = $carttotal + ($value['theli_wholesaller_price'] * $value['Pcs']) * $value['Qty'];
-						$pcstotal = $pcstotal + ($value['Pcs']) * $value['Qty'];
+						$PcsMrp = $this->IND_money_format($value['theli_wholesaller_price'] * $value['Qty']);
+						$carttotal = $carttotal + ($value['theli_wholesaller_price'] ) * $value['Qty'];
+						$pcstotal = $pcstotal + $value['Qty'];
 					}	
 				}
 				// box_retailer_price		
@@ -1012,7 +1018,7 @@ class Api_model extends CI_Model {
 
 				if($c_row['ProductType']=='box'){
 						if($p_row['packagingtype_id']==$c_row['packagingtype_id']){						
-							$total=$total+($c_row['PcsMrp_reg']*$c_row['Qty']);
+							$total=$total+($c_row['PcsMrp_reg']);
 							array_push($box['cartdata'],$c_row);
 							$package_qty += $c_row['Qty'] * $c_row['Pcs'];							
 						}
@@ -1054,7 +1060,7 @@ class Api_model extends CI_Model {
 		$total=0;
 		foreach($data as $c_row){					
 			if($c_row['ProductType']=='theli'){										
-				$total=$total+($c_row['PcsMrp_reg']*$c_row['Qty']);
+				$total=$total+($c_row['PcsMrp_reg']);
 				$package_qty += $c_row['Qty']* $c_row['Pcs'];
 				array_push($box['cartdata'],$c_row);					
 			}					
@@ -1753,7 +1759,7 @@ class Api_model extends CI_Model {
 					$totalqty[] = $value['qty'];
 					$product = $this->getOneProductForSerialize($value['itemid'], $_REQUEST['UserId'],$value['ProductType']);
 					$finalprice=$finalprice+(($value['qty'])*($product['price']));
-					$products_to_order[] = [						
+					$products_to_order[] = [																		
 						'itemid' => $value['itemid'],
 						'qty' => $value['qty'],
 						'ProductType' => $value['ProductType'],
@@ -1765,7 +1771,7 @@ class Api_model extends CI_Model {
 				}			
 			}
 			
-			$this->db->insert_batch('order_products', $products_to_order); 
+			
 			// echo '<pre>';print_r($products_to_order);die;
 			$this->db->select('*');
 			$this->db->from('user_app');
@@ -1823,6 +1829,13 @@ class Api_model extends CI_Model {
 
 			$lastId = $this->db->insert_id();
 			
+			$order_products=array();
+			foreach($products_to_order as $row_pto){
+				$row['refOrder_id']=$lastId;
+				array_push($order_products,$row);
+			}
+			$this->db->insert_batch('order_products', $order_products); 
+
 			$Addressship = $this->GetUserAddressfun($_REQUEST['ShipId'], null);
 			$Addressbill = $this->GetUserAddressfun(null, $_REQUEST['BillId']);
 			if (!$this->db->insert('orders_clients', array(

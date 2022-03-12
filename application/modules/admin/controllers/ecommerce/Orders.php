@@ -15,7 +15,7 @@ class Orders extends ADMIN_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('SendMail');
-		$this->load->model(array('Orders_model', 'Home_admin_model','Ordersdt_model','Products_model'));
+		$this->load->model(array('Orders_model', 'Home_admin_model','Ordersdt_model','Products_model','Api_model'));
 	}
 
 	public function index($page = 0) {
@@ -200,6 +200,43 @@ class Orders extends ADMIN_Controller {
 		}
 	}
 	public function addOrder() {
+
+		if(isset($_POST['UserId'])){
+			$post=$_POST;
+			$_POST=array();
+			$i=0;			
+			foreach($post['ItemId'] as $row){
+				$_POST['UserId']=$post['UserId'];
+				$_POST['ItemId']=$post['ItemId'][$i];
+				$_POST['Qty']=$post['Qty'][$i];
+				$_POST['ProductType']=$post['ProductType'][$i];
+				$_POST['Comment']='';
+				$_POST['HindiComment']='';
+				$_POST['user_type']='admin';		
+				$this->Api_model->AddToCart();
+				$i=$i+1;
+			}
+			$_REQUEST['UserId']=$post['UserId'];
+			$_REQUEST['user_type']='admin';	
+			$res=$this->Api_model->GetMyCart();
+			$_REQUEST['GSTamount']=0;
+			if(!empty($res)){
+				foreach($res as $row_dt){				
+					$_REQUEST['GSTamount']=$row_dt[0]['GSTAmount'];
+					break;
+				}									
+			}
+			$_REQUEST['PaymentMode']='ofline';
+			$_REQUEST['ShipId']=$post['ShipId'];
+			$_REQUEST['BillId']=$post['BillId'];
+			
+			$checkout=$this->Api_model->CheckOutfun();
+			if(!empty($checkout)){
+				if($checkout['IsSuccess']==1){
+					redirect('admin/orders');	
+				}
+			}
+		}
 		$data = array();
 		$head = array();
 		$head['title'] = 'Add-Order';
@@ -212,5 +249,16 @@ class Orders extends ADMIN_Controller {
 		$this->load->view('ecommerce/add-order', $data);
 		$this->load->view('_parts/footer');			
 	}
+
+	public function load_address(){
+        if($_REQUEST['userid']){            
+            $shipping = $this->Products_model->load_shipping($_POST);
+			$billing = $this->Products_model->load_billing($_POST);            
+            $result=array();
+            $result['shipping']=$shipping; 
+			$result['billing']=$billing;                        
+            echo json_encode($result);
+        }
+    }
 	
 }

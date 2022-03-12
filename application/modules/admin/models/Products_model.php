@@ -389,6 +389,17 @@ class Products_model extends CI_Model {
 		$result = $this->db->get('user_app');		
 		return $result->result_array();
 	}
+	public function load_shipping($params){
+        $userid = $params['userid'];
+        $shipping = $this->db->query("SELECT * FROM useraddress WHERE userid=$userid AND addresstype='Shipping'");
+        return $shipping->result_array();
+    }
+	public function load_billing($params){
+        $userid = $params['userid'];
+        $billing= $this->db->query("SELECT * FROM useraddress WHERE userid=$userid AND addresstype='Billing'");
+        return $billing->result_array();
+    }	
+
 
 	private function setProductTranslation($post, $id, $is_update) {
 		$i = 0;

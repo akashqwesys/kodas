@@ -130,29 +130,36 @@ if (!isset($_GET['settings'])) {
       <tbody>
         <?php
 
-		$products = unserialize(html_entity_decode($orders_details->products));
+		// $products = unserialize(html_entity_decode($orders_details->products));
     // echo '<pre>';print_r($products);die;
 		$fmt = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
 		$finalprice = 0;
 		foreach ($products as $key => $value) {
-			$productinfo = $value['product_info'];
-			$productprice = ($value['product_quantity'] * $productinfo['product_pcs']) * $productinfo['price'];
+      $productinfo='';
+      if($value['ProductType']=='Box'){
+        $productinfo = $value['title'];
+      }
+      if($value['ProductType']=='Theli'){
+        $productinfo = $value['theli_title'];
+      }
+			
+			$productprice = $value['qty'] * $value['price'];
 			// $productprice = $value['product_quantity'] * $productinfo['price'];
 			$finalprice = $finalprice + $productprice;
 			?>
         <tr>
-          <td class="text-left"><a target="_blank" href="<?=base_url('admin/publish/' . $productinfo['id']);?>">
-            <?=$productinfo['title'];?>
+          <td class="text-left"><a target="_blank" href="<?=base_url('admin/publish/' . $value['id']);?>">
+            <?=$productinfo;?>
             </a></td>
-          <td class="text-left"><?=$value['product_comment'];?></td>
-          <td class="text-left"><?=$value['product_hindicomment'];?></td>
-          <td class="text-center"><?php if (isset($value['product_audiofile']) && $value['product_audiofile'] != '') {
+          <td class="text-left"><?=$value['comment'];?></td>
+          <td class="text-left"><?=$value['hindicomment'];?></td>
+          <td class="text-center"><?php if (isset($value['audiofile']) && $value['audiofile'] != '') {
 				echo '<audio controls="">
-					  <source src="' . base_url('attachments/audiofile/' . $value['product_audiofile']) . '" type="audio/mpeg">
+					  <source src="' . base_url('attachments/audiofile/' . $value['audiofile']) . '" type="audio/mpeg">
 					</audio>';
 			}?></td>
-          <td class="text-right"><?=$value['product_quantity'];?><?=!empty($productinfo['product_pcs']) ? ' x ' . $productinfo['product_pcs'] . '<small><b> (Product Pcs)</b></small>' : '';?></td>
-          <td class="text-right"><?=$fmt->formatCurrency($productinfo['price'], "INR");?></td>
+          <td class="text-right"><?=$value['qty'];?><?=!empty($value['qty']) ? ' x ' . $value['Pcs'] . '<small><b> (Product Pcs)</b></small>' : '';?></td>
+          <td class="text-right"><?=$fmt->formatCurrency($value['box_guest_price'], "INR");?></td>
           <td class="text-right"><?=$fmt->formatCurrency($productprice, "INR");?></td>
         </tr>
         <?php }?>
