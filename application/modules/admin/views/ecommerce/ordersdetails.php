@@ -143,7 +143,7 @@ if (!isset($_GET['settings'])) {
         $productinfo = $value['theli_title'];
       }
 			
-			$productprice = $value['qty'] * $value['price'];
+			$productprice = $value['qty'] * $value['box_guest_price'];
 			// $productprice = $value['product_quantity'] * $productinfo['price'];
 			$finalprice = $finalprice + $productprice;
 			?>
