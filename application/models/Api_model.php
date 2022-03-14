@@ -516,19 +516,20 @@ class Api_model extends CI_Model {
 	}
 
 	public function GlobalgetProducts() {
+	
 		$data = array();
-		if (!empty($_GET['Kyeword'])) {
+		if (!empty($_GET['Kyeword'])) {			
 			$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
-			$this->db->like('products.productviewtype', 'registorcustomer');
+			// $this->db->like('products.productviewtype', 'registorcustomer');
 			$keyword = $_GET['Kyeword'];
-			$likewhere = "(products_translations.title LIKE '%$keyword%'  OR products_translations.description LIKE '%$keyword%'  OR products_translations.basic_description LIKE '%$keyword%')";
+			$likewhere = "(products.designNo LIKE '%$keyword%' OR products_translations.title LIKE '%$keyword%'  OR products_translations.description LIKE '%$keyword%'  OR products_translations.basic_description LIKE '%$keyword%' OR products_translations.theli_title LIKE '%$keyword%')";
 			$this->db->where($likewhere);
 			$this->db->order_by("products.id", "desc");
 			if (isset($_REQUEST['Page'])) {
 				$offset = 10 * ($_REQUEST['Page'] - 1);
 				$this->db->limit(10, $offset);
 			}
-			$query = $this->db->select('products.id as Id, products.image as product_image, products.folder as imgfolder , products.product_pcs as Pcs, products_translations.title, products_translations.description, products_translations.basic_description, products_translations.price, products_translations.old_price,products.productviewtype')->get('products');
+			$query = $this->db->select('price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,products.id as Id, products.image as product_image, products.folder as imgfolder , products.product_pcs as Pcs, products_translations.title, products_translations.description, products_translations.basic_description, products_translations.price, products_translations.old_price,products.productviewtype')->get('products');
 			$result = $query->result_array();
 			$i = 0;
 			foreach ($result as $key => $value) {
