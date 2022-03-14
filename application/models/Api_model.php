@@ -839,7 +839,7 @@ class Api_model extends CI_Model {
 				$audiodelete = $_SERVER['DOCUMENT_ROOT'] . '/attachments/audiofile/' . $row['audiofile'];
 				@unlink($audiodelete);
 				$new_name = time() . '_' . $_FILES['AudioFile']['name'];
-				$path = '/public_html/kodas.qwesys.com/attachments/'.$new_name;
+				$path = '/attachments/audiofile/' . $new_name;
 				move_uploaded_file($_FILES['AudioFile']['tmp_name'], $path);
 				$audiofile = $new_name;
 			} else {
@@ -859,7 +859,7 @@ class Api_model extends CI_Model {
 			$audiofile = '';
 			if (isset($_FILES['AudioFile'])) {
 				$new_name = time() . '_' . $_FILES['AudioFile']['name'];
-				$path = '/public_html/kodas.qwesys.com/attachments/'.$new_name;
+				$path = '/attachments/audiofile/' . $new_name;
 				move_uploaded_file($_FILES['AudioFile']['tmp_name'], $path);
 				$audiofile = $new_name;
 			}
