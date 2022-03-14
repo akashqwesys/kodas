@@ -1019,7 +1019,6 @@ class Api_model extends CI_Model {
 				$total=0;
 				$package_qty = 0;
 				foreach($data as $c_row){
-
 				if($c_row['ProductType']=='box'){
 						if($p_row['packagingtype_id']==$c_row['packagingtype_id']){						
 							$total=$total+($c_row['PcsMrp_reg']);
@@ -1051,7 +1050,8 @@ class Api_model extends CI_Model {
 							break;
 						}
 						$x++;
-					}														
+					}		
+					$box['refPackage_id']=$p_row['packagingtype_id'];																	
 					$box['Package_type']='box';
 					$box['Package_total']=$total;				
 					array_push($item[0]['CartItem'],$box);
