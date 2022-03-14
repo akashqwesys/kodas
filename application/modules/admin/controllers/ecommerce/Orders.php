@@ -85,6 +85,7 @@ class Orders extends ADMIN_Controller {
 			redirect('admin/orders?settings');
 		}
 		$data['paypal_sandbox'] = $this->Home_admin_model->getValueStore('paypal_sandbox');
+		$data['statusList'] = $this->Orders_model->getStatusList();
 		$data['paypal_email'] = $this->Home_admin_model->getValueStore('paypal_email');
 		$data['cashondelivery_visibility'] = $this->Home_admin_model->getValueStore('cashondelivery_visibility');
 		$data['bank_account'] = $this->Orders_model->getBankAccountSettings();
@@ -101,13 +102,13 @@ class Orders extends ADMIN_Controller {
 	public function order_list() {
 		// echo 'hi';die;       
         $this->login_check();             
-        $list = $this->Ordersdt_model->get_datatables();
+        $list = $this->Ordersdt_model->get_datatables($_REQUEST['orderStatus']);
         $data = array();
         $no = $_POST['start'];
 
-        foreach ($list as $datarow) {    
-            
-			
+
+
+        foreach ($list as $datarow) {                			
             // $active_inactive_badge='';
             // if($datarow->status==1){
             //     $active_inactive_badge='<span class="badge badge-success badge-status-'.$datarow->id.'">Active</span>';
@@ -143,8 +144,8 @@ class Orders extends ADMIN_Controller {
         }
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Ordersdt_model->count_all(),
-            "recordsFiltered" => $this->Ordersdt_model->count_filtered(),
+            "recordsTotal" => $this->Ordersdt_model->count_all($_REQUEST['orderStatus']),
+            "recordsFiltered" => $this->Ordersdt_model->count_filtered($_REQUEST['orderStatus']),
             "data" => $data,
         );
         echo json_encode($output);

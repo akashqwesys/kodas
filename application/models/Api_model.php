@@ -1831,11 +1831,11 @@ class Api_model extends CI_Model {
 			
 			$order_products=array();
 			foreach($products_to_order as $row_pto){
-				$row['refOrder_id']=$lastId;
-				array_push($order_products,$row);
+				$row_pto['refOrder_id']=$lastId;
+				array_push($order_products,$row_pto);
 			}
+			// echo '<pre>';print_r($order_products);die;
 			$this->db->insert_batch('order_products', $order_products); 
-
 			$Addressship = $this->GetUserAddressfun($_REQUEST['ShipId'], null);
 			$Addressbill = $this->GetUserAddressfun(null, $_REQUEST['BillId']);
 			if (!$this->db->insert('orders_clients', array(
@@ -1870,6 +1870,59 @@ class Api_model extends CI_Model {
 
 		return $return;
 	}
+	public function MyOrderListfun() {
+
+		$this->db->select('packagingtype.*');				
+		$result_package = $this->db->get('packagingtype');
+		$data_package = $result_package->result_array();
+		
+		$this->db->select('orders.id,orders.processed,orders.date,orders.gstwithamount,orders.description,orders.totalqty');		
+		$this->db->where('orders.user_id', $_REQUEST['UserId']);
+		$result = $this->db->get('orders');
+		$data = $result->result_array();				
+		$final_data=array();
+
+		if(!empty($data)){
+			foreach($data as $order_row){				
+				$this->db->select('order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id');
+				$this->db->join('products', 'products.id = order_products.itemid', 'inner');				
+				$this->db->where('order_products.refOrder_id', $order_row['id']);
+				$result1 = $this->db->get('order_products');
+				$data1 = $result1->result_array();
+				
+				
+				$count_data=array();							
+				foreach($data1 as $catlog_row){
+					foreach($data_package as $package_row){
+						if($catlog_row['refPackagingtype_id']==$package_row['packagingtype_id'] && $catlog_row['ProductType']=='box'){
+							array_push($count_data,$catlog_row['refPackagingtype_id']);
+						}
+						if($catlog_row['ProductType']=='theli'){
+							array_push($count_data,0);
+						}
+					}
+				}
+				
+				$count=count(array_unique($count_data));				
+				$order_row['totalCatlog']=$count;
+				array_push($final_data,$order_row);	
+			}						
+		}		
+
+		if (!empty($final_data) && isset($final_data)) {
+			$return['Data'] = $final_data;
+			$return['Message'] = 'Data Get Successfully!';
+			$return['IsSuccess'] = true;
+		} else {
+			$return['Data'] = 0;
+			$return['Message'] = 'Item not Found';
+			$return['IsSuccess'] = false;
+		}
+		return $return;
+	}
+	
+
+
 	public function GetOrderByTypefun() {
 		$Status = '';
 		if (isset($_REQUEST['Status']) && $_REQUEST['Status'] == 'Pending') {

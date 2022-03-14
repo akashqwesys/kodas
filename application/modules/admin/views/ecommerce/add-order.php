@@ -1,31 +1,5 @@
-<h1><img src="<?= base_url('assets/imgs/admin-user.png') ?>" class="header-img" style="margin-top:-3px;"> Add Order</h1>
+<h1>Add Order</h1>
 <hr>
-<?php
-$timeNow = time();
-if (validation_errors()) {
-?>
-  <hr>
-  <div class="alert alert-danger">
-    <?= validation_errors() ?>
-  </div>
-  <hr>
-<?php
-}
-if ($this->session->flashdata('add_attributes')) {
-?>
-  <hr>
-  <div class="alert alert-danger">
-    <?= $this->session->flashdata('add_attributes') ?>
-    <?php $this->session->set_flashdata('add_attributes', ''); ?>
-  </div>
-  <hr>
-<?php
-}
-?>
-
-
-
-
 <select class="product_select form-control show-tick show-menu-arrow mainpicker" style="display:none" data-live-search="true" name="ItemId[]">          
           <?php foreach ($conn_products as $conn_product) {                     
             ?>

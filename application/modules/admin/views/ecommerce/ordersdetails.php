@@ -56,6 +56,14 @@ if (!isset($_GET['settings'])) {
             <td><?=$orders_details->address;?></td>
           </tr>
           <tr>
+            <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer Group"><i class="fa fa-map-marker fa-fw"></i></button></td>
+            <td><b>Shipping To : </b><?php echo unserialize(html_entity_decode($address['shiptoid']))[0]['Address'];?></td>
+          </tr>
+          <tr>
+            <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer Group"><i class="fa fa-map-marker fa-fw"></i></button></td>
+            <td><b>Billing To : </b><?php echo unserialize(html_entity_decode($address['billtoid']))[0]['Address'];?></td>
+          </tr>
+          <tr>
             <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="E-Mail"><i class="fa fa-envelope-o fa-fw"></i></button></td>
             <td><a href="mailto:<?=$orders_details->first_name;?>">
               <?=$orders_details->email;?>
@@ -136,19 +144,18 @@ if (!isset($_GET['settings'])) {
 		$finalprice = 0;
 		foreach ($products as $key => $value) {
       $productinfo='';
-      if($value['ProductType']=='Box'){
+      if($value['ProductType']=='box'){
         $productinfo = $value['title'];
       }
-      if($value['ProductType']=='Theli'){
+      if($value['ProductType']=='theli'){
         $productinfo = $value['theli_title'];
-      }
-			
+      }	                  
 			$productprice = $value['qty'] * $value['box_guest_price'];
 			// $productprice = $value['product_quantity'] * $productinfo['price'];
 			$finalprice = $finalprice + $productprice;
 			?>
         <tr>
-          <td class="text-left"><a target="_blank" href="<?=base_url('admin/publish/' . $value['id']);?>">
+          <td class="text-left"><a target="_blank" href="<?=base_url('admin/publish/' . $value['itemid']);?>">
             <?=$productinfo;?>
             </a></td>
           <td class="text-left"><?=$value['comment'];?></td>

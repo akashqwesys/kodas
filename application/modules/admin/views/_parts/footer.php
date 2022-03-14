@@ -142,15 +142,11 @@
 <?php $this->load->view('newsletter/subscriber_js'); ?>
 <?php $this->load->view('coupan/coupan_js'); ?>
 <?php $this->load->view('ecommerce/orderlist_js'); ?>
-
+<?php if($title=='Add-Order'){ ?>
 <script>
  $(document).ready(function () {
 
-    $('#addBlock').on('click', function () { 
-        
-          
-
-
+    $('#addBlock').on('click', function () {                   
         var cloneData=$(".block1" ).clone();
         cloneData.find('.col-md-4').remove();
         $(".current_1").removeClass('current');
@@ -198,7 +194,7 @@
         });
     });
 </script>
-
+<?php } ?>
 
 </body>
 </html>

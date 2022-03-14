@@ -433,6 +433,9 @@ $route['admin/loadOthersImages'] =
 	$route['admin/load-address'] =
 	'admin/ecommerce/orders/load_address';
 
+	$route['admin/add-stock/(:num)'] =
+	'admin/ecommerce/products/addStock/$1';
+
 // $route['admin/uploadOthersPdf1'] = "admin/ecommerce/prepublish/do_upload_others_pdf";
 
 /*
@@ -481,6 +484,9 @@ $route['api/MessageList'] = 'Api/Apilist/MessageList/';
 // New API Start SendMessage
 $route['api/SendMessage'] = 'Api/Apilist/SendMessage/';
 // New API Start GetOrderByType
+
+$route['api/MyOrderList'] = 'Api/Apilist/MyOrderList/';
+
 $route['api/GetOrderByType'] = 'Api/Apilist/GetOrderByType/';
 // New API Start GetOrderByTypeNew
 $route['api/GetOrderByTypeNew'] = 'Api/Apilist/GetOrderByTypeNew/';

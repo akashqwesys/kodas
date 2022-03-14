@@ -50,6 +50,12 @@ class Ordersdetails_model extends CI_Model {
 		return $result = $query->result_array();
 	}
 
+	public function getOrderAddress($order_id) {		
+		$this->db->where('for_id', $order_id);		
+		$query = $this->db->select('orders_clients.*')->get('orders_clients');
+		return $result = $query->row_array();
+	}
+
 	public function ordercomment($order_id) {
 		$this->db->where('order_id', $order_id);
 		$this->db->where('type', 'Normal Order');

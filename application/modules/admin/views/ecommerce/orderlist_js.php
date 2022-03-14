@@ -1,10 +1,15 @@
 <?php if ($title == "Orders-List") {
 ?>
     <script type="text/javascript">
-        $(document).ready(function() {           
-            load_payment_list();
-
-            function load_payment_list() {
+        $(document).ready(function() {   
+            load_payment_list('Pending');
+            // alert('ji');    
+            $('#status').on('change', function () {
+                var orderStatus  = $(this).val();
+                    $('#table').DataTable().destroy();
+                    load_payment_list(orderStatus);
+            });                        
+            function load_payment_list(orderStatus='Pending') {
                 $('#table').DataTable({
                     responsive: {
                         details: {
@@ -30,7 +35,10 @@
                     ],
                     "ajax": {
                         'type': 'POST',
-                        'url': "<?= base_url('admin/get-orders-list') ?>"
+                        'url': "<?= base_url('admin/get-orders-list') ?>",
+                        'data': {                            
+                            orderStatus: orderStatus                           
+                        }
                     },
                     "columns": [{
                             "data": 0

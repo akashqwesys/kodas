@@ -132,10 +132,12 @@ class Products extends ADMIN_Controller {
 			// $actionBtn = '<button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->attributes_id . '" data-status="' . $status . '" data-table="attributes" data-wherefield="attributes_id" data-updatefield="status" data-module="attributes">'.$str.'</button>';
 
             $edit_url=base_url('admin/publish/'). $datarow->id; 
-			$delete_url=base_url('admin/products?delete='). $datarow->id;           
+			$delete_url=base_url('admin/products?delete='). $datarow->id;   
+			$stock_url=base_url('admin/add-stock/'). $datarow->id;            
             $actionBtn = '<a href="'.$edit_url.'" class="btn btn-xs btn-warning">Edit <i class="fa fa-edit" aria-hidden="true"></i></a>             
 			<a href="'.$delete_url.'" class="btn btn-xs btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
 			<button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->id . '" data-status="' . $status . '" data-table="products" data-wherefield="id" data-updatefield="visibility" data-module="products">'.$str.'</button>
+			<a href="'.$stock_url.'" class="btn btn-xs btn-info">Stock <i class="fa fa-plus" aria-hidden="true"></i></a>
 			';
             $no++;
             $row = array();
@@ -196,5 +198,39 @@ class Products extends ADMIN_Controller {
             echo json_encode($data);
         }
     }
+	
+	public function addStock($id=0) {		
+		$this->login_check();
+        $adminid = $this->session->userdata('logged_roledata');
+        if (!in_array('addproduct', $adminid)) {
+            redirect('admin');
+        }
+        if (!in_array('editproduct', $adminid)) {
+            redirect('admin');
+        }          
+		if (isset($_POST['submit'])) {            
+			$res=$this->Products_model->addStock($_POST);
+			if ($res) {
+				$this->session->set_flashdata('add_stock', 'Stock Updated Successfully!');
+				$this->saveHistory('Success Updated stock');  
+				redirect('admin/products');              
+			}else{
+				$this->session->set_flashdata('add_stock', 'somthing happen wrong!');
+				$this->saveHistory('Failed Update stock');    
+			}
+		} 
+					
+		$data = array();		
+		$head = array();
+		$head['title'] = 'Administration - Add Stock';
+		$head['description'] = '!';
+		$head['keywords'] = '';
+	
+		$data['id']=$id;
+		$this->load->view('_parts/header', $head);
+		$this->load->view('ecommerce/add-stock', $data);
+		$this->load->view('_parts/footer');
+		$this->saveHistory('Go to Add Stock');		
+	}
 
 }

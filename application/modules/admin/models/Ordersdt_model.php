@@ -45,37 +45,39 @@ class Ordersdt_model extends CI_Model
         }
     }
 
-    function get_datatables()
+    function get_datatables($orderStatus)
     {     
         $this->db->select('orders.*,orders_clients.first_name,orders_clients.phone,user_app.businessname');        
         $this->_get_datatables_query();
         $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
         $this->db->join('user_app', 'user_app.id = orders.user_id', 'left');  
+        $this->db->where('orders.processed',$orderStatus);  
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
 
-    function count_filtered()
+    function count_filtered($orderStatus)
     {
         $this->db->select('orders.*,orders_clients.first_name,orders_clients.phone,user_app.businessname');        
         $this->_get_datatables_query();
         $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
         $this->db->join('user_app', 'user_app.id = orders.user_id', 'left');  
+        $this->db->where('orders.processed',$orderStatus); 
         $query = $this->db->get();
         return $query->num_rows();
     }
 
-    public function count_all()
+    public function count_all($orderStatus)
     {
         $this->db->select('orders.*,orders_clients.first_name,orders_clients.phone,user_app.businessname');        
         $this->db->from($this->table);
         $this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
-        $this->db->join('user_app', 'user_app.id = orders.user_id', 'left');          
+        $this->db->join('user_app', 'user_app.id = orders.user_id', 'left');  
+        $this->db->where('orders.processed',$orderStatus);         
         return $this->db->count_all_results();
     }
-
 
     public function approve_status($params)
     {

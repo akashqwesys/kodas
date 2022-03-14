@@ -1,6 +1,17 @@
 
 <div>
 <?php
+if ($this->session->flashdata('add_stock')) {
+?>
+  <hr>
+  <div class="alert alert-success">
+    <?= $this->session->flashdata('add_stock') ?>
+  </div>
+  <hr>
+<?php
+}
+?>
+<?php
 if ($this->session->flashdata('result_publish')) {
 ?>
   <hr>
@@ -52,3 +63,4 @@ if ($this->session->flashdata('result_delete')) {
 </div>
 <?php $this->session->set_flashdata('result_publish', ''); ?>
 <?php $this->session->set_flashdata('result_delete', ''); ?>
+<?php $this->session->set_flashdata('add_stock', ''); ?>

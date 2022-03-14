@@ -400,6 +400,20 @@ class Products_model extends CI_Model {
         return $billing->result_array();
     }	
 
+	public function addStock($post)
+    {
+        $this->db->insert('stock', array(
+            'qty' => $post['qty'],
+            'refProduct_id' => $post['refProduct_id'],                       
+            'timeanddate' => time()
+        ));
+        $id = $this->db->insert_id();
+        if ($id) {
+            return true;
+        } else {
+            log_message('error', print_r($this->db->error(), true));
+        }
+    }
 
 	private function setProductTranslation($post, $id, $is_update) {
 		$i = 0;
