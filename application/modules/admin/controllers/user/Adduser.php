@@ -208,8 +208,10 @@ class Adduser extends ADMIN_Controller {
 	public function addbulkuser() {
 		if (isset($_POST['submit'])) {
 			$userexits = array();
+			$data_batch=array();
 			$fp = fopen($_FILES['csvfile']['tmp_name'], 'r') or die("can't open file");
 			$skip = 0;
+			$mobilenumber=array();
 			while (($line = fgetcsv($fp)) !== FALSE) {
 				// echo '<pre>';print_r($line[3]);
 				if(!empty($line[0])){
@@ -259,14 +261,21 @@ class Adduser extends ADMIN_Controller {
 						$querymobile = $this->db->get_where('user_app', array('whatsapp' => $data['whatsapp']));
 						if ($querymobile->num_rows() > 0) {
 							$this->session->set_flashdata('result_publish', 'Some Users Mobile Already exits In System!');
-							array_push($userexits, $data['mobilenumber']);
+							array_push($userexits, $data['whatsapp']);
 						} else {
-							$this->db->insert('user_app', $data);
+							if (!in_array($data['whatsapp'], $mobilenumber))
+							{
+								array_push($mobilenumber,$data['whatsapp']);
+								array_push($data_batch,$data);
+							}							
+							// $this->db->insert('user_app', $data);
 						}
 					}
 				}
 			}
-			// die;	
+			if(!empty($data_batch)){
+				$this->db->insert_batch('user_app', $data_batch); 
+			}				
 			fclose($fp) or die("can't close file");
 			$List = implode(', ', $userexits);
 			if ($List) {

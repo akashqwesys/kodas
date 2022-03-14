@@ -118,7 +118,7 @@ class Listuser extends ADMIN_Controller {
             $row = array();
             $row[] = $no;
             $row[] = $datarow->name;        
-            $row[] = $datarow->mobilenumber;
+            $row[] = $datarow->whatsapp;
             $row[] = $datarow->emailid;     
             $row[]=$datarow->compnay;
 			$row[]=$datarow->a_name;
