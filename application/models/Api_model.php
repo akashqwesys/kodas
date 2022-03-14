@@ -339,6 +339,10 @@ class Api_model extends CI_Model {
 			$this->db->limit(10, 0);
 		}
 
+		if (isset($_REQUEST['refPackage_id']) && $_REQUEST['refPackage_id'] != 0 && $_REQUEST['refPackage_id'] != '') {
+			$this->db->where('products.refPackagingtype_id', $_REQUEST['refPackage_id']);	
+		}
+
 		if (isset($_REQUEST['Catid']) && $_REQUEST['Catid'] != 0 && $_REQUEST['Catid'] != '') {
 			if (isset($_REQUEST['Attribute']) && $_REQUEST['Attribute'] != '') {
 				$attributearray = explode(",", $_REQUEST['Attribute']);
