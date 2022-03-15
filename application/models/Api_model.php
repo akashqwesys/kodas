@@ -1248,7 +1248,7 @@ class Api_model extends CI_Model {
 			// $transportname = $_REQUEST['TransportName'];
 			// $shiptoid = $_REQUEST['ShipId'];
 			// $billtoid = $_REQUEST['BillId'];
-			$orderstatus = 'pending';
+			$orderstatus = 'Pending';
 
 			if (!empty($_FILES['Image']['name'])) {
 				$orderphoto = $this->singalfileupload('Image', 'photoorder_images');
