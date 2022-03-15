@@ -249,8 +249,8 @@ class Adduser extends ADMIN_Controller {
 							'ac_type' => str_replace('"', '', "$line[1]"),
 							'city' => str_replace('"', '', "$line[2]"),
 							'alocation_agent_id' => $agent_id,
-							'whatsapp' => str_replace('"', '', $line[4]),
-							'mobilenumber' => str_replace('"', '', $line[5]),
+							'mobilenumber' => str_replace('"', '', $line[4]),
+							'phone_1' => str_replace('"', '', $line[5]),
 							'phone_2' => str_replace('"', '', $line[6]),
 							'emailid' => str_replace('"', '', $line[7]),
 							'sms_no' => str_replace('"', '', $line[8]),											
@@ -258,24 +258,24 @@ class Adduser extends ADMIN_Controller {
 							'guest' => 1,	
 							'isverified' => 'true'			
 						);
-						$querymobile = $this->db->get_where('user_app', array('whatsapp' => $data['whatsapp']));
-						if(empty($data['whatsapp']) || $data['whatsapp']==''){							
+						$querymobile = $this->db->get_where('user_app', array('mobilenumber' => $data['mobilenumber']));
+						if(empty($data['mobilenumber']) || $data['mobilenumber']==''){							
 							$querymobile = $this->db->get_where('user_app', array('name' => $data['name']));							
 						}
 						
 						if ($querymobile->num_rows() > 0) {
 							$this->session->set_flashdata('result_publish', 'Some Users Mobile and Name Already exits In System!');
-							array_push($userexits, $data['whatsapp']);
+							array_push($userexits, $data['mobilenumber']);
 						} else {
-							if (!in_array($data['whatsapp'],$mobilenumber))
+							if (!in_array($data['mobilenumber'],$mobilenumber))
 							{
-								if(!empty($data['whatsapp']) || $data['whatsapp']!=''){
-									array_push($mobilenumber,$data['whatsapp']);
+								if(!empty($data['mobilenumber']) || $data['mobilenumber']!=''){
+									array_push($mobilenumber,$data['mobilenumber']);
 									array_push($name,$data['name']);
 									array_push($data_batch,$data);
 								}								
 							}
-							if(empty($data['whatsapp']) || $data['whatsapp']==''){
+							if(empty($data['mobilenumber']) || $data['mobilenumber']==''){
 								if (!in_array($data['name'],$name))
 								{																					
 									array_push($name,$data['name']);
