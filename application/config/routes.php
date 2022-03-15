@@ -486,6 +486,7 @@ $route['api/SendMessage'] = 'Api/Apilist/SendMessage/';
 // New API Start GetOrderByType
 
 $route['api/MyOrderList'] = 'Api/Apilist/MyOrderList/';
+$route['api/SingleOrderDetails'] = 'Api/Apilist/SingleOrderDetails/';
 
 $route['api/GetOrderByType'] = 'Api/Apilist/GetOrderByType/';
 // New API Start GetOrderByTypeNew

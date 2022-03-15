@@ -1875,6 +1875,101 @@ class Api_model extends CI_Model {
 
 		return $return;
 	}
+
+
+	public function SingleOrderDetailsfun() {
+
+		$this->db->select('packagingtype.*');				
+		$result_package = $this->db->get('packagingtype');
+		$data_package = $result_package->result_array();
+		
+
+		$this->db->where('for_id', $_REQUEST['OrderId']);		
+		$query = $this->db->select('orders_clients.*')->get('orders_clients');
+		$resultAddress = $query->row_array();
+		
+		$this->db->select('orders.*');		
+		$this->db->where('orders.user_id', $_REQUEST['UserId']);
+		$this->db->where('orders.id', $_REQUEST['OrderId']);
+		$result = $this->db->get('orders');
+		$data = $result->row_array();
+
+
+		
+		
+		
+		$data['BillingAddress']=unserialize(html_entity_decode($resultAddress['billtoid']));
+		$data['ShippingAddress']=unserialize(html_entity_decode($resultAddress['shiptoid']));
+
+		if(!empty($data['ShippingAddress'])){
+			foreach($data['ShippingAddress'] as $row){
+				$data['ShippingAddress']=$row;	
+			}	
+		}
+		if(!empty($data['BillingAddress'])){
+			foreach($data['BillingAddress'] as $row){
+				$data['BillingAddress']=$row;	
+			}	
+		}	
+						
+		$this->db->select('order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id,order_products.qty,products.price1 as box_guest_price,products.price2 as box_retailer_price,products.price3 as box_wholesaller_price,products.theli_price1 as theli_guest_price,products.theli_price2 as theli_retailer_price,products.theli_price3 as theli_wholesaller_price');
+		$this->db->join('products', 'products.id = order_products.itemid', 'inner');						
+		$this->db->where('order_products.refOrder_id', $_REQUEST['OrderId']);
+		$result1 = $this->db->get('order_products');
+		$data1 = $result1->result_array();				
+		$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();
+
+
+		$box_package=array();	
+		$theli_package=array();							
+		foreach($data1 as $catlog_row){			
+			if(!empty($user)){
+				if($user->guest==1){
+					$mainprice=	$catlog_row['box_guest_price'];
+					$mainprice2=$catlog_row['theli_guest_price'];
+				}
+				if($user->retailer==1){
+					$mainprice=	$catlog_row['box_retailer_price'];
+					$mainprice2=$catlog_row['theli_retailer_price'];
+				}
+				if($user->wholesaller==1){
+					$mainprice=$catlog_row['box_wholesaller_price'];
+					$mainprice2=$catlog_row['theli_wholesaller_price'];
+				}
+			}
+			foreach($data_package as $package_row){
+				if($catlog_row['refPackagingtype_id']==$package_row['packagingtype_id'] && $catlog_row['ProductType']=='box'){
+					$package_row['price']=$mainprice;
+					$package_row['qty']=$catlog_row['qty'];
+					array_push($box_package,$package_row);
+					// $box_package[$package_row['packagingtype_id']]['totalproduct']=$catlog_row['qty'];
+					// $box_package[$package_row['packagingtype_id']]['amount']=$mainprice;
+				}				
+			}
+			if($catlog_row['ProductType']=='theli'){
+				$theli_data=array();
+				$theli_data['price']=$mainprice2;
+				$theli_data['qty']=$catlog_row['qty'];
+				array_push($theli_package,$theli_data);
+			}
+		}			
+		
+		print_r($box_package);die;
+
+		if (!empty($data) && isset($data)) {
+			$return['Data'] = $data;
+			$return['Message'] = 'Data Get Successfully!';
+			$return['IsSuccess'] = true;
+		} else {
+			$return['Data'] = 0;
+			$return['Message'] = 'Item not Found';
+			$return['IsSuccess'] = false;
+		}
+		return $return;
+	}
+	
+
+
 	public function MyOrderListfun() {
 
 		$this->db->select('packagingtype.*');				

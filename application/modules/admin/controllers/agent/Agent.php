@@ -357,6 +357,7 @@ class Agent extends ADMIN_Controller
 			$userexits = array();
             $data_batch=array();
             $mobilenumber=array();
+			$name=array();
 			$fp = fopen($_FILES['csvfile']['tmp_name'], 'r') or die("can't open file");
 			$skip = 0;
 			while (($line = fgetcsv($fp)) !== FALSE) {
@@ -395,15 +396,33 @@ class Agent extends ADMIN_Controller
                         );
 
                         $querymobile = $this->db->get_where('agent', array('phone' => $data['phone']));
+                        if(empty($data['phone']) || $data['phone']==''){							
+                            $querymobile = $this->db->get_where('agent', array('name' => $data['name']));							
+                        }
+                        // $querymobile = $this->db->get_where('agent', array('phone' => $data['phone']));
                         if ($querymobile->num_rows() > 0) {
                             $this->session->set_flashdata('result_publish', 'Some Agent Mobile Already exits In System!');
                             array_push($userexits, $data['phone']);
                         } else {
                             if (!in_array($data['phone'], $mobilenumber))
                             {
-                                array_push($mobilenumber,$data['phone']);
-                                array_push($data_batch,$data);
+
+                                if(!empty($data['phone']) || $data['phone']!=''){
+									array_push($mobilenumber,$data['phone']);
+									array_push($name,$data['name']);
+									array_push($data_batch,$data);
+								}	
+
+                                // array_push($mobilenumber,$data['phone']);
+                                // array_push($data_batch,$data);
                             }
+                            if(empty($data['phone']) || $data['phone']==''){
+								if (!in_array($data['name'],$name))
+								{																					
+									array_push($name,$data['name']);
+									array_push($data_batch,$data);																		
+								}
+							}
                             // $this->db->insert('agent', $data);
                         }
                     }
