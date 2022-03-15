@@ -1893,6 +1893,7 @@ class Api_model extends CI_Model {
 		$this->db->where('orders.id', $_REQUEST['OrderId']);
 		$result = $this->db->get('orders');
 		$data = $result->row_array();
+		$data['date']=date('d-m-Y', $data['date']);
 
 
 		
@@ -1922,7 +1923,9 @@ class Api_model extends CI_Model {
 
 		$box_package=array();	
 		$theli_package=array();							
-		foreach($data1 as $catlog_row){			
+		foreach($data1 as $catlog_row){	
+			$mainprice=0;	
+			$mainprice2=0;	
 			if(!empty($user)){
 				if($user->guest==1){
 					$mainprice=	$catlog_row['box_guest_price'];
@@ -1954,7 +1957,7 @@ class Api_model extends CI_Model {
 			}
 		}			
 		
-		print_r($box_package);die;
+		// print_r($box_package);die;
 
 		if (!empty($data) && isset($data)) {
 			$return['Data'] = $data;
