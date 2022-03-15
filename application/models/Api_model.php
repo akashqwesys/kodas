@@ -97,6 +97,7 @@ class Api_model extends CI_Model {
 			$data['address'] = !empty($_REQUEST['Address']) ? $_REQUEST['Address'] : '';
 			$data['mobilenumber'] = !empty($_REQUEST['MobileNo']) ? $_REQUEST['MobileNo'] : '';
 			$data['emailid'] = !empty($_REQUEST['EmailId']) ? $_REQUEST['EmailId'] : '';
+			$data['retailer'] = 1;
 			$data['gstin'] = !empty($_REQUEST['GSTNo']) ? $_REQUEST['GSTNo'] : '';
 			$data['isverified'] = 0;
 			$this->db->insert('user_app', $data);
