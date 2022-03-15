@@ -1919,14 +1919,23 @@ class Api_model extends CI_Model {
 		$result1 = $this->db->get('order_products');
 		$data1 = $result1->result_array();				
 		$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();
+		// print_r($user);die;
 
+		$countArray=array();
+		$k=0;
+		foreach($data_package as $package_row){						
+			$countArray[$k]=array();
+			$k=$k+1;
+		}
+		$countArray[$k]=array();
 
 		$box_package=array();	
 		$theli_package=array();							
-		foreach($data1 as $catlog_row){	
+		foreach($data1 as $catlog_row){				
+			$i=0;
 			$mainprice=0;	
 			$mainprice2=0;	
-			if(!empty($user)){
+			if(!empty($user)){				
 				if($user->guest==1){
 					$mainprice=	$catlog_row['box_guest_price'];
 					$mainprice2=$catlog_row['theli_guest_price'];
@@ -1942,22 +1951,50 @@ class Api_model extends CI_Model {
 			}
 			foreach($data_package as $package_row){
 				if($catlog_row['refPackagingtype_id']==$package_row['packagingtype_id'] && $catlog_row['ProductType']=='box'){
-					$package_row['price']=$mainprice;
-					$package_row['qty']=$catlog_row['qty'];
-					array_push($box_package,$package_row);
+					$dummy=array();
+					$dummy['price']=$mainprice*$catlog_row['qty'];
+					$dummy['qty']=$catlog_row['qty'];
+					$dummy['refPackagingtype_id']=$catlog_row['refPackagingtype_id'];
+					array_push($countArray[$i],$dummy);
 					// $box_package[$package_row['packagingtype_id']]['totalproduct']=$catlog_row['qty'];
 					// $box_package[$package_row['packagingtype_id']]['amount']=$mainprice;
-				}				
+				}
+				$i=$i+1;				
 			}
 			if($catlog_row['ProductType']=='theli'){
 				$theli_data=array();
 				$theli_data['price']=$mainprice2;
 				$theli_data['qty']=$catlog_row['qty'];
-				array_push($theli_package,$theli_data);
+				$theli_data['refPackagingtype_id']=0;
+				array_push($countArray[$k],$theli_data);
 			}
-		}			
-		
-		// print_r($box_package);die;
+		}
+		$finalCount=array();			
+		if(!empty($countArray)){
+			$m=1;
+			foreach($countArray as $c_row){
+				$price=0;
+				$qty=0;
+				$finalRow=array();
+				if(!empty($c_row)){
+					foreach($c_row as $mainRow){
+						$price=$mainRow['price']+$price;
+						$qty=$mainRow['qty']+$qty;
+						$finalRow['price']=$price;
+						$finalRow['qty']=$qty;						
+					}
+					$finalRow['catalog']=$m;
+				}
+				
+				$m=$m+1;
+				if(!empty($finalRow)){
+					array_push($finalCount,$finalRow);
+				}
+			}			
+		}
+		$data['cataloglist']=$finalCount;
+		// print_r($finalCount);die;
+
 
 		if (!empty($data) && isset($data)) {
 			$return['Data'] = $data;
