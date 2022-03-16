@@ -1879,7 +1879,7 @@ class Api_model extends CI_Model {
 
 	public function SingleOrderDetailsfun() {
 
-		print_r($_REQUEST);die;
+		
 		$this->db->select('packagingtype.*');				
 		$result_package = $this->db->get('packagingtype');
 		$data_package = $result_package->result_array();		
