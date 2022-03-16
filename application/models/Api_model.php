@@ -1754,8 +1754,7 @@ class Api_model extends CI_Model {
 		
 		// print_r($query);die;
 
-		if ($query->num_rows() > 0) {
-					
+		if ($query->num_rows() > 0) {					
 			$result = $query->result_array();			
 			$post['date'] = time();
 			$finalprice=0;
@@ -1880,10 +1879,10 @@ class Api_model extends CI_Model {
 
 	public function SingleOrderDetailsfun() {
 
+		print_r($_REQUEST);die;
 		$this->db->select('packagingtype.*');				
 		$result_package = $this->db->get('packagingtype');
-		$data_package = $result_package->result_array();
-		
+		$data_package = $result_package->result_array();		
 
 		$this->db->where('for_id', $_REQUEST['OrderId']);		
 		$query = $this->db->select('orders_clients.*')->get('orders_clients');
