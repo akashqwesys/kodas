@@ -1791,7 +1791,12 @@ class Api_model extends CI_Model {
 			// $post['notes'] = !empty($_REQUEST['TransportName']) ? $_REQUEST['TransportName'] : '';
 			$post['user_id'] = $_REQUEST['UserId'];
 			$post['products'] = '';
-			$post['finaltotal'] = $finalprice;
+
+
+			$post['discountamount'] = !empty($_REQUEST['Discountprice']) ? $_REQUEST['Discountprice'] : '';
+			$post['coupancode'] = !empty($_REQUEST['CoupanCode']) ? $_REQUEST['CoupanCode'] : '';
+
+			$post['finaltotal'] = $finalprice-$post['discountamount'];
 			$post['totalqty'] = array_sum($totalqty);
 			$post['gst'] = !empty($cartgst) ? $cartgst : 0;
 			// $post['gstamount'] = !empty($cartgst) ? round($post['finaltotal'] * $cartgst / 100) : 0;
@@ -1800,8 +1805,7 @@ class Api_model extends CI_Model {
 			$post['description'] = !empty($_REQUEST['Description']) ? $_REQUEST['Description'] : '';
 			$post['payment_type'] = !empty($_REQUEST['PaymentMode']) ? $_REQUEST['PaymentMode'] : '';
 			$post['transactionid'] = !empty($_REQUEST['TransactionID']) ? $_REQUEST['TransactionID'] : '';
-			$post['discountamount'] = !empty($_REQUEST['Discountprice']) ? $_REQUEST['Discountprice'] : '';
-			$post['coupancode'] = !empty($_REQUEST['CoupanCode']) ? $_REQUEST['CoupanCode'] : '';
+		
 			$post['referrer'] = '';
 			if (!empty($_FILES['AudioFile']['name'])) {
 				$new_name = time() . '_' . $_FILES['AudioFile']['name'];
@@ -2021,7 +2025,7 @@ class Api_model extends CI_Model {
 		$result_package = $this->db->get('packagingtype');
 		$data_package = $result_package->result_array();
 		
-		$this->db->select('orders.id,orders.processed,orders.date,orders.gstwithamount,orders.description,orders.totalqty');		
+		$this->db->select('orders.id,orders.order_id,orders.processed,orders.date,orders.gstwithamount,orders.description,orders.totalqty');		
 		$this->db->where('orders.user_id', $_REQUEST['UserId']);
 		$this->db->order_by("orders.id", "desc");
 		$result = $this->db->get('orders');
