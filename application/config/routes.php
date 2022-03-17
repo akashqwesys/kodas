@@ -443,6 +443,14 @@ $route['admin/loadOthersImages'] =
 | Sample REST API Routes
 | -------------------------------------------------------------------------
  */
+
+
+
+
+$route['api/agent/dashboard'] = 'Api/Apilist/DashboardAgent';
+$route['api/agent/customerList'] = 'Api/Apilist/customerList';
+$route['api/agent/customerDetails'] = 'Api/Apilist/customerDetails';
+
 $route['api/Home'] = 'Api/Apilist/Home/$1';
 $route['api/GetProductListByType'] = 'Api/Products/all/$1';
 $route['api/product/(\w{2})/(:num)/get'] = 'Api/Products/one/$1/$2';
@@ -487,6 +495,9 @@ $route['api/SendMessage'] = 'Api/Apilist/SendMessage/';
 
 $route['api/MyOrderList'] = 'Api/Apilist/MyOrderList/';
 $route['api/SingleOrderDetails'] = 'Api/Apilist/SingleOrderDetails/';
+
+
+$route['api/Singalorderdata'] = 'Api/Apilist/Singalorderdata/';
 
 $route['api/GetOrderByType'] = 'Api/Apilist/GetOrderByType/';
 // New API Start GetOrderByTypeNew

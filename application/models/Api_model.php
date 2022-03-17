@@ -1878,8 +1878,9 @@ class Api_model extends CI_Model {
 
 
 	public function SingleOrderDetailsfun() {
-
 		
+		$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();
+
 		$this->db->select('packagingtype.*');				
 		$result_package = $this->db->get('packagingtype');
 		$data_package = $result_package->result_array();		
@@ -1894,13 +1895,18 @@ class Api_model extends CI_Model {
 		$result = $this->db->get('orders');
 		$data = $result->row_array();
 		$data['date']=date('d-m-Y', $data['date']);
+		
+		
+		$data['customerName']=$user->name;
 
-
-		
-		
-		
 		$data['BillingAddress']=unserialize(html_entity_decode($resultAddress['billtoid']));
+		if(!$data['BillingAddress']){
+			$data['BillingAddress']=array();
+		}
 		$data['ShippingAddress']=unserialize(html_entity_decode($resultAddress['shiptoid']));
+		if(!$data['ShippingAddress']){
+			$data['ShippingAddress']=array();
+		}
 
 		if(!empty($data['ShippingAddress'])){
 			foreach($data['ShippingAddress'] as $row){
@@ -2023,7 +2029,11 @@ class Api_model extends CI_Model {
 		$final_data=array();
 
 		if(!empty($data)){
-			foreach($data as $order_row){				
+			foreach($data as $order_row){
+				
+				
+				$order_row['date']=date('d-m-Y', $order_row['date']);
+
 				$this->db->select('order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id');
 				$this->db->join('products', 'products.id = order_products.itemid', 'inner');				
 				$this->db->where('order_products.refOrder_id', $order_row['id']);
@@ -2208,6 +2218,10 @@ class Api_model extends CI_Model {
 			}
 		}
 		if (isset($_REQUEST['Status']) && $_REQUEST['Status'] == 'PhotoOrder') {
+
+
+			
+
 			$this->db->select('photoordercreate.*');
 			$this->db->where('photoordercreate.userid', $_REQUEST['UserId']);
 			$this->db->order_by("photoordercreate.id", "desc");
@@ -2215,6 +2229,8 @@ class Api_model extends CI_Model {
 			//echo $this->db->last_query(); exit;
 			$row = $result->result_array();
 			$data = [];
+
+			
 			$i = 0;
 			foreach ($row as $key => $value) {
 				// $Addressship = $this->GetUserAddressfun($value['shiptoid'], null);
@@ -2223,24 +2239,28 @@ class Api_model extends CI_Model {
 				$Addressship = unserialize(html_entity_decode($value['shiptoid']));
 				$Addressbill = unserialize(html_entity_decode($value['billtoid']));
 				$orderdate = date("d-m-Y", $value['datetime']);
-				$data[$i]['OrderId'] = $value['id'];
-				$data[$i]['UserId'] = $value['userid'];
-				$data[$i]['Address'] = $value['address'];
+				$data['order'][$i]['OrderId'] = $value['id'];
+				$data['order'][$i]['UserId'] = $value['userid'];
+				$data['order'][$i]['Address'] = $value['address'];
 				// $data[$i]['TransportName'] = $value['transportname'];
-				$data[$i]['Description'] = $value['description'];
-				$data[$i]['Status'] = $value['orderstatus'];
-				$data[$i]['Date'] = $orderdate;
-				$data[$i]['Addressship'] = !empty($Addressship) ? $Addressship : array();
-				$data[$i]['Addressbill'] = !empty($Addressbill) ? $Addressbill : array();
+				$data['order'][$i]['Description'] = $value['description'];
+				$data['order'][$i]['Status'] = $value['orderstatus'];
+				$data['order'][$i]['Date'] = $orderdate;
+				$data['order'][$i]['Addressship'] = !empty($Addressship) ? $Addressship : array();
+				$data['order'][$i]['Addressbill'] = !empty($Addressbill) ? $Addressbill : array();
 				$Items_List = [];
 				$Items_List[0]['OrderId'] = $value['id'];
 				$Items_List[0]['Image'] = !empty($value['orderphoto']) ? base_url('attachments/photoorder_images/' . $value['orderphoto']) : '';
 				$Items_List[0]['Comment'] = $value['description'];
 				$Items_List[0]['AudioFile'] = !empty($value['orderaudio']) ? base_url('attachments/audiofile/' . $value['orderaudio']) : '';
-				$data[$i]['ItemsList'] = $Items_List;
+				$data['order'][$i]['ItemsList'] = $Items_List;
 				$i++;
 			}
 		}
+
+
+		$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();
+		$data['customerName']=$user->name;
 
 		if (!empty($data) && isset($data)) {
 			$return['Data'] = $data;
@@ -2253,6 +2273,12 @@ class Api_model extends CI_Model {
 		}
 		return $return;
 	}
+
+
+
+
+
+
 	public function sendorderdetailsfun() {
 
 		if (isset($_REQUEST['Type']) && $_REQUEST['Type'] == 'order' && isset($_REQUEST['Orderid']) && $_REQUEST['Orderid'] != '') {
@@ -2262,7 +2288,7 @@ class Api_model extends CI_Model {
 				. 'orders_clients.address, orders_clients.city, orders_clients.post_code,'
 				. ' orders_clients.notes');
 
-			$this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'inner');
+			$this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'inner');			
 			$this->db->where('orders.id', $_REQUEST['Orderid']);
 			$this->db->order_by("orders.id", "desc");
 			$result = $this->db->get('orders');
@@ -2368,7 +2394,8 @@ class Api_model extends CI_Model {
 			}
 		}
 		if (isset($_REQUEST['Type']) && $_REQUEST['Type'] == 'photo' && isset($_REQUEST['Orderid']) && $_REQUEST['Orderid'] != '') {
-			$this->db->select('photoordercreate.*');
+			$this->db->select('photoordercreate.*,user_app.name');
+			$this->db->join('user_app', 'user_app.id = photoordercreate.userid', 'inner');
 			$this->db->where('photoordercreate.id', $_REQUEST['Orderid']);
 			$this->db->order_by("photoordercreate.id", "desc");
 			$result = $this->db->get('photoordercreate');
@@ -2385,6 +2412,7 @@ class Api_model extends CI_Model {
 				$orderdate = date("d-m-Y", $value['datetime']);
 				$data[$i]['OrderId'] = $value['id'];
 				$data[$i]['UserId'] = $value['userid'];
+				$data[$i]['CustomerName'] = $value['name'];
 				$data[$i]['Address'] = $value['address'];
 				// $data[$i]['TransportName'] = $value['transportname'];
 				$data[$i]['Description'] = $value['description'];
@@ -4492,6 +4520,111 @@ class Api_model extends CI_Model {
 				$this->db->update('user_app', $dataup);
 			}
 		}
+	}
+
+
+
+	public function DashboardAgent() {
+		// $this->db->select('*');
+		// $this->db->from('user_app');
+		// $this->db->where('user_app.id', $_POST['UserId']);		
+		// $query = $this->db->get();		
+		// $data = $query->result_array(); 
+		$data = array();
+		$this->db->where('alocation_agent_id', $_REQUEST['agent_id']);
+		$query = $this->db->select('COUNT(id) as usercount')->get('user_app');
+		$customers = $query->row_array();		
+		$data['usercount']=$customers['usercount'];
+
+
+		$this->db->join('user_app', 'user_app.id = orders.user_id', 'left');
+		$this->db->where('user_app.alocation_agent_id', $_REQUEST['agent_id']);
+		$query = $this->db->select('COUNT(orders.id) as orderCount')->get('orders');
+		$customers = $query->row_array();		
+		$data['orderCount']=$customers['orderCount'];
+
+		$this->db->join('user_app', 'user_app.id = photoordercreate.userid', 'left');
+		$this->db->where('user_app.alocation_agent_id', $_REQUEST['agent_id']);
+		$query = $this->db->select('COUNT(photoordercreate.id) as directOrderCount')->get('photoordercreate');
+		$customers = $query->row_array();		
+		$data['directOrderCount']=$customers['directOrderCount'];
+
+		$this->db->join('user_app', 'user_app.id = orders.user_id', 'left');
+		$this->db->where('user_app.alocation_agent_id', $_REQUEST['agent_id']);
+		$this->db->where('orders.processed','Pending');
+		$query = $this->db->select('COUNT(orders.id) as pendingOrderCount')->get('orders');
+		$customers = $query->row_array();		
+		$data['pendingOrderCount']=$customers['pendingOrderCount'];
+				
+		if (!empty($data) && $data != '') {
+			$return['Data'] = $data;
+			$return['Message'] = 'Data Get Successfully!';
+			$return['IsSuccess'] = true;
+		} else {
+			$return['data'] = $data;
+			$return['Message'] = 'Data Get Not Successfully.';
+			$return['IsSuccess'] = false;
+		}
+		return $return;
+		//return $query->result_array();
+	}
+
+	public function customerList() {
+		$data = array();
+		$this->db->select('id,name,businessname,gstin,mobilenumber,profileimg');
+		$this->db->from('user_app');
+		$this->db->where('user_app.alocation_agent_id', $_REQUEST['agent_id']);		
+		$query = $this->db->get();		
+		$data = $query->result_array(); 
+		
+
+		if (!empty($data) && $data != '') {
+			$return['Data'] = $data;
+			$return['Message'] = 'Data Get Successfully!';
+			$return['IsSuccess'] = true;
+		} else {
+			$return['data'] = $data;
+			$return['Message'] = 'Data Get Not Successfully.';
+			$return['IsSuccess'] = false;
+		}
+		return $return;
+		//return $query->result_array();
+	}
+	public function customerDetails() {
+		$data = array();
+		$this->db->select('id,name,businessname,gstin,mobilenumber,profileimg,emailid');
+		$this->db->from('user_app');
+		$this->db->where('user_app.alocation_agent_id', $_REQUEST['agent_id']);	
+		$this->db->where('user_app.id', $_REQUEST['user_id']);		
+		$query = $this->db->get();		
+		$data = $query->row_array(); 
+		
+
+		$this->db->select('companyname,address,gstnumber');		
+		$this->db->where('userid', $_REQUEST['user_id']);
+		$this->db->where('addresstype', 'Shipping');		
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get('useraddress');
+		$data['ShippingAddress'] = $query->row_array(); 
+
+		$this->db->select('companyname,address,gstnumber');	
+		$this->db->where('userid', $_REQUEST['user_id']);
+		$this->db->where('addresstype', 'Billing');		
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get('useraddress');
+		$data['BillingAddress'] = $query->row_array(); 
+
+		if (!empty($data) && $data != '') {
+			$return['Data'] = $data;
+			$return['Message'] = 'Data Get Successfully!';
+			$return['IsSuccess'] = true;
+		} else {
+			$return['data'] = $data;
+			$return['Message'] = 'Data Get Not Successfully.';
+			$return['IsSuccess'] = false;
+		}
+		return $return;
+		//return $query->result_array();
 	}
 
 }

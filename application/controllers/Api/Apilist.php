@@ -1508,4 +1508,58 @@ class Apilist extends REST_Controller {
 		$this->set_response($message, REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
 	}
 
+
+
+	///////////////////////////////////---AGENT---/////////////////////////////////
+	
+	public function DashboardAgent_get() {
+		
+		$product = $this->Api_model->DashboardAgent();
+
+		// Check if the products data store contains products (in case the database result returns NULL)
+		if ($product) {
+			// Set the response and exit
+			$this->response($product, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		} else {
+			// Set the response and exit
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No product were found',
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}
+	}
+	public function customerList_get() {
+		
+		$product = $this->Api_model->customerList();
+
+		// Check if the products data store contains products (in case the database result returns NULL)
+		if ($product) {
+			// Set the response and exit
+			$this->response($product, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		} else {
+			// Set the response and exit
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No product were found',
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}
+	}
+
+	public function customerDetails_get() {
+		
+		$product = $this->Api_model->customerDetails();
+
+		// Check if the products data store contains products (in case the database result returns NULL)
+		if ($product) {
+			// Set the response and exit
+			$this->response($product, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		} else {
+			// Set the response and exit
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No product were found',
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}
+	}
+
 }
