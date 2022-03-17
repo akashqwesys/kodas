@@ -2024,6 +2024,7 @@ class Api_model extends CI_Model {
 		
 		$this->db->select('orders.id,orders.processed,orders.date,orders.gstwithamount,orders.description,orders.totalqty');		
 		$this->db->where('orders.user_id', $_REQUEST['UserId']);
+		$this->db->order_by("orders.id", "desc");
 		$result = $this->db->get('orders');
 		$data = $result->result_array();				
 		$final_data=array();
