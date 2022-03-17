@@ -1739,7 +1739,7 @@ class Api_model extends CI_Model {
 
 	public function CheckOutfun() {
 		
-		// print_r($_REQUEST);die;
+		print_r($_REQUEST);die;
 		$query_cartgst = $this->db->where("thekey = 'addgst'")->get('value_store')->row_array();
 		$cartgst = $query_cartgst['value'];
 		$q = $this->db->query('SELECT MAX(order_id) as order_id FROM orders');
@@ -1775,8 +1775,7 @@ class Api_model extends CI_Model {
 					];
 				}			
 			}
-			
-			
+						
 			// echo '<pre>';print_r($products_to_order);die;
 			$this->db->select('*');
 			$this->db->from('user_app');
