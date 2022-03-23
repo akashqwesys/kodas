@@ -142,6 +142,7 @@
 <?php $this->load->view('newsletter/subscriber_js'); ?>
 <?php $this->load->view('coupan/coupan_js'); ?>
 <?php $this->load->view('ecommerce/orderlist_js'); ?>
+<?php $this->load->view('ecommerce/stock_js'); ?>
 <?php if($title=='Add-Order'){ ?>
 <script>
  $(document).ready(function () {

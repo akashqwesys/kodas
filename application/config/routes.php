@@ -205,7 +205,6 @@ $route['admin/shareproduct-list'] = 'admin/shareproduct/shareproduct/shareproduc
 $route['admin/addshareproduct'] = 'admin/shareproduct/shareproduct/add_shareproduct';
 
 
-
 $route['admin/agent-history/(:num)'] = 'admin/agent/agent/agent_history/$1';
 $route['admin/agent-history-list/(:num)'] = 'admin/agent/agent/agent_history_list/$1';
 
@@ -271,6 +270,9 @@ $route['admin/products'] = 'admin/ecommerce/products';
 $route['admin/products/(:num)'] = 'admin/ecommerce/products/index/$1';
 
 $route['admin/get-product-list'] = 'admin/ecommerce/products/product_list';
+
+$route['admin/stock/(:num)'] = 'admin/ecommerce/stock/index/$1';
+$route['admin/get-stock-list'] = 'admin/ecommerce/stock/stock_list';
 
 $route['admin/prepublish'] = 'admin/ecommerce/prepublish';
 $route['admin/prepublish/(:num)'] = 'admin/ecommerce/prepublish/index/$1';
@@ -536,6 +538,9 @@ $route['api/HomeSlider'] = 'Api/Apilist/HomeSlider/';
 $route['api/AttributeList'] = 'Api/Apilist/AttributeList/';
 // New API Dashboard Count
 $route['api/Dashboardcount'] = 'Api/Apilist/Dashboardcount/';
+
+$route['api/AgentOrderList'] = 'Api/Apilist/AgentOrderList/';
+$route['api/AgentDirectOrderList'] = 'Api/Apilist/AgentDirectOrderList/';
 // New API Dashboard List
 // $route['api/Topcustomerlist'] = 'Api/Apilist/Topcustomer/';
 // New API Dashboard List

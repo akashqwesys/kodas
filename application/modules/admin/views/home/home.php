@@ -36,12 +36,239 @@ $apidata = json_decode($json);*/
         </div>
     </div>
     <div class="row">
+
         <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $todaysOrder+$todaysDirectOrder; ?></div>
+                            <div>Today’s Orders</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $weeklyOrder['cnt']+$weeklyDirectOrder['cnt']; ?></div>
+                            <div>Weekly Orders</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $monthlyOrder['cnt']+$monthlyDirectOrder['cnt']; ?></div>
+                            <div>Monthly Orders</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $todaysSales['gstwithamount']; ?></div>
+                            <div>Today’s Sales</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $weeklySales['total']; ?></div>
+                            <div>Weekly Sales</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $monthlySales['total']; ?></div>
+                            <div>Monthly Sales</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $pendingOrder; ?></div>
+                            <div>Pending Orders</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $cancelledOrder; ?></div>
+                            <div>Cancelled Orders</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-camera fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $pendingDirectOrder; ?></div>
+                            <div>Pending Direct Orders</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading fast-view-panel">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-camera fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $cancelledDirectOrder; ?></div>
+                            <div>Cancelled Direct Orders</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading fast-view-panel">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-5x"></i>
+                            <i class="fa fa-shopping-cart fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge"><?=!empty($apidata->Data[0]->todaysales) ? $apidata->Data[0]->todaysales : ''?></div>
@@ -63,7 +290,7 @@ $apidata = json_decode($json);*/
                 <div class="panel-heading fast-view-panel">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-5x"></i>
+                            <i class="fa fa-shopping-cart fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge"><?=!empty($apidata->Data[0]->weeksales) ? $apidata->Data[0]->weeksales : ''?></div>
@@ -85,7 +312,7 @@ $apidata = json_decode($json);*/
                 <div class="panel-heading fast-view-panel">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
+                            <i class="fa fa-user fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge"><?=!empty($apidata->Data[0]->topcustomer) ? $apidata->Data[0]->topcustomer : ''?></div>
@@ -107,7 +334,7 @@ $apidata = json_decode($json);*/
                 <div class="panel-heading fast-view-panel">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
+                            <i class="fa fa-user fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge"><?=!empty($apidata->Data[0]->bottomcustomer) ? $apidata->Data[0]->bottomcustomer : ''?></div>
@@ -129,7 +356,7 @@ $apidata = json_decode($json);*/
                 <div class="panel-heading fast-view-panel">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-mobile fa-5x"></i>
+                            <i class="fa fa-mobile fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div>Change User Device</div>
@@ -144,7 +371,7 @@ $apidata = json_decode($json);*/
                     </div>
                 </a>
             </div>
-        </div>
+        </div> -->
     </div>
     <!-- <div class="row">
         <div class="col-lg-12">

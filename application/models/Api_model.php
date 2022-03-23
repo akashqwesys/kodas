@@ -145,7 +145,7 @@ class Api_model extends CI_Model {
 			// curl_close($ch);
 			// $msgdisplay = json_decode($data);
 
-			// print_r($msgdisplay);die;
+			print_r($msgdisplay);die;
 			if (!empty($msgdisplay)) {
 				//echo "cURL Error #:" . $err;
 				$return['Data'] = "1";
@@ -1796,7 +1796,7 @@ class Api_model extends CI_Model {
 			$post['discountamount'] = !empty($_REQUEST['Discountprice']) ? $_REQUEST['Discountprice'] : '';
 			$post['coupancode'] = !empty($_REQUEST['CoupanCode']) ? $_REQUEST['CoupanCode'] : '';
 
-			$post['finaltotal'] = $finalprice-$post['discountamount'];
+			$post['finaltotal'] = $finalprice - ((float)$post['discountamount']);
 			$post['totalqty'] = array_sum($totalqty);
 			$post['gst'] = !empty($cartgst) ? $cartgst : 0;
 			// $post['gstamount'] = !empty($cartgst) ? round($post['finaltotal'] * $cartgst / 100) : 0;
@@ -2034,8 +2034,7 @@ class Api_model extends CI_Model {
 
 		if(!empty($data)){
 			foreach($data as $order_row){
-				
-				
+							
 				$order_row['date']=date('d-m-Y', $order_row['date']);
 
 				$this->db->select('order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id');
@@ -2063,8 +2062,71 @@ class Api_model extends CI_Model {
 			}						
 		}		
 
+
+		$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();
+		// $final_data['customerName']=$user->name;
 		if (!empty($final_data) && isset($final_data)) {
 			$return['Data'] = $final_data;
+			$return['customerName']=$user->name;
+			$return['Message'] = 'Data Get Successfully!';
+			$return['IsSuccess'] = true;
+		} else {
+			$return['Data'] = 0;
+			$return['Message'] = 'Item not Found';
+			$return['IsSuccess'] = false;
+		}
+		return $return;
+	}
+
+
+	public function AgentOrderListfun() {
+
+		$this->db->select('packagingtype.*');				
+		$result_package = $this->db->get('packagingtype');
+		$data_package = $result_package->result_array();
+		
+		$this->db->select('orders.id,orders.order_id,orders.processed,orders.date,orders.gstwithamount,orders.description,orders.totalqty,user_app.name,user_app.businessname');	
+		$this->db->join('user_app', 'user_app.id = orders.user_id', 'left');		
+		$this->db->where('user_app.alocation_agent_id', $_REQUEST['agent_id']);
+		$this->db->order_by("orders.id", "desc");
+		$result = $this->db->get('orders');
+		$data = $result->result_array();				
+		$final_data=array();
+
+		if(!empty($data)){
+			foreach($data as $order_row){
+							
+				$order_row['date']=date('d-m-Y', $order_row['date']);
+
+				$this->db->select('order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id');
+				$this->db->join('products', 'products.id = order_products.itemid', 'inner');				
+				$this->db->where('order_products.refOrder_id', $order_row['id']);
+				$result1 = $this->db->get('order_products');
+				$data1 = $result1->result_array();
+				
+				
+				$count_data=array();							
+				foreach($data1 as $catlog_row){
+					foreach($data_package as $package_row){
+						if($catlog_row['refPackagingtype_id']==$package_row['packagingtype_id'] && $catlog_row['ProductType']=='box'){
+							array_push($count_data,$catlog_row['refPackagingtype_id']);
+						}
+						if($catlog_row['ProductType']=='theli'){
+							array_push($count_data,0);
+						}
+					}
+				}
+				
+				$count=count(array_unique($count_data));				
+				$order_row['totalCatlog']=$count;
+				array_push($final_data,$order_row);	
+			}						
+		}		
+		
+		// $final_data['customerName']=$user->name;
+		if (!empty($final_data) && isset($final_data)) {
+			$return['Data'] = $final_data;
+			
 			$return['Message'] = 'Data Get Successfully!';
 			$return['IsSuccess'] = true;
 		} else {
@@ -2278,8 +2340,58 @@ class Api_model extends CI_Model {
 		return $return;
 	}
 
+	public function AgentDirectOrderListfun() {
+	
+		
+			$this->db->select('photoordercreate.*,user_app.name,user_app.businessname');
 
+			$this->db->join('user_app', 'user_app.id = photoordercreate.userid', 'left');		
+			$this->db->where('user_app.alocation_agent_id', $_REQUEST['agent_id']);			
+			$this->db->order_by("photoordercreate.id", "desc");
+			$result = $this->db->get('photoordercreate');
+			//echo $this->db->last_query(); exit;
+			$row = $result->result_array();
+			$data = [];
+			
+			$i = 0;
+			foreach ($row as $key => $value) {
+				// $Addressship = $this->GetUserAddressfun($value['shiptoid'], null);
+				// $Addressbill = $this->GetUserAddressfun(null, $value['billtoid']);
 
+				$Addressship = unserialize(html_entity_decode($value['shiptoid']));
+				$Addressbill = unserialize(html_entity_decode($value['billtoid']));
+				$orderdate = date("d-m-Y", $value['datetime']);
+				$data['order'][$i]['OrderId'] = $value['id'];
+				$data['order'][$i]['UserId'] = $value['userid'];
+				$data['order'][$i]['Address'] = $value['address'];
+				// $data[$i]['TransportName'] = $value['transportname'];
+				$data['order'][$i]['customername'] = $value['name'];
+				$data['order'][$i]['businessname'] = $value['businessname'];
+				$data['order'][$i]['Description'] = $value['description'];
+				$data['order'][$i]['Status'] = $value['orderstatus'];
+				$data['order'][$i]['Date'] = $orderdate;
+				$data['order'][$i]['Addressship'] = !empty($Addressship) ? $Addressship : array();
+				$data['order'][$i]['Addressbill'] = !empty($Addressbill) ? $Addressbill : array();
+				$Items_List = [];
+				$Items_List[0]['OrderId'] = $value['id'];
+				$Items_List[0]['Image'] = !empty($value['orderphoto']) ? base_url('attachments/photoorder_images/' . $value['orderphoto']) : '';
+				$Items_List[0]['Comment'] = $value['description'];
+				$Items_List[0]['AudioFile'] = !empty($value['orderaudio']) ? base_url('attachments/audiofile/' . $value['orderaudio']) : '';
+				$data['order'][$i]['ItemsList'] = $Items_List;
+				$i++;
+			}
+	
+		if (!empty($data) && isset($data)) {
+			$return['Data'] = $data;
+			$return['Message'] = 'Data Get Successfully!';
+			$return['IsSuccess'] = true;
+		} else {
+			$return['Data'] = 0;
+			$return['Message'] = 'Item not Found';
+			$return['IsSuccess'] = false;
+		}
+		return $return;
+	}
 
 
 
@@ -2715,7 +2827,17 @@ class Api_model extends CI_Model {
 		return $return;
 	}
 	public function Updateorderstatusfun() {
-		if (isset($_REQUEST['OrderId']) && isset($_REQUEST['Status']) && isset($_REQUEST['AdminId']) && $_REQUEST['Type'] == 'Order') {
+
+		if(isset($_REQUEST['agent_id'])){
+			$sender_id = $_REQUEST['agent_id'];
+			$userType = 'agent';
+		}
+		if(isset($_REQUEST['AdminId'])){
+			$sender_id = $_REQUEST['AdminId'];
+			$userType = 'admin';
+		}
+
+		if (isset($_REQUEST['OrderId']) && isset($_REQUEST['Status']) && (isset($_REQUEST['AdminId']) || isset($_REQUEST['agent_id'])) && $_REQUEST['Type'] == 'Order') {
 			$id = $_REQUEST['OrderId'];
 			$to_status = $_REQUEST['Status'];
 			$this->db->join('user_app', 'user_app.id = orders.user_id', 'left');
@@ -2733,12 +2855,12 @@ class Api_model extends CI_Model {
 			$result_check = $this->db->insert('notificationdata', $notidata);
 			$result = true;
 			if ($res['processed'] != $to_status) {
-				$adminid = $_REQUEST['AdminId'];
-				$data['sender_id'] = $adminid;
+												
+				$data['sender_id'] = $sender_id;
 				$data['receiver_id'] = $res['user_id'];
 				$data['order_id'] = $id;
 				$data['message'] = 'Order is shifted to ' . $to_status;
-				$data['usertype'] = 'admin';
+				$data['usertype'] = $userType;
 				$data['type'] = 'Normal Order';
 				$data['time'] = time();
 				$result_check = $this->db->insert('order_chatmessenger', $data);
@@ -2775,12 +2897,12 @@ class Api_model extends CI_Model {
 			$result_check = $this->db->insert('notificationdata', $notidata);
 			$result = true;
 			if ($res['orderstatus'] != $to_status) {
-				$adminid = $_REQUEST['AdminId'];
-				$data['sender_id'] = $adminid;
+				// $adminid = $_REQUEST['AdminId'];
+				$data['sender_id'] = $sender_id;
 				$data['receiver_id'] = $res['userid'];
 				$data['order_id'] = $id;
 				$data['message'] = 'Order is shifted to ' . $to_status;
-				$data['usertype'] = 'admin';
+				$data['usertype'] = $userType;
 				$data['type'] = 'Direct Order';
 				$data['time'] = time();
 				$result_check = $this->db->insert('order_chatmessenger', $data);

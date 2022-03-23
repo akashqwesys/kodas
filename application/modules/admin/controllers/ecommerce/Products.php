@@ -97,8 +97,9 @@ class Products extends ADMIN_Controller {
 			$result = $this->db->get('stock')->row();  
 			$totalStock=$result->qty;
 
+			$stock_history_url=base_url('admin/stock/'). $datarow->id;
 			$finalstock=$totalStock-$totalStockOrder;
-
+			$stock='<a href="'.$stock_history_url.'">'.$finalstock.'</a>';
 
 			$u_path = 'attachments/shop_images/';
 			if ($datarow->image != null && file_exists($u_path . $datarow->image)) {
@@ -129,6 +130,8 @@ class Products extends ADMIN_Controller {
                 $status=1;
             }
 
+
+
 			// $actionBtn = '<button class="btn btn-xs '.$class.' active_inactive_button" data-id="' . $datarow->attributes_id . '" data-status="' . $status . '" data-table="attributes" data-wherefield="attributes_id" data-updatefield="status" data-module="attributes">'.$str.'</button>';
 
             $edit_url=base_url('admin/publish/'). $datarow->id; 
@@ -147,7 +150,7 @@ class Products extends ADMIN_Controller {
             $row[] = $datarow->price3;
 			$row[] = $datarow->theli_price3; 
             $row[]=$datarow->product_pcs; 
-			$row[]=$finalstock;  
+			$row[]=$stock;  
             $row[]=$datarow->view_count;  
             $row[]=$this->db->count_all_results('userviewproduct');   
 			$row[]=$active_inactive_badge; 

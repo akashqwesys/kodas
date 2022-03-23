@@ -25,6 +25,26 @@ class Home extends ADMIN_Controller
         $head['title'] = 'Administration - Home';
         $head['description'] = '';
         $head['keywords'] = '';
+
+        $data['todaysOrder'] = $this->Home_admin_model->countTodaysOrder();
+        $data['weeklyOrder'] = $this->Home_admin_model->countWeeklyOrder();
+        $data['monthlyOrder'] = $this->Home_admin_model->countMonthlyOrder();
+
+
+        $data['todaysDirectOrder'] = $this->Home_admin_model->countTodaysDirectOrder();
+        $data['weeklyDirectOrder'] = $this->Home_admin_model->countWeeklyDirectOrder();
+        $data['monthlyDirectOrder'] = $this->Home_admin_model->countMonthlyDirectOrder();
+
+        $data['todaysSales'] = $this->Home_admin_model->countTodaysSales();
+        $data['weeklySales'] = $this->Home_admin_model->countWeeklySales();
+        $data['monthlySales'] = $this->Home_admin_model->countMonthlySales();
+
+        $data['pendingOrder'] = $this->Home_admin_model->countPendingOrder();
+        $data['cancelledOrder'] = $this->Home_admin_model->countCancelledOrder();
+
+        $data['pendingDirectOrder'] = $this->Home_admin_model->countPendingDirectOrder();
+        $data['cancelledDirectOrder'] = $this->Home_admin_model->countCancelledDirectOrder();
+
         //$data['newOrdersCount'] = $this->Orders_model->ordersCount(true);
         $data['lowQuantity'] = $this->Home_admin_model->countLowQuantityProducts();
         $data['lastSubscribed'] = $this->Home_admin_model->lastSubscribedEmailsCount();

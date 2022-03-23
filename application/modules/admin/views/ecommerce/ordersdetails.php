@@ -57,11 +57,11 @@ if (!isset($_GET['settings'])) {
           </tr>
           <tr>
             <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer Group"><i class="fa fa-map-marker fa-fw"></i></button></td>
-            <td><b>Shipping To : </b><?php echo unserialize(html_entity_decode($address['shiptoid']))[0]['Address'];?></td>
+            <td><b>Shipping To : </b><?php if(!empty(unserialize(html_entity_decode($address['shiptoid']))[0]['Address'])){echo unserialize(html_entity_decode($address['shiptoid']))[0]['Address'];}?></td>
           </tr>
           <tr>
             <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer Group"><i class="fa fa-map-marker fa-fw"></i></button></td>
-            <td><b>Billing To : </b><?php echo unserialize(html_entity_decode($address['billtoid']))[0]['Address'];?></td>
+            <td><b>Billing To : </b><?php if(!empty(unserialize(html_entity_decode($address['billtoid']))[0]['Address'])){echo unserialize(html_entity_decode($address['billtoid']))[0]['Address'];}?></td>
           </tr>
           <tr>
             <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="E-Mail"><i class="fa fa-envelope-o fa-fw"></i></button></td>

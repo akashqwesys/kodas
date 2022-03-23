@@ -33,6 +33,73 @@ class Home_admin_model extends CI_Model {
 		return $this->db->count_all_results('products');
 	}
 
+
+	public function countPendingDirectOrder() {					
+		$this->db->where_in('orderstatus',array('Pending'));
+		return $this->db->count_all_results('photoordercreate');
+	}
+	public function countCancelledDirectOrder() {					
+		$this->db->where_in('orderstatus',array('Cancelled'));
+		return $this->db->count_all_results('photoordercreate');
+	}
+
+
+	public function countPendingOrder() {					
+		$this->db->where_in('processed',array('Pending'));
+		return $this->db->count_all_results('orders');
+	}
+	public function countCancelledOrder() {					
+		$this->db->where_in('processed',array('Cancelled'));
+		return $this->db->count_all_results('orders');
+	}
+	
+	public function countTodaysOrder() {
+		$this->db->where('date >=', strtotime(date('m/d/Y')));			
+		$this->db->where_in('processed',array('Accepted by kodas','Shipped'));
+		return $this->db->count_all_results('orders');
+	}
+	public function countTodaysDirectOrder() {
+		$this->db->where('datetime >=', strtotime(date('m/d/Y')));			
+		$this->db->where_in('orderstatus',array('Accepted by kodas','Shipped'));
+		return $this->db->count_all_results('photoordercreate');
+	}
+
+	public function countWeeklyOrder() {		
+		$result = $this->db->query("select count(id) as cnt from orders where week((FROM_UNIXTIME(date)))=week(now()) AND (processed='Accepted by kodas') OR (processed='Shipped')");	
+		return $result->row_array();		
+	}
+	public function countWeeklyDirectOrder() {		
+		$result = $this->db->query("select count(id) as cnt from photoordercreate where week((FROM_UNIXTIME(datetime)))=week(now()) AND (orderstatus='Accepted by kodas') OR (orderstatus='Shipped')");	
+		return $result->row_array();		
+	}
+
+
+	public function countMonthlyOrder() {		
+		$result = $this->db->query("select count(id) as cnt from orders where MONTH((FROM_UNIXTIME(date)))=MONTH(now()) AND (processed='Accepted by kodas') OR (processed='Shipped')");	
+		return $result->row_array();		
+	}
+	public function countMonthlyDirectOrder() {		
+		$result = $this->db->query("select count(id) as cnt from photoordercreate where MONTH((FROM_UNIXTIME(datetime)))=MONTH(now()) AND (orderstatus='Accepted by kodas') OR (orderstatus='Shipped')");	
+		return $result->row_array();		
+	}
+	
+	public function countTodaysSales() {
+		$this->db->select_sum('gstwithamount');
+		$this->db->where('date >=', strtotime(date('m/d/Y')));
+		$this->db->where_in('processed',array('Accepted by kodas','Shipped'));
+		return $this->db->get('orders')->row_array();
+	}
+
+	public function countWeeklySales() {			
+		$result = $this->db->query("select sum(gstwithamount) as total from orders where week((FROM_UNIXTIME(date)))=week(now()) AND (processed='Accepted by kodas') OR (processed='Shipped')");
+		return $result->row_array();	
+	}
+	public function countMonthlySales() {		
+		$result = $this->db->query("select sum(gstwithamount) as total from orders where MONTH((FROM_UNIXTIME(date)))=MONTH(now()) AND (processed='Accepted by kodas') OR (processed='Shipped')");
+		return $result->row_array();		
+	}
+
+
 	public function lastSubscribedEmailsCount() {
 		$yesterday = strtotime('-1 day', time());
 		$this->db->where('time > ', $yesterday);

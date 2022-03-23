@@ -1034,6 +1034,36 @@ class Apilist extends REST_Controller {
 			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 		}	
 	}
+	public function AgentOrderList_get() {
+		$product = $this->Api_model->AgentOrderListfun();
+
+		// Check if the products data store contains products (in case the database result returns NULL)
+		if ($product) {
+			// Set the response and exit
+			$this->response($product, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		} else {
+			// Set the response and exit
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No product were found',
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}	
+	}
+	public function AgentDirectOrderList_get() {
+		$product = $this->Api_model->AgentDirectOrderListfun();
+
+		// Check if the products data store contains products (in case the database result returns NULL)
+		if ($product) {
+			// Set the response and exit
+			$this->response($product, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		} else {
+			// Set the response and exit
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No product were found',
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}	
+	}
 
 	public function GetOrderByType_get() {
 
