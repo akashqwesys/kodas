@@ -26,6 +26,11 @@ class Home extends ADMIN_Controller
         $head['description'] = '';
         $head['keywords'] = '';
 
+        $data['activeCustomers'] = $this->Home_admin_model->countactiveCustomers();
+        $data['inActiveCustomers'] = $this->Home_admin_model->countInActiveCustomers();
+
+        $data['topCustomers'] = $this->Home_admin_model->countTopCustomers();
+
         $data['todaysOrder'] = $this->Home_admin_model->countTodaysOrder();
         $data['weeklyOrder'] = $this->Home_admin_model->countWeeklyOrder();
         $data['monthlyOrder'] = $this->Home_admin_model->countMonthlyOrder();

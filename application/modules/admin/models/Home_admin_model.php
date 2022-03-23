@@ -34,6 +34,23 @@ class Home_admin_model extends CI_Model {
 	}
 
 
+	public function countactiveCustomers() {
+		$this->db->where('isverified =','true');					
+		return $this->db->count_all_results('user_app');
+	}
+
+	public function countTopCustomers() {
+		$this->db->where('isverified =','false');					
+		return $this->db->count_all_results('user_app');
+	}
+
+
+	public function countInActiveCustomers() {
+		$this->db->where('isverified =','false');					
+		return $this->db->count_all_results('user_app');
+	}
+
+
 	public function countPendingDirectOrder() {					
 		$this->db->where_in('orderstatus',array('Pending'));
 		return $this->db->count_all_results('photoordercreate');

@@ -101,6 +101,19 @@ class Api_model extends CI_Model {
 			$data['gstin'] = !empty($_REQUEST['GSTNo']) ? $_REQUEST['GSTNo'] : '';
 			$data['isverified'] = 'true';
 			$this->db->insert('user_app', $data);
+			$user_id = $this->db->insert_id();
+
+
+			$data1 = array();
+			$data1['userid'] = $user_id;
+			$data1['addresstype'] = 'Both';
+			$data1['companyname'] = $data['businessname'];
+			$data1['address'] = $data['address'];
+			$data1['gstnumber'] = $data['gstin'];
+			$data1['dateandtime'] = time();
+			$this->db->insert('useraddress', $data1);
+			
+
 			$fcmtoken = $this->getadminfcmtoken();
 			notifications('New Customer Sign Up ' . $_REQUEST['Name'], ' ', $fcmtoken);
 			$string = 1;
@@ -121,31 +134,7 @@ class Api_model extends CI_Model {
 		$OtpCode = !empty($_REQUEST['Code']) ? $_REQUEST['Code'] : '';
 		$signature = !empty($_REQUEST['signature']) ? $_REQUEST['signature'] : '';
 		if ($MobileNo != '' && $OtpCode != '') {
-			
-
-			// sendsms($_POST['username'], $six_digit_random_number);
-			// $res=sendsms($MobileNo,$OtpCode,$signature);
-			// $msg = "Welcome%20to%20Ramrasiya%20Mobile%20Application.%20Your%20verification%20code%20is%20$OtpCode.";
-			// $msg = "Welcome to 20Ramrasiya%20Mobile%20Application.%20Your%20verification%20code%20is%20$OtpCode%0A$signature%20.";
-			// $msg = urlencode($msg);
-			// $message = urlencode($message);
-
 			$msgdisplay=sendsms($MobileNo,$OtpCode,$signature);
-			
-			// $url = "http://sms.premware.in:6005/api/v2/SendSMS?ApiKey=FbKnpOIgZfU541fff6mxudtf5tiCMEz/L5dEUKNJ6YI=&ClientId=26e94c2d-96f0-417e-8ddf-fa563e95e5c7&SenderId=RASIYA&Message=$msg&MobileNumbers=$MobileNo&Is_Flash=False";
-			// $ch = curl_init();
-			// $timeout = 20;
-			// curl_setopt($ch, CURLOPT_URL, $url);
-			// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			// curl_setopt($ch, CURLOPT_HEADER, false);
-			// curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-			// $data = curl_exec($ch);
-			// // print_r($data);die;
-			// curl_close($ch);
-			// $msgdisplay = json_decode($data);
-
-			// print_r($msgdisplay);die;
 			if (!empty($msgdisplay)) {
 				//echo "cURL Error #:" . $err;
 				$return['Data'] = "1";
