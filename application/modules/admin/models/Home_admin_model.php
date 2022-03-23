@@ -40,8 +40,18 @@ class Home_admin_model extends CI_Model {
 	}
 
 	public function countTopCustomers() {
-		$this->db->where('isverified =','false');					
-		return $this->db->count_all_results('user_app');
+
+
+		$result = $this->db->query("SELECT count('user_id') as cnt, rank() 
+		OVER ( partition by subjects order by mark desc ) 
+		AS 'rank' FROM result");	
+		return $result->row_array();
+
+		
+
+
+		// $this->db->where('isverified =','false');					
+		// return $this->db->count_all_results('user_app');
 	}
 
 

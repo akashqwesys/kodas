@@ -448,7 +448,6 @@ $route['admin/loadOthersImages'] =
 
 
 
-
 $route['api/agent/dashboard'] = 'Api/Apilist/DashboardAgent';
 $route['api/agent/customerList'] = 'Api/Apilist/customerList';
 $route['api/agent/customerDetails'] = 'Api/Apilist/customerDetails';

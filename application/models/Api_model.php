@@ -113,7 +113,6 @@ class Api_model extends CI_Model {
 			$data1['dateandtime'] = time();
 			$this->db->insert('useraddress', $data1);
 			
-
 			$fcmtoken = $this->getadminfcmtoken();
 			notifications('New Customer Sign Up ' . $_REQUEST['Name'], ' ', $fcmtoken);
 			$string = 1;
@@ -1632,7 +1631,7 @@ class Api_model extends CI_Model {
 	}
 
 	public function GetUserAddressfun($shipid = null, $billid = null) {
-		$this->db->where('addresstype', 'Billing');
+		$this->db->where_in('addresstype', array('Billing','both'));
 		if ($billid != null) {
 			$this->db->where('id', $billid);
 		} else {
@@ -1649,7 +1648,8 @@ class Api_model extends CI_Model {
 			$databill[$i]['Gstnumber'] = ($value['gstnumber'] != '') ? $value['gstnumber'] : '';
 			$i++;
 		}
-		$this->db->where('addresstype', 'Shipping');
+		// $this->db->where('addresstype', 'Shipping');
+		$this->db->where_in('addresstype', array('Shipping','both'));
 		if ($shipid != null) {
 			$this->db->where('id', $shipid);
 		} else {
