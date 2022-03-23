@@ -59,7 +59,17 @@ class Products extends REST_Controller
 				array_push($response['filter'],$ag_row);	
 			}
 		}
-
+        $response['categoryName']='';
+        if(isset($_REQUEST['Catid'])){
+            $this->db->select('name');     
+            $this->db->where('for_id', $_REQUEST['Catid']);           
+            $queryResult = $this->db->get('shop_categories_translations');
+            $catName=$queryResult->row_array();
+            if(!empty($catName)){
+                $response['categoryName']=$catName['name'];
+            }
+        }
+        
         // Check if the products data store contains products (in case the database result returns NULL)
         if ($products) {
             $response['product']=$products;

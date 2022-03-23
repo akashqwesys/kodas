@@ -317,7 +317,7 @@ $apidata = json_decode($json);*/
                             <i class="fa fa-user-times fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $topCustomers; ?></div>
+                            <div class="huge"><?php echo $topCustomers['total_orders']; ?></div>
                             <div>Top Customers</div>
                         </div>
                     </div>

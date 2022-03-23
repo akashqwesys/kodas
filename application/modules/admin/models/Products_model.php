@@ -391,12 +391,12 @@ class Products_model extends CI_Model {
 	}
 	public function load_shipping($params){
         $userid = $params['userid'];
-        $shipping = $this->db->query("SELECT * FROM useraddress WHERE userid=$userid AND addresstype='Shipping'");
+        $shipping = $this->db->query("SELECT * FROM useraddress WHERE userid=$userid AND (addresstype='Shipping' OR addresstype='Both')");
         return $shipping->result_array();
     }
 	public function load_billing($params){
         $userid = $params['userid'];
-        $billing= $this->db->query("SELECT * FROM useraddress WHERE userid=$userid AND addresstype='Billing'");
+        $billing= $this->db->query("SELECT * FROM useraddress WHERE userid=$userid AND (addresstype='Billing' OR addresstype='Both')");
         return $billing->result_array();
     }	
 

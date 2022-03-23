@@ -41,14 +41,12 @@ class Home_admin_model extends CI_Model {
 
 	public function countTopCustomers() {
 
-
-		$result = $this->db->query("SELECT count('user_id') as cnt, rank() 
-		OVER ( partition by subjects order by mark desc ) 
-		AS 'rank' FROM result");	
-		return $result->row_array();
-
-		
-
+		$result = $this->db->query("SELECT order_id,user_id , COUNT(id) AS NoofOrders,
+		rank() over(order by NoofOrders) AS ranking
+		FROM orders
+		GROUP BY user_id
+		ORDER BY NoofOrders DESC");	
+		echo '<pre>';print_r($result->result_array());die;
 
 		// $this->db->where('isverified =','false');					
 		// return $this->db->count_all_results('user_app');
