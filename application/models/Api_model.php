@@ -145,7 +145,7 @@ class Api_model extends CI_Model {
 			// curl_close($ch);
 			// $msgdisplay = json_decode($data);
 
-			print_r($msgdisplay);die;
+			// print_r($msgdisplay);die;
 			if (!empty($msgdisplay)) {
 				//echo "cURL Error #:" . $err;
 				$return['Data'] = "1";
