@@ -30,6 +30,7 @@ class Home extends ADMIN_Controller
         $data['inActiveCustomers'] = $this->Home_admin_model->countInActiveCustomers();
 
         $data['topCustomers'] = $this->Home_admin_model->countTopCustomers();
+        $data['bottomCustomers'] = $this->Home_admin_model->countBottomCustomers();
 
         $data['todaysOrder'] = $this->Home_admin_model->countTodaysOrder();
         $data['weeklyOrder'] = $this->Home_admin_model->countWeeklyOrder();
@@ -44,10 +45,19 @@ class Home extends ADMIN_Controller
         $data['weeklySales'] = $this->Home_admin_model->countWeeklySales();
         $data['monthlySales'] = $this->Home_admin_model->countMonthlySales();
 
+
+        $data['listPendingOrder'] = $this->Home_admin_model->listPendingOrder();
         $data['pendingOrder'] = $this->Home_admin_model->countPendingOrder();
+
+        $data['listCancelledOrder'] = $this->Home_admin_model->listCancelledOrder();
         $data['cancelledOrder'] = $this->Home_admin_model->countCancelledOrder();
 
+
+        
+        $data['listPendingDirectOrder'] = $this->Home_admin_model->listPendingDirectOrder();
         $data['pendingDirectOrder'] = $this->Home_admin_model->countPendingDirectOrder();
+
+        $data['listCancelledDirectOrder'] = $this->Home_admin_model->listCancelledDirectOrder();
         $data['cancelledDirectOrder'] = $this->Home_admin_model->countCancelledDirectOrder();
 
         //$data['newOrdersCount'] = $this->Orders_model->ordersCount(true);

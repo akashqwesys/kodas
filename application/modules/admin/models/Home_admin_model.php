@@ -40,16 +40,20 @@ class Home_admin_model extends CI_Model {
 	}
 
 	public function countTopCustomers() {
+		$result = $this->db->query("SELECT orders.order_id, COUNT(orders.user_id) as cnt,orders.user_id,SUM(orders.gstwithamount) as totalAmount,user_app.name,user_app.emailid,user_app.mobilenumber FROM orders
+		LEFT JOIN user_app
+		ON user_app.id=orders.user_id
+		GROUP BY user_id ORDER BY 2 DESC LIMIT 5");
+		return $result->result_array();		
+		// echo '<pre>';print_r($result->result_array());die;
+	}
 
-		$result = $this->db->query("SELECT order_id,user_id , COUNT(id) AS NoofOrders,
-		rank() over(order by NoofOrders) AS ranking
-		FROM orders
-		GROUP BY user_id
-		ORDER BY NoofOrders DESC");	
-		echo '<pre>';print_r($result->result_array());die;
-
-		// $this->db->where('isverified =','false');					
-		// return $this->db->count_all_results('user_app');
+	public function countBottomCustomers() {
+		$result = $this->db->query("SELECT orders.order_id, COUNT(orders.user_id) as cnt,orders.user_id,SUM(orders.gstwithamount) as totalAmount,user_app.name,user_app.emailid,user_app.mobilenumber FROM orders
+		LEFT JOIN user_app
+		ON user_app.id=orders.user_id
+		GROUP BY user_id ORDER BY 2 ASC LIMIT 5");
+		return $result->result_array();			
 	}
 
 
@@ -73,9 +77,44 @@ class Home_admin_model extends CI_Model {
 		$this->db->where_in('processed',array('Pending'));
 		return $this->db->count_all_results('orders');
 	}
+
+	public function listPendingOrder() {					
+		$this->db->select('orders_clients.*,orders.*');        		
+		$this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
+		$this->db->where_in('orders.processed',array('Pending'));
+		$this->db->limit(5);
+		$this->db->order_by('orders.id','DESC');
+		return $this->db->get('orders')->result_array();		
+	}
+
 	public function countCancelledOrder() {					
 		$this->db->where_in('processed',array('Cancelled'));
 		return $this->db->count_all_results('orders');
+	}
+	public function listCancelledOrder() {					
+		$this->db->select('orders_clients.*,orders.*');        		
+		$this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
+		$this->db->where_in('orders.processed',array('Cancelled'));
+		$this->db->limit(5);
+		$this->db->order_by('orders.id','DESC');
+		return $this->db->get('orders')->result_array();		
+	}
+	public function listCancelledDirectOrder() {					
+		$this->db->select('photoordercreate.id,user_app.name,user_app.mobilenumber,user_app.emailid');       		
+		$this->db->join('user_app', 'user_app.id = photoordercreate.userid', 'left'); 
+		$this->db->where_in('photoordercreate.orderstatus',array('Cancelled'));
+		$this->db->limit(5);
+		$this->db->order_by('photoordercreate.id','DESC');
+		return $this->db->get('photoordercreate')->result_array();		
+	}
+
+	public function listPendingDirectOrder() {					
+		$this->db->select('photoordercreate.id,user_app.name,user_app.mobilenumber,user_app.emailid');        		
+		$this->db->join('user_app', 'user_app.id = photoordercreate.userid', 'left'); 
+		$this->db->where_in('photoordercreate.orderstatus',array('Pending'));
+		$this->db->limit(5);
+		$this->db->order_by('photoordercreate.id','DESC');
+		return $this->db->get('photoordercreate')->result_array();		
 	}
 	
 	public function countTodaysOrder() {

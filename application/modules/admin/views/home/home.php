@@ -1,7 +1,7 @@
-<script src="<?=base_url('assets/highcharts/highcharts.js')?>"></script>
-<script src="<?=base_url('assets/highcharts/data.js')?>"></script>
-<script src="<?=base_url('assets/highcharts/drilldown.js')?>"></script>
-<h1><img src="<?=base_url('assets/imgs/admin-home.png')?>" class="header-img" style="margin-top:-3px;"> Home</h1>
+<script src="<?= base_url('assets/highcharts/highcharts.js') ?>"></script>
+<script src="<?= base_url('assets/highcharts/data.js') ?>"></script>
+<script src="<?= base_url('assets/highcharts/drilldown.js') ?>"></script>
+<h1><img src="<?= base_url('assets/imgs/admin-home.png') ?>" class="header-img" style="margin-top:-3px;"> Home</h1>
 <hr>
 
 
@@ -36,236 +36,104 @@ $apidata = json_decode($json);*/
         </div>
     </div>
     <div class="row">
-
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
             <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
+                <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-3">
+                        <!-- <div class="col-xs-3">
                             <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $todaysOrder+$todaysDirectOrder; ?></div>
-                            <div>Today’s Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $weeklyOrder['cnt']+$weeklyDirectOrder['cnt']; ?></div>
-                            <div>Weekly Orders</div>
+                        </div> -->
+                        <div class="col-xs-12">
+                            <h4>Today’s Orders <span class="pull-right"><?php echo $todaysOrder + $todaysDirectOrder; ?></span></h4>                           
                         </div>
                     </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $monthlyOrder['cnt']+$monthlyDirectOrder['cnt']; ?></div>
-                            <div>Monthly Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                </div>      
             </div>
         </div>
 
 
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <!-- <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div> -->
+                        <div class="col-xs-12">
+                            <h4>Weekly Orders <span class="pull-right"><?php echo $weeklyOrder['cnt'] + $weeklyDirectOrder['cnt']; ?></span></h4>                           
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    
 
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
             <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
+                <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-3">
+                        <!-- <div class="col-xs-3">
                             <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $todaysSales['gstwithamount']; ?></div>
-                            <div>Today’s Sales</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $weeklySales['total']; ?></div>
-                            <div>Weekly Sales</div>
+                        </div> -->
+                        <div class="col-xs-12">
+                            <h4>Monthly Orders <span class="pull-right"><?php echo $monthlyOrder['cnt'] + $monthlyDirectOrder['cnt']; ?></span></h4>                           
                         </div>
                     </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $monthlySales['total']; ?></div>
-                            <div>Monthly Sales</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $pendingOrder; ?></div>
-                            <div>Pending Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $cancelledOrder; ?></div>
-                            <div>Cancelled Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-camera fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $pendingDirectOrder; ?></div>
-                            <div>Pending Direct Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-camera fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $cancelledDirectOrder; ?></div>
-                            <div>Cancelled Direct Orders</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                </div>      
             </div>
         </div>
 
 
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
             <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <!-- <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div> -->
+                        <div class="col-xs-12">
+                            <h4>Today’s Sales <span class="pull-right">Rs.<?php echo $todaysSales['gstwithamount']; ?>/-</span></h4>                           
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <!-- <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div> -->
+                        <div class="col-xs-12">
+                            <h4>Weekly Sales <span class="pull-right">Rs.<?php echo $weeklySales['total']; ?>/-</span></h4>                           
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <!-- <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div> -->
+                        <div class="col-xs-12">
+                            <h4>Monthly Sales <span class="pull-right">Rs.<?php echo $monthlySales['total']; ?>/-</span></h4>                           
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+</div>
+
+<div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="panel panel-success">
                 <div class="panel-heading fast-view-panel">
                     <div class="row">
                         <div class="col-xs-3">
@@ -286,8 +154,8 @@ $apidata = json_decode($json);*/
                 </a>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
+        <div class="col-lg-6 col-md-6">
+            <div class="panel panel-danger">
                 <div class="panel-heading fast-view-panel">
                     <div class="row">
                         <div class="col-xs-3">
@@ -307,140 +175,187 @@ $apidata = json_decode($json);*/
                     </div>
                 </a>
             </div>
-        </div>
+        </div>              
+    </div>
 
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user-times fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $topCustomers['total_orders']; ?></div>
-                            <div>Top Customers</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- <div class="col-lg-3 col-md-6">
+<div class="row">
+        <div class="col-md-3">
             <div class="panel panel-primary">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?=!empty($apidata->Data[0]->todaysales) ? $apidata->Data[0]->todaysales : ''?></div>
-                            <div>Today Sales</div>
-                        </div>
+                <div class="panel-heading">                
+                    <span class=""><i class="fa fa-shopping-cart"></i></span>&nbsp;Pending Orders (<?php echo $pendingOrder; ?>) <span class="pull-right">View All</span>                    
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" style="margin-bottom: 0px;">
+                        <table class="table table-hover table-responsive" style="margin-bottom: 0px;">
+                            <thead class="bg-white">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Amount</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($listPendingOrder as $row){ ?>
+                                <tr>
+                                    <td><b><?php echo $row['first_name']; ?></b><p><?php echo $row['phone']; ?></p></td>                                   
+                                    <td>Rs.<?php echo $row['gstwithamount']; ?>/-</td>                                                                      
+                                </tr> 
+                                <?php } ?>                                                                                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <a href="<?=base_url('admin/orders')?>">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                <!---->
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?=!empty($apidata->Data[0]->weeksales) ? $apidata->Data[0]->weeksales : ''?></div>
-                            <div>Week Sales</div>
-                        </div>
+
+        <div class="col-md-3">
+            <div class="panel panel-danger">
+                <div class="panel-heading">                
+                    <span class=""><i class="fa fa-shopping-cart"></i></span>&nbsp;Cancelled Orders (<?php echo $cancelledOrder; ?>) <span class="pull-right">View All</span>                    
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" style="margin-bottom: 0px;">
+                        <table class="table table-hover table-responsive" style="margin-bottom: 0px;">
+                            <thead class="bg-white">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Amount</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($listCancelledOrder as $row){ ?>
+                                <tr>
+                                    <td><b><?php echo $row['first_name']; ?></b><p><?php echo $row['phone']; ?></p></td>                                   
+                                    <td>Rs.<?php echo $row['gstwithamount']; ?>/-</td>                                                                      
+                                </tr> 
+                                <?php } ?>                                                                                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <a href="<?=base_url('admin/orders');?>">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                <!---->
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?=!empty($apidata->Data[0]->topcustomer) ? $apidata->Data[0]->topcustomer : ''?></div>
-                            <div>Ordering Customer</div>
-                        </div>
+
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">                
+                    <span class=""><i class="fa fa-shopping-cart"></i></span>&nbsp;Pending Direct Orders (<?php echo $pendingDirectOrder; ?>) <span class="pull-right">View All</span>                    
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" style="margin-bottom: 0px;">
+                        <table class="table table-hover table-responsive" style="margin-bottom: 0px;">
+                            <thead class="bg-white">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($listPendingDirectOrder as $row){ ?>
+                                <tr>
+                                    <td><b><?php echo $row['name']; ?></b><p><?php echo $row['mobilenumber']; ?></p></td>                                   
+                                    <td><?php echo $row['emailid']; ?></td> 
+                                </tr> 
+                                <?php } ?>                                                                                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <a href="<?=base_url('admin/userreport/top');?>">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                <!---->
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?=!empty($apidata->Data[0]->bottomcustomer) ? $apidata->Data[0]->bottomcustomer : ''?></div>
-                            <div>Non Ordering Customer</div>
-                        </div>
+
+        <div class="col-md-3">
+            <div class="panel panel-danger">
+                <div class="panel-heading">                
+                    <span class=""><i class="fa fa-shopping-cart"></i></span>&nbsp;Cancelled Direct Orders (<?php echo $cancelledDirectOrder; ?>) <span class="pull-right">View All</span>                    
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" style="margin-bottom: 0px;">
+                        <table class="table table-hover table-responsive" style="margin-bottom: 0px;">
+                            <thead class="bg-white">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($listCancelledDirectOrder as $row){ ?>
+                                <tr>
+                                    <td><b><?php echo $row['name']; ?></b><p><?php echo $row['mobilenumber']; ?></p></td>                                   
+                                    <td><?php echo $row['emailid']; ?></td>                                                                      
+                                </tr> 
+                                <?php } ?>                                                                                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <a href="<?=base_url('admin/userreport/bottom');?>">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                <!---->
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading fast-view-panel">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-mobile fa-3x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div>Change User Device</div>
-                        </div>
+</div>                              
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">                
+                    <span class=""><i class="fa fa-users"></i></span>&nbsp;Top Customers <span class="pull-right">View All</span>                    
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" style="margin-bottom: 0px;">
+                        <table class="table table-hover table-responsive" style="margin-bottom: 0px;">
+                            <thead class="bg-white">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Total Order</th>
+                                    <th>Total Amount</th>                                 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($topCustomers as $row){ ?>
+                                <tr>
+                                    <td><b><?php echo $row['name']; ?></b><p><?php echo $row['mobilenumber']; ?></p></td>                                   
+                                    <td><?php echo $row['cnt']; ?></td>
+                                    <td>Rs.<?php echo $row['totalAmount']; ?>/-</td>                                   
+                                </tr> 
+                                <?php } ?>                                                                                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <a href="<?=base_url('admin/userreport/changedevice');?>">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                <!---->
             </div>
-        </div> -->
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                <span class=""><i class="fa fa-users"></i></span>&nbsp;Bottom Customers <span class="pull-right">View All</span>               
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" style="margin-bottom: 0px;">
+                        <table class="table table-hover table-responsive" style="margin-bottom: 0px;">
+                            <thead class="bg-white">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Total Order</th>
+                                    <th>Total Amount</th>                                 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($bottomCustomers as $row){ ?>
+                                <tr>
+                                    <td><b><?php echo $row['name']; ?></b><p><?php echo $row['mobilenumber']; ?></p></td>                                   
+                                    <td><?php echo $row['cnt']; ?></td>
+                                    <td>Rs.<?php echo $row['totalAmount']; ?>/-</td>                                   
+                                </tr> 
+                                <?php } ?>                                                                                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!---->
+            </div>
+        </div>
     </div>
     <!-- <div class="row">
         <div class="col-lg-12">
@@ -487,21 +402,21 @@ $apidata = json_decode($json);*/
                             </thead>
                             <tbody>
                                 <?php
-if (!empty($ordersByPaymentType)) {
-	foreach ($ordersByPaymentType as $paymentT) {
-		?>
+                                if (!empty($ordersByPaymentType)) {
+                                    foreach ($ordersByPaymentType as $paymentT) {
+                                ?>
                                         <tr>
-                                            <td><?=$paymentT['payment_type']?></td>
-                                            <td><?=$paymentT['num']?></td>
+                                            <td><?= $paymentT['payment_type'] ?></td>
+                                            <td><?= $paymentT['num'] ?></td>
                                         </tr>
                                         <?php
-}
-} else {
-	?>
+                                    }
+                                } else {
+                                        ?>
                                     <tr>
                                         <td colspan="2">No Orders</td>
                                     </tr>
-                                <?php }?>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -524,26 +439,26 @@ if (!empty($ordersByPaymentType)) {
                             </thead>
                             <tbody>
                                 <?php
-if ($activity->result()) {
-	foreach ($activity->result() as $action) {
-		?>
+                                if ($activity->result()) {
+                                    foreach ($activity->result() as $action) {
+                                ?>
                                         <tr>
-                                            <td><i class="fa fa-user" aria-hidden="true"></i> <b><?=$action->username?></b></td>
-                                            <td><?=$action->activity . ' on ' . date('d.m.Y / H.m.s', $action->time)?></td>
+                                            <td><i class="fa fa-user" aria-hidden="true"></i> <b><?= $action->username ?></b></td>
+                                            <td><?= $action->activity . ' on ' . date('d.m.Y / H.m.s', $action->time) ?></td>
                                         </tr>
                                         <?php
-}
-} else {
-	?>
+                                    }
+                                } else {
+                                        ?>
                                     <tr>
                                         <td colspan="2">No history found!</td>
                                     </tr>
-                                <?php }?>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
                     <div class="text-right">
-                        <a href="<?=base_url('admin/history')?>">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="<?= base_url('admin/history') ?>">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -564,26 +479,26 @@ if ($activity->result()) {
                             </thead>
                             <tbody>
                                 <?php
-if (!empty($mostSold)) {
-	foreach ($mostSold as $product) {
-		?>
+                                if (!empty($mostSold)) {
+                                    foreach ($mostSold as $product) {
+                                ?>
                                         <tr>
-                                            <td><?=$product['procurement']?></td>
-                                            <td><a target="_blank" href="<?=base_url($product['url'])?>"><?=base_url($product['url'])?></a></td>
+                                            <td><?= $product['procurement'] ?></td>
+                                            <td><a target="_blank" href="<?= base_url($product['url']) ?>"><?= base_url($product['url']) ?></a></td>
                                         </tr>
                                         <?php
-}
-} else {
-	?>
+                                    }
+                                } else {
+                                        ?>
                                     <tr>
                                         <td colspan="2">No Orders</td>
                                     </tr>
-                                <?php }?>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
                     <div class="text-right">
-                        <a href="<?=base_url('admin/products?orderby=procurement=desc')?>">View All Products <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="<?= base_url('admin/products?orderby=procurement=desc') ?>">View All Products <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -594,101 +509,100 @@ if (!empty($mostSold)) {
     /*
      * Chart for orders by referrer
      */
-    $(function () {
-    Highcharts.chart('container-by-referrer', {
-    chart: {
-    type: 'column'
-    },
+    $(function() {
+        Highcharts.chart('container-by-referrer', {
+            chart: {
+                type: 'column'
+            },
             title: {
-            text: 'Orders comming from..'
+                text: 'Orders comming from..'
             },
             subtitle: {
-            text: 'Most Orders By Referrer'
+                text: 'Most Orders By Referrer'
             },
             xAxis: {
-            type: 'category'
+                type: 'category'
             },
             yAxis: {
-            title: {
-            text: 'Total max numbers'
-            }
+                title: {
+                    text: 'Total max numbers'
+                }
 
             },
             legend: {
-            enabled: false
+                enabled: false
             },
             plotOptions: {
-            series: {
-            borderWidth: 0,
+                series: {
+                    borderWidth: 0,
                     dataLabels: {
-                    enabled: true,
-                            format: '{y}'
+                        enabled: true,
+                        format: '{y}'
                     }
-            }
+                }
             },
             tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> of total<br/>'
             },
             series: [{
-            name: 'Referrer',
-                    colorByPoint: true,
-                    data: [
-<?php foreach ($byReferral as $referrer) {?>
-                        {
-                        name: '<?=$referrer['referrer']?>',
-                                y: <?=$referrer['num']?>,
-                                drilldown: '<?=$referrer['referrer']?>'
+                name: 'Referrer',
+                colorByPoint: true,
+                data: [
+                    <?php foreach ($byReferral as $referrer) { ?> {
+                            name: '<?= $referrer['referrer'] ?>',
+                            y: <?= $referrer['num'] ?>,
+                            drilldown: '<?= $referrer['referrer'] ?>'
                         },
-<?php }?>
-                    ]
+                    <?php } ?>
+                ]
             }]
-    });
+        });
     });
     /*
      * Chart for orders by mount/year
      */
-    $(function () {
-    Highcharts.chart('container-by-month', {
-    title: {
-    text: 'Monthly Orders',
-            x: - 20
-    },
+    $(function() {
+        Highcharts.chart('container-by-month', {
+            title: {
+                text: 'Monthly Orders',
+                x: -20
+            },
             subtitle: {
-            text: 'Source: Orders table',
-                    x: - 20
+                text: 'Source: Orders table',
+                x: -20
             },
             xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                ]
             },
             yAxis: {
-            title: {
-            text: 'Orders'
-            },
-                    plotLines: [{
+                title: {
+                    text: 'Orders'
+                },
+                plotLines: [{
                     value: 0,
-                            width: 1,
-                            color: '#808080'
-                    }]
+                    width: 1,
+                    color: '#808080'
+                }]
             },
             tooltip: {
-            valueSuffix: ' Orders'
+                valueSuffix: ' Orders'
             },
             legend: {
-            layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
             },
             series: [
-<?php foreach ($ordersByMonth['years'] as $year) {?>
-                {
-                name: '<?=$year?>',
-                        data: [<?=implode(',', $ordersByMonth['orders'][$year])?>]
-                },
-<?php }?>
+                <?php foreach ($ordersByMonth['years'] as $year) { ?> {
+                        name: '<?= $year ?>',
+                        data: [<?= implode(',', $ordersByMonth['orders'][$year]) ?>]
+                    },
+                <?php } ?>
             ]
-    });
+        });
     });
 </script>
