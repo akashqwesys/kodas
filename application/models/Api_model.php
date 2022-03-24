@@ -1886,7 +1886,7 @@ class Api_model extends CI_Model {
 		$this->db->where('orders.id', $_REQUEST['OrderId']);
 		$result = $this->db->get('orders');
 		$data = $result->row_array();
-		$data['date']=date('d-m-Y h:i:s a', $data['date']);
+		$data['date']=date('d-m-Y h:i:s A', $data['date']);
 		$data['orderaudio']=base_url('attachments/audiofile/' . $data['orderaudio']);
 		
 		
