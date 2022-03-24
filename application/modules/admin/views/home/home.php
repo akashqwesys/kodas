@@ -99,7 +99,6 @@ $apidata = json_decode($json);*/
             </div>
         </div>
 
-
         <div class="col-lg-4 col-md-6">
             <div class="panel panel-info">
                 <div class="panel-heading">

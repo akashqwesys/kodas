@@ -3942,14 +3942,14 @@ class Api_model extends CI_Model {
 		$data = array();
 		$i = 0;
 		foreach ($result as $key => $value) {
-			$orderdata = $this->GetOrderBynotificationfun($value['ordertype'], $_REQUEST['UserId'], $value['orderid']);
+			// $orderdata = $this->GetOrderBynotificationfun($value['ordertype'], $_REQUEST['UserId'], $value['orderid']);
 			$data[$i]['Title'] = $value['title'];
 			$data[$i]['Message'] = $value['description'];
 			$data[$i]['Productid'] = $value['productid'];
 			$data[$i]['Orderid'] = $value['orderid'];
 			$data[$i]['Type'] = $value['ordertype'];
 			$data[$i]['Date'] = date('d-m-Y', $value['dateandtime']);
-			$data[$i]['Data'] = $orderdata;
+			// $data[$i]['Data'] = $orderdata;
 			$i++;
 		}
 		if ($data) {
