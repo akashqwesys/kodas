@@ -72,9 +72,11 @@ class Listuser extends ADMIN_Controller {
 		$this->load->view('user/listuser', $data);
 		$this->load->view('_parts/footer');
 	}
-
-
-
+	
+	public function get_user_by_status($status='') {       
+		$_SESSION['user_status']=$status;
+		redirect('admin/listuser');
+	}
 	public function user_list() {       
         $this->login_check();
         $adminid = $this->session->userdata('logged_roledata');

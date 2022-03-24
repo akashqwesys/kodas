@@ -48,6 +48,22 @@ $sitelogo = $data1['sitelogo'];
                 min-height:130px !important;
             }
         </style>
+
+
+<?php if(isset($_SESSION['user_status'])){
+                if($_SESSION['user_status']=='active'){
+                    ?>
+                        order_by=6; 
+                        order_by_type='desc';                       
+                    <?php
+                }
+                if($_SESSION['user_status']=='inactive'){
+                    ?>
+                        order_by=6;
+                        order_by_type='asc';                        
+                    <?php
+                }
+            } ?>
     </head>
     <body>
         <div id="wrapper">

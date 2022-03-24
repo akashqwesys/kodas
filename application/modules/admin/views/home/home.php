@@ -51,7 +51,6 @@ $apidata = json_decode($json);*/
             </div>
         </div>
 
-
         <div class="col-lg-4 col-md-6">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -67,7 +66,6 @@ $apidata = json_decode($json);*/
             </div>
         </div>
     
-
         <div class="col-lg-4 col-md-6">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -82,7 +80,6 @@ $apidata = json_decode($json);*/
                 </div>      
             </div>
         </div>
-
 
         <div class="col-lg-4 col-md-6">
             <div class="panel panel-info">
@@ -144,7 +141,7 @@ $apidata = json_decode($json);*/
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="<?php echo site_url('admin/get-user-by-status/active');?>">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -166,7 +163,7 @@ $apidata = json_decode($json);*/
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="<?php echo site_url('admin/get-user-by-status/inactive');?>">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

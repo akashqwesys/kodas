@@ -2,9 +2,25 @@
 ?>
     <script type="text/javascript">
         $(document).ready(function() {
-           
-            load_payment_list();
+            var order_by=1;
+            var order_by_type='desc';                         
+            <?php if(isset($_SESSION['user_status'])){
+                if($_SESSION['user_status']=='active'){
+                    ?>
+                        order_by=6; 
+                        order_by_type='desc';                       
+                    <?php
+                }
+                if($_SESSION['user_status']=='inactive'){
+                    ?>
+                        order_by=6;
+                        order_by_type='asc';                        
+                    <?php
+                }
+            } ?>
 
+            load_payment_list();
+            
             function load_payment_list() {
                 $('#table').DataTable({
                     responsive: {
@@ -19,7 +35,7 @@
                         targets: 0
                     }],
                     "order": [
-                        [1, "desc"]
+                        [order_by, order_by_type]
                     ],
                     "processing": true,
                     "serverSide": true,
@@ -56,7 +72,7 @@
                         },
                         {
                             "data": 7
-                        }
+                        }   
                     ]
                 });
             }

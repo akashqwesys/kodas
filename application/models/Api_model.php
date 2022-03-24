@@ -1646,6 +1646,7 @@ class Api_model extends CI_Model {
 			$databill[$i]['Companyname'] = ($value['companyname'] != '') ? $value['companyname'] : '';
 			$databill[$i]['Address'] = ($value['address'] != '') ? $value['address'] : '';
 			$databill[$i]['Gstnumber'] = ($value['gstnumber'] != '') ? $value['gstnumber'] : '';
+			$databill[$i]['addresstype'] = ($value['addresstype'] != '') ? $value['addresstype'] : '';
 			$i++;
 		}
 		// $this->db->where('addresstype', 'Shipping');
@@ -1664,6 +1665,7 @@ class Api_model extends CI_Model {
 			$datashipp[$j]['Companyname'] = ($value['companyname'] != '') ? $value['companyname'] : '';
 			$datashipp[$j]['Address'] = ($value['address'] != '') ? $value['address'] : '';
 			$datashipp[$j]['Gstnumber'] = ($value['gstnumber'] != '') ? $value['gstnumber'] : '';
+			$datashipp[$j]['addresstype'] = ($value['addresstype'] != '') ? $value['addresstype'] : '';
 			$j++;
 		}
 		$data = array();
@@ -1888,8 +1890,7 @@ class Api_model extends CI_Model {
 		$data = $result->row_array();
 		$data['date']=date('d-m-Y h:i:s A', $data['date']);
 		$data['orderaudio']=base_url('attachments/audiofile/' . $data['orderaudio']);
-		
-		
+				
 		$data['customerName']=$user->name;
 
 		$data['BillingAddress']=unserialize(html_entity_decode($resultAddress['billtoid']));
