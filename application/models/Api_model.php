@@ -1887,6 +1887,7 @@ class Api_model extends CI_Model {
 		$result = $this->db->get('orders');
 		$data = $result->row_array();
 		$data['date']=date('d-m-Y', $data['date']);
+		$data['orderaudio']=base_url('attachments/audiofile/' . $data['orderaudio']);
 		
 		
 		$data['customerName']=$user->name;
@@ -3935,9 +3936,9 @@ class Api_model extends CI_Model {
 	public function Notificationdatafun() {
 		$this->db->limit(10, 0);
 		$this->db->order_by('id', 'DESC');
-		$this->db->where('userid', $_REQUEST['UserId']);
+		$this->db->where('userid', $_REQUEST['UserId']);			
 		$query = $this->db->select('*')->get('notificationdata');
-		$this->db->last_query();
+		// $this->db->last_query();
 		$result = $query->result_array();
 		$data = array();
 		$i = 0;
