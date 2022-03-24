@@ -2025,7 +2025,7 @@ class Api_model extends CI_Model {
 		if(!empty($data)){
 			foreach($data as $order_row){
 							
-				$order_row['date']=date('d-m-Y H:i:s', $order_row['date']);
+				$order_row['date']=date('d-m-Y h:i:s A', $order_row['date']);
 
 				$this->db->select('order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id');
 				$this->db->join('products', 'products.id = order_products.itemid', 'inner');				
@@ -2086,7 +2086,7 @@ class Api_model extends CI_Model {
 		if(!empty($data)){
 			foreach($data as $order_row){
 							
-				$order_row['date']=date('d-m-Y H:i:s', $order_row['date']);
+				$order_row['date']=date('d-m-Y h:i:s A', $order_row['date']);
 
 				$this->db->select('order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id');
 				$this->db->join('products', 'products.id = order_products.itemid', 'inner');				
@@ -2294,7 +2294,7 @@ class Api_model extends CI_Model {
 
 				$Addressship = unserialize(html_entity_decode($value['shiptoid']));
 				$Addressbill = unserialize(html_entity_decode($value['billtoid']));
-				$orderdate = date("d-m-Y H:i:s", $value['datetime']);
+				$orderdate = date("d-m-Y h:i:s A", $value['datetime']);
 				$data['order'][$i]['OrderId'] = $value['id'];
 				$data['order'][$i]['UserId'] = $value['userid'];
 				$data['order'][$i]['Address'] = $value['address'];
@@ -2350,7 +2350,7 @@ class Api_model extends CI_Model {
 
 				$Addressship = unserialize(html_entity_decode($value['shiptoid']));
 				$Addressbill = unserialize(html_entity_decode($value['billtoid']));
-				$orderdate = date("d-m-Y H:i:s", $value['datetime']);
+				$orderdate = date("d-m-Y h:i:s A", $value['datetime']);
 				$data['order'][$i]['OrderId'] = $value['id'];
 				$data['order'][$i]['UserId'] = $value['userid'];
 				$data['order'][$i]['Address'] = $value['address'];
@@ -2421,8 +2421,8 @@ class Api_model extends CI_Model {
 				$data[$i]['AudioFile'] = !empty($value['orderaudio']) ? base_url('attachments/audiofile/' . $value['orderaudio']) : '';
 				$data[$i]['Addressship'] = $Addressship;
 				$data[$i]['Addressbill'] = $Addressbill;
-				$data[$i]['Date'] = date('d.M.Y H:i:s', $value['date']);
-				$data[$i]['NewDate'] = date('d-m-Y H:i:s', $value['date']);
+				$data[$i]['Date'] = date('d.M.Y h:i:s A', $value['date']);
+				$data[$i]['NewDate'] = date('d-m-Y h:i:s A', $value['date']);
 				$discountamount = $value['discountamount'];
 				$gstamount = $value['gstamount'];
 
@@ -2515,7 +2515,7 @@ class Api_model extends CI_Model {
 
 				$Addressship = unserialize(html_entity_decode($value['shiptoid']));
 				$Addressbill = unserialize(html_entity_decode($value['billtoid']));
-				$orderdate = date("d-m-Y H:i:s", $value['datetime']);
+				$orderdate = date("d-m-Y h:i:s A", $value['datetime']);
 				$data[$i]['OrderId'] = $value['id'];
 				$data[$i]['UserId'] = $value['userid'];
 				$data[$i]['CustomerName'] = $value['name'];
@@ -2587,8 +2587,8 @@ class Api_model extends CI_Model {
 				$data[$i]['Status'] = $value['processed'];
 				$data[$i]['Addressship'] = !empty($Addressship) ? $Addressship : array();
 				$data[$i]['Addressbill'] = !empty($Addressbill) ? $Addressbill : array();
-				$data[$i]['Date'] = date('d.M.Y H:i:s', $value['date']);
-				$data[$i]['NewDate'] = date('d-m-Y H:i:s', $value['date']);
+				$data[$i]['Date'] = date('d.M.Y h:i:s A', $value['date']);
+				$data[$i]['NewDate'] = date('d-m-Y h:i:s A', $value['date']);
 				$discountamount = $value['discountamount'];
 				$gstamount = $value['gstamount'];
 
@@ -2650,7 +2650,7 @@ class Api_model extends CI_Model {
 				$Addressbill = unserialize(html_entity_decode($value['billtoid']));
 				$bussname = '';
 				if (isset($value['businessname']) && $value['businessname'] != '') {$bussname = '(' . $value['businessname'] . ')';}
-				$orderdate = date("d-m-Y H:i:s", $value['datetime']);
+				$orderdate = date("d-m-Y h:i:s A", $value['datetime']);
 				$data[$i]['OrderId'] = $value['id'];
 				$data[$i]['UserId'] = $value['userid'];
 				$data[$i]['Username'] = $value['username'] . ' ' . $bussname;
@@ -2722,8 +2722,8 @@ class Api_model extends CI_Model {
 				$data[$i]['Status'] = $value['processed'];
 				$data[$i]['Addressship'] = !empty($Addressship) ? $Addressship : array();
 				$data[$i]['Addressbill'] = !empty($Addressbill) ? $Addressbill : array();
-				$data[$i]['Date'] = date('d.M.Y H:i:s', $value['date']);
-				$data[$i]['NewDate'] = date('d-m-Y H:i:s', $value['date']);
+				$data[$i]['Date'] = date('d.M.Y h:i:s A', $value['date']);
+				$data[$i]['NewDate'] = date('d-m-Y h:i:s A', $value['date']);
 				$discountamount = $value['discountamount'];
 				$gstamount = $value['gstamount'];
 
@@ -2784,7 +2784,7 @@ class Api_model extends CI_Model {
 				$Addressbill = unserialize(html_entity_decode($value['billtoid']));
 				$bussname = '';
 				if (isset($value['businessname']) && $value['businessname'] != '') {$bussname = '(' . $value['businessname'] . ')';}
-				$orderdate = date("d-m-Y H:i:s", $value['datetime']);
+				$orderdate = date("d-m-Y h:i:s A", $value['datetime']);
 				$data[$i]['OrderId'] = $value['id'];
 				$data[$i]['UserId'] = $value['userid'];
 				$data[$i]['Username'] = $value['username'] . ' ' . $bussname;
@@ -3949,7 +3949,7 @@ class Api_model extends CI_Model {
 			$data[$i]['Productid'] = $value['productid'];
 			$data[$i]['Orderid'] = $value['orderid'];
 			$data[$i]['Type'] = $value['ordertype'];
-			$data[$i]['Date'] = date('d-m-Y H:i:s', $value['dateandtime']);
+			$data[$i]['Date'] = date('d-m-Y h:i:s A', $value['dateandtime']);
 			// $data[$i]['Data'] = $orderdata;
 			$i++;
 		}
@@ -4029,8 +4029,8 @@ class Api_model extends CI_Model {
 				$data[$i]['AudioFile'] = !empty($value['orderaudio']) ? base_url('attachments/audiofile/' . $value['orderaudio']) : '';
 				$data[$i]['Addressship'] = $Addressship;
 				$data[$i]['Addressbill'] = $Addressbill;
-				$data[$i]['Date'] = date('d.M.Y H:i:s', $value['date']);
-				$data[$i]['NewDate'] = date('d-m-Y H:i:s', $value['date']);
+				$data[$i]['Date'] = date('d.M.Y h:i:s A', $value['date']);
+				$data[$i]['NewDate'] = date('d-m-Y h:i:s A', $value['date']);
 				$discountamount = $value['discountamount'];
 
 				$productsdec = unserialize(html_entity_decode($value['products']));
@@ -4082,7 +4082,7 @@ class Api_model extends CI_Model {
 			foreach ($row as $key => $value) {
 				$Addressship = unserialize(html_entity_decode($value['shiptoid']));
 				$Addressbill = unserialize(html_entity_decode($value['billtoid']));
-				$orderdate = date("d-m-Y H:i:s", $value['datetime']);
+				$orderdate = date("d-m-Y h:i:s A", $value['datetime']);
 				$data[$i]['OrderId'] = $value['id'];
 				$data[$i]['UserId'] = $value['userid'];
 				$data[$i]['Address'] = $value['address'];
