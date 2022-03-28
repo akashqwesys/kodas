@@ -4,7 +4,9 @@
       <select class="form-control" name="status" id="status">                
       <?php foreach($statusList as $row){
         ?>
-        <option value="<?php echo $row['name']; ?>"><?php echo $row['name']; ?></option>
+        <option value="<?php echo $row['name']; ?>"  <?php if (isset($_SESSION['order_status'])) {if($_SESSION['order_status']==$row['name']){
+                                  echo 'selected';
+                                }} ?>><?php echo $row['name']; ?></option>
         <?php
       }?>  
       

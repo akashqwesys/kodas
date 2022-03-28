@@ -35,14 +35,25 @@ $sitelogo = $data1['sitelogo'];
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/flat/blue.css"> -->
         
 
+      
+
         <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
         <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-
+        
+        <?php 
+            if($title!="List-Users"){
+                $_SESSION['user_status']='';
+            }
+        ?> 
+        <?php 
+            if($title!="Orders-List"){
+                $_SESSION['order_status']='';
+            }
+        ?>   
         <style>
             .dropdown-menu ul{
                 min-height:130px !important;

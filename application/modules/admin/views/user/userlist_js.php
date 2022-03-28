@@ -2,19 +2,18 @@
 ?>
     <script type="text/javascript">
         $(document).ready(function() {
-            var order_by=1;
-            var order_by_type='desc';                         
+            var status='';                                     
             <?php if(isset($_SESSION['user_status'])){
                 if($_SESSION['user_status']=='active'){
                     ?>
-                        order_by=6; 
-                        order_by_type='desc';                       
+                        status='true'; 
+                        // order_by_type='desc';                       
                     <?php
                 }
                 if($_SESSION['user_status']=='inactive'){
                     ?>
-                        order_by=6;
-                        order_by_type='asc';                        
+                         status='false';
+                        // order_by_type='';                        
                     <?php
                 }
             } ?>
@@ -35,7 +34,7 @@
                         targets: 0
                     }],
                     "order": [
-                        [order_by, order_by_type]
+                        [1, 'desc']
                     ],
                     "processing": true,
                     "serverSide": true,
@@ -47,7 +46,10 @@
                     ],
                     "ajax": {
                         'type': 'POST',
-                        'url': "<?= base_url('admin/get-user-list') ?>"
+                        'url': "<?= base_url('admin/get-user-list') ?>",
+                        'data': {                            
+                            status: status                           
+                        }
                     },
                     "columns": [{
                             "data": 0

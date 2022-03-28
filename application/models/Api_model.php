@@ -615,7 +615,6 @@ class Api_model extends CI_Model {
 				'productid' => $_REQUEST['ItemId'],
 				'userid' => $_REQUEST['UserId'],
 			));
-
 		} else {
 			$this->db->where('id', $_REQUEST['ItemId']);
 			$this->db->set('view_count', 'view_count+1', FALSE);

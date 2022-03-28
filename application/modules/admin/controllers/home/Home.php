@@ -26,6 +26,195 @@ class Home extends ADMIN_Controller
         $head['description'] = '';
         $head['keywords'] = '';
 
+
+
+        $monthToMonthOrders = $this->Home_admin_model->monthToMonthOrders();
+        $mTmOrdersMonth=array();
+        $mTmOrdersValue=array();              
+        if(!empty($monthToMonthOrders)){
+            foreach($monthToMonthOrders as $m_row){
+                $mTmOrdersMonth[]=  $m_row['MonthName'];
+                $mTmOrdersValue[]=  $m_row['cnt'];                                  
+            }
+        } 
+        $data['mTmOrdersMonthStr']=implode('","',$mTmOrdersMonth);
+        $data['mTmOrdersValue']=implode(',',$mTmOrdersValue);       
+
+
+        $monthToMonthActiveCustomer = $this->Home_admin_model->monthToMonthActiveCustomer();
+        $mTmActiveCustomerMonth=array();
+        $mTmActiveCustomerValue=array();              
+        if(!empty($monthToMonthActiveCustomer)){
+            foreach($monthToMonthActiveCustomer as $m_row){
+                $mTmActiveCustomerMonth[]=  $m_row['MonthName'];
+                $mTmActiveCustomerValue[]=  $m_row['cnt'];                                  
+            }
+        } 
+        $data['mTmActiveCustomerMonthStr']=implode('","',$mTmActiveCustomerMonth);
+        $data['mTmActiveCustomerValue']=implode(',',$mTmActiveCustomerValue); 
+        
+        $semiArray=array();
+        $monthToMonthViewVsOrders = $this->Home_admin_model->monthToMonthViewVsOrders();
+        if(!empty($monthToMonthOrders) && !empty($monthToMonthViewVsOrders)){
+            foreach($monthToMonthOrders as $m_row){
+                $voArray=array();                
+                foreach($monthToMonthViewVsOrders as $vo_row){
+                    if($m_row['MonthNo']==$vo_row['MonthNo']){
+                        $voArray['orders']= $m_row['cnt'];
+                        $voArray['views']= $vo_row['cnt'];
+                        $voArray['MonthName']= $vo_row['MonthName'];
+                        $voArray['MonthNo']= $vo_row['MonthNo'];
+                        $voArray['YearNo']= $vo_row['YearNo'];
+                    }
+                }
+                if(empty($voArray)){
+                    $voArray['orders']= $m_row['cnt'];
+                    $voArray['views']= 0;
+                    $voArray['MonthName']= $m_row['MonthName'];
+                    $voArray['MonthNo']= $m_row['MonthNo'];
+                    $voArray['YearNo']= $m_row['YearNo'];
+                }
+                $semiArray[]=$voArray;                                 
+            }    
+        }
+
+
+        $semiArray2=array();      
+        if(!empty($monthToMonthViewVsOrders) && !empty($monthToMonthViewVsOrders)){
+            foreach($monthToMonthViewVsOrders as $m_row){
+                $voArray=array();
+                foreach($semiArray as $vo_row){
+                    if($m_row['MonthNo']==$vo_row['MonthNo']){
+                        $voArray['orders']= $vo_row['orders'];
+                        $voArray['views']= $m_row['cnt'];
+                        $voArray['MonthName']= $vo_row['MonthName'];
+                        $voArray['MonthNo']= $vo_row['MonthNo'];
+                        $voArray['YearNo']= $vo_row['YearNo'];
+                    }
+                }
+                if(empty($voArray)){
+                    $voArray['orders']= 0;
+                    $voArray['views']= $m_row['cnt'];
+                    $voArray['MonthName']= $m_row['MonthName'];
+                    $voArray['MonthNo']= $m_row['MonthNo'];
+                    $voArray['YearNo']= $m_row['YearNo'];    
+                }                
+                $semiArray2[]=$voArray;                                 
+            }    
+        }
+        $myArray = array_merge($semiArray, $semiArray2);  
+        usort($myArray, function($a, $b) {
+            return $a['MonthNo'] <=> $b['MonthNo'];
+        });        
+        $temp_array = [];
+        foreach ($myArray as &$v) {
+            if (!isset($temp_array[$v['MonthNo']]))
+            $temp_array[$v['MonthNo']] =& $v;
+        }
+        $myArray = array_values($temp_array);    
+        usort($myArray, function($a, $b) {
+            return $a['YearNo'] <=> $b['YearNo'];
+        });
+        
+        // echo '<pre>';print_r($myArray);die;
+        $voOrders=array();
+        $voViews=array(); 
+        $voMonth=array();             
+        if(!empty($myArray)){
+            foreach($myArray as $m_row){
+                $voOrders[]= $m_row['orders'];
+                $voViews[]=  $m_row['views'];
+                $voMonth[]=  $m_row['MonthName'];                                
+            }
+        } 
+        $data['voOrders']=implode(',',$voOrders);
+        $data['voViews']=implode(',',$voViews); 
+        $data['voMonth']=implode('","',$voMonth);
+
+
+
+        
+
+
+        $semiArray=array();
+        $monthToMonthRegisterUser = $this->Home_admin_model->monthToMonthRegisterUser();
+        if(!empty($monthToMonthOrders) && !empty($monthToMonthRegisterUser)){
+            foreach($monthToMonthOrders as $m_row){
+                $voArray=array();                
+                foreach($monthToMonthRegisterUser as $vo_row){
+                    if($m_row['MonthNo']==$vo_row['MonthNo']){
+                        $voArray['orders']= $m_row['cnt'];
+                        $voArray['user']= $vo_row['cnt'];
+                        $voArray['MonthName']= $vo_row['MonthName'];
+                        $voArray['MonthNo']= $vo_row['MonthNo'];
+                        $voArray['YearNo']= $vo_row['YearNo'];
+                    }
+                }
+                if(empty($voArray)){
+                    $voArray['orders']= $m_row['cnt'];
+                    $voArray['user']= 0;
+                    $voArray['MonthName']= $m_row['MonthName'];
+                    $voArray['MonthNo']= $m_row['MonthNo'];
+                    $voArray['YearNo']= $m_row['YearNo'];
+                }
+                $semiArray[]=$voArray;                                 
+            }    
+        }
+
+
+        $semiArray2=array();      
+        if(!empty($monthToMonthRegisterUser) && !empty($monthToMonthRegisterUser)){
+            foreach($monthToMonthRegisterUser as $m_row){
+                $voArray=array();
+                foreach($semiArray as $vo_row){
+                    if($m_row['MonthNo']==$vo_row['MonthNo']){
+                        $voArray['orders']= $vo_row['orders'];
+                        $voArray['user']= $m_row['cnt'];
+                        $voArray['MonthName']= $vo_row['MonthName'];
+                        $voArray['MonthNo']= $vo_row['MonthNo'];
+                        $voArray['YearNo']= $vo_row['YearNo'];
+                    }
+                }
+                if(empty($voArray)){
+                    $voArray['orders']= 0;
+                    $voArray['user']= $m_row['cnt'];
+                    $voArray['MonthName']= $m_row['MonthName'];
+                    $voArray['MonthNo']= $m_row['MonthNo'];
+                    $voArray['YearNo']= $m_row['YearNo'];    
+                }                
+                $semiArray2[]=$voArray;                                 
+            }    
+        }
+        $myArray = array_merge($semiArray, $semiArray2);  
+        usort($myArray, function($a, $b) {
+            return $a['MonthNo'] <=> $b['MonthNo'];
+        });        
+        $temp_array = [];
+        foreach ($myArray as &$v) {
+            if (!isset($temp_array[$v['MonthNo']]))
+            $temp_array[$v['MonthNo']] =& $v;
+        }
+        $myArray = array_values($temp_array);    
+        usort($myArray, function($a, $b) {
+            return $a['YearNo'] <=> $b['YearNo'];
+        });
+        
+        // echo '<pre>';print_r($myArray);die;
+        $coOrders=array();
+        $coUser=array(); 
+        $coMonth=array();             
+        if(!empty($myArray)){
+            foreach($myArray as $m_row){
+                $coOrders[]= $m_row['orders'];
+                $coUser[]=  $m_row['user'];
+                $coMonth[]=  $m_row['MonthName'];                                
+            }
+        } 
+        $data['coOrders']=implode(',',$coOrders);
+        $data['coUser']=implode(',',$coUser); 
+        $data['coMonth']=implode('","',$coMonth);
+
+
         $data['activeCustomers'] = $this->Home_admin_model->countactiveCustomers();
         $data['inActiveCustomers'] = $this->Home_admin_model->countInActiveCustomers();
 

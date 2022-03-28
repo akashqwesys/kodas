@@ -46,10 +46,14 @@ class Userlist_model extends CI_Model
         }
     }
 
-    function get_datatables()
-    {
+    function get_datatables($status)
+    {        
         $this->db->select('user_app.*,agent.name as a_name');        
         $this->_get_datatables_query();
+
+        if($status!=''){
+            $this->db->where('isverified',"$status");    
+        }
         $this->db->join('agent', 'agent.agent_id = user_app.alocation_agent_id', 'left');
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
@@ -57,19 +61,25 @@ class Userlist_model extends CI_Model
         return $query->result();
     }
 
-    function count_filtered()
+    function count_filtered($status)
     {
         $this->db->select('user_app.*,agent.name as a_name');        
         $this->_get_datatables_query();
+        if($status!=''){
+            $this->db->where('isverified',"$status");    
+        }
         $this->db->join('agent', 'agent.agent_id = user_app.alocation_agent_id', 'left');
         $query = $this->db->get();
         return $query->num_rows();
     }
 
-    public function count_all()
+    public function count_all($status)
     {
         $this->db->select('user_app.*,agent.name as a_name');    
         $this->db->from($this->table);
+        if($status!=''){
+            $this->db->where('isverified',"$status");    
+        }
         $this->db->join('agent', 'agent.agent_id = user_app.alocation_agent_id', 'left');
         return $this->db->count_all_results();
     }

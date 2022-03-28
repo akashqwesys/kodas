@@ -87,6 +87,46 @@ class Home_admin_model extends CI_Model {
 		return $this->db->get('orders')->result_array();		
 	}
 
+	public function monthToMonthOrders() {	
+		$result = $this->db->query("SELECT COUNT(id) as cnt,MONTHNAME((FROM_UNIXTIME(date))) as 'MonthName',MONTH((FROM_UNIXTIME(date))) as 'MonthNo',YEAR((FROM_UNIXTIME(date))) as 'YearNo'
+		FROM orders WHERE DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH)
+		GROUP BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))
+		ORDER BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))");	
+		return $result->result_array();			
+	}
+
+	public function monthToMonthActiveCustomer() {	
+		$result = $this->db->query("SELECT COUNT(DISTINCT user_id) as cnt,MONTHNAME((FROM_UNIXTIME(date))) as 'MonthName'
+		FROM orders WHERE DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH)
+		GROUP BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))
+		ORDER BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))");	
+		return $result->result_array();			
+	}
+
+	public function monthToMonthViewVsOrders() {	
+		$result = $this->db->query("SELECT COUNT(id) as cnt,MONTHNAME(dateandtime) as 'MonthName',MONTH(dateandtime) as 'MonthNo',YEAR(dateandtime) as 'YearNo'
+		FROM userviewproduct WHERE DATE_FORMAT(dateandtime, '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH)
+		GROUP BY YEAR(dateandtime),MONTH(dateandtime)
+		ORDER BY YEAR(dateandtime),MONTH(dateandtime)");	
+		return $result->result_array();			
+	}
+
+	public function monthToMonthRegisterUser() {	
+		$result = $this->db->query("SELECT COUNT(id) as cnt,MONTHNAME(created) as 'MonthName',MONTH(created) as 'MonthNo',YEAR(created) as 'YearNo'
+		FROM user_app WHERE DATE_FORMAT(created, '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH)
+		GROUP BY YEAR(created),MONTH(created)
+		ORDER BY YEAR(created),MONTH(created)");	
+		return $result->result_array();			
+	}
+
+	// public function monthToMonthActiveCustomer() {	
+	// 	$result = $this->db->query("SELECT COUNT(DISTINCT user_id) as cnt,MONTH((FROM_UNIXTIME(date))) as 'MonthName'
+	// 	FROM orders WHERE YEAR((FROM_UNIXTIME(date))) = YEAR(CURDATE())
+	// 	GROUP BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))
+	// 	ORDER BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))");	
+	// 	return $result->result_array();	
+	// }
+
 	public function countCancelledOrder() {					
 		$this->db->where_in('processed',array('Cancelled'));
 		return $this->db->count_all_results('orders');

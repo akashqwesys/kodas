@@ -187,6 +187,7 @@ $route['^(\w{2})/(.*)$'] = '$2';
  * Admin Controllers Routes
  */
 $route['admin/get-user-by-status/(:any)'] = 'admin/user/listuser/get_user_by_status/$1';
+$route['admin/get-order-by-status/(:any)'] = 'admin/ecommerce/orders/get_order_by_status/$1';
 $route['admin/get-user-list'] = 'admin/user/listuser/user_list';
 $route['admin/active-inactive-user'] = 'admin/user/listuser/approve_status';
 //agent managements

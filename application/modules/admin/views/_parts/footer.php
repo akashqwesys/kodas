@@ -86,6 +86,7 @@
         </div>
     </div>
 </div>
+
 <script src="<?=base_url('assets/bootstrap-select-1.12.1/js/bootstrap-select.min.js')?>"></script>
 
 <script  src="<?= base_url('assets/central') ?>/datatable/jquery.dataTables.min.js" type="text/javascript"></script>
@@ -102,6 +103,11 @@
 <script src="<?=base_url('assets/js/zxcvbn.js')?>"></script>
 <script src="<?=base_url('assets/js/zxcvbn_bootstrap3.js')?>"></script>
 <script src="<?=base_url('assets/js/pGenerator.jquery.js')?>"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 <script>
     var urls = {
         changePass: '<?=base_url('admin/changePass')?>',
@@ -143,6 +149,7 @@
 <?php $this->load->view('coupan/coupan_js'); ?>
 <?php $this->load->view('ecommerce/orderlist_js'); ?>
 <?php $this->load->view('ecommerce/stock_js'); ?>
+<?php $this->load->view('home/dashboard'); ?>
 <?php if($title=='Add-Order'){ ?>
 <script>
  $(document).ready(function () {
@@ -196,6 +203,5 @@
     });
 </script>
 <?php } ?>
-
 </body>
 </html>

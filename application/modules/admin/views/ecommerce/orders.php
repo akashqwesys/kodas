@@ -18,7 +18,8 @@
         <option value="">Select Status</option>
         <option value="Pending" <?php if (isset($_GET['status']) && $_GET['status'] == 'Pending') {
                                   echo 'selected';
-                                } ?>>Pending</option>
+                                } ?>                                                                                                 
+                                >Pending</option>
         <option value="Accepted_by_Agent" <?php if (isset($_GET['status']) && $_GET['status'] == 'Accepted_by_Agent') {
                                       echo 'selected';
                                     } ?>>Accepted By Agent</option>
@@ -41,7 +42,7 @@
                                   } ?>>Complete</option> -->
         <option value="Cancelled" <?php if (isset($_GET['status']) && $_GET['status'] == 'Cancelled') {
                                     echo 'selected';
-                                  } ?>>Cancelled</option>
+                                  } ?>  >Cancelled</option>
       </select>
     </div>
     <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">

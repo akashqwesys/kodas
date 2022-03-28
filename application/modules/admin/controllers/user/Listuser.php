@@ -86,7 +86,7 @@ class Listuser extends ADMIN_Controller {
         if (!in_array('editcustomer', $adminid)) {
             redirect('admin');
         } 
-        $list = $this->Userlist_model->get_datatables();
+        $list = $this->Userlist_model->get_datatables($_REQUEST['status']);
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $datarow) {    
@@ -130,8 +130,8 @@ class Listuser extends ADMIN_Controller {
         }
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Userlist_model->count_all(),
-            "recordsFiltered" => $this->Userlist_model->count_filtered(),
+            "recordsTotal" => $this->Userlist_model->count_all($_REQUEST['status']),
+            "recordsFiltered" => $this->Userlist_model->count_filtered($_REQUEST['status']),
             "data" => $data,
         );
         echo json_encode($output);

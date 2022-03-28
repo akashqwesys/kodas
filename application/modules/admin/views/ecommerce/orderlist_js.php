@@ -2,14 +2,25 @@
 ?>
     <script type="text/javascript">
         $(document).ready(function() {   
-            load_payment_list('Pending');
+                                               
+            <?php if(isset($_SESSION['order_status'])){
+                if(!empty($_SESSION['order_status'])){                    
+                    ?>
+                    load_payment_list('<?php echo $_SESSION['order_status'];?>');                      
+                    <?php
+                }else{?>
+                    load_payment_list('Pending');
+               <?php }
+            }else{ ?>
+                    load_payment_list('Pending');
+            <?php } ?>
             // alert('ji');    
             $('#status').on('change', function () {
                 var orderStatus  = $(this).val();
                     $('#table').DataTable().destroy();
                     load_payment_list(orderStatus);
             });                        
-            function load_payment_list(orderStatus='Pending') {
+            function load_payment_list(orderStatus='Pending') {                
                 $('#table').DataTable({
                     responsive: {
                         details: {

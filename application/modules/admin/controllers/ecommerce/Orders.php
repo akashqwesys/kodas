@@ -97,7 +97,12 @@ class Orders extends ADMIN_Controller {
 		}
 	}
 
-
+	
+		
+	public function get_order_by_status($status='') {       
+		$_SESSION['order_status']=$status;		
+		redirect('admin/orders');
+	}
 
 	public function order_list() {
 		// echo 'hi';die;       
