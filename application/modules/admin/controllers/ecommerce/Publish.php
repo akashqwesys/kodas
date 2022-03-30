@@ -41,10 +41,19 @@ class Publish extends ADMIN_Controller {
 
 		if (isset($_POST['submit'])) {
 
+
+
 			if (isset($_GET['to_lang'])) {
 				$id = 0;
 			}
-			$_POST['image'] = $this->uploadImage();
+
+			$_POST['image']='';
+			if (($_FILES['userfile']['name']) != '') {				
+				$products_single_image = singleImageUpload('userfile');								
+				$_POST['image'] = $products_single_image[2]['file_name'];													
+			}
+
+			// $_POST['image'] = $this->uploadImage();
 			$this->Products_model->setProduct($_POST, $id);
 			$this->session->set_flashdata('result_publish', 'Product is published!');
 			if ($id == 0) {
@@ -131,9 +140,7 @@ class Publish extends ADMIN_Controller {
 					}
 				}
 			}
-
 		} else {
-
 			$config['upload_path'] = './attachments/shop_images/';
 			$config['allowed_types'] = $this->allowed_img_types;
 			$this->load->library('upload', $config);
@@ -288,6 +295,33 @@ class Publish extends ADMIN_Controller {
 		} else {
 			return $output;
 		}
+	}
+
+
+
+
+	public function loadOthersImages1() {
+		$output = array();		
+		if (isset($_POST['folder']) && $_POST['folder'] != null) {	
+			// echo $_POST['folder'];die;	
+			$dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['folder'] . DIRECTORY_SEPARATOR;
+			if (is_dir($dir)) {								
+				if ($dh = opendir($dir)) {
+					$i = 0;
+					while (($file = readdir($dh)) !== false) {
+						if (is_file($dir . $file)) {
+							$extention = strtolower(substr($file, strrpos($file, '.') + 1));
+							if ($extention != 'pdf') {
+								array_push($output,base_url('attachments/shop_images/' . $_POST['folder'] . '/' . $file));
+							}
+						}
+						$i++;
+					}
+					closedir($dh);
+				}
+			}
+		}		
+		return $output;	
 	}
 
 	/*

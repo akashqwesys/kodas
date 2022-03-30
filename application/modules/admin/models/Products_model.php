@@ -203,8 +203,10 @@ class Products_model extends CI_Model {
 						$this->db->insert('product_image',$params);
 					}
 				}
-			// }
 
+				
+
+			// }
 			// foreach ($post['shop_attribute'] as $key => $value) {
 			// 	if (!empty($value[0])) {
 			// 		$this->db->insert('product_attribute', array(
@@ -217,7 +219,7 @@ class Products_model extends CI_Model {
 			isset($_POST['old_image']) ? $oldimg = $_POST['old_image'] : $oldimg = '';
 			if (!$this->db->where('id', $id)->update('products', array(
 				'designNo' => $post['designNo'],
-				'image' => $post['image'] != null ? $_POST['image'] : $oldimg,
+				'image' => $post['image'] != '' ? $_POST['image'] : $oldimg,
 				// 'shop_categorie' => $post['shop_categorie'],
 				'quantity' => $post['quantity'],
 				// 'product_type' => $post['product_type'],
@@ -294,6 +296,8 @@ class Products_model extends CI_Model {
 					$this->db->insert('product_image',$params);
 				}
 			}
+		
+			
 			
 
 

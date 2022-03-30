@@ -589,14 +589,13 @@ if (!function_exists('imageResizeLib')) {
 
                 foreach ($path_size as $ps) {
 
-                    if (isset($ps['size']) && isset($ps['path'])) {
+                    if (isset($ps['width']) && isset($ps['path'])) {
 
-                        $image->resizeToBestFit($ps['size'], $ps['size']);
+                        $image->resizeToBestFit($ps['width'], $ps['width'],true);
 
                         $image->save($ps['path']);
                     }
                 }
-
                 return true;
             }
         }
@@ -616,11 +615,17 @@ if (!function_exists('imageUpload')) {
 
         $output_subdir = $output_dir . "original/";
 
-        $output_subdir1 = $output_dir . "large/";
+        $output_subdir1 = $output_dir . "exlarge/";
 
-        $output_subdir2 = $output_dir . "medium/";
+        $output_subdir2 = $output_dir . "large/";
 
-        $output_subdir3 = $output_dir . "thumb/";
+        $output_subdir3 = $output_dir . "medium/";
+
+        $output_subdir4 = $output_dir . "thumb/";
+
+        $output_subdir5 = $output_dir . "small/";
+
+        $output_subdir6 = $output_dir . "exsmall/";
 
         if (isset($file)) {
 
@@ -680,9 +685,12 @@ if (!function_exists('imageUpload')) {
                 $filepath_original = $output_subdir . $NewImageName;
 
                 $path_size = array(
-                    array('path' => $output_subdir1 . $NewImageName, 'size' => 500),
-                    array('path' => $output_subdir2 . $NewImageName, 'size' => 300),
-                    array('path' => $output_subdir3 . $NewImageName, 'size' => 100)
+                    array('path' => $output_subdir1 . $NewImageName, 'width' => 500),
+                    array('path' => $output_subdir2 . $NewImageName, 'width' => 450),
+                    array('path' => $output_subdir3 . $NewImageName, 'width' => 350),
+                    array('path' => $output_subdir4 . $NewImageName, 'width' => 250),
+                    array('path' => $output_subdir5 . $NewImageName, 'width' => 200),
+                    array('path' => $output_subdir6 . $NewImageName, 'width' => 150)                   
                 );
                 if (imageResizeLib($file_tmp, $filepath_original, $path_size)) {
                     // if(move_uploaded_file($file_tmp, "$output_dir/$NewImageName")){                                                            

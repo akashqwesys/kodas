@@ -87,6 +87,17 @@ class Products extends ADMIN_Controller {
 
         foreach ($list as $datarow) {    
            
+			$cat=array();
+			$catStr='';
+			$categories = $this->Productsdt_model->get_productCat($datarow->id);			
+			if(!empty($categories)){
+				foreach($categories as $ct_row){
+					array_push($cat,$ct_row['name']);
+				}
+				$catStr=implode(',',$cat);
+			}
+			
+
 			$this->db->select_sum('qty');
 			$this->db->where('itemid',$datarow->id);
 			$result = $this->db->get('order_products')->row();  
@@ -146,7 +157,8 @@ class Products extends ADMIN_Controller {
             $row = array();
             $row[] = $no;
 			$row[] = $img;
-            $row[] = $datarow->title;        
+            $row[] = $datarow->title; 
+			$row[] = $catStr;        
             $row[] = $datarow->price3;
 			$row[] = $datarow->theli_price3; 
             $row[]=$datarow->product_pcs; 

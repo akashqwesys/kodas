@@ -84,4 +84,14 @@ class Productsdt_model extends CI_Model
             return true;
         }
     }
+    public function get_productCat($id)
+    {
+        $this->db->select('shop_categories_translations.name');
+        $this->db->from('productcat');
+        $this->db->join('shop_categories_translations', 'shop_categories_translations.for_id = productcat.catid', 'left'); 
+        $this->db->where('productcat.productid', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    
 }

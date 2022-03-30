@@ -167,7 +167,7 @@ $i++;
   <div class="form-group bordered-group">
     <?php
 if (isset($_POST['image']) && $_POST['image'] != null) {
-	$image = 'attachments/shop_images/' . $_POST['image'];
+	$image = 'attachments/uploads/large/' . $_POST['image'];
 	if (!file_exists($image)) {
 		$image = 'attachments/no-image.png';
 	}
@@ -192,8 +192,6 @@ if (isset($_POST['image']) && $_POST['image'] != null) {
     <?php /*?><a href="javascript:void(0);" data-toggle="modal" data-target="#modalMoreImages" class="btn btn-default">Upload more images</a><?php */?>
     <a href="javascript:void(0);" data-toggle="modal" data-target="#modalMorePdf" class="btn btn-default">Upload PDF File</a> 
   </div>
-
-
 <?php
   $this->db->where('refProduct_id', $id);                    
   $query = $this->db->get('product_image');
@@ -206,9 +204,9 @@ if (isset($_POST['image']) && $_POST['image'] != null) {
         if(!empty($otherImgs)){
           foreach($otherImgs as $img_row){
             ?>
-          <div class="outer col-md-2" id=<?php echo 'img_'.$img_row['product_image_id']; ?>>
+          <div class="outer col-md-3" id=<?php echo 'img_'.$img_row['product_image_id']; ?>>
             <ion-card class="inner" *ngFor="let i of images">
-              <img src="<?php echo base_url('attachments/uploads/thumb'); ?>/<?php echo $img_row['img_name']; ?>"/>
+              <img src="<?php echo base_url('attachments/uploads/small'); ?>/<?php echo $img_row['img_name']; ?>" style='width:150px;height:150px;'>
               <span class="close-icon delete-image" data-id="<?php echo $img_row['product_image_id']; ?>">X</span>
             </ion-card>
           </div>
@@ -363,6 +361,7 @@ if (isset($_POST['productoffertype'])) {
       <div class="checkbox-inline"><label for="latest"><input <?php if (in_array("latest", $productoffertype)) {echo 'checked';}?> type="checkbox" name="productoffertype[]" value="latest" />Latest</label></div>
       <div class="checkbox-inline"><label for="trending"><input <?php if (in_array("trending", $productoffertype)) {echo 'checked';}?> type="checkbox" name="productoffertype[]" value="trending" />Trending</label></div>
       <div class="checkbox-inline"><label for="recommended"><input <?php if (in_array("recommended", $productoffertype)) {echo 'checked';}?> type="checkbox" name="productoffertype[]" value="recommended"/>Recommended</label></div>
+      <div class="checkbox-inline"><label for="bestOffer"><input <?php if (in_array("bestOffer", $productoffertype)) {echo 'checked';}?> type="checkbox" name="productoffertype[]" value="bestOffer"/>Best Offer</label></div>
   </div>
 
 
@@ -465,16 +464,18 @@ foreach ($shop_categorie['info'] as $nameAbbr) {
   </div>
 
 <?php
-
+$totalStock=0;
 // $this->db->where('itemid', $_POST['id']);  
 // $order_product_stock = $this->db->get('order_products')->result_array();
+if(isset($_POST['id'])){
   $this->db->select('qty');
   $this->db->where('refProduct_id', $_POST['id']);
   $result = $this->db->get('stock')->row_array();    
-  $totalStock=0;
+  
   if(!empty($result)){
     $totalStock=$result['qty'];
   }
+}
 ?>
   <div class="form-group for-shop">
     <label>Opening stock</label>

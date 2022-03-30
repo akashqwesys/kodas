@@ -43,7 +43,7 @@ class Products extends REST_Controller
 		$response['sort'][3]['value']='oldest';
 
 		$response['sort'][3]['title']='Best Offer';
-		$response['sort'][3]['value']='best_offer';
+		$response['sort'][3]['value']='bestOffer';
 
 		$response['filter']=array();
 		$ag_res=$this->Api_model->getAttributeGroup();

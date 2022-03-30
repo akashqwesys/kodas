@@ -103,7 +103,6 @@ class Api_model extends CI_Model {
 			$this->db->insert('user_app', $data);
 			$user_id = $this->db->insert_id();
 
-
 			$data1 = array();
 			$data1['userid'] = $user_id;
 			$data1['addresstype'] = 'Both';
@@ -266,7 +265,18 @@ class Api_model extends CI_Model {
 		$user=array();
 		if(isset($_REQUEST['UserId'])){
 			$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();			
-		}	
+		}
+		
+
+		$viewType='guest';			
+		if($user->retailer==1){
+			$viewType='retailer';
+		}
+		if($user->wholesaller==1){
+			$viewType='wholesaller';
+		}
+
+		// print_r($_REQUEST['UserId']);die;	
 
 		if(!empty($product_type)){
 			$this->db->like('productoffertype',$product_type);
@@ -274,14 +284,23 @@ class Api_model extends CI_Model {
 
 		if (isset($_REQUEST['sort']) && !empty($_REQUEST['sort'])) {
 			$sort = $_REQUEST['sort'];
+			
+			$price='products.price1';
+			if($user->guest==1){
+				$price='products.price1';	
+			}
+			if($user->retailer==1){
+				$price='products.price2';
+			}
+			if($user->wholesaller==1){
+				$price='products.price3';
+			}
 
-			// $gettype = $this->getcustomeridbypricetype($_REQUEST['UserId']);
-			// if (!empty($gettype)) {
 				if($sort=='price_low_to_high'){
-					$this->db->order_by('products.price1', 'ASC');		
+					$this->db->order_by($price, 'ASC');		
 				}
 				if($sort=='price_high_to_low'){
-					$this->db->order_by('products.price1', 'DESC');
+					$this->db->order_by($price, 'DESC');
 				}
 				if($sort=='latest'){
 					$this->db->order_by('products.id', 'DESC');
@@ -289,28 +308,10 @@ class Api_model extends CI_Model {
 				if($sort=='oldest'){
 					$this->db->order_by('products.id', 'ASC');
 				}
-				if($sort=='best_offer'){
-					$this->db->order_by('products.id', 'ASC');
+				if($sort=='bestOffer'){
+					$this->db->like('productoffertype','bestOffer');
 				}					
-				// $this->db->order_by('products.' . strtolower($gettype), $_REQUEST['sort']);
-			// } else {
-				// if($sort=='price_low_to_high'){
-				// 	$this->db->order_by('products.price1', 'ASC');		
-				// }
-				// if($sort=='price_high_to_low'){
-				// 	$this->db->order_by('products.price1', 'DESC');
-				// }
-				// if($sort=='latest'){
-				// 	$this->db->order_by('products.id', 'DESC');
-				// }
-				// if($sort=='oldest'){
-				// 	$this->db->order_by('products.id', 'ASC');
-				// }
-				// if($sort=='best_offer'){
-				// 	$this->db->order_by('products.id', 'ASC');
-				// }	
-			// }
-
+		
 		} else {
 			$this->db->order_by('products.id', 'DESC');
 		}
@@ -331,10 +332,10 @@ class Api_model extends CI_Model {
 		if (isset($_REQUEST['refPackage_id']) && $_REQUEST['refPackage_id'] != 0 && $_REQUEST['refPackage_id'] != '') {
 			$this->db->where('products.refPackagingtype_id', $_REQUEST['refPackage_id']);	
 		}
-
+		
 		if (isset($_REQUEST['Catid']) && $_REQUEST['Catid'] != 0 && $_REQUEST['Catid'] != '') {
 			if (isset($_REQUEST['Attribute']) && $_REQUEST['Attribute'] != '') {
-				$attributearray = explode(",", $_REQUEST['Attribute']);
+				$attributearray = explode(",", $_REQUEST['Attribute']);								
 				$this->db->distinct('products.id');
 				$this->db->join('product_attribute1', 'product_attribute1.refProduct_id = productcat.productid', 'left');
 				$this->db->where_in('product_attribute1.refattributes_id', $attributearray);
@@ -343,9 +344,11 @@ class Api_model extends CI_Model {
 			$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
 			$this->db->where('productcat.catid', $_REQUEST['Catid']);
 			$this->db->where('products.visibility', 1);
+			$this->db->like('productviewtype',$viewType);
 			$query = $this->db->select('products_translations.description,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,products.id as Id, products.image as product_image, products.folder as imgfolder, products.videoid, products.product_pcs as Pcs, products_translations.title,products_translations.theli_title, products_translations.price, products_translations.old_price, ')->get('productcat');
 		} else {
 			$this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+			$this->db->like('productviewtype',$viewType);
 			$query = $this->db->select('products_translations.description,products.designNo,price1 as box_guest_price,price2 as box_retailer_price,price3 as box_wholesaller_price,theli_price1 as theli_guest_price,theli_price2 as theli_retailer_price,theli_price3 as theli_wholesaller_price,products.id as Id, products.image as product_image, products.folder as imgfolder, products.videoid, products.product_pcs as Pcs, products_translations.title,products_translations.theli_title, products_translations.price, products_translations.old_price, ')->get('products');
 		}
 		$result = $query->result_array();
@@ -360,7 +363,9 @@ class Api_model extends CI_Model {
 			if (isset($singalimg) && $singalimg != '') {
 				$nid = 1;
 				$image_link[0]['Id'] = strval($value['Id'] . $nid);
-				$image_link[0]['Image'] = !empty($singalimg) ? base_url('attachments/shop_images/' . $singalimg) : '';
+				$image_link[0]['Image'] = !empty($singalimg) ? base_url('attachments/uploads/medium/' . $singalimg) : '';
+				$image_link[0]['Image_thumb'] = !empty($singalimg) ? base_url('attachments/uploads/thumb/' . $singalimg) : '';
+				$image_link[0]['Image_small'] = !empty($singalimg) ? base_url('attachments/uploads/small/' . $singalimg) : '';
 				$a = 1;
 			} else {
 				$a = 0;
@@ -369,7 +374,7 @@ class Api_model extends CI_Model {
 			$multiimgarray = $this->productmultiimg($multiimg);
 			foreach ($multiimgarray as $key => $value1) {
 				$image_link[$a]['Id'] = strval($value['Id'] . ($a + 1));
-				$image_link[$a]['Image'] = $value1;
+				$image_link[$a]['Image'] = $value1;					
 				$a++;
 			}
 			// $pricebyuser = '';
@@ -402,6 +407,9 @@ class Api_model extends CI_Model {
 			$data[$i]['Pcs'] = $value['Pcs'];
 			$data[$i]['VideoUrl'] = !empty($value['videoid']) ? $value['videoid'] : '';
 			$data[$i]['Image'] = $image_link;
+
+				// print_r($user);die;
+
 			if(!empty($user)){
 				if($user->guest==1){
 					$data[$i]['mainprice']=	$this->IND_money_format($value['box_guest_price']);
@@ -639,41 +647,50 @@ class Api_model extends CI_Model {
 		
 		if (isset($singalimg) && $singalimg != '') {
 			$singalimg = $result[0]['product_image'];
-			$imgnameextension = str_replace(base_url('attachments/shop_images/'), "", $singalimg);
-			$without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
-			$this->db->where('likeproductimg.userid', $_REQUEST['UserId']);
-			$this->db->where('likeproductimg.imgname', $without_extension);
-			$querylikedi = $this->db->select('likestatus')->get('likeproductimg')->row();
-			$likestatus = '';
-			if (isset($querylikedi->likestatus)) {$likestatus = $querylikedi->likestatus;} else { $likestatus = '';}
-			$nid = 1;
-			$image_link[0]['Id'] = strval($_REQUEST['ItemId'] . $nid);
-			$image_link[0]['Image'] = !empty($singalimg) ? base_url('attachments/shop_images/' . $singalimg) : '';
-			$image_link[0]['ImageName'] = $without_extension;
-			$image_link[0]['LikeStatus'] = $likestatus;
-			$a = 1;
+			// $imgnameextension = str_replace(base_url('attachments/shop_images/'), "", $singalimg);
+			// $without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
+			// $this->db->where('likeproductimg.userid', $_REQUEST['UserId']);
+			// $this->db->where('likeproductimg.imgname', $without_extension);
+			// $querylikedi = $this->db->select('likestatus')->get('likeproductimg')->row();
+			// $likestatus = '';
+			// if (isset($querylikedi->likestatus)) {$likestatus = $querylikedi->likestatus;} else { $likestatus = '';}
+			// $nid = 1;
+			// $image_link[0]['Id'] = strval($_REQUEST['ItemId'] . $nid);
+			$image_link[] = !empty($singalimg) ? base_url('attachments/shop_images/' . $singalimg) : '';
+			// $image_link[0]['ImageName'] = $without_extension;
+			// $image_link[0]['LikeStatus'] = $likestatus;
+			// $a = 1;
 
 			$multiimg = $result[0]['imgfolder'];
 			$multiimgarray = $this->productmultiimg($multiimg);
 			$pdfurl = $this->productmultiimg($multiimg, 0, 'pdfurl');
 		} else {
-			$a = 0;
+			// $a = 0;
 		}
 		
 		foreach ($multiimgarray as $key => $value) {
-			$imgnameextension = str_replace(base_url('attachments/shop_images/' . $multiimg . '/'), "", $value);
-			$without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
-			$this->db->where('likeproductimg.userid', $_REQUEST['UserId']);
-			$this->db->where('likeproductimg.imgname', $without_extension);
-			$querylikedi = $this->db->select('likestatus')->get('likeproductimg')->row();
-			$likestatus = '';
-			if (isset($querylikedi->likestatus)) {$likestatus = $querylikedi->likestatus;} else { $likestatus = '';}
-			$image_link[$a]['Id'] = strval($_REQUEST['ItemId'] . ($a + 1));
-			$image_link[$a]['Image'] = $value;
-			$image_link[$a]['ImageName'] = $without_extension;
-			$image_link[$a]['LikeStatus'] = $likestatus;
-			$a++;
+			// $imgnameextension = str_replace(base_url('attachments/shop_images/' . $multiimg . '/'), "", $value);
+			// $without_extension = substr($imgnameextension, 0, strrpos($imgnameextension, "."));
+			// $this->db->where('likeproductimg.userid', $_REQUEST['UserId']);
+			// $this->db->where('likeproductimg.imgname', $without_extension);
+			// $querylikedi = $this->db->select('likestatus')->get('likeproductimg')->row();
+			// $likestatus = '';
+			// if (isset($querylikedi->likestatus)) {$likestatus = $querylikedi->likestatus;} else { $likestatus = '';}
+			// $image_link[$a]['Id'] = strval($_REQUEST['ItemId'] . ($a + 1));
+			$image_link[] = $value;
+			// $image_link[$a]['ImageName'] = $without_extension;
+			// $image_link[$a]['LikeStatus'] = $likestatus;
+			// $a++;
 		}
+		
+
+		$img=$this->db->where('refProduct_id',$id)->get('product_image')->result_array();
+		if(!empty($img)){
+			foreach($img as $img_upl){
+				$image_link[]=base_url('attachments/uploads/original/' . $img_upl['img_name']);
+			}
+		}
+		
 
 		$this->db->select('likestatus')->get('likeproductimg')->row();
 
@@ -818,6 +835,7 @@ class Api_model extends CI_Model {
 		$this->db->from('cartdetails');
 		$this->db->where('cartdetails.userid', $_POST['UserId']);
 		$this->db->where('cartdetails.itemid', $_POST['ItemId']);
+		$this->db->where('cartdetails.ProductType', $_POST['ProductType']);
 		$this->db->limit(1);
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
@@ -901,8 +919,7 @@ class Api_model extends CI_Model {
 			$pricebyuser = '';
 			if (!empty($_REQUEST['UserId']) && isset($_REQUEST['UserId'])) {
 				$pricebyuser = $this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();				
-			}
-		
+			}		
 			if (!empty($pricebyuser)) {
 				if($value['ProductType']=='box'){
 					if($pricebyuser->guest==1){

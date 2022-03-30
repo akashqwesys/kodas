@@ -103,6 +103,17 @@ class Categories extends ADMIN_Controller
             $_POST['image'] = $this->uploadImage();
 			$_POST['webimage'] = $this->uploadImage('website');
 
+            // $_POST['image']='';
+			// if (($_FILES['catimg']['name']) != '') {				
+			// 	$products_single_image = singleImageUpload('catimg');								
+			// 	$_POST['image'] = $products_single_image[2]['file_name'];													
+			// }
+            // $_POST['webimage']='';
+			// if (($_FILES['catimg']['name']) != '') {				
+			// 	$products_single_image = singleImageUpload('catimg');								
+			// 	$_POST['webimage'] = $products_single_image[2]['file_name'];													
+			// }
+
             $res=$this->Categoriesdt_model->addCategories($_POST);
             if ($res) {
                 $this->session->set_flashdata('add_categories', 'Create Categories Successfully!');
@@ -139,6 +150,20 @@ class Categories extends ADMIN_Controller
         if (isset($_POST['submit'])) { 
             
             $_POST['image'] = $this->uploadImage();
+
+
+            // $_POST['image']='';
+			// if (($_FILES['catimg']['name']) != '') {				
+			// 	$products_single_image = singleImageUpload('catimg');								
+			// 	$_POST['image'] = $products_single_image[2]['file_name'];													
+			// }
+            // $_POST['webimage']='';
+			// if (($_FILES['catimg']['name']) != '') {				
+			// 	$products_single_image = singleImageUpload('catimg');								
+			// 	$_POST['webimage'] = $products_single_image[2]['file_name'];													
+			// }
+
+
 			$_POST['webimage'] = $this->uploadImage('website');
             
             $res=$this->Categoriesdt_model->editCategories($_POST);
