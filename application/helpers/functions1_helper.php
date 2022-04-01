@@ -765,7 +765,45 @@ if (!function_exists('shorter')) {
 }
 
 
-function notification_str($resAddProductNotification = array(), $resCommentNotification = array()) {
+
+
+
+
+
+
+    function sendNotification($token,$message='',$title=''){
+        $url ="https://fcm.googleapis.com/fcm/send";
+    
+        $fields=array(
+            "to"=>$token,
+            "notification"=>array(
+                "body"=>$message,
+                "title"=>$title,
+                // "icon"=>$_REQUEST['icon'],
+                // "click_action"=>"https://kodaslive.qwesys.com"
+                "click_action"=>"https://kodaslive.qwesys.com"
+            )
+        );
+    
+        $headers=array(
+            'Authorization: key=AAAAi-sl7Ks:APA91bFmHeJfqCQVh8UYy--unACouFv1c5w6CaZ2tKJxrZMbxTLlknbEfzc3qugB52qMFBPAnKrWI4_UR8_l5qIYARn6MDh98MLnIxUGzzG1eeV98auOEoMUodLZbK-JaSvo6r5g999L',
+            'Content-Type:application/json'
+        );
+    
+        $ch=curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_POST,true);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$headers);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($fields));
+        $result=curl_exec($ch);        
+        curl_close($ch);
+    }
+
+
+
+
+    function notification_str($resAddProductNotification = array(), $resCommentNotification = array()) {
         $str = "";
         $result = array();
         if (!empty($resAddProductNotification)) {

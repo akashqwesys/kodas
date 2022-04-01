@@ -1592,4 +1592,28 @@ class Apilist extends REST_Controller {
 		}
 	}
 
+////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////   ADMIN API   /////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+		/*
+		     * Get dashboard
+	*/
+
+	public function dashboard_get() {
+		$response = $this->Api_model->dashboardfun();
+
+		// Check if the products data store contains products (in case the database result returns NULL)
+		if ($response) {
+			// Set the response and exit
+			$this->response($response, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		} else {
+			// Set the response and exit
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No product were found',
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}	
+	}
+
 }

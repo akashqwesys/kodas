@@ -193,11 +193,11 @@ $db['default'] = array(
 	
 		'hostname' => 'localhost',
 	
-		'username' => 'akashs_qkodas',
+		'username' => 'akashs_kodaslive',
 	
 		'password' => '4Nhwnp15=H@m',
 	
-		'database' => 'akashs_qkodas',
+		'database' => 'akashs_kodaslive',
 	
 		'dbdriver' => 'mysqli',
 	

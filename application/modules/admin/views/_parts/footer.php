@@ -96,8 +96,6 @@
 <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js" type="text/javascript"></script> -->
 
 
-
-
 <script src="<?=base_url('assets/js/bootstrap.min.js')?>"></script>
 <script src="<?=base_url('assets/js/bootbox.min.js')?>"></script>
 <script src="<?=base_url('assets/js/zxcvbn.js')?>"></script>
@@ -203,5 +201,92 @@
     });
 </script>
 <?php } ?>
+<!-- 
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDnzyFGwNS2YlbeD0wdFCL1OVycC5zd51I",
+    authDomain: "kodaslive-9beb6.firebaseapp.com",
+    projectId: "kodaslive-9beb6",
+    storageBucket: "kodaslive-9beb6.appspot.com",
+    messagingSenderId: "600945585323",
+    appId: "1:600945585323:web:c71d104222c0b98f7adbee",
+    measurementId: "G-19H096V4JT"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script> -->
+
+<input type="hidden" id="token" name="token">
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-messaging.js"></script>
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyDnzyFGwNS2YlbeD0wdFCL1OVycC5zd51I",
+        authDomain: "kodaslive-9beb6.firebaseapp.com",
+        projectId: "kodaslive-9beb6",
+        storageBucket: "kodaslive-9beb6.appspot.com",
+        messagingSenderId: "600945585323",
+        appId: "1:600945585323:web:c71d104222c0b98f7adbee",
+        measurementId: "G-19H096V4JT"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const messaging=firebase.messaging();
+
+    function IntitalizeFireBaseMessaging() {
+        messaging
+            .requestPermission()
+            .then(function () {
+                console.log("Notification Permission");
+                return messaging.getToken();
+            })
+            .then(function (token) {
+                console.log("Token : "+token);
+                document.getElementById("token").innerHTML=token;
+            })
+            .catch(function (reason) {
+                console.log(reason);
+            });
+    }
+
+    messaging.onMessage(function (payload) {
+        console.log(payload);
+        const notificationOption={
+            body:payload.notification.body,
+            icon:payload.notification.icon
+        };
+
+        if(Notification.permission==="granted"){
+            var notification=new Notification(payload.notification.title,notificationOption);
+
+            notification.onclick=function (ev) {
+                ev.preventDefault();
+                window.open(payload.notification.click_action,'_blank');
+                notification.close();
+            }
+        }
+
+    });
+    messaging.onTokenRefresh(function () {
+        messaging.getToken()
+            .then(function (newtoken) {
+                console.log("New Token : "+ newtoken);
+            })
+            .catch(function (reason) {
+                console.log(reason);
+				//alert(reason);
+            })
+    })
+    IntitalizeFireBaseMessaging();
+</script>
 </body>
 </html>

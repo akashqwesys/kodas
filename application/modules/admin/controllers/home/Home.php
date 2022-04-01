@@ -14,7 +14,7 @@ class Home extends ADMIN_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Orders_model', 'History_model'));
+        $this->load->model(array('Orders_model', 'History_model','Api_model'));
     }
 
     public function index()
@@ -28,7 +28,7 @@ class Home extends ADMIN_Controller
 
 
 
-        $monthToMonthOrders = $this->Home_admin_model->monthToMonthOrders();
+        $monthToMonthOrders = $this->Api_model->monthToMonthOrders();
         $mTmOrdersMonth=array();
         $mTmOrdersValue=array();              
         if(!empty($monthToMonthOrders)){
@@ -41,7 +41,7 @@ class Home extends ADMIN_Controller
         $data['mTmOrdersValue']=implode(',',$mTmOrdersValue);       
 
 
-        $monthToMonthActiveCustomer = $this->Home_admin_model->monthToMonthActiveCustomer();
+        $monthToMonthActiveCustomer = $this->Api_model->monthToMonthActiveCustomer();
         $mTmActiveCustomerMonth=array();
         $mTmActiveCustomerValue=array();              
         if(!empty($monthToMonthActiveCustomer)){
@@ -54,7 +54,7 @@ class Home extends ADMIN_Controller
         $data['mTmActiveCustomerValue']=implode(',',$mTmActiveCustomerValue); 
         
         $semiArray=array();
-        $monthToMonthViewVsOrders = $this->Home_admin_model->monthToMonthViewVsOrders();
+        $monthToMonthViewVsOrders = $this->Api_model->monthToMonthViewVsOrders();
         if(!empty($monthToMonthOrders) && !empty($monthToMonthViewVsOrders)){
             foreach($monthToMonthOrders as $m_row){
                 $voArray=array();                
@@ -137,7 +137,7 @@ class Home extends ADMIN_Controller
 
 
         $semiArray=array();
-        $monthToMonthRegisterUser = $this->Home_admin_model->monthToMonthRegisterUser();
+        $monthToMonthRegisterUser = $this->Api_model->monthToMonthRegisterUser();
         if(!empty($monthToMonthOrders) && !empty($monthToMonthRegisterUser)){
             foreach($monthToMonthOrders as $m_row){
                 $voArray=array();                
@@ -215,39 +215,37 @@ class Home extends ADMIN_Controller
         $data['coMonth']=implode('","',$coMonth);
 
 
-        $data['activeCustomers'] = $this->Home_admin_model->countactiveCustomers();
-        $data['inActiveCustomers'] = $this->Home_admin_model->countInActiveCustomers();
+        $data['activeCustomers'] = $this->Api_model->countactiveCustomers();
+        $data['inActiveCustomers'] = $this->Api_model->countInActiveCustomers();
 
-        $data['topCustomers'] = $this->Home_admin_model->countTopCustomers();
-        $data['bottomCustomers'] = $this->Home_admin_model->countBottomCustomers();
+        $data['topCustomers'] = $this->Api_model->countTopCustomers();
+        $data['bottomCustomers'] = $this->Api_model->countBottomCustomers();
 
-        $data['todaysOrder'] = $this->Home_admin_model->countTodaysOrder();
-        $data['weeklyOrder'] = $this->Home_admin_model->countWeeklyOrder();
-        $data['monthlyOrder'] = $this->Home_admin_model->countMonthlyOrder();
-
-
-        $data['todaysDirectOrder'] = $this->Home_admin_model->countTodaysDirectOrder();
-        $data['weeklyDirectOrder'] = $this->Home_admin_model->countWeeklyDirectOrder();
-        $data['monthlyDirectOrder'] = $this->Home_admin_model->countMonthlyDirectOrder();
-
-        $data['todaysSales'] = $this->Home_admin_model->countTodaysSales();
-        $data['weeklySales'] = $this->Home_admin_model->countWeeklySales();
-        $data['monthlySales'] = $this->Home_admin_model->countMonthlySales();
+        $data['todaysOrder'] = $this->Api_model->countTodaysOrder();
+        $data['weeklyOrder'] = $this->Api_model->countWeeklyOrder();
+        $data['monthlyOrder'] = $this->Api_model->countMonthlyOrder();
 
 
-        $data['listPendingOrder'] = $this->Home_admin_model->listPendingOrder();
-        $data['pendingOrder'] = $this->Home_admin_model->countPendingOrder();
+        $data['todaysDirectOrder'] = $this->Api_model->countTodaysDirectOrder();
+        $data['weeklyDirectOrder'] = $this->Api_model->countWeeklyDirectOrder();
+        $data['monthlyDirectOrder'] = $this->Api_model->countMonthlyDirectOrder();
 
-        $data['listCancelledOrder'] = $this->Home_admin_model->listCancelledOrder();
-        $data['cancelledOrder'] = $this->Home_admin_model->countCancelledOrder();
+        $data['todaysSales'] = $this->Api_model->countTodaysSales();
+        $data['weeklySales'] = $this->Api_model->countWeeklySales();
+        $data['monthlySales'] = $this->Api_model->countMonthlySales();
 
 
+        $data['listPendingOrder'] = $this->Api_model->listPendingOrder();
+        $data['pendingOrder'] = $this->Api_model->countPendingOrder();
+
+        $data['listCancelledOrder'] = $this->Api_model->listCancelledOrder();
+        $data['cancelledOrder'] = $this->Api_model->countCancelledOrder();
         
-        $data['listPendingDirectOrder'] = $this->Home_admin_model->listPendingDirectOrder();
-        $data['pendingDirectOrder'] = $this->Home_admin_model->countPendingDirectOrder();
+        $data['listPendingDirectOrder'] = $this->Api_model->listPendingDirectOrder();
+        $data['pendingDirectOrder'] = $this->Api_model->countPendingDirectOrder();
 
-        $data['listCancelledDirectOrder'] = $this->Home_admin_model->listCancelledDirectOrder();
-        $data['cancelledDirectOrder'] = $this->Home_admin_model->countCancelledDirectOrder();
+        $data['listCancelledDirectOrder'] = $this->Api_model->listCancelledDirectOrder();
+        $data['cancelledDirectOrder'] = $this->Api_model->countCancelledDirectOrder();
 
         //$data['newOrdersCount'] = $this->Orders_model->ordersCount(true);
         $data['lowQuantity'] = $this->Home_admin_model->countLowQuantityProducts();

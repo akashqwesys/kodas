@@ -222,8 +222,8 @@ class Viewchat extends ADMIN_Controller {
 		foreach ($row as $rows) {			
 			$fcmtoken[] = $rows['fcmtoken'];
 		}
-		notifications("New message", $this->input->post("commentmsg"), $fcmtoken);
-
+		// sendNotification($this->input->post("token"),$this->input->post("commentmsg"),"New message");
+		 notifications("New message", $this->input->post("commentmsg"), $this->input->post("token"));		
 		$msg = '';
 		if ($result_check == 1) {
 			$msg = 'Message sent successfully!';

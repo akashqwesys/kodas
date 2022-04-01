@@ -172,6 +172,7 @@ if ($id != 0 && $id != '') {
           </div>
           <form style="padding: 10px 20px;" method="post">
           <div class="form-group">
+          <input type="hidden" id="token" name="token">
           <input type="hidden" name="sender_id" value="1" />
           <input type="hidden" name="receiver_id" value="<?=$id;?>" />
           <textarea class="form-control" name="commentmsg"></textarea>

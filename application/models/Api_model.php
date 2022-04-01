@@ -49,6 +49,7 @@ class Api_model extends CI_Model {
 			$data[$i]['TranportName'] = $row['tranportname'];
 			$data[$i]['PreviewCount'] = $row['pviewcount'];
 			$data[$i]['PremiumUser'] = $row['premiumuser'];
+			$data[$i]['credit'] = $row['credit'];
 			if ($_REQUEST['MobileNo'] != '9375186540') {
 				if ($row['fcmtoken'] == $_REQUEST['FCMToken']) {
 					$data[$i]['FCMToken'] = $row['fcmtoken'];
@@ -1929,11 +1930,14 @@ class Api_model extends CI_Model {
 			}	
 		}	
 						
-		$this->db->select('order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id,order_products.qty,products.price1 as box_guest_price,products.price2 as box_retailer_price,products.price3 as box_wholesaller_price,products.theli_price1 as theli_guest_price,products.theli_price2 as theli_retailer_price,products.theli_price3 as theli_wholesaller_price');
-		$this->db->join('products', 'products.id = order_products.itemid', 'inner');						
+		$this->db->select('products_translations.title,products_translations.theli_title,order_products.refOrder_id,order_products.itemid,order_products.ProductType,products.refPackagingtype_id,order_products.qty,products.price1 as box_guest_price,products.price2 as box_retailer_price,products.price3 as box_wholesaller_price,products.theli_price1 as theli_guest_price,products.theli_price2 as theli_retailer_price,products.theli_price3 as theli_wholesaller_price,products.product_pcs,order_products.audiofile,order_products.comment,order_products.hindicomment');
+		$this->db->join('products', 'products.id = order_products.itemid', 'inner');
+		$this->db->join('products_translations', 'products_translations.for_id = order_products.itemid', 'left');						
 		$this->db->where('order_products.refOrder_id', $_REQUEST['OrderId']);
 		$result1 = $this->db->get('order_products');
-		$data1 = $result1->result_array();				
+		$data1 = $result1->result_array();	
+		
+		
 		$user=$this->db->get_where('user_app', array('id' => $_REQUEST['UserId']))->row();
 		// print_r($user);die;
 
@@ -1971,6 +1975,18 @@ class Api_model extends CI_Model {
 					$dummy['price']=$mainprice*$catlog_row['qty'];
 					$dummy['qty']=$catlog_row['qty'];
 					$dummy['refPackagingtype_id']=$catlog_row['refPackagingtype_id'];
+					// $theli_data['product']=$catlog_row;
+					$dummy['product']['title']=$catlog_row['title'];
+					$dummy['product']['pcs']=$catlog_row['product_pcs'];
+					$dummy['product']['price']=$mainprice2;
+					$dummy['product']['qty']=$catlog_row['qty'];
+					$dummy['product']['audiofile']=$catlog_row['audiofile'];
+					$dummy['product']['comment']=$catlog_row['comment'];
+					$dummy['product']['hindicomment']=$catlog_row['hindicomment'];
+					// $dummy['audiofile']=$catlog_row['audiofile'];
+					// $dummy['comment']=$catlog_row['comment'];
+					// $dummy['hindicomment']=$catlog_row['hindicomment'];
+					
 					array_push($countArray[$i],$dummy);
 					// $box_package[$package_row['packagingtype_id']]['totalproduct']=$catlog_row['qty'];
 					// $box_package[$package_row['packagingtype_id']]['amount']=$mainprice;
@@ -1979,9 +1995,19 @@ class Api_model extends CI_Model {
 			}
 			if($catlog_row['ProductType']=='theli'){
 				$theli_data=array();
-				$theli_data['price']=$mainprice2;
+				$theli_data['price']=$mainprice2*$catlog_row['qty'];
 				$theli_data['qty']=$catlog_row['qty'];
 				$theli_data['refPackagingtype_id']=0;
+				$theli_data['product']['title']=$catlog_row['theli_title'];
+				$theli_data['product']['pcs']=$catlog_row['product_pcs'];
+				$theli_data['product']['price']=$mainprice2;
+				$theli_data['product']['qty']=$catlog_row['qty'];
+				$theli_data['product']['audiofile']=$catlog_row['audiofile'];
+				$theli_data['product']['comment']=$catlog_row['comment'];
+				$theli_data['product']['hindicomment']=$catlog_row['hindicomment'];
+				// $dummy['audiofile']=$catlog_row;
+				// $dummy['comment']=$catlog_row['comment'];
+				// $dummy['hindicomment']=$catlog_row['hindicomment'];
 				array_push($countArray[$k],$theli_data);
 			}
 		}
@@ -1993,15 +2019,17 @@ class Api_model extends CI_Model {
 				$qty=0;
 				$finalRow=array();
 				if(!empty($c_row)){
-					foreach($c_row as $mainRow){
+					$finalRow['catalog']=$m;					
+					foreach($c_row as $mainRow){						
 						$price=$mainRow['price']+$price;
 						$qty=$mainRow['qty']+$qty;
 						$finalRow['price']=$price;
-						$finalRow['qty']=$qty;						
-					}
-					$finalRow['catalog']=$m;
-				}
-				
+						$finalRow['qty']=$qty;
+						$finalRow['product'][]=$mainRow['product'];
+						// $finalRow['comment'][]=$mainRow;
+						// $finalRow['hindicomment'][]=$mainRow['hindicomment'];						
+					}					
+				}				
 				$m=$m+1;
 				if(!empty($finalRow)){
 					array_push($finalCount,$finalRow);
@@ -4759,5 +4787,393 @@ class Api_model extends CI_Model {
 		return $return;
 		//return $query->result_array();
 	}
+
+
+
+	public function dashboardfun() {
+		$data = array();
+
+
+
+		/////////////  VIEW VS ORDERS  ////////////////////
+		$monthToMonthOrders = $this->monthToMonthOrders();
+		$semiArray=array();
+        $monthToMonthViewVsOrders = $this->monthToMonthViewVsOrders();
+        if(!empty($monthToMonthOrders) && !empty($monthToMonthViewVsOrders)){
+            foreach($monthToMonthOrders as $m_row){
+                $voArray=array();                
+                foreach($monthToMonthViewVsOrders as $vo_row){
+                    if($m_row['MonthNo']==$vo_row['MonthNo']){
+                        $voArray['orders']= $m_row['cnt'];
+                        $voArray['views']= $vo_row['cnt'];
+                        $voArray['MonthName']= $vo_row['MonthName'];
+                        $voArray['MonthNo']= $vo_row['MonthNo'];
+                        $voArray['YearNo']= $vo_row['YearNo'];
+                    }
+                }
+                if(empty($voArray)){
+                    $voArray['orders']= $m_row['cnt'];
+                    $voArray['views']= 0;
+                    $voArray['MonthName']= $m_row['MonthName'];
+                    $voArray['MonthNo']= $m_row['MonthNo'];
+                    $voArray['YearNo']= $m_row['YearNo'];
+                }
+                $semiArray[]=$voArray;                                 
+            }    
+        }
+
+
+        $semiArray2=array();      
+        if(!empty($monthToMonthViewVsOrders) && !empty($monthToMonthViewVsOrders)){
+            foreach($monthToMonthViewVsOrders as $m_row){
+                $voArray=array();
+                foreach($semiArray as $vo_row){
+                    if($m_row['MonthNo']==$vo_row['MonthNo']){
+                        $voArray['orders']= $vo_row['orders'];
+                        $voArray['views']= $m_row['cnt'];
+                        $voArray['MonthName']= $vo_row['MonthName'];
+                        $voArray['MonthNo']= $vo_row['MonthNo'];
+                        $voArray['YearNo']= $vo_row['YearNo'];
+                    }
+                }
+                if(empty($voArray)){
+                    $voArray['orders']= 0;
+                    $voArray['views']= $m_row['cnt'];
+                    $voArray['MonthName']= $m_row['MonthName'];
+                    $voArray['MonthNo']= $m_row['MonthNo'];
+                    $voArray['YearNo']= $m_row['YearNo'];    
+                }                
+                $semiArray2[]=$voArray;                                 
+            }    
+        }
+        $myArray = array_merge($semiArray, $semiArray2);  
+        usort($myArray, function($a, $b) {
+            return $a['MonthNo'] <=> $b['MonthNo'];
+        });        
+        $temp_array = [];
+        foreach ($myArray as &$v) {
+            if (!isset($temp_array[$v['MonthNo']]))
+            $temp_array[$v['MonthNo']] =& $v;
+        }
+        $myArray = array_values($temp_array);    
+        usort($myArray, function($a, $b) {
+            return $a['YearNo'] <=> $b['YearNo'];
+        });
+        
+        // echo '<pre>';print_r($myArray);die;
+        $voOrders=array();
+        $voViews=array(); 
+        $voMonth=array();             
+        if(!empty($myArray)){
+            foreach($myArray as $m_row){
+                $voOrders[]= $m_row['orders'];
+                $voViews[]=  $m_row['views'];
+                $voMonth[]=  $m_row['MonthName'];                                
+            }
+        } 
+        $data['viewVSorder']['orders']=implode(',',$voOrders);
+        $data['viewVSorder']['views']=implode(',',$voViews); 
+        $data['viewVSorder']['month']=implode('","',$voMonth);			
+
+
+
+		///////////////////  CUSTOMER VS ORDERS ///////////////////////
+		$monthToMonthOrders = $this->monthToMonthOrders();
+		$semiArray=array();
+        $monthToMonthRegisterUser = $this->monthToMonthRegisterUser();
+        if(!empty($monthToMonthOrders) && !empty($monthToMonthRegisterUser)){
+            foreach($monthToMonthOrders as $m_row){
+                $voArray=array();                
+                foreach($monthToMonthRegisterUser as $vo_row){
+                    if($m_row['MonthNo']==$vo_row['MonthNo']){
+                        $voArray['orders']= $m_row['cnt'];
+                        $voArray['user']= $vo_row['cnt'];
+                        $voArray['MonthName']= $vo_row['MonthName'];
+                        $voArray['MonthNo']= $vo_row['MonthNo'];
+                        $voArray['YearNo']= $vo_row['YearNo'];
+                    }
+                }
+                if(empty($voArray)){
+                    $voArray['orders']= $m_row['cnt'];
+                    $voArray['user']= 0;
+                    $voArray['MonthName']= $m_row['MonthName'];
+                    $voArray['MonthNo']= $m_row['MonthNo'];
+                    $voArray['YearNo']= $m_row['YearNo'];
+                }
+                $semiArray[]=$voArray;                                 
+            }    
+        }
+
+
+        $semiArray2=array();      
+        if(!empty($monthToMonthRegisterUser) && !empty($monthToMonthRegisterUser)){
+            foreach($monthToMonthRegisterUser as $m_row){
+                $voArray=array();
+                foreach($semiArray as $vo_row){
+                    if($m_row['MonthNo']==$vo_row['MonthNo']){
+                        $voArray['orders']= $vo_row['orders'];
+                        $voArray['user']= $m_row['cnt'];
+                        $voArray['MonthName']= $vo_row['MonthName'];
+                        $voArray['MonthNo']= $vo_row['MonthNo'];
+                        $voArray['YearNo']= $vo_row['YearNo'];
+                    }
+                }
+                if(empty($voArray)){
+                    $voArray['orders']= 0;
+                    $voArray['user']= $m_row['cnt'];
+                    $voArray['MonthName']= $m_row['MonthName'];
+                    $voArray['MonthNo']= $m_row['MonthNo'];
+                    $voArray['YearNo']= $m_row['YearNo'];    
+                }                
+                $semiArray2[]=$voArray;                                 
+            }    
+        }
+        $myArray = array_merge($semiArray, $semiArray2);  
+        usort($myArray, function($a, $b) {
+            return $a['MonthNo'] <=> $b['MonthNo'];
+        });        
+        $temp_array = [];
+        foreach ($myArray as &$v) {
+            if (!isset($temp_array[$v['MonthNo']]))
+            $temp_array[$v['MonthNo']] =& $v;
+        }
+        $myArray = array_values($temp_array);    
+        usort($myArray, function($a, $b) {
+            return $a['YearNo'] <=> $b['YearNo'];
+        });
+        
+        // echo '<pre>';print_r($myArray);die;
+        $coOrders=array();
+        $coUser=array(); 
+        $coMonth=array();             
+        if(!empty($myArray)){
+            foreach($myArray as $m_row){
+                $coOrders[]= $m_row['orders'];
+                $coUser[]=  $m_row['user'];
+                $coMonth[]=  $m_row['MonthName'];                                
+            }
+        } 
+        $data['customerVSorder']['orders']=implode(',',$coOrders);
+        $data['customerVSorder']['user']=implode(',',$coUser); 
+        $data['customerVSorder']['month']=implode('","',$coMonth);
+
+
+
+		////////////////  MONTH TO MONTH ORDERS  ///////////////////////
+		$monthToMonthOrders = $this->monthToMonthOrders($_REQUEST['orderStatusMonthToMonth']);
+        $mTmOrdersMonth=array();
+        $mTmOrdersValue=array();              
+        if(!empty($monthToMonthOrders)){
+            foreach($monthToMonthOrders as $m_row){
+                $mTmOrdersMonth[]=  $m_row['MonthName'];
+                $mTmOrdersValue[]=  $m_row['cnt'];                                  
+            }
+        } 
+        $data['monthToMonthOrders']['month']=implode('","',$mTmOrdersMonth);
+        $data['monthToMonthOrders']['orders']=implode(',',$mTmOrdersValue); 
+
+
+
+		////////////////  MONTH TO MONTH CUSTOMERS  ///////////////////////
+		$monthToMonthActiveCustomer = $this->monthToMonthActiveCustomer();
+        $mTmActiveCustomerMonth=array();
+        $mTmActiveCustomerValue=array();              
+        if(!empty($monthToMonthActiveCustomer)){
+            foreach($monthToMonthActiveCustomer as $m_row){
+                $mTmActiveCustomerMonth[]=  $m_row['MonthName'];
+                $mTmActiveCustomerValue[]=  $m_row['cnt'];                                  
+            }
+        } 
+        $data['monthToMonthCustomers']['month']=implode('","',$mTmActiveCustomerMonth);
+        $data['monthToMonthCustomers']['customers']=implode(',',$mTmActiveCustomerValue); 
+        
+
+
+		if (!empty($data) && $data != '') {
+			$return['Data'] = $data;
+			$return['Message'] = 'Data Get Successfully!';
+			$return['IsSuccess'] = true;
+		} else {
+			$return['data'] = $data;
+			$return['Message'] = 'Data Get Not Successfully.';
+			$return['IsSuccess'] = false;
+		}
+		return $return;
+		//return $query->result_array();
+	}
+
+	
+	public function countactiveCustomers() {
+		$this->db->where('isverified =','true');					
+		return $this->db->count_all_results('user_app');
+	}
+
+	public function countTopCustomers() {
+		$result = $this->db->query("SELECT orders.order_id, COUNT(orders.user_id) as cnt,orders.user_id,SUM(orders.gstwithamount) as totalAmount,user_app.name,user_app.emailid,user_app.mobilenumber FROM orders
+		LEFT JOIN user_app
+		ON user_app.id=orders.user_id
+		GROUP BY user_id ORDER BY 2 DESC LIMIT 5");
+		return $result->result_array();		
+		// echo '<pre>';print_r($result->result_array());die;
+	}
+
+	public function countBottomCustomers() {
+		$result = $this->db->query("SELECT orders.order_id, COUNT(orders.user_id) as cnt,orders.user_id,SUM(orders.gstwithamount) as totalAmount,user_app.name,user_app.emailid,user_app.mobilenumber FROM orders
+		LEFT JOIN user_app
+		ON user_app.id=orders.user_id
+		GROUP BY user_id ORDER BY 2 ASC LIMIT 5");
+		return $result->result_array();			
+	}
+
+
+	public function countInActiveCustomers() {
+		$this->db->where('isverified =','false');					
+		return $this->db->count_all_results('user_app');
+	}
+
+
+	public function countPendingDirectOrder() {					
+		$this->db->where_in('orderstatus',array('Pending'));
+		return $this->db->count_all_results('photoordercreate');
+	}
+	public function countCancelledDirectOrder() {					
+		$this->db->where_in('orderstatus',array('Cancelled'));
+		return $this->db->count_all_results('photoordercreate');
+	}
+
+
+	public function countPendingOrder() {					
+		$this->db->where_in('processed',array('Pending'));
+		return $this->db->count_all_results('orders');
+	}
+
+	public function listPendingOrder() {					
+		$this->db->select('orders_clients.*,orders.*');        		
+		$this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
+		$this->db->where_in('orders.processed',array('Pending'));
+		$this->db->limit(5);
+		$this->db->order_by('orders.id','DESC');
+		return $this->db->get('orders')->result_array();		
+	}
+
+	public function monthToMonthOrders($orderStatus='') {
+		if($orderStatus!=''){
+			$result = $this->db->query("SELECT COUNT(id) as cnt,MONTHNAME((FROM_UNIXTIME(date))) as 'MonthName',MONTH((FROM_UNIXTIME(date))) as 'MonthNo',YEAR((FROM_UNIXTIME(date))) as 'YearNo'
+			FROM orders WHERE DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH) AND processed='$orderStatus'
+			GROUP BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))
+			ORDER BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))");
+		}else{
+			$result = $this->db->query("SELECT COUNT(id) as cnt,MONTHNAME((FROM_UNIXTIME(date))) as 'MonthName',MONTH((FROM_UNIXTIME(date))) as 'MonthNo',YEAR((FROM_UNIXTIME(date))) as 'YearNo'
+			FROM orders WHERE DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH)
+			GROUP BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))
+			ORDER BY YEAR((FROM_UNIXTIME(date))),MONTH((FROM_UNIXTIME(date)))");
+		}					
+		return $result->result_array();			
+	}
+
+	public function monthToMonthActiveCustomer() {	
+		$result = $this->db->query("SELECT COUNT(DISTINCT orders.user_id) as cnt,MONTHNAME((FROM_UNIXTIME(orders.date))) as 'MonthName'
+		FROM orders 
+		LEFT JOIN user_app
+		ON user_app.id=orders.user_id
+		WHERE DATE_FORMAT(FROM_UNIXTIME(orders.date), '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH)
+		GROUP BY YEAR((FROM_UNIXTIME(orders.date))),MONTH((FROM_UNIXTIME(orders.date)))
+		ORDER BY YEAR((FROM_UNIXTIME(orders.date))),MONTH((FROM_UNIXTIME(orders.date)))");	
+		return $result->result_array();			
+	}
+
+	public function monthToMonthViewVsOrders() {	
+		$result = $this->db->query("SELECT COUNT(id) as cnt,MONTHNAME(dateandtime) as 'MonthName',MONTH(dateandtime) as 'MonthNo',YEAR(dateandtime) as 'YearNo'
+		FROM userviewproduct WHERE DATE_FORMAT(dateandtime, '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH)
+		GROUP BY YEAR(dateandtime),MONTH(dateandtime)
+		ORDER BY YEAR(dateandtime),MONTH(dateandtime)");	
+		return $result->result_array();			
+	}
+
+	public function monthToMonthRegisterUser() {	
+		$result = $this->db->query("SELECT COUNT(id) as cnt,MONTHNAME(created) as 'MonthName',MONTH(created) as 'MonthNo',YEAR(created) as 'YearNo'
+		FROM user_app WHERE DATE_FORMAT(created, '%Y-%m-%d') > DATE_SUB(now(), INTERVAL 6 MONTH)
+		GROUP BY YEAR(created),MONTH(created)
+		ORDER BY YEAR(created),MONTH(created)");	
+		return $result->result_array();			
+	}
+
+	public function countCancelledOrder() {					
+		$this->db->where_in('processed',array('Cancelled'));
+		return $this->db->count_all_results('orders');
+	}
+	public function listCancelledOrder() {					
+		$this->db->select('orders_clients.*,orders.*');        		
+		$this->db->join('orders_clients', 'orders_clients.for_id = orders.id', 'left'); 
+		$this->db->where_in('orders.processed',array('Cancelled'));
+		$this->db->limit(5);
+		$this->db->order_by('orders.id','DESC');
+		return $this->db->get('orders')->result_array();		
+	}
+	public function listCancelledDirectOrder() {					
+		$this->db->select('photoordercreate.id,user_app.name,user_app.mobilenumber,user_app.emailid');       		
+		$this->db->join('user_app', 'user_app.id = photoordercreate.userid', 'left'); 
+		$this->db->where_in('photoordercreate.orderstatus',array('Cancelled'));
+		$this->db->limit(5);
+		$this->db->order_by('photoordercreate.id','DESC');
+		return $this->db->get('photoordercreate')->result_array();		
+	}
+
+	public function listPendingDirectOrder() {					
+		$this->db->select('photoordercreate.id,user_app.name,user_app.mobilenumber,user_app.emailid');        		
+		$this->db->join('user_app', 'user_app.id = photoordercreate.userid', 'left'); 
+		$this->db->where_in('photoordercreate.orderstatus',array('Pending'));
+		$this->db->limit(5);
+		$this->db->order_by('photoordercreate.id','DESC');
+		return $this->db->get('photoordercreate')->result_array();		
+	}
+	
+	public function countTodaysOrder() {
+		$this->db->where('date >=', strtotime(date('m/d/Y')));			
+		$this->db->where_in('processed',array('Accepted by kodas','Shipped'));
+		return $this->db->count_all_results('orders');
+	}
+	public function countTodaysDirectOrder() {
+		$this->db->where('datetime >=', strtotime(date('m/d/Y')));			
+		$this->db->where_in('orderstatus',array('Accepted by kodas','Shipped'));
+		return $this->db->count_all_results('photoordercreate');
+	}
+
+	public function countWeeklyOrder() {		
+		$result = $this->db->query("select count(id) as cnt from orders where week((FROM_UNIXTIME(date)))=week(now()) AND (processed='Accepted by kodas') OR (processed='Shipped')");	
+		return $result->row_array();		
+	}
+	public function countWeeklyDirectOrder() {		
+		$result = $this->db->query("select count(id) as cnt from photoordercreate where week((FROM_UNIXTIME(datetime)))=week(now()) AND (orderstatus='Accepted by kodas') OR (orderstatus='Shipped')");	
+		return $result->row_array();		
+	}
+
+
+	public function countMonthlyOrder() {		
+		$result = $this->db->query("select count(id) as cnt from orders where MONTH((FROM_UNIXTIME(date)))=MONTH(now()) AND (processed='Accepted by kodas') OR (processed='Shipped')");	
+		return $result->row_array();		
+	}
+	public function countMonthlyDirectOrder() {		
+		$result = $this->db->query("select count(id) as cnt from photoordercreate where MONTH((FROM_UNIXTIME(datetime)))=MONTH(now()) AND (orderstatus='Accepted by kodas') OR (orderstatus='Shipped')");	
+		return $result->row_array();		
+	}
+	
+	public function countTodaysSales() {
+		$this->db->select_sum('gstwithamount');
+		$this->db->where('date >=', strtotime(date('m/d/Y')));
+		$this->db->where_in('processed',array('Accepted by kodas','Shipped'));
+		return $this->db->get('orders')->row_array();
+	}
+
+	public function countWeeklySales() {			
+		$result = $this->db->query("select sum(gstwithamount) as total from orders where week((FROM_UNIXTIME(date)))=week(now()) AND (processed='Accepted by kodas') OR (processed='Shipped')");
+		return $result->row_array();	
+	}
+	public function countMonthlySales() {		
+		$result = $this->db->query("select sum(gstwithamount) as total from orders where MONTH((FROM_UNIXTIME(date)))=MONTH(now()) AND (processed='Accepted by kodas') OR (processed='Shipped')");
+		return $result->row_array();		
+	}
+
+
 
 }

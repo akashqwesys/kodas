@@ -1073,7 +1073,7 @@ $config['proxy_ips'] = '';
 $config['template'] = 'redlabel';
 
 function notifications($title, $message, $fcmtoken, $img = '', $name = '', $id = '', $type = '') {
-	define('API_ACCESS_KEY', 'AAAAPGdbHBM:APA91bHu02pHkazG4mApCdmpV-Gayb54C_Dq7TtdEUkDmMujyKKwzvLrYUDhI43aZfr2j4hIFtj6HHGczPzRkQk-csaOmmMjkxISIC3sGO4Bw05Fck2kqsch5NW8Ee-XhBLOFs0eWm7s');
+	define('API_ACCESS_KEY', 'AAAAi-sl7Ks:APA91bFmHeJfqCQVh8UYy--unACouFv1c5w6CaZ2tKJxrZMbxTLlknbEfzc3qugB52qMFBPAnKrWI4_UR8_l5qIYARn6MDh98MLnIxUGzzG1eeV98auOEoMUodLZbK-JaSvo6r5g999L');
 	$fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 	$notification = [
 		'title' => $title,
@@ -1084,7 +1084,7 @@ function notifications($title, $message, $fcmtoken, $img = '', $name = '', $id =
 		'title' => $title,
 		'body' => $message,
 		'image' => $img,
-		'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+		'click_action' => 'https://kodaslive.com',
 		'type' => $type,
 		'id' => $id,
 		'name' => $name,
